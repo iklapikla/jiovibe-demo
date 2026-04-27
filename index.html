@@ -36,16 +36,16 @@ cursor:pointer;margin-right:5px}
 <body>
 
 <div class="sidebar">
-<div class="logo" onclick="go('index.html')">JioVibe</div>
+  <div class="logo" onclick="go('index.html')">JioVibe</div>
 
-<div class="nav active">🏠 Home</div>
-<div class="nav" onclick="go('explore.html')">🔎 Explore</div>
+  <div class="nav active">🏠 Home</div>
+  <div class="nav" onclick="go('explore.html')">🔎 Explore</div>
 </div>
 
 <div class="main">
 
 <div class="top">
-<input class="search" placeholder="Search...">
+  <input class="search" placeholder="Search...">
 </div>
 
 <div class="content">
@@ -58,7 +58,7 @@ cursor:pointer;margin-right:5px}
 <div class="thumb" onclick="go('explore.html')"
 style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e')"></div>
 <div class="body">
-<b>Go to Explore</b>
+<b>Go to Explore Page</b>
 <div>
 <span class="btn" onclick="like(this)">❤️ 120</span>
 <span class="btn" onclick="save(this)">Save</span>
@@ -72,9 +72,17 @@ style="background-image:url('https://images.unsplash.com/photo-1542751371-adc384
 </div>
 
 <script>
-function go(p){window.location.href=p}
-function like(b){b.classList.toggle("active")}
-function save(b){b.innerText=b.innerText=="Save"?"Saved":"Save"}
+function go(page){
+  window.location.href = page;
+}
+
+function like(btn){
+  btn.classList.toggle("active");
+}
+
+function save(btn){
+  btn.innerText = btn.innerText === "Save" ? "Saved" : "Save";
+}
 </script>
 
 </body>
