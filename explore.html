@@ -1,211 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>JioVibe - Explore</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore</title>
 
 <style>
-:root{
-  --orange:#ff6a00;
-  --bg:#fafafa;
-}
+body{margin:0;font-family:Arial;background:#fafafa}
+.sidebar{width:220px;background:white;height:100vh;position:fixed;padding:20px;border-right:1px solid #eee}
+.logo{font-size:26px;font-weight:bold;margin-bottom:30px;cursor:pointer}
+.nav{padding:12px;border-radius:10px;margin-bottom:8px;cursor:pointer}
+.nav:hover,.active{background:#fff1e8;color:#ff6a00;font-weight:bold}
 
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:var(--bg);
-}
+.main{margin-left:220px}
+.top{height:70px;background:white;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:center}
+.search{width:50%;padding:10px;border-radius:20px;border:1px solid #ddd}
 
-.jv-layout{display:flex}
+.content{padding:30px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 
-/* SIDEBAR */
-.jv-sidebar{
-  width:230px;
-  background:white;
-  height:100vh;
-  position:fixed;
-  padding:20px;
-  border-right:1px solid #eee;
-}
+.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.05)}
+.thumb{height:180px;background-size:cover;cursor:pointer}
+.body{padding:10px}
 
-.jv-logo{
-  font-size:28px;
-  font-weight:900;
-  margin-bottom:30px;
-  cursor:pointer;
-}
-
-.jv-nav-item{
-  padding:12px;
-  border-radius:10px;
-  cursor:pointer;
-  margin-bottom:8px;
-}
-
-.jv-nav-item:hover,
-.active{
-  background:#fff1e8;
-  color:var(--orange);
-  font-weight:bold;
-}
-
-/* MAIN */
-.jv-main{
-  margin-left:230px;
-  width:calc(100% - 230px);
-}
-
-/* TOPBAR */
-.jv-topbar{
-  height:80px;
-  background:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-bottom:1px solid #eee;
-}
-
-.jv-search{
-  width:50%;
-  padding:12px;
-  border-radius:25px;
-  border:1px solid #ddd;
-}
-
-/* CONTENT */
-.jv-content{padding:30px}
-
-.jv-title{
-  font-size:24px;
-  font-weight:bold;
-  margin-bottom:20px;
-}
-
-/* GRID */
-.jv-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.jv-card{
-  background:white;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
-}
-
-.jv-thumb{
-  height:180px;
-  background-size:cover;
-  cursor:pointer;
-}
-
-.jv-body{padding:10px}
-
-.jv-actions{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
-}
-
-.jv-btn{
-  border:1px solid #ddd;
-  border-radius:20px;
-  padding:6px 12px;
-  cursor:pointer;
-}
-
-.jv-btn.active{
-  background:#fff1e8;
-  color:var(--orange);
-}
-
+.btn{border:1px solid #ddd;border-radius:20px;padding:6px 12px;cursor:pointer;margin-right:5px}
+.btn.active{background:#fff1e8;color:#ff6a00}
 </style>
 </head>
 
 <body>
 
-<div class="jv-layout">
+<div class="sidebar">
+<div class="logo" onclick="go('index.html')">JioVibe</div>
 
-<!-- SIDEBAR -->
-<div class="jv-sidebar">
-  <div class="jv-logo" onclick="go('index.html')">JioVibe</div>
-
-  <div class="jv-nav-item" onclick="go('index.html')">🏠 Home</div>
-  <div class="jv-nav-item active">🔎 Explore</div>
-  <div class="jv-nav-item" onclick="go('live.html')">📡 Live</div>
-  <div class="jv-nav-item" onclick="go('shorts.html')">⚡ Shorts</div>
-  <div class="jv-nav-item" onclick="go('stories.html')">⭕ Stories</div>
-  <div class="jv-nav-item" onclick="go('community.html')">💬 Community</div>
+<div class="nav" onclick="go('index.html')">🏠 Home</div>
+<div class="nav active">🔎 Explore</div>
 </div>
 
-<!-- MAIN -->
-<div class="jv-main">
+<div class="main">
 
-  <div class="jv-topbar">
-    <input class="jv-search" placeholder="Search creators, videos...">
-  </div>
+<div class="top">
+<input class="search" placeholder="Search...">
+</div>
 
-  <div class="jv-content">
+<div class="content">
 
-    <div class="jv-title">Explore Trending Content 🔥</div>
+<h2>Explore Page 🔥</h2>
 
-    <div class="jv-grid">
+<div class="grid">
 
-      <!-- CARD -->
-      <div class="jv-card">
-        <div class="jv-thumb" onclick="go('video.html')" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e')"></div>
-        <div class="jv-body">
-          <b>Gaming Highlights</b>
-          <div class="jv-actions">
-            <div class="jv-btn" onclick="like(this)">❤️ 1.2K</div>
-            <div class="jv-btn" onclick="save(this)">Save</div>
-          </div>
-        </div>
-      </div>
+<div class="card">
+<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1516280440614-37939bbacd81')"></div>
+<div class="body">
+<b>Music Content</b>
+<div>
+<span class="btn" onclick="like(this)">❤️ 980</span>
+<span class="btn" onclick="save(this)">Save</span>
+</div>
+</div>
+</div>
 
-      <div class="jv-card">
-        <div class="jv-thumb" onclick="go('video.html')" style="background-image:url('https://images.unsplash.com/photo-1516280440614-37939bbacd81')"></div>
-        <div class="jv-body">
-          <b>Music Night</b>
-          <div class="jv-actions">
-            <div class="jv-btn" onclick="like(this)">❤️ 980</div>
-            <div class="jv-btn" onclick="save(this)">Save</div>
-          </div>
-        </div>
-      </div>
+<div class="card">
+<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac')"></div>
+<div class="body">
+<b>Comedy Content</b>
+<div>
+<span class="btn" onclick="like(this)">❤️ 2K</span>
+<span class="btn" onclick="save(this)">Save</span>
+</div>
+</div>
+</div>
 
-      <div class="jv-card">
-        <div class="jv-thumb" onclick="go('video.html')" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac')"></div>
-        <div class="jv-body">
-          <b>Comedy Clips</b>
-          <div class="jv-actions">
-            <div class="jv-btn" onclick="like(this)">❤️ 2K</div>
-            <div class="jv-btn" onclick="save(this)">Save</div>
-          </div>
-        </div>
-      </div>
+</div>
 
-    </div>
-
-  </div>
 </div>
 </div>
 
 <script>
-function go(page){
-  window.location.href = page;
-}
-
-function like(btn){
-  btn.classList.toggle("active");
-}
-
-function save(btn){
-  btn.innerText = btn.innerText === "Save" ? "Saved" : "Save";
-}
+function go(p){window.location.href=p}
+function like(b){b.classList.toggle("active")}
+function save(b){b.innerText=b.innerText=="Save"?"Saved":"Save"}
 </script>
 
 </body>
