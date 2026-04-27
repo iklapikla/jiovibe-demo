@@ -2,27 +2,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Explore</title>
+<title>JioVibe - Explore</title>
 
 <style>
 body{margin:0;font-family:Arial;background:#fafafa}
-.sidebar{width:220px;background:white;height:100vh;position:fixed;padding:20px;border-right:1px solid #eee}
+.sidebar{
+width:220px;background:white;height:100vh;position:fixed;
+padding:20px;border-right:1px solid #eee;
+}
 .logo{font-size:26px;font-weight:bold;margin-bottom:30px;cursor:pointer}
 .nav{padding:12px;border-radius:10px;margin-bottom:8px;cursor:pointer}
 .nav:hover,.active{background:#fff1e8;color:#ff6a00;font-weight:bold}
 
 .main{margin-left:220px}
-.top{height:70px;background:white;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:center}
+.top{height:70px;background:white;border-bottom:1px solid #eee;
+display:flex;align-items:center;justify-content:center}
 .search{width:50%;padding:10px;border-radius:20px;border:1px solid #ddd}
 
 .content{padding:30px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 
-.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.05)}
+.card{background:white;border-radius:12px;overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,0.05)}
 .thumb{height:180px;background-size:cover;cursor:pointer}
 .body{padding:10px}
 
-.btn{border:1px solid #ddd;border-radius:20px;padding:6px 12px;cursor:pointer;margin-right:5px}
+.btn{border:1px solid #ddd;border-radius:20px;padding:6px 12px;
+cursor:pointer;margin-right:5px}
 .btn.active{background:#fff1e8;color:#ff6a00}
 </style>
 </head>
@@ -30,16 +36,16 @@ body{margin:0;font-family:Arial;background:#fafafa}
 <body>
 
 <div class="sidebar">
-<div class="logo" onclick="go('index.html')">JioVibe</div>
+  <div class="logo" onclick="go('index.html')">JioVibe</div>
 
-<div class="nav" onclick="go('index.html')">🏠 Home</div>
-<div class="nav active">🔎 Explore</div>
+  <div class="nav" onclick="go('index.html')">🏠 Home</div>
+  <div class="nav active">🔎 Explore</div>
 </div>
 
 <div class="main">
 
 <div class="top">
-<input class="search" placeholder="Search...">
+  <input class="search" placeholder="Search...">
 </div>
 
 <div class="content">
@@ -76,9 +82,17 @@ body{margin:0;font-family:Arial;background:#fafafa}
 </div>
 
 <script>
-function go(p){window.location.href=p}
-function like(b){b.classList.toggle("active")}
-function save(b){b.innerText=b.innerText=="Save"?"Saved":"Save"}
+function go(page){
+  window.location.href = page;
+}
+
+function like(btn){
+  btn.classList.toggle("active");
+}
+
+function save(btn){
+  btn.innerText = btn.innerText === "Save" ? "Saved" : "Save";
+}
 </script>
 
 </body>
