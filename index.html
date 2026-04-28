@@ -32,7 +32,6 @@
       min-height: 100vh;
     }
 
-    /* SIDEBAR */
     .sidebar {
       width: 250px;
       height: 100vh;
@@ -109,13 +108,11 @@
       margin: 22px 8px;
     }
 
-    /* MAIN */
     .main {
       margin-left: 250px;
       width: calc(100% - 250px);
     }
 
-    /* TOPBAR */
     .topbar {
       height: 94px;
       border-bottom: 1px solid #edf0f4;
@@ -275,7 +272,6 @@
       width: 24px;
     }
 
-    /* CONTENT */
     .content {
       padding: 26px 44px 60px;
     }
@@ -316,7 +312,6 @@
       font-size: 26px;
     }
 
-    /* HERO SLIDER */
     .hero-section {
       position: relative;
       margin-bottom: 34px;
@@ -441,7 +436,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* SECTIONS */
     .section {
       margin-top: 28px;
     }
@@ -579,10 +573,11 @@
 
     .extra {
       display: none;
+      margin-top: 18px;
     }
 
     .extra.show {
-      display: block;
+      display: grid;
     }
 
     @media(max-width: 1100px) {
@@ -612,7 +607,6 @@
 <body>
   <div class="app">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <a href="index.html" class="logo">
         <div class="logo-circle">Jio</div>
@@ -625,16 +619,16 @@
         <a href="live.html" class="menu-item"><i class="fa-solid fa-tower-broadcast"></i> Live</a>
         <a href="video.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Video</a>
         <a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
+        <a href="stories.html" class="menu-item"><i class="fa-regular fa-circle"></i> Stories</a>
+        <a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community Post</a>
         <a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
       </nav>
 
       <div class="divider"></div>
     </aside>
 
-    <!-- MAIN -->
     <main class="main">
 
-      <!-- TOP BAR -->
       <header class="topbar">
         <div class="search">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -674,7 +668,6 @@
 
       <section class="content">
 
-        <!-- CATEGORY TABS -->
         <div class="tabs-wrap">
           <a href="index.html" class="tab active">All</a>
           <a href="category-gaming.html" class="tab"><i class="fa-solid fa-gamepad"></i> Gaming</a>
@@ -684,11 +677,12 @@
           <a href="category-education.html" class="tab"><i class="fa-solid fa-graduation-cap"></i> Education</a>
           <a href="category-lifestyle.html" class="tab"><i class="fa-solid fa-mug-hot"></i> Lifestyle</a>
           <a href="category-movies.html" class="tab"><i class="fa-solid fa-clapperboard"></i> Movies</a>
+          <a href="category-stories.html" class="tab"><i class="fa-regular fa-circle"></i> Stories</a>
+          <a href="category-community.html" class="tab"><i class="fa-regular fa-comments"></i> Community Post</a>
           <a href="video.html" class="tab"><i class="fa-regular fa-circle-play"></i> Video</a>
           <span class="tab-next"><i class="fa-solid fa-chevron-right"></i></span>
         </div>
 
-        <!-- HERO BANNER SLIDER -->
         <div class="hero-section">
           <button class="hero-btn prev" onclick="slideHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
           <button class="hero-btn next" onclick="slideHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
@@ -749,11 +743,10 @@
           </div>
         </div>
 
-        <!-- TRENDING -->
         <div class="section">
           <div class="section-head">
             <h2>Trending Now <span>🔥</span></h2>
-            <button onclick="toggleVideos('trendingExtra', this)">View all <i class="fa-solid fa-chevron-right"></i></button>
+            <button onclick="toggleVideos('trendingExtra', this, 'View all')">View all <i class="fa-solid fa-chevron-right"></i></button>
           </div>
 
           <div class="video-row">
@@ -814,11 +807,12 @@
             </a>
           </div>
 
-          <div class="video-row extra" id="trendingExtra" style="margin-top:18px;">
+          <div class="video-row extra" id="trendingExtra">
             <a href="watch-gaming-night-live.html" class="card">
               <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=900&auto=format&fit=crop');">
                 <video muted loop src="https://cdn.coverr.co/videos/coverr-gamer-room-4780/1080p.mp4"></video>
-                <span class="duration">LIVE</span>
+                <span class="live-tag">● LIVE</span>
+                <span class="duration">18.2K</span>
               </div>
               <div class="card-body">
                 <div class="card-title">Gaming Night Live</div>
@@ -836,14 +830,46 @@
                 <div class="creator">Foodie Yatra <span class="verified">●</span></div>
               </div>
             </a>
+
+            <a href="watch-city-lights.html" class="card">
+              <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=900&auto=format&fit=crop');">
+                <video muted loop src="https://cdn.coverr.co/videos/coverr-city-traffic-at-night-5251/1080p.mp4"></video>
+                <span class="duration">5:45</span>
+              </div>
+              <div class="card-body">
+                <div class="card-title">City Lights</div>
+                <div class="creator">Urban Vibes <span class="verified">●</span></div>
+              </div>
+            </a>
+
+            <a href="watch-cricket-talks.html" class="card">
+              <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=900&auto=format&fit=crop');">
+                <video muted loop src="https://cdn.coverr.co/videos/coverr-playing-cricket-7335/1080p.mp4"></video>
+                <span class="duration">7:40</span>
+              </div>
+              <div class="card-body">
+                <div class="card-title">Cricket Talks</div>
+                <div class="creator">Sports Adda <span class="verified">●</span></div>
+              </div>
+            </a>
+
+            <a href="watch-travel-diaries.html" class="card">
+              <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop');">
+                <video muted loop src="https://cdn.coverr.co/videos/coverr-beach-from-above-7854/1080p.mp4"></video>
+                <span class="duration">10:05</span>
+              </div>
+              <div class="card-body">
+                <div class="card-title">Travel Diaries</div>
+                <div class="creator">Wander India <span class="verified">●</span></div>
+              </div>
+            </a>
           </div>
         </div>
 
-        <!-- RECOMMENDED -->
         <div class="section">
           <div class="section-head">
             <h2>Recommended for You <span>✨</span></h2>
-            <button onclick="toggleVideos('recommendedExtra', this)">See more <i class="fa-solid fa-chevron-right"></i></button>
+            <button onclick="toggleVideos('recommendedExtra', this, 'See more')">See more <i class="fa-solid fa-chevron-right"></i></button>
           </div>
 
           <div class="video-grid">
@@ -884,7 +910,7 @@
             </a>
           </div>
 
-          <div class="video-grid extra" id="recommendedExtra" style="margin-top:22px;">
+          <div class="video-grid extra" id="recommendedExtra">
             <a href="watch-morning-fitness-flow.html" class="card large">
               <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1000&auto=format&fit=crop');">
                 <video muted loop src="https://cdn.coverr.co/videos/coverr-woman-doing-yoga-8310/1080p.mp4"></video>
@@ -906,6 +932,18 @@
                 <div class="card-title">Creator Life Vlog</div>
                 <div class="creator">Daily Creator <span class="verified">●</span></div>
                 <div class="views">980K views • 4 days ago</div>
+              </div>
+            </a>
+
+            <a href="watch-fashion-edit.html" class="card large">
+              <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1000&auto=format&fit=crop');">
+                <video muted loop src="https://cdn.coverr.co/videos/coverr-fashion-model-3132/1080p.mp4"></video>
+                <span class="duration">8:30</span>
+              </div>
+              <div class="card-body">
+                <div class="card-title">Fashion Edit</div>
+                <div class="creator">Style Studio <span class="verified">●</span></div>
+                <div class="views">670K views • 6 days ago</div>
               </div>
             </a>
           </div>
@@ -970,18 +1008,14 @@
       }
     });
 
-    function toggleVideos(id, btn) {
+    function toggleVideos(id, btn, originalText) {
       const box = document.getElementById(id);
       box.classList.toggle("show");
 
       if (box.classList.contains("show")) {
         btn.innerHTML = 'Show less <i class="fa-solid fa-chevron-up"></i>';
       } else {
-        if (id === "trendingExtra") {
-          btn.innerHTML = 'View all <i class="fa-solid fa-chevron-right"></i>';
-        } else {
-          btn.innerHTML = 'See more <i class="fa-solid fa-chevron-right"></i>';
-        }
+        btn.innerHTML = originalText + ' <i class="fa-solid fa-chevron-right"></i>';
       }
     }
 
