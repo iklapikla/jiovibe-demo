@@ -14,7 +14,6 @@ body{background:#fbfbfc;color:#222;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 .app{display:flex;min-height:100vh}
 
-/* SIDEBAR */
 .sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:32px 18px;position:fixed;left:0;top:0;background:#fff;z-index:10}
 .logo{display:flex;align-items:center;gap:4px;margin-bottom:45px;padding-left:8px}
 .logo-circle{width:54px;height:54px;background:#ff5a00;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
@@ -23,9 +22,7 @@ a{text-decoration:none;color:inherit}
 .menu-item{display:flex;align-items:center;gap:18px;padding:17px 22px;border-radius:14px;font-weight:600;color:#383838;font-size:16px;transition:.25s}
 .menu-item i{width:22px;font-size:22px;text-align:center}
 .menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
-.divider{height:1px;background:#edf0f4;margin:22px 8px}
 
-/* MAIN */
 .main{margin-left:250px;width:calc(100% - 250px)}
 .topbar{height:82px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;position:sticky;top:0;z-index:8}
 .search{width:720px;height:50px;border:1px solid #e8ebf0;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.03)}
@@ -38,12 +35,10 @@ a{text-decoration:none;color:inherit}
 .profile img{width:48px;height:48px;object-fit:cover;border-radius:50%}
 .profile span{font-weight:700;font-size:15px}
 
-/* LAYOUT */
 .content{padding:16px 28px 60px}
 .community-layout{display:grid;grid-template-columns:1fr 380px;gap:28px;max-width:1250px;margin:auto}
 .card{background:#fff;border:1px solid #edf0f4;border-radius:18px;box-shadow:0 3px 16px rgba(0,0,0,.04)}
 
-/* CREATE POST */
 .create-post{padding:22px;margin-bottom:16px}
 .create-top{display:flex;align-items:center;gap:16px;margin-bottom:18px}
 .create-top img{width:48px;height:48px;border-radius:50%;object-fit:cover}
@@ -54,7 +49,6 @@ a{text-decoration:none;color:inherit}
 .type-btn.active,.type-btn:hover{background:#fff0e8;color:#ff5a00;border-color:#ffd9c6}
 .post-btn{height:46px;padding:0 28px;border:none;border-radius:24px;background:#ff5a00;color:white;font-weight:800;cursor:pointer}
 
-/* POSTS */
 .post{padding:20px;margin-bottom:16px}
 .post-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
 .post-head img{width:52px;height:52px;border-radius:50%;object-fit:cover}
@@ -67,11 +61,22 @@ a{text-decoration:none;color:inherit}
 .menu-popup div{padding:13px 14px;font-size:14px;font-weight:700;cursor:pointer}
 .menu-popup div:hover{background:#fff0e8;color:#ff5a00}
 .post-text{font-size:16px;line-height:1.55;margin-bottom:14px;color:#28303f}
-.post-media{width:100%;height:250px;border-radius:14px;object-fit:cover;margin-bottom:12px}
-.video-media{position:relative}
-.video-media img{width:100%;height:260px;border-radius:14px;object-fit:cover;display:block}
+
+.post-media{
+  width:100%;
+  aspect-ratio:1/1;
+  max-height:620px;
+  border-radius:14px;
+  object-fit:cover;
+  margin-bottom:12px;
+  background:#f1f1f1;
+}
+
+.video-media{position:relative;width:100%;aspect-ratio:1/1;border-radius:14px;overflow:hidden;margin-bottom:12px}
+.video-media img{width:100%;height:100%;object-fit:cover;display:block}
 .play-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:70px;height:70px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;border:none;font-size:28px;cursor:pointer}
 .duration{position:absolute;right:14px;bottom:14px;background:rgba(0,0,0,.75);color:#fff;font-size:13px;font-weight:800;padding:6px 9px;border-radius:7px}
+
 .post-actions{display:flex;align-items:center;gap:42px;margin-top:12px;padding:0 18px}
 .post-action{display:flex;align-items:center;gap:9px;border:none;background:none;cursor:pointer;font-weight:800;color:#6b7280;font-size:15px}
 .post-action i{font-size:22px}
@@ -85,14 +90,12 @@ a{text-decoration:none;color:inherit}
 .comment-input input{flex:1;height:42px;border:1px solid #edf0f4;border-radius:22px;padding:0 14px;outline:none}
 .comment-input button{width:42px;border:none;border-radius:50%;background:#ff5a00;color:#fff;font-size:17px;cursor:pointer}
 
-/* POLL */
 .poll-options{display:grid;gap:10px;margin:14px 0}
-.poll-option{height:42px;border:1px solid #edf0f4;border-radius:12px;overflow:hidden;position:relative;cursor:pointer;background:#fff}
+.poll-option{height:46px;border:1px solid #edf0f4;border-radius:12px;overflow:hidden;position:relative;cursor:pointer;background:#fff}
 .poll-fill{height:100%;width:0;background:#fff0e8;transition:.3s}
 .poll-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-weight:800;color:#444}
 .poll-option.voted{border-color:#ff5a00}
 
-/* RIGHT SIDEBAR */
 .side-card{padding:22px;margin-bottom:18px}
 .side-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
 .side-head h2{font-size:19px}
@@ -108,16 +111,18 @@ a{text-decoration:none;color:inherit}
 .follow-btn.following,.join-btn.joined{background:#ff5a00;color:#fff;border-color:#ff5a00}
 .community{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .community-icon{width:48px;height:48px;border-radius:50%;background:#008db7;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px}
-.community:nth-child(3) .community-icon{background:#ef4444}
 .community h3{font-size:15px}.community p{font-size:13px;color:#777}
 
-/* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:50}
 .modal-bg.show{display:flex}
-.modal{background:#fff;width:420px;border-radius:20px;padding:24px;box-shadow:0 15px 45px rgba(0,0,0,.25)}
+.modal{background:#fff;width:460px;border-radius:20px;padding:24px;box-shadow:0 15px 45px rgba(0,0,0,.25)}
 .modal h2{margin-bottom:16px}
 .modal textarea,.modal input{width:100%;border:1px solid #edf0f4;border-radius:14px;padding:14px;outline:none;font-size:14px;margin-bottom:12px}
 .modal textarea{height:120px;resize:none}
+.upload-box{border:2px dashed #ffd0bb;background:#fff7f2;border-radius:16px;padding:20px;text-align:center;color:#ff5a00;font-weight:800;cursor:pointer;margin-bottom:12px}
+.upload-preview{display:none;width:100%;aspect-ratio:1/1;border-radius:14px;object-fit:cover;margin-bottom:12px}
+.poll-box{display:none}
+.poll-box input{height:44px}
 .share-icons{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .share-icon{text-align:center;font-size:13px;font-weight:700;cursor:pointer}
 .share-icon i{width:54px;height:54px;border-radius:50%;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-size:25px;margin:0 auto 8px}
@@ -125,7 +130,6 @@ a{text-decoration:none;color:inherit}
 .modal-btn{flex:1;height:46px;border:none;border-radius:12px;font-weight:800;cursor:pointer}
 .cancel{background:#f1f1f1}
 .submit{background:#ff5a00;color:#fff}
-
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-size:14px;font-weight:700;display:none;z-index:80}
 
 @media(max-width:1100px){
@@ -160,10 +164,7 @@ a{text-decoration:none;color:inherit}
     <a href="community.html" class="menu-item active"><i class="fa-regular fa-comments"></i> Community</a>
     <a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
     <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
-
   </nav>
-
-  <div class="divider"></div>
 </aside>
 
 <main class="main">
@@ -189,7 +190,6 @@ a{text-decoration:none;color:inherit}
 <div class="community-layout">
 
 <div>
-  <!-- CREATE POST -->
   <div class="card create-post">
     <div class="create-top">
       <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop">
@@ -206,146 +206,16 @@ a{text-decoration:none;color:inherit}
     </div>
   </div>
 
-  <!-- POSTS -->
-  <div id="postFeed">
-
-    <div class="card post">
-      <div class="post-head">
-        <img src="https://i.pravatar.cc/100?img=32">
-        <div>
-          <h3>Neha Moves <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3>
-          <p>2h ago • Public</p>
-        </div>
-        <div class="post-menu" onclick="toggleMenu(this)">
-          <i class="fa-solid fa-ellipsis-vertical"></i>
-          <div class="menu-popup">
-            <div onclick="toast('Post saved')"><i class="fa-regular fa-bookmark"></i> Save post</div>
-            <div onclick="toast('Post hidden')"><i class="fa-regular fa-eye-slash"></i> Hide post</div>
-            <div onclick="toast('Post reported')"><i class="fa-regular fa-flag"></i> Report</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="post-text">Sunsets, good music and even better company! 🌅✨<br>Grateful for these little moments that feel like magic.</div>
-      <img class="post-media" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1100&auto=format&fit=crop">
-
-      <div class="post-actions">
-        <button class="post-action like-btn" onclick="toggleLike(this)"><i class="fa-solid fa-heart"></i> <span>1.2K</span></button>
-        <button class="post-action" onclick="toggleCommentBox(this)"><i class="fa-regular fa-comment"></i> <span>128</span></button>
-        <button class="post-action" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
-      </div>
-
-      <div class="comments-box">
-        <div class="comment-line"><b>WanderWithRaj</b> Beautiful shot! 😍</div>
-        <div class="comment-line"><b>Travel With Simran</b> Looks like a dream place! Where is this?</div>
-        <button class="view-comments" onclick="toggleCommentBox(this)">View all 28 comments</button>
-        <div class="comment-input">
-          <input placeholder="Write a comment...">
-          <button onclick="sendInlineComment(this)"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card post">
-      <div class="post-head">
-        <img src="https://i.pravatar.cc/100?img=12">
-        <div>
-          <h3>WanderWithRaj <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3>
-          <p>5h ago • Public</p>
-        </div>
-        <div class="post-menu" onclick="toggleMenu(this)">
-          <i class="fa-solid fa-ellipsis-vertical"></i>
-          <div class="menu-popup">
-            <div onclick="toast('Post saved')"><i class="fa-regular fa-bookmark"></i> Save post</div>
-            <div onclick="toast('Post hidden')"><i class="fa-regular fa-eye-slash"></i> Hide post</div>
-            <div onclick="toast('Post reported')"><i class="fa-regular fa-flag"></i> Report</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="post-text">Exploring hidden gems in the Himalayas! 🏔️❄️<br>Nature never fails to amaze me.</div>
-
-      <div class="video-media">
-        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1100&auto=format&fit=crop">
-        <button class="play-btn" onclick="playVideo(this)"><i class="fa-solid fa-play"></i></button>
-        <span class="duration">00:45</span>
-      </div>
-
-      <div class="post-actions">
-        <button class="post-action like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i> <span>856</span></button>
-        <button class="post-action" onclick="toggleCommentBox(this)"><i class="fa-regular fa-comment"></i> <span>64</span></button>
-        <button class="post-action" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
-      </div>
-
-      <div class="comments-box">
-        <div class="comment-line"><b>Neha Moves</b> Wow, this place is unreal!</div>
-        <button class="view-comments" onclick="toggleCommentBox(this)">View all 14 comments</button>
-        <div class="comment-input">
-          <input placeholder="Write a comment...">
-          <button onclick="sendInlineComment(this)"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card post">
-      <div class="post-head">
-        <img src="https://i.pravatar.cc/100?img=22">
-        <div>
-          <h3>MusicVibes <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3>
-          <p>8h ago • Public</p>
-        </div>
-        <div class="post-menu" onclick="toggleMenu(this)">
-          <i class="fa-solid fa-ellipsis-vertical"></i>
-          <div class="menu-popup">
-            <div onclick="toast('Post saved')"><i class="fa-regular fa-bookmark"></i> Save post</div>
-            <div onclick="toast('Post hidden')"><i class="fa-regular fa-eye-slash"></i> Hide post</div>
-            <div onclick="toast('Post reported')"><i class="fa-regular fa-flag"></i> Report</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="post-text">Which type of music should we stream tonight?</div>
-
-      <div class="poll-options">
-        <div class="poll-option" onclick="votePoll(this, 62)">
-          <div class="poll-fill"></div>
-          <div class="poll-text"><span>Acoustic</span><b>0%</b></div>
-        </div>
-        <div class="poll-option" onclick="votePoll(this, 25)">
-          <div class="poll-fill"></div>
-          <div class="poll-text"><span>Indie Pop</span><b>0%</b></div>
-        </div>
-        <div class="poll-option" onclick="votePoll(this, 13)">
-          <div class="poll-fill"></div>
-          <div class="poll-text"><span>Bollywood Covers</span><b>0%</b></div>
-        </div>
-      </div>
-
-      <div class="post-actions">
-        <button class="post-action like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i> <span>432</span></button>
-        <button class="post-action" onclick="toggleCommentBox(this)"><i class="fa-regular fa-comment"></i> <span>89</span></button>
-        <button class="post-action" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
-      </div>
-    </div>
-
-  </div>
+  <div id="postFeed"></div>
 </div>
 
 <aside>
   <div class="card side-card">
-    <div class="side-head">
-      <h2>Trending Topics</h2>
-      <button onclick="toggleTopics(this)">View all</button>
-    </div>
-
-    <div id="topicsList">
-      <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>TravelDiaries</div><span>12.5K posts</span></div>
-      <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>SunsetLovers</div><span>8.7K posts</span></div>
-      <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>MusicVibes</div><span>6.1K posts</span></div>
-      <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>CreatorLife</div><span>5.3K posts</span></div>
-      <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>GoodVibesOnly</div><span>4.8K posts</span></div>
-    </div>
-
+    <div class="side-head"><h2>Trending Topics</h2><button onclick="toggleBlock('extraTopics',this)">View all</button></div>
+    <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>TravelDiaries</div><span>12.5K posts</span></div>
+    <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>SunsetLovers</div><span>8.7K posts</span></div>
+    <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>MusicVibes</div><span>6.1K posts</span></div>
+    <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>CreatorLife</div><span>5.3K posts</span></div>
     <div id="extraTopics" style="display:none">
       <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>GamingIndia</div><span>4.2K posts</span></div>
       <div class="topic"><div class="hash"><i class="fa-solid fa-hashtag"></i>FoodStories</div><span>3.9K posts</span></div>
@@ -353,36 +223,27 @@ a{text-decoration:none;color:inherit}
   </div>
 
   <div class="card side-card">
-    <div class="side-head">
-      <h2>Active Creators</h2>
-      <button onclick="toggleCreators(this)">View all</button>
-    </div>
-
-    <div id="creatorsList">
-      <div class="creator"><img src="https://i.pravatar.cc/100?img=32"><div><h3>Neha Moves <span class="verified">●</span></h3><p>523K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
-      <div class="creator"><img src="https://i.pravatar.cc/100?img=12"><div><h3>WanderWithRaj <span class="verified">●</span></h3><p>312K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
-      <div class="creator"><img src="https://i.pravatar.cc/100?img=22"><div><h3>MusicVibes <span class="verified">●</span></h3><p>284K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
-      <div class="creator"><img src="https://i.pravatar.cc/100?img=45"><div><h3>Travel With Simran <span class="verified">●</span></h3><p>198K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
-    </div>
-
+    <div class="side-head"><h2>Active Creators</h2><button onclick="toggleBlock('extraCreators',this)">View all</button></div>
+    <div class="creator"><img src="https://i.pravatar.cc/100?img=32"><div><h3>Neha Moves <span class="verified">●</span></h3><p>523K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
+    <div class="creator"><img src="https://i.pravatar.cc/100?img=12"><div><h3>WanderWithRaj <span class="verified">●</span></h3><p>312K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
+    <div class="creator"><img src="https://i.pravatar.cc/100?img=22"><div><h3>MusicVibes <span class="verified">●</span></h3><p>284K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
     <div id="extraCreators" style="display:none">
       <div class="creator"><img src="https://i.pravatar.cc/100?img=28"><div><h3>Foodie Naina <span class="verified">●</span></h3><p>150K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
-      <div class="creator"><img src="https://i.pravatar.cc/100?img=52"><div><h3>Tech Simplified <span class="verified">●</span></h3><p>142K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
     </div>
   </div>
 
   <div class="card side-card">
-    <div class="side-head">
-      <h2>Suggested Communities</h2>
-      <button onclick="toggleCommunities(this)">View all</button>
-    </div>
+    <div class="side-head"><h2>Featured Creators</h2><button onclick="toast('Featured creators opened')">View all</button></div>
+    <div class="creator"><img src="https://i.pravatar.cc/100?img=45"><div><h3>Travel With Simran <span class="verified">●</span></h3><p>198K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
+    <div class="creator"><img src="https://i.pravatar.cc/100?img=52"><div><h3>Tech Simplified <span class="verified">●</span></h3><p>142K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
+  </div>
 
+  <div class="card side-card">
+    <div class="side-head"><h2>Suggested Communities</h2><button onclick="toggleBlock('extraCommunities',this)">View all</button></div>
     <div class="community"><div class="community-icon"><i class="fa-solid fa-users"></i></div><div><h3>Travel & Explore</h3><p>128K members</p></div><button class="join-btn" onclick="join(this)">Join</button></div>
-    <div class="community"><div class="community-icon"><i class="fa-solid fa-music"></i></div><div><h3>Music & Beats</h3><p>96K members</p></div><button class="join-btn" onclick="join(this)">Join</button></div>
-
+    <div class="community"><div class="community-icon" style="background:#ef4444"><i class="fa-solid fa-music"></i></div><div><h3>Music & Beats</h3><p>96K members</p></div><button class="join-btn" onclick="join(this)">Join</button></div>
     <div id="extraCommunities" style="display:none">
-      <div class="community"><div class="community-icon"><i class="fa-solid fa-gamepad"></i></div><div><h3>Gaming Squad</h3><p>84K members</p></div><button class="join-btn" onclick="join(this)">Join</button></div>
-      <div class="community"><div class="community-icon"><i class="fa-solid fa-utensils"></i></div><div><h3>Food Lovers</h3><p>72K members</p></div><button class="join-btn" onclick="join(this)">Join</button></div>
+      <div class="community"><div class="community-icon" style="background:#7c3aed"><i class="fa-solid fa-gamepad"></i></div><div><h3>Gaming Squad</h3><p>84K members</p></div><button class="join-btn" onclick="join(this)">Join</button></div>
     </div>
   </div>
 </aside>
@@ -392,12 +253,27 @@ a{text-decoration:none;color:inherit}
 </main>
 </div>
 
-<!-- CREATE POST MODAL -->
 <div class="modal-bg" id="postModal">
   <div class="modal">
     <h2 id="modalTitle">Create Post</h2>
+
     <textarea id="modalPostText" placeholder="Write something..."></textarea>
-    <input id="modalImageUrl" placeholder="Image URL optional">
+
+    <div id="imageBox" style="display:none">
+      <div class="upload-box" onclick="dummyBrowse()">
+        <i class="fa-regular fa-image"></i><br>
+        Click to browse image
+      </div>
+      <img id="uploadPreview" class="upload-preview" src="">
+    </div>
+
+    <div class="poll-box" id="pollBox">
+      <input id="pollQ" placeholder="Poll question">
+      <input id="pollA" placeholder="Option 1">
+      <input id="pollB" placeholder="Option 2">
+      <input id="pollC" placeholder="Option 3">
+    </div>
+
     <div class="modal-actions">
       <button class="modal-btn cancel" onclick="closeModal('postModal')">Cancel</button>
       <button class="modal-btn submit" onclick="createPost()">Post</button>
@@ -405,191 +281,195 @@ a{text-decoration:none;color:inherit}
   </div>
 </div>
 
-<!-- SHARE MODAL -->
 <div class="modal-bg" id="shareModal">
   <div class="modal">
     <h2>Share Post</h2>
     <div class="share-icons">
-      <div class="share-icon"><i class="fa-brands fa-whatsapp"></i>WhatsApp</div>
-      <div class="share-icon"><i class="fa-brands fa-instagram"></i>Instagram</div>
-      <div class="share-icon"><i class="fa-brands fa-facebook"></i>Facebook</div>
-      <div class="share-icon"><i class="fa-brands fa-x-twitter"></i>Twitter</div>
-      <div class="share-icon"><i class="fa-brands fa-telegram"></i>Telegram</div>
-      <div class="share-icon"><i class="fa-solid fa-link"></i>Copy Link</div>
-      <div class="share-icon"><i class="fa-solid fa-envelope"></i>Email</div>
-      <div class="share-icon"><i class="fa-solid fa-message"></i>SMS</div>
+      <div class="share-icon" onclick="toast('Shared on WhatsApp')"><i class="fa-brands fa-whatsapp"></i>WhatsApp</div>
+      <div class="share-icon" onclick="toast('Shared on Instagram')"><i class="fa-brands fa-instagram"></i>Instagram</div>
+      <div class="share-icon" onclick="toast('Shared on Facebook')"><i class="fa-brands fa-facebook"></i>Facebook</div>
+      <div class="share-icon" onclick="toast('Copied link')"><i class="fa-solid fa-link"></i>Copy</div>
     </div>
-    <div class="modal-actions">
-      <button class="modal-btn cancel" onclick="closeModal('shareModal')">Close</button>
-    </div>
+    <div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('shareModal')">Close</button></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+let postMode="text";
+let dummyImage="";
+
+const randomPosts=[
+  {name:"Neha Moves",avatar:"https://i.pravatar.cc/100?img=32",text:"Sunsets, good music and even better company. Grateful for these little moments.",img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop"},
+  {name:"WanderWithRaj",avatar:"https://i.pravatar.cc/100?img=12",text:"Exploring hidden gems in the Himalayas. Nature never fails to amaze me.",img:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=900&auto=format&fit=crop"},
+  {name:"Foodie Naina",avatar:"https://i.pravatar.cc/100?img=28",text:"Trying a new street food place today. This one is worth visiting.",img:"https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=900&auto=format&fit=crop"},
+  {name:"Tech Simplified",avatar:"https://i.pravatar.cc/100?img=52",text:"AI tools are becoming part of daily creator workflow. Which one do you use most?",img:"https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=900&auto=format&fit=crop"}
+];
+
+function renderInitial(){
+  randomPosts.forEach(p=>addPost(p.text,p.img,p.name,p.avatar,false));
+  addPollPost("Which type of content should we stream tonight?",["Acoustic","Indie Pop","Bollywood Covers"],"MusicVibes","https://i.pravatar.cc/100?img=22");
+}
+
 function toast(msg){
   const t=document.getElementById("toast");
-  t.innerText=msg;
-  t.style.display="block";
+  t.innerText=msg;t.style.display="block";
   setTimeout(()=>t.style.display="none",1600);
 }
-
 function openModal(id){document.getElementById(id).classList.add("show")}
 function closeModal(id){document.getElementById(id).classList.remove("show")}
-document.querySelectorAll(".modal-bg").forEach(m=>{
-  m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")})
-});
+document.querySelectorAll(".modal-bg").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}))
 
 function openPostModal(type){
-  document.getElementById("modalTitle").innerText = type==="poll" ? "Create Poll Post" : type==="image" ? "Create Image Post" : "Create Text Post";
-  document.getElementById("modalImageUrl").style.display = type==="text" ? "none" : "block";
+  postMode=type;
+  document.getElementById("modalTitle").innerText=type==="poll"?"Create Poll":type==="image"?"Create Image Post":"Create Text Post";
+  document.getElementById("imageBox").style.display=type==="image"?"block":"none";
+  document.getElementById("pollBox").style.display=type==="poll"?"block":"none";
+  document.getElementById("modalPostText").style.display=type==="poll"?"none":"block";
   openModal("postModal");
 }
-
+function dummyBrowse(){
+  const imgs=[
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=900&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=900&auto=format&fit=crop"
+  ];
+  dummyImage=imgs[Math.floor(Math.random()*imgs.length)];
+  const preview=document.getElementById("uploadPreview");
+  preview.src=dummyImage;
+  preview.style.display="block";
+  toast("Dummy image selected");
+}
 function quickPost(){
   const input=document.getElementById("quickPostText");
   if(input.value.trim()===""){toast("Please write something");return;}
-  addPost(input.value,"");
+  addPost(input.value,"","Trupti Latur","https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop",true);
   input.value="";
-  toast("Post published");
 }
-
 function createPost(){
-  const text=document.getElementById("modalPostText").value;
-  const img=document.getElementById("modalImageUrl").value;
-  if(text.trim()===""){toast("Please write something");return;}
-  addPost(text,img);
-  document.getElementById("modalPostText").value="";
-  document.getElementById("modalImageUrl").value="";
+  if(postMode==="poll"){
+    const q=document.getElementById("pollQ").value||"Your poll question";
+    const opts=[document.getElementById("pollA").value||"Option 1",document.getElementById("pollB").value||"Option 2",document.getElementById("pollC").value||"Option 3"];
+    addPollPost(q,opts,"Trupti Latur","https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop");
+  }else{
+    const text=document.getElementById("modalPostText").value;
+    if(text.trim()===""){toast("Please write something");return;}
+    addPost(text,postMode==="image"?dummyImage:"","Trupti Latur","https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop",true);
+  }
   closeModal("postModal");
-  toast("Post published");
+  document.querySelectorAll("#postModal textarea,#postModal input").forEach(i=>i.value="");
+  document.getElementById("uploadPreview").style.display="none";
+  dummyImage="";
 }
 
-function addPost(text,img){
+function postShell(name,avatar){
+  return `
+  <div class="post-head">
+    <img src="${avatar}">
+    <div><h3>${name} <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3><p>Just now • Public</p></div>
+    <div class="post-menu" onclick="toggleMenu(this)">
+      <i class="fa-solid fa-ellipsis-vertical"></i>
+      <div class="menu-popup">
+        <div onclick="toast('Post saved')">Save post</div>
+        <div onclick="toast('Post hidden')">Hide post</div>
+        <div onclick="toast('Post reported')">Report</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function addPost(text,img,name,avatar,top){
   const feed=document.getElementById("postFeed");
   const div=document.createElement("div");
   div.className="card post";
   div.innerHTML=`
-    <div class="post-head">
-      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop">
-      <div><h3>Trupti Latur <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3><p>Just now • Public</p></div>
-      <div class="post-menu" onclick="toggleMenu(this)">
-        <i class="fa-solid fa-ellipsis-vertical"></i>
-        <div class="menu-popup">
-          <div onclick="toast('Post saved')"><i class="fa-regular fa-bookmark"></i> Save post</div>
-          <div onclick="toast('Post hidden')"><i class="fa-regular fa-eye-slash"></i> Hide post</div>
-          <div onclick="toast('Post reported')"><i class="fa-regular fa-flag"></i> Report</div>
-        </div>
-      </div>
-    </div>
+    ${postShell(name,avatar)}
     <div class="post-text">${text}</div>
-    ${img ? `<img class="post-media" src="${img}">` : ""}
+    ${img?`<img class="post-media" src="${img}">`:""}
     <div class="post-actions">
-      <button class="post-action like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i> <span>0</span></button>
-      <button class="post-action" onclick="toggleCommentBox(this)"><i class="fa-regular fa-comment"></i> <span>0</span></button>
+      <button class="post-action like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i> <span>${Math.floor(Math.random()*900)+100}</span></button>
+      <button class="post-action" onclick="toggleCommentBox(this)"><i class="fa-regular fa-comment"></i> <span>${Math.floor(Math.random()*120)+10}</span></button>
       <button class="post-action" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
     </div>
     <div class="comments-box">
+      <div class="comment-line"><b>WanderWithRaj</b> Beautiful post.</div>
       <button class="view-comments" onclick="toggleCommentBox(this)">Add comment</button>
-      <div class="comment-input">
-        <input placeholder="Write a comment...">
-        <button onclick="sendInlineComment(this)"><i class="fa-solid fa-paper-plane"></i></button>
-      </div>
+      <div class="comment-input"><input placeholder="Write a comment..."><button onclick="sendInlineComment(this)"><i class="fa-solid fa-paper-plane"></i></button></div>
+    </div>`;
+  top?feed.prepend(div):feed.appendChild(div);
+}
+
+function addPollPost(q,opts,name,avatar){
+  const feed=document.getElementById("postFeed");
+  const div=document.createElement("div");
+  div.className="card post";
+  div.innerHTML=`
+    ${postShell(name,avatar)}
+    <div class="post-text">${q}</div>
+    <div class="poll-options">
+      ${opts.map((o,i)=>`<div class="poll-option" onclick="votePoll(this)">
+        <div class="poll-fill"></div><div class="poll-text"><span>${o}</span><b>0%</b></div>
+      </div>`).join("")}
     </div>
-  `;
+    <div class="post-actions">
+      <button class="post-action like-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i> <span>432</span></button>
+      <button class="post-action" onclick="toggleCommentBox(this)"><i class="fa-regular fa-comment"></i> <span>89</span></button>
+      <button class="post-action" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
+    </div>`;
   feed.prepend(div);
 }
 
+function votePoll(option){
+  const parent=option.closest(".poll-options");
+  const values=[58,29,13];
+  parent.querySelectorAll(".poll-option").forEach((o,i)=>{
+    o.classList.remove("voted");
+    o.querySelector(".poll-fill").style.width=values[i]+"%";
+    o.querySelector("b").innerText=values[i]+"%";
+  });
+  option.classList.add("voted");
+  toast("Vote submitted");
+}
 function toggleLike(btn){
   btn.classList.toggle("liked");
   const icon=btn.querySelector("i");
-  const span=btn.querySelector("span");
-  let count=parseFloat(span.innerText) || 0;
-  if(btn.classList.contains("liked")){
-    icon.className="fa-solid fa-heart";
-    span.innerText=count>=1000?span.innerText:Math.floor(count+1);
-  }else{
-    icon.className="fa-regular fa-heart";
-    span.innerText=count>=1000?span.innerText:Math.max(0,Math.floor(count-1));
-  }
+  icon.className=btn.classList.contains("liked")?"fa-solid fa-heart":"fa-regular fa-heart";
 }
-
 function toggleCommentBox(el){
-  const post=el.closest(".post");
-  const box=post.querySelector(".comment-input");
-  box.classList.toggle("show");
+  el.closest(".post").querySelector(".comment-input")?.classList.toggle("show");
 }
-
 function sendInlineComment(btn){
-  const box=btn.closest(".comment-input");
-  const input=box.querySelector("input");
+  const box=btn.closest(".comment-input"), input=box.querySelector("input");
   if(input.value.trim()==="")return;
-  const comment=document.createElement("div");
-  comment.className="comment-line";
-  comment.innerHTML=`<b>You</b> ${input.value}`;
-  box.parentElement.insertBefore(comment,box);
-  input.value="";
-  toast("Comment added");
+  const c=document.createElement("div");
+  c.className="comment-line"; c.innerHTML=`<b>You</b> ${input.value}`;
+  box.parentElement.insertBefore(c,box); input.value=""; toast("Comment added");
 }
-
 function toggleMenu(menu){
   const popup=menu.querySelector(".menu-popup");
   document.querySelectorAll(".menu-popup").forEach(p=>{if(p!==popup)p.classList.remove("show")});
   popup.classList.toggle("show");
 }
+document.addEventListener("click",e=>{if(!e.target.closest(".post-menu"))document.querySelectorAll(".menu-popup").forEach(p=>p.classList.remove("show"))})
+function follow(btn){btn.classList.toggle("following");btn.innerText=btn.classList.contains("following")?"Following":"Follow"}
+function join(btn){btn.classList.toggle("joined");btn.innerText=btn.classList.contains("joined")?"Joined":"Join"}
+function toggleBlock(id,btn){const b=document.getElementById(id);b.style.display=b.style.display==="none"?"block":"none";btn.innerText=b.style.display==="none"?"View all":"Show less"}
 
-document.addEventListener("click",e=>{
-  if(!e.target.closest(".post-menu")){
-    document.querySelectorAll(".menu-popup").forEach(p=>p.classList.remove("show"));
+let loading=false;
+window.addEventListener("scroll",()=>{
+  if(loading)return;
+  if(window.innerHeight+window.scrollY>=document.body.offsetHeight-500){
+    loading=true;
+    for(let i=0;i<3;i++){
+      const p=randomPosts[Math.floor(Math.random()*randomPosts.length)];
+      addPost(p.text,p.img,p.name,p.avatar,false);
+    }
+    setTimeout(()=>loading=false,400);
   }
 });
 
-function playVideo(btn){
-  btn.innerHTML='<i class="fa-solid fa-pause"></i>';
-  toast("Video playing");
-  setTimeout(()=>btn.innerHTML='<i class="fa-solid fa-play"></i>',2200);
-}
-
-function votePoll(option,percent){
-  const parent=option.closest(".poll-options");
-  parent.querySelectorAll(".poll-option").forEach(o=>o.classList.remove("voted"));
-  option.classList.add("voted");
-  parent.querySelectorAll(".poll-option").forEach((o,i)=>{
-    const values=[62,25,13];
-    o.querySelector(".poll-fill").style.width=values[i]+"%";
-    o.querySelector("b").innerText=values[i]+"%";
-  });
-  toast("Vote submitted");
-}
-
-function follow(btn){
-  btn.classList.toggle("following");
-  btn.innerText=btn.classList.contains("following")?"Following":"Follow";
-}
-
-function join(btn){
-  btn.classList.toggle("joined");
-  btn.innerText=btn.classList.contains("joined")?"Joined":"Join";
-}
-
-function toggleTopics(btn){
-  const box=document.getElementById("extraTopics");
-  box.style.display=box.style.display==="none"?"block":"none";
-  btn.innerText=box.style.display==="none"?"View all":"Show less";
-}
-
-function toggleCreators(btn){
-  const box=document.getElementById("extraCreators");
-  box.style.display=box.style.display==="none"?"block":"none";
-  btn.innerText=box.style.display==="none"?"View all":"Show less";
-}
-
-function toggleCommunities(btn){
-  const box=document.getElementById("extraCommunities");
-  box.style.display=box.style.display==="none"?"block":"none";
-  btn.innerText=box.style.display==="none"?"View all":"Show less";
-}
+renderInitial();
 </script>
 </body>
 </html>
