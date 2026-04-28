@@ -1,363 +1,1109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>JioVibe Creator Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JioVibe Dashboard</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-body{background:#fbfbfc;color:#1f2937;overflow-x:hidden}
+body{background:#fbfbfc;color:#222;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 .app{display:flex;min-height:100vh}
-.sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:32px 18px;position:fixed;left:0;top:0;background:#fff;z-index:10}
-.logo{display:flex;align-items:center;gap:4px;margin-bottom:38px;padding-left:8px}
-.logo-circle{width:54px;height:54px;background:#ff5a00;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
-.logo-text{font-size:32px;font-weight:800;color:#2b070b;letter-spacing:-1.2px}
-.menu{display:flex;flex-direction:column;gap:10px}
-.menu-item{display:flex;align-items:center;gap:16px;padding:15px 20px;border-radius:14px;font-weight:700;color:#3f4654;font-size:15px;transition:.25s}
-.menu-item i{width:22px;font-size:20px;text-align:center}
-.menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
-.main{margin-left:250px;width:calc(100% - 250px)}
-.topbar{height:82px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;position:sticky;top:0;z-index:8}
-.search{width:650px;height:50px;border:1px solid #edf0f4;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad;background:#fff}
-.search input{border:none;outline:none;flex:1;font-size:15px;background:transparent}
-.top-actions{display:flex;align-items:center;gap:18px}
-.icon-btn{width:44px;height:44px;border:1px solid #edf0f4;background:#fff;border-radius:50%;font-size:18px;cursor:pointer;position:relative}
-.icon-btn.notify:after{content:"3";position:absolute;top:-4px;right:-2px;background:#ff5a00;color:#fff;font-size:10px;font-weight:800;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.profile{display:flex;align-items:center;gap:12px;cursor:pointer}
-.profile img{width:48px;height:48px;border-radius:50%;object-fit:cover}
-.profile span{font-weight:800;font-size:15px}
-.content{padding:28px 34px 70px;max-width:1280px;margin:auto}
 
-.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-.head h1{font-size:30px;margin-bottom:6px}
-.head p{color:#667085;font-weight:600}
-.head-actions{display:flex;gap:12px}
-.primary{height:46px;padding:0 22px;border:none;border-radius:24px;background:#ff5a00;color:#fff;font-weight:800;cursor:pointer}
-.secondary{height:46px;padding:0 22px;border:1px solid #edf0f4;border-radius:24px;background:#fff;color:#333;font-weight:800;cursor:pointer}
+/* SIDEBAR */
+.sidebar{
+  width:250px;
+  height:100vh;
+  background:#fff;
+  border-right:1px solid #edf0f4;
+  padding:28px 18px;
+  position:fixed;
+  left:0;
+  top:0;
+  z-index:10;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  margin-bottom:38px;
+  padding-left:8px;
+}
+.logo-circle{
+  width:54px;
+  height:54px;
+  background:#ff5a00;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:25px;
+}
+.logo-text{
+  font-size:32px;
+  font-weight:800;
+  color:#2b070b;
+  letter-spacing:-1.2px;
+}
+.menu{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:16px 18px;
+  border-radius:14px;
+  color:#30343b;
+  font-weight:700;
+  font-size:16px;
+  transition:.25s;
+}
+.menu-item i{
+  width:22px;
+  font-size:21px;
+  text-align:center;
+}
+.menu-item:hover,
+.menu-item.active{
+  background:#fff0e8;
+  color:#ff5a00;
+}
+.help{
+  position:absolute;
+  left:18px;
+  right:18px;
+  bottom:28px;
+  border-top:1px solid #edf0f4;
+  padding-top:22px;
+}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px}
-.stat{background:#fff;border:1px solid #edf0f4;border-radius:18px;padding:22px;box-shadow:0 4px 18px rgba(0,0,0,.04)}
-.stat-icon{width:46px;height:46px;border-radius:14px;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
-.stat h2{font-size:28px;margin-bottom:6px}
-.stat p{color:#667085;font-size:14px;font-weight:700}
-.up{color:#16a34a;font-size:13px;font-weight:800;margin-top:8px}
-.down{color:#ef4444;font-size:13px;font-weight:800;margin-top:8px}
+/* MAIN */
+.main{
+  margin-left:250px;
+  width:calc(100% - 250px);
+}
+.topbar{
+  height:86px;
+  background:#fff;
+  border-bottom:1px solid #edf0f4;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 34px;
+  position:sticky;
+  top:0;
+  z-index:9;
+}
+.search{
+  width:580px;
+  height:50px;
+  border:1px solid #edf0f4;
+  border-radius:25px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:0 20px;
+  color:#9aa1ad;
+}
+.search input{
+  flex:1;
+  border:none;
+  outline:none;
+  font-size:15px;
+}
+.token-pill{
+  height:46px;
+  padding:0 18px;
+  border:1px solid #edf0f4;
+  border-radius:12px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:800;
+  color:#ff5a00;
+  cursor:pointer;
+}
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  position:relative;
+}
+.bell{
+  font-size:23px;
+  position:relative;
+  cursor:pointer;
+}
+.bell::after{
+  content:"3";
+  position:absolute;
+  top:-8px;
+  right:-8px;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#ff5a00;
+  color:#fff;
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+.profile{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  padding:6px;
+  border-radius:18px;
+}
+.profile img{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  object-fit:cover;
+}
+.profile span{
+  font-size:15px;
+  font-weight:800;
+}
 
-.layout{display:grid;grid-template-columns:1fr 360px;gap:24px}
-.card{background:#fff;border:1px solid #edf0f4;border-radius:18px;box-shadow:0 4px 18px rgba(0,0,0,.04)}
-.card-head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid #edf0f4}
-.card-head h2{font-size:20px}
-.card-head button{border:none;background:none;color:#ff5a00;font-weight:800;cursor:pointer}
-.chart{height:260px;padding:22px;display:flex;align-items:end;gap:9px;border-bottom:1px solid #edf0f4}
-.bar{flex:1;background:#ff8a3d;border-radius:7px 7px 0 0;min-height:20px}
-.chart-labels{display:flex;justify-content:space-between;padding:12px 22px;color:#777;font-size:12px;font-weight:700}
+/* PROFILE DROPDOWN */
+.dropdown{
+  position:absolute;
+  top:70px;
+  right:0;
+  width:410px;
+  background:#fff;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 18px 55px rgba(0,0,0,.18);
+  display:none;
+  z-index:50;
+}
+.dropdown.show{display:block}
+.dropdown::before{
+  content:"";
+  position:absolute;
+  top:-12px;
+  right:90px;
+  width:24px;
+  height:24px;
+  background:#fff;
+  transform:rotate(45deg);
+}
+.drop-head{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:26px;
+}
+.drop-head img{
+  width:84px;
+  height:84px;
+  border-radius:50%;
+  object-fit:cover;
+}
+.drop-head h2{
+  font-size:25px;
+  margin-bottom:6px;
+}
+.drop-head p{
+  color:#ff5a00;
+  font-size:18px;
+  font-weight:800;
+}
+.drop-item{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  padding:18px 20px;
+  border-radius:14px;
+  font-size:21px;
+  font-weight:800;
+  color:#333;
+  cursor:pointer;
+}
+.drop-item i{
+  width:26px;
+  font-size:24px;
+}
+.drop-item:hover,
+.drop-item.active{
+  background:#fff0e8;
+  color:#ff5a00;
+}
+.drop-line{
+  height:1px;
+  background:#edf0f4;
+  margin:22px 0;
+}
 
-.video-list{padding:18px}
-.video{display:grid;grid-template-columns:170px 1fr auto;gap:16px;padding:14px;border-bottom:1px solid #edf0f4;align-items:center}
-.video:last-child{border-bottom:none}
-.thumb{height:96px;border-radius:12px;background-size:cover;background-position:center;position:relative}
-.duration{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;border-radius:5px;font-size:12px;font-weight:800;padding:4px 7px}
-.video h3{font-size:16px;margin-bottom:8px}
-.video p{font-size:13px;color:#667085;line-height:1.5}
-.video-actions{display:flex;gap:8px}
-.mini-btn{width:38px;height:38px;border:1px solid #edf0f4;background:#fff;border-radius:10px;cursor:pointer;color:#555}
-.mini-btn:hover{background:#fff0e8;color:#ff5a00}
+/* CONTENT */
+.content{
+  padding:26px 30px 60px;
+}
+.dashboard-layout{
+  display:grid;
+  grid-template-columns:1fr 300px;
+  gap:24px;
+  max-width:1280px;
+  margin:auto;
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  margin-bottom:22px;
+}
+.stat-card{
+  background:#fff;
+  border:1px solid #edf0f4;
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 5px 18px rgba(0,0,0,.04);
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+}
+.stat-icon{
+  width:54px;
+  height:54px;
+  border-radius:14px;
+  background:#ff5a00;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+}
+.stat-card p{
+  font-size:14px;
+  color:#555;
+  font-weight:700;
+  margin-bottom:6px;
+}
+.stat-card h2{
+  font-size:28px;
+  margin-bottom:8px;
+}
+.growth{
+  color:#16a34a;
+  font-weight:800;
+  font-size:14px;
+}
 
-.side-card{padding:20px;margin-bottom:18px}
-.side-card h2{font-size:19px;margin-bottom:16px}
-.task{display:flex;gap:14px;align-items:center;padding:14px;border:1px solid #edf0f4;border-radius:14px;margin-bottom:12px;cursor:pointer}
-.task i{width:42px;height:42px;border-radius:50%;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-size:19px}
-.task h3{font-size:14px;margin-bottom:4px}
-.task p{font-size:12px;color:#777}
-.task:hover{border-color:#ffd8c5;background:#fffaf7}
-.comment{display:flex;gap:12px;margin-bottom:16px}
-.comment img{width:40px;height:40px;border-radius:50%;object-fit:cover}
-.comment h4{font-size:14px;margin-bottom:4px}
-.comment p{font-size:13px;color:#667085}
-.badge{display:inline-block;padding:6px 10px;border-radius:20px;background:#e8f8e8;color:#16a34a;font-size:12px;font-weight:800}
-.table{padding:18px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{text-align:left;padding:13px;border-bottom:1px solid #edf0f4}
-th{color:#667085}
-.status{padding:6px 10px;border-radius:18px;background:#e8f8e8;color:#16a34a;font-weight:800;font-size:12px}
+/* QUICK ACTION */
+.quick-actions{
+  background:#fff;
+  border:1px solid #edf0f4;
+  border-radius:20px;
+  padding:22px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:22px;
+  box-shadow:0 5px 18px rgba(0,0,0,.04);
+}
+.quick-action{
+  padding:16px;
+  border-right:1px solid #edf0f4;
+  text-align:center;
+  cursor:pointer;
+  border-radius:16px;
+  transition:.25s;
+}
+.quick-action:last-child{border-right:none}
+.quick-action:hover{
+  background:#fff0e8;
+}
+.quick-icon{
+  width:58px;
+  height:58px;
+  border-radius:14px;
+  background:#fff0e8;
+  color:#ff5a00;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  margin:0 auto 12px;
+}
+.quick-action h3{
+  font-size:17px;
+  margin-bottom:6px;
+}
+.quick-action p{
+  color:#777;
+  font-size:13px;
+}
 
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:100}
+/* CONTENT TABLE */
+.card{
+  background:#fff;
+  border:1px solid #edf0f4;
+  border-radius:20px;
+  box-shadow:0 5px 18px rgba(0,0,0,.04);
+}
+.card-head{
+  padding:20px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #edf0f4;
+}
+.card-head h2{
+  font-size:21px;
+}
+.card-head button{
+  border:none;
+  background:none;
+  color:#ff5a00;
+  font-weight:800;
+  cursor:pointer;
+}
+.table-wrap{padding:12px 18px 18px}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th,td{
+  text-align:left;
+  padding:13px 8px;
+  border-bottom:1px solid #edf0f4;
+  font-size:14px;
+}
+th{
+  color:#555;
+  font-size:13px;
+}
+.content-cell{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.content-cell img{
+  width:88px;
+  height:50px;
+  object-fit:cover;
+  border-radius:8px;
+}
+.content-cell h3{
+  font-size:14px;
+  margin-bottom:4px;
+}
+.content-cell p{
+  color:#777;
+  font-size:12px;
+}
+.status{
+  padding:7px 13px;
+  background:#e8f8e8;
+  color:#169c3a;
+  border-radius:20px;
+  font-weight:800;
+  font-size:12px;
+}
+.status.unlisted{
+  background:#f3f4f6;
+  color:#555;
+}
+.more{
+  font-size:20px;
+  cursor:pointer;
+  position:relative;
+}
+.menu-popup{
+  display:none;
+  position:absolute;
+  right:0;
+  top:26px;
+  width:200px;
+  background:#fff;
+  border:1px solid #edf0f4;
+  border-radius:14px;
+  box-shadow:0 10px 28px rgba(0,0,0,.14);
+  z-index:10;
+  overflow:hidden;
+}
+.menu-popup.show{display:block}
+.menu-popup div{
+  padding:13px 14px;
+  font-weight:700;
+  font-size:14px;
+  cursor:pointer;
+}
+.menu-popup div:hover{
+  background:#fff0e8;
+  color:#ff5a00;
+}
+
+/* RIGHT SIDE */
+.side-card{
+  background:#fff;
+  border:1px solid #edf0f4;
+  border-radius:20px;
+  padding:22px;
+  margin-bottom:20px;
+  box-shadow:0 5px 18px rgba(0,0,0,.04);
+}
+.side-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+.side-head h2{
+  font-size:19px;
+}
+.side-head button{
+  border:none;
+  background:none;
+  color:#ff5a00;
+  font-weight:800;
+  cursor:pointer;
+}
+.tool{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  padding:16px 0;
+  border-bottom:1px solid #edf0f4;
+  cursor:pointer;
+}
+.tool:last-child{border-bottom:none}
+.tool-icon{
+  width:54px;
+  height:54px;
+  border-radius:14px;
+  background:#fff0e8;
+  color:#ff5a00;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+}
+.tool h3{
+  font-size:16px;
+  margin-bottom:5px;
+}
+.tool p{
+  font-size:13px;
+  color:#777;
+  line-height:1.4;
+}
+.tool .arrow{
+  margin-left:auto;
+  color:#8b93a1;
+}
+.token-box{
+  text-align:center;
+}
+.token-box h1{
+  font-size:42px;
+  color:#ff5a00;
+  margin:12px 0 4px;
+}
+.token-box p{
+  font-weight:700;
+  color:#333;
+}
+.buy-btn{
+  width:100%;
+  height:48px;
+  border:none;
+  border-radius:12px;
+  background:#ff5a00;
+  color:#fff;
+  font-weight:800;
+  font-size:16px;
+  margin:20px 0;
+  cursor:pointer;
+}
+.history-btn{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  font-weight:700;
+  color:#444;
+  padding-top:12px;
+  border-top:1px solid #edf0f4;
+}
+.ai-promo{
+  background:#fff7f2;
+  border-color:#ffd8c5;
+}
+.ai-promo h3{
+  font-size:17px;
+  margin-bottom:8px;
+}
+.ai-promo p{
+  color:#555;
+  font-size:13px;
+  line-height:1.5;
+}
+.ai-promo button{
+  margin-top:16px;
+  border:none;
+  background:none;
+  color:#ff5a00;
+  font-weight:800;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* MODALS */
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+}
 .modal-bg.show{display:flex}
-.modal{background:#fff;width:460px;border-radius:22px;padding:26px;box-shadow:0 18px 55px rgba(0,0,0,.25)}
-.modal h2{margin-bottom:16px}
-.modal input,.modal textarea,.modal select{width:100%;border:1px solid #edf0f4;border-radius:14px;padding:14px;margin-bottom:12px;outline:none;font-size:14px}
-.modal textarea{height:110px;resize:none}
-.modal-actions{display:flex;gap:10px;margin-top:10px}
-.modal-btn{flex:1;height:46px;border:none;border-radius:12px;font-weight:800;cursor:pointer}
+.modal{
+  width:430px;
+  background:#fff;
+  border-radius:22px;
+  padding:26px;
+  box-shadow:0 16px 50px rgba(0,0,0,.22);
+}
+.modal h2{
+  margin-bottom:16px;
+}
+.modal input,
+.modal textarea,
+.modal select{
+  width:100%;
+  border:1px solid #edf0f4;
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:12px;
+  outline:none;
+  font-size:14px;
+}
+.modal textarea{
+  height:110px;
+  resize:none;
+}
+.modal-actions{
+  display:flex;
+  gap:10px;
+}
+.modal-btn{
+  flex:1;
+  height:46px;
+  border:none;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
+}
 .cancel{background:#f1f1f1}
 .submit{background:#ff5a00;color:#fff}
-.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-size:14px;font-weight:700;display:none;z-index:120}
-
-/* TERMS POPUP */
-.terms-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
-.terms-modal{width:720px;max-width:95vw;background:#fff;border-radius:24px;padding:34px 40px;box-shadow:0 22px 70px rgba(0,0,0,.28);position:relative}
-.terms-close{position:absolute;right:22px;top:22px;width:38px;height:38px;border:none;border-radius:50%;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.15);font-size:18px;cursor:pointer}
-.terms-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
-.terms-logo{display:flex;align-items:center;gap:4px;margin-bottom:12px}
-.terms-logo .logo-circle{width:54px;height:54px;font-size:24px}
-.terms-logo .logo-text{font-size:31px}
-.terms-modal h1{font-size:34px;margin-bottom:10px}
-.terms-modal .sub{color:#667085;font-size:16px;margin-bottom:28px}
-.terms-icon{font-size:72px;color:#ffb58d;margin-top:28px}
-.terms-box{height:300px;overflow-y:auto;border:1px solid #edf0f4;border-radius:14px;padding:18px 22px;margin-bottom:20px}
-.terms-box h3{font-size:15px;margin:12px 0 8px}
-.terms-box p{font-size:14px;color:#5e6673;line-height:1.65;border-bottom:1px solid #edf0f4;padding-bottom:14px}
-.check-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;color:#4b5563;font-weight:600}
-.check-row input{width:24px;height:24px;accent-color:#ff5a00}
-.check-row span{color:#ff5a00}
-.accept-btn{width:100%;height:52px;border:none;border-radius:12px;background:#ffc8ad;color:#fff;font-weight:800;font-size:16px;cursor:not-allowed;margin-bottom:14px}
-.accept-btn.enabled{background:#ff5a00;cursor:pointer}
-.decline-btn{width:100%;height:50px;border:1px solid #edf0f4;border-radius:12px;background:#fff;color:#4b5563;font-weight:800;font-size:16px;cursor:pointer}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:28px;
+  transform:translateX(-50%);
+  background:#222;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:20px;
+  font-size:14px;
+  font-weight:700;
+  display:none;
+  z-index:200;
+}
 
 @media(max-width:1100px){
-.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px)}
-.search{width:420px}.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}
+  .sidebar{width:220px}
+  .main{margin-left:220px;width:calc(100% - 220px)}
+  .dashboard-layout{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .search{width:420px}
 }
 @media(max-width:780px){
-.sidebar{display:none}.main{margin-left:0;width:100%}.topbar{padding:0 16px}.search{width:100%}.profile span{display:none}
-.content{padding:18px}.head{flex-direction:column;align-items:flex-start;gap:14px}.stats{grid-template-columns:1fr}
-.video{grid-template-columns:1fr}.thumb{height:180px}
-.terms-modal{padding:26px 22px}.terms-icon{display:none}.terms-modal h1{font-size:28px}
+  .sidebar{display:none}
+  .main{margin-left:0;width:100%}
+  .topbar{padding:0 16px}
+  .profile span{display:none}
+  .search{width:100%}
+  .content{padding:18px}
+  .stats{grid-template-columns:1fr}
+  .quick-actions{grid-template-columns:1fr}
+  .quick-action{border-right:none;border-bottom:1px solid #edf0f4}
+  table{min-width:780px}
+  .table-wrap{overflow:auto}
+  .dropdown{width:330px;right:-10px}
 }
 </style>
 </head>
 
 <body>
-
 <div class="app">
+
 <aside class="sidebar">
-<a href="index.html" class="logo"><div class="logo-circle">Jio</div><div class="logo-text">Vibe</div></a>
-<nav class="menu">
-<a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
-<a href="dashboard.html" class="menu-item active"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
-<a href="my-channel.html" class="menu-item"><i class="fa-regular fa-user"></i> My Channel</a>
-<a href="live.html" class="menu-item"><i class="fa-solid fa-video"></i> Live</a>
-<a href="video.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Videos</a>
-<a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
-<a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community</a>
-<a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
-<a href="settings.html" class="menu-item"><i class="fa-solid fa-gear"></i> Settings</a>
-</nav>
+  <a href="index.html" class="logo">
+    <div class="logo-circle">Jio</div>
+    <div class="logo-text">Vibe</div>
+  </a>
+
+  <nav class="menu">
+    <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="my-channel.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Content</a>
+    <a href="ai-studio.html" class="menu-item active"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio</a>
+    <a href="#" class="menu-item" onclick="toast('Analytics opened')"><i class="fa-solid fa-chart-simple"></i> Analytics</a>
+    <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
+  </nav>
+
+  <div class="help">
+    <a href="#" class="menu-item" onclick="toast('Help & Support opened')"><i class="fa-regular fa-circle-question"></i> Help & Support</a>
+  </div>
 </aside>
 
 <main class="main">
+
 <header class="topbar">
-<div class="search"><i class="fa-solid fa-magnifying-glass"></i><input placeholder="Search dashboard, videos, analytics..."></div>
-<div class="top-actions">
-<button class="icon-btn" onclick="openModal('uploadModal')"><i class="fa-solid fa-upload"></i></button>
-<button class="icon-btn notify" onclick="toast('Notifications opened')"><i class="fa-regular fa-bell"></i></button>
-<div class="profile"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop"><span>Trupti Latur</span><i class="fa-solid fa-chevron-down"></i></div>
-</div>
+  <div class="search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input placeholder="Search videos, analytics, tools...">
+  </div>
+
+  <div class="top-actions">
+    <button class="token-pill" onclick="openModal('buyModal')">
+      🪙 <span id="topTokens">1,250</span> Tokens
+    </button>
+
+    <div class="bell" onclick="toast('Notifications opened')">
+      <i class="fa-regular fa-bell"></i>
+    </div>
+
+    <div class="profile" onclick="toggleDropdown()">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop">
+      <span>Ankit Jayant</span>
+      <i class="fa-solid fa-chevron-down" id="arrow"></i>
+    </div>
+
+    <div class="dropdown" id="profileDropdown">
+      <div class="drop-head">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop">
+        <div>
+          <h2>Trupti Latur</h2>
+          <p>Creator Account</p>
+        </div>
+      </div>
+
+      <a href="dashboard.html" class="drop-item active"><i class="fa-solid fa-table-cells-large"></i> Go to Dashboard</a>
+      <a href="my-channel.html" class="drop-item"><i class="fa-regular fa-user"></i> My Channel</a>
+      <a href="ai-studio.html" class="drop-item"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio</a>
+      <a href="wallet.html" class="drop-item"><i class="fa-regular fa-wallet"></i> Wallet</a>
+      <a href="settings.html" class="drop-item"><i class="fa-solid fa-gear"></i> Settings</a>
+
+      <div class="drop-line"></div>
+
+      <a href="logout.html" class="drop-item"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+    </div>
+  </div>
 </header>
 
 <section class="content">
-<div class="head">
-<div>
-<h1>Creator Dashboard</h1>
-<p>Welcome back, Trupti. Here is your channel performance overview.</p>
-</div>
-<div class="head-actions">
-<button class="secondary" onclick="window.location.href='my-channel.html'"><i class="fa-regular fa-user"></i> View Channel</button>
-<button class="primary" onclick="openModal('uploadModal')"><i class="fa-solid fa-upload"></i> Upload Video</button>
-<button class="primary" onclick="window.location.href='live.html'"><i class="fa-solid fa-tower-broadcast"></i> Go Live</button>
-</div>
-</div>
+  <div class="dashboard-layout">
 
-<div class="stats">
-<div class="stat"><div class="stat-icon"><i class="fa-solid fa-eye"></i></div><h2>8.4M</h2><p>Total Views</p><div class="up">+18.6% this month</div></div>
-<div class="stat"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><h2>128K</h2><p>Subscribers</p><div class="up">+4.2K new</div></div>
-<div class="stat"><div class="stat-icon"><i class="fa-solid fa-clock"></i></div><h2>42.8K</h2><p>Watch Hours</p><div class="up">+12.4% growth</div></div>
-<div class="stat"><div class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div><h2>₹48K</h2><p>Monthly Earnings</p><div class="down">-2.1% vs last week</div></div>
-</div>
+    <div>
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-eye"></i></div>
+          <div>
+            <p>Views</p>
+            <h2>2.4M</h2>
+            <div class="growth">↗ 12.5%</div>
+            <small>vs last 7 days</small>
+          </div>
+        </div>
 
-<div class="layout">
-<div>
-<div class="card">
-<div class="card-head"><h2>Analytics Overview</h2><button onclick="toast('Analytics opened')">View analytics</button></div>
-<div class="chart" id="chart"></div>
-<div class="chart-labels"><span>1 May</span><span>8 May</span><span>15 May</span><span>22 May</span><span>29 May</span></div>
-</div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+          <div>
+            <p>Revenue</p>
+            <h2>₹1,24,560</h2>
+            <div class="growth">↗ 18.7%</div>
+            <small>vs last 7 days</small>
+          </div>
+        </div>
 
-<div class="card" style="margin-top:22px">
-<div class="card-head"><h2>Latest Content</h2><button onclick="toast('All content opened')">View all</button></div>
-<div class="video-list" id="videoList">
-<div class="video">
-<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=800&auto=format&fit=crop')"><span class="duration">12:34</span></div>
-<div><h3>Acoustic Evening with Trupti 🎸</h3><p>1.2M views • 2 days ago<br><span class="badge">Published</span></p></div>
-<div class="video-actions"><button class="mini-btn" onclick="toast('Edit opened')"><i class="fa-regular fa-pen-to-square"></i></button><button class="mini-btn" onclick="toast('Stats opened')"><i class="fa-solid fa-chart-line"></i></button><button class="mini-btn" onclick="deleteVideo(this)"><i class="fa-regular fa-trash-can"></i></button></div>
-</div>
-<div class="video">
-<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop')"><span class="duration">10:20</span></div>
-<div><h3>Travel Day With Friends</h3><p>420K views • 2 weeks ago<br><span class="badge">Published</span></p></div>
-<div class="video-actions"><button class="mini-btn" onclick="toast('Edit opened')"><i class="fa-regular fa-pen-to-square"></i></button><button class="mini-btn" onclick="toast('Stats opened')"><i class="fa-solid fa-chart-line"></i></button><button class="mini-btn" onclick="deleteVideo(this)"><i class="fa-regular fa-trash-can"></i></button></div>
-</div>
-</div>
-</div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-user-group"></i></div>
+          <div>
+            <p>Followers</p>
+            <h2>128K</h2>
+            <div class="growth">↗ 8.3%</div>
+            <small>vs last 7 days</small>
+          </div>
+        </div>
 
-<div class="card" style="margin-top:22px">
-<div class="card-head"><h2>Revenue Summary</h2><button onclick="window.location.href='wallet.html'">Open wallet</button></div>
-<div class="table">
-<table>
-<thead><tr><th>Source</th><th>Amount</th><th>Growth</th><th>Status</th></tr></thead>
-<tbody>
-<tr><td>Ads Revenue</td><td>₹24,540</td><td>+18.6%</td><td><span class="status">Active</span></td></tr>
-<tr><td>Subscriptions</td><td>₹15,230</td><td>+24.4%</td><td><span class="status">Active</span></td></tr>
-<tr><td>Superchat</td><td>₹8,550</td><td>+10.3%</td><td><span class="status">Active</span></td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-regular fa-clock"></i></div>
+          <div>
+            <p>Watch Time</p>
+            <h2>486 hrs</h2>
+            <div class="growth">↗ 15.2%</div>
+            <small>vs last 7 days</small>
+          </div>
+        </div>
+      </div>
 
-<aside>
-<div class="card side-card">
-<h2>Quick Actions</h2>
-<div class="task" onclick="openModal('uploadModal')"><i class="fa-solid fa-upload"></i><div><h3>Upload Video</h3><p>Add new video to your channel</p></div></div>
-<div class="task" onclick="window.location.href='live.html'"><i class="fa-solid fa-tower-broadcast"></i><div><h3>Go Live</h3><p>Start live streaming now</p></div></div>
-<div class="task" onclick="window.location.href='ai-studio.html'"><i class="fa-solid fa-wand-magic-sparkles"></i><div><h3>AI Studio</h3><p>Create title, thumbnail and script</p></div></div>
-<div class="task" onclick="window.location.href='wallet.html'"><i class="fa-solid fa-wallet"></i><div><h3>Wallet</h3><p>Manage earnings and tokens</p></div></div>
-</div>
+      <div class="quick-actions">
+        <div class="quick-action" onclick="window.location.href='live.html'">
+          <div class="quick-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+          <h3>Go Live</h3>
+          <p>Start streaming now</p>
+        </div>
 
-<div class="card side-card">
-<h2>Recent Comments</h2>
-<div class="comment"><img src="https://i.pravatar.cc/80?img=12"><div><h4>Rohan Verma</h4><p>Amazing voice! ❤️</p></div></div>
-<div class="comment"><img src="https://i.pravatar.cc/80?img=22"><div><h4>Music Lover</h4><p>This vibe is next level 🔥</p></div></div>
-<div class="comment"><img src="https://i.pravatar.cc/80?img=32"><div><h4>Anjali Singh</h4><p>Goosebumps! ✨</p></div></div>
-</div>
+        <div class="quick-action" onclick="openModal('uploadModal')">
+          <div class="quick-icon"><i class="fa-solid fa-upload"></i></div>
+          <h3>Upload Video</h3>
+          <p>Upload and publish</p>
+        </div>
 
-<div class="card side-card">
-<h2>Channel Checklist</h2>
-<div class="task" onclick="toast('Profile already completed')"><i class="fa-solid fa-check"></i><div><h3>Complete profile</h3><p>Done</p></div></div>
-<div class="task" onclick="openModal('uploadModal')"><i class="fa-solid fa-plus"></i><div><h3>Upload weekly video</h3><p>Pending</p></div></div>
-<div class="task" onclick="toast('Monetization settings opened')"><i class="fa-solid fa-indian-rupee-sign"></i><div><h3>Enable monetization</h3><p>Active</p></div></div>
-</div>
-</aside>
-</div>
+        <div class="quick-action" onclick="window.location.href='shorts.html'">
+          <div class="quick-icon"><i class="fa-solid fa-clapperboard"></i></div>
+          <h3>Create Reel</h3>
+          <p>Shorts for everyone</p>
+        </div>
+
+        <div class="quick-action" onclick="window.location.href='stories.html'">
+          <div class="quick-icon"><i class="fa-regular fa-circle"></i></div>
+          <h3>Post Story</h3>
+          <p>Share moments</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Recent Content</h2>
+          <button onclick="toast('All content opened')">View All</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Visibility</th>
+                <th>Views</th>
+                <th>Likes</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="contentTable">
+              <tr>
+                <td>
+                  <div class="content-cell">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=400&auto=format&fit=crop">
+                    <div><h3>Weekend Trip to Manali</h3><p>Exploring the beauty of hills 🏔️</p></div>
+                  </div>
+                </td>
+                <td><i class="fa-regular fa-circle-play"></i> Video</td>
+                <td><span class="status">Public</span></td>
+                <td>312K</td>
+                <td>24.1K</td>
+                <td>May 20, 2024</td>
+                <td><div class="more" onclick="toggleMenu(this)"><i class="fa-solid fa-ellipsis-vertical"></i><div class="menu-popup"><div onclick="toast('Edit opened')">Edit</div><div onclick="toast('Analytics opened')">Analytics</div><div onclick="deleteRow(this)">Delete</div></div></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="content-cell">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400&auto=format&fit=crop">
+                    <div><h3>Road to Glory 🔥</h3><p>Epic BGMI Ranked Match</p></div>
+                  </div>
+                </td>
+                <td><i class="fa-regular fa-circle-play"></i> Video</td>
+                <td><span class="status">Public</span></td>
+                <td>185K</td>
+                <td>15.2K</td>
+                <td>May 18, 2024</td>
+                <td><div class="more" onclick="toggleMenu(this)"><i class="fa-solid fa-ellipsis-vertical"></i><div class="menu-popup"><div onclick="toast('Edit opened')">Edit</div><div onclick="toast('Analytics opened')">Analytics</div><div onclick="deleteRow(this)">Delete</div></div></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="content-cell">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=400&auto=format&fit=crop">
+                    <div><h3>5 Fitness Tips for Beginners</h3><p>Stay fit, stay strong 💪</p></div>
+                  </div>
+                </td>
+                <td><i class="fa-solid fa-clapperboard"></i> Reel</td>
+                <td><span class="status">Public</span></td>
+                <td>98K</td>
+                <td>7.6K</td>
+                <td>May 17, 2024</td>
+                <td><div class="more" onclick="toggleMenu(this)"><i class="fa-solid fa-ellipsis-vertical"></i><div class="menu-popup"><div onclick="toast('Edit opened')">Edit</div><div onclick="toast('Analytics opened')">Analytics</div><div onclick="deleteRow(this)">Delete</div></div></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="content-cell">
+                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=400&auto=format&fit=crop">
+                    <div><h3>Q&A with You! Ask Anything</h3><p>Your questions, my answers</p></div>
+                  </div>
+                </td>
+                <td><i class="fa-solid fa-tower-broadcast"></i> Live Replay</td>
+                <td><span class="status">Public</span></td>
+                <td>62K</td>
+                <td>5.3K</td>
+                <td>May 15, 2024</td>
+                <td><div class="more" onclick="toggleMenu(this)"><i class="fa-solid fa-ellipsis-vertical"></i><div class="menu-popup"><div onclick="toast('Edit opened')">Edit</div><div onclick="toast('Analytics opened')">Analytics</div><div onclick="deleteRow(this)">Delete</div></div></div></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="content-cell">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=400&auto=format&fit=crop">
+                    <div><h3>A Day in My Life | Daily Vlog</h3><p>Simple moments, real life</p></div>
+                  </div>
+                </td>
+                <td><i class="fa-regular fa-circle-play"></i> Video</td>
+                <td><span class="status unlisted">Unlisted</span></td>
+                <td>41K</td>
+                <td>3.1K</td>
+                <td>May 13, 2024</td>
+                <td><div class="more" onclick="toggleMenu(this)"><i class="fa-solid fa-ellipsis-vertical"></i><div class="menu-popup"><div onclick="toast('Edit opened')">Edit</div><div onclick="toast('Analytics opened')">Analytics</div><div onclick="deleteRow(this)">Delete</div></div></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <aside>
+      <div class="side-card">
+        <div class="side-head">
+          <h2>✨ AI Quick Tools</h2>
+          <button onclick="window.location.href='ai-studio.html'">View All</button>
+        </div>
+
+        <div class="tool" onclick="toast('AI Edit opened')">
+          <div class="tool-icon"><i class="fa-solid fa-crop-simple"></i></div>
+          <div><h3>AI Edit</h3><p>Auto edit your videos in one click</p></div>
+          <i class="fa-solid fa-chevron-right arrow"></i>
+        </div>
+
+        <div class="tool" onclick="toast('AI Thumbnail opened')">
+          <div class="tool-icon"><i class="fa-regular fa-image"></i></div>
+          <div><h3>AI Thumbnail</h3><p>Generate eye-catching thumbnails</p></div>
+          <i class="fa-solid fa-chevron-right arrow"></i>
+        </div>
+
+        <div class="tool" onclick="toast('AI Title & Description opened')">
+          <div class="tool-icon"><i class="fa-regular fa-rectangle-list"></i></div>
+          <div><h3>AI Title & Description</h3><p>Create SEO-friendly titles and descriptions</p></div>
+          <i class="fa-solid fa-chevron-right arrow"></i>
+        </div>
+      </div>
+
+      <div class="side-card token-box">
+        <h2>🪙 Token Balance</h2>
+        <h1 id="tokenBalance">1,250</h1>
+        <p>Tokens</p>
+        <button class="buy-btn" onclick="openModal('buyModal')">Buy Tokens</button>
+        <div class="history-btn" onclick="window.location.href='wallet.html'">
+          <span><i class="fa-regular fa-clock"></i> View Token History</span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+      </div>
+
+      <div class="side-card ai-promo">
+        <h3>✨ Get more done with AI</h3>
+        <p>Buy tokens to unlock premium AI tools and grow faster.</p>
+        <button onclick="window.location.href='ai-studio.html'">Explore AI Tools <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </aside>
+
+  </div>
 </section>
 </main>
 </div>
 
-<!-- TERMS POPUP -->
-<div class="terms-overlay" id="termsOverlay">
-<div class="terms-modal">
-<button class="terms-close" onclick="declineTerms()"><i class="fa-solid fa-xmark"></i></button>
-<div class="terms-top">
-<div>
-<div class="terms-logo"><div class="logo-circle">Jio</div><div class="logo-text">Vibe</div></div>
-<h1>Terms & Conditions</h1>
-<p class="sub">Please review and accept to continue using JioVibe</p>
-</div>
-<div class="terms-icon"><i class="fa-regular fa-file-lines"></i></div>
-</div>
-
-<div class="terms-box">
-<h3>1. Introduction</h3>
-<p>Welcome to JioVibe. By accessing or using our platform, you agree to comply with and be bound by these Terms & Conditions. If you do not agree, please do not use JioVibe.</p>
-<h3>2. Eligibility</h3>
-<p>You must be at least 13 years old or the minimum age of digital consent in your country to use JioVibe. By creating an account, you confirm that you meet this requirement.</p>
-<h3>3. User Responsibilities</h3>
-<p>You are responsible for maintaining the confidentiality of your account and for all activities that occur under your account. You agree not to misuse the platform or violate applicable laws.</p>
-<h3>4. Content & Intellectual Property</h3>
-<p>All content on JioVibe, including videos, thumbnails, logos, text, graphics, and software, is protected by intellectual property laws. Creator-uploaded content remains subject to platform policies.</p>
-<h3>5. Monetization</h3>
-<p>Creator earnings, subscriptions, superchat, token usage and withdrawals are subject to review, platform rules, payment verification, and applicable taxes.</p>
-<h3>6. Safety</h3>
-<p>JioVibe may remove content, restrict features, or suspend accounts that violate safety, community, or copyright rules.</p>
-</div>
-
-<label class="check-row">
-<input type="checkbox" id="agreeCheck" onchange="toggleAccept()">
-I agree to the <span>Terms & Conditions</span> and <span>Privacy Policy</span>
-</label>
-
-<button class="accept-btn" id="acceptBtn" onclick="acceptTerms()"><i class="fa-solid fa-lock"></i> Accept & Continue</button>
-<button class="decline-btn" onclick="declineTerms()">Decline</button>
-</div>
-</div>
-
 <!-- UPLOAD MODAL -->
 <div class="modal-bg" id="uploadModal">
-<div class="modal">
-<h2>Upload Video</h2>
-<input id="uploadTitle" placeholder="Video title">
-<select id="uploadType"><option>Video</option><option>Short</option><option>Live Replay</option></select>
-<input id="uploadThumb" placeholder="Thumbnail URL optional">
-<textarea id="uploadDesc" placeholder="Description"></textarea>
-<div class="modal-actions">
-<button class="modal-btn cancel" onclick="closeModal('uploadModal')">Cancel</button>
-<button class="modal-btn submit" onclick="uploadVideo()">Publish</button>
+  <div class="modal">
+    <h2>Upload Video</h2>
+    <input id="uploadTitle" placeholder="Video title">
+    <select id="uploadType">
+      <option>Video</option>
+      <option>Reel</option>
+      <option>Live Replay</option>
+      <option>Story</option>
+    </select>
+    <input id="uploadThumb" placeholder="Thumbnail image URL optional">
+    <textarea id="uploadDesc" placeholder="Description"></textarea>
+
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeModal('uploadModal')">Cancel</button>
+      <button class="modal-btn submit" onclick="uploadContent()">Publish</button>
+    </div>
+  </div>
 </div>
-</div>
+
+<!-- BUY TOKEN MODAL -->
+<div class="modal-bg" id="buyModal">
+  <div class="modal">
+    <h2>Buy Tokens</h2>
+    <select id="tokenPackage">
+      <option value="100">100 Tokens - ₹99</option>
+      <option value="500">500 Tokens - ₹399</option>
+      <option value="1000">1000 Tokens - ₹699</option>
+    </select>
+    <select>
+      <option>UPI</option>
+      <option>Credit Card</option>
+      <option>Debit Card</option>
+      <option>Net Banking</option>
+    </select>
+
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeModal('buyModal')">Cancel</button>
+      <button class="modal-btn submit" onclick="buyTokens()">Pay Now</button>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const chart=document.getElementById("chart");
-for(let i=0;i<34;i++){
-  const b=document.createElement("div");
-  b.className="bar";
-  b.style.height=(30+Math.random()*190)+"px";
-  chart.appendChild(b);
-}
+let tokens = 1250;
 
 function toast(msg){
-  const t=document.getElementById("toast");
-  t.innerText=msg;
-  t.style.display="block";
-  setTimeout(()=>t.style.display="none",1600);
+  const t = document.getElementById("toast");
+  t.innerText = msg;
+  t.style.display = "block";
+  setTimeout(()=> t.style.display = "none", 1600);
 }
-function openModal(id){document.getElementById(id).classList.add("show")}
-function closeModal(id){document.getElementById(id).classList.remove("show")}
-document.querySelectorAll(".modal-bg").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}))
 
-function toggleAccept(){
-  const btn=document.getElementById("acceptBtn");
-  const checked=document.getElementById("agreeCheck").checked;
-  btn.classList.toggle("enabled",checked);
-  btn.innerHTML=checked?'<i class="fa-solid fa-check"></i> Accept & Continue':'<i class="fa-solid fa-lock"></i> Accept & Continue';
+function openModal(id){
+  document.getElementById(id).classList.add("show");
 }
-function acceptTerms(){
-  if(!document.getElementById("agreeCheck").checked){
-    toast("Please agree to continue");
+
+function closeModal(id){
+  document.getElementById(id).classList.remove("show");
+}
+
+document.querySelectorAll(".modal-bg").forEach(m=>{
+  m.addEventListener("click",e=>{
+    if(e.target===m)m.classList.remove("show");
+  });
+});
+
+function toggleDropdown(){
+  const d = document.getElementById("profileDropdown");
+  const arrow = document.getElementById("arrow");
+  d.classList.toggle("show");
+  arrow.classList.toggle("fa-chevron-up");
+  arrow.classList.toggle("fa-chevron-down");
+}
+
+document.addEventListener("click",function(e){
+  const profile = document.querySelector(".profile");
+  const dropdown = document.getElementById("profileDropdown");
+  if(!profile.contains(e.target) && !dropdown.contains(e.target)){
+    dropdown.classList.remove("show");
+    document.getElementById("arrow").classList.remove("fa-chevron-up");
+    document.getElementById("arrow").classList.add("fa-chevron-down");
+  }
+});
+
+function toggleMenu(el){
+  const menu = el.querySelector(".menu-popup");
+  document.querySelectorAll(".menu-popup").forEach(m=>{
+    if(m!==menu)m.classList.remove("show");
+  });
+  menu.classList.toggle("show");
+}
+
+document.addEventListener("click",function(e){
+  if(!e.target.closest(".more")){
+    document.querySelectorAll(".menu-popup").forEach(m=>m.classList.remove("show"));
+  }
+});
+
+function deleteRow(el){
+  el.closest("tr").remove();
+  toast("Content deleted");
+}
+
+function uploadContent(){
+  const title = document.getElementById("uploadTitle").value.trim();
+  const type = document.getElementById("uploadType").value;
+  const thumb = document.getElementById("uploadThumb").value || "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400&auto=format&fit=crop";
+  const desc = document.getElementById("uploadDesc").value || "New uploaded content";
+
+  if(!title){
+    toast("Please enter title");
     return;
   }
-  document.getElementById("termsOverlay").style.display="none";
-  toast("Welcome to Creator Dashboard");
-}
-function declineTerms(){
-  toast("You must accept to access dashboard");
-}
-function uploadVideo(){
-  const title=document.getElementById("uploadTitle").value.trim();
-  const thumb=document.getElementById("uploadThumb").value || "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop";
-  if(!title){toast("Please enter video title");return;}
-  const div=document.createElement("div");
-  div.className="video";
-  div.innerHTML=`
-    <div class="thumb" style="background-image:url('${thumb}')"><span class="duration">New</span></div>
-    <div><h3>${title}</h3><p>Just now<br><span class="badge">Published</span></p></div>
-    <div class="video-actions"><button class="mini-btn" onclick="toast('Edit opened')"><i class="fa-regular fa-pen-to-square"></i></button><button class="mini-btn" onclick="toast('Stats opened')"><i class="fa-solid fa-chart-line"></i></button><button class="mini-btn" onclick="deleteVideo(this)"><i class="fa-regular fa-trash-can"></i></button></div>`;
-  document.getElementById("videoList").prepend(div);
+
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>
+      <div class="content-cell">
+        <img src="${thumb}">
+        <div><h3>${title}</h3><p>${desc}</p></div>
+      </div>
+    </td>
+    <td><i class="fa-regular fa-circle-play"></i> ${type}</td>
+    <td><span class="status">Public</span></td>
+    <td>0</td>
+    <td>0</td>
+    <td>Today</td>
+    <td>
+      <div class="more" onclick="toggleMenu(this)">
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+        <div class="menu-popup">
+          <div onclick="toast('Edit opened')">Edit</div>
+          <div onclick="toast('Analytics opened')">Analytics</div>
+          <div onclick="deleteRow(this)">Delete</div>
+        </div>
+      </div>
+    </td>
+  `;
+
+  document.getElementById("contentTable").prepend(tr);
   closeModal("uploadModal");
-  document.getElementById("uploadTitle").value="";
-  document.getElementById("uploadThumb").value="";
-  document.getElementById("uploadDesc").value="";
-  toast("Video published");
+
+  document.getElementById("uploadTitle").value = "";
+  document.getElementById("uploadThumb").value = "";
+  document.getElementById("uploadDesc").value = "";
+
+  toast("Content published");
 }
-function deleteVideo(btn){
-  btn.closest(".video").remove();
-  toast("Video deleted");
+
+function buyTokens(){
+  const amount = Number(document.getElementById("tokenPackage").value);
+  tokens += amount;
+
+  document.getElementById("tokenBalance").innerText = tokens.toLocaleString();
+  document.getElementById("topTokens").innerText = tokens.toLocaleString();
+
+  closeModal("buyModal");
+  toast(amount + " tokens added");
 }
 </script>
 </body>
