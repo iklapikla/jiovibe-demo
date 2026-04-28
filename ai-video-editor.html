@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Video Editor - JioVibe</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#fbfbfc;color:#222;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.app{display:flex;min-height:100vh}
+
+.sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:28px 18px;position:fixed;left:0;top:0;background:#fff;z-index:10}
+.logo{display:flex;align-items:center;gap:4px;margin-bottom:38px;padding-left:8px}
+.logo-circle{width:54px;height:54px;background:#ff5a00;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
+.logo-text{font-size:32px;font-weight:800;color:#2b070b;letter-spacing:-1.2px}
+.menu{display:flex;flex-direction:column;gap:10px}
+.menu-item{display:flex;align-items:center;gap:18px;padding:16px 18px;border-radius:14px;color:#30343b;font-weight:700;font-size:16px;transition:.25s}
+.menu-item i{width:22px;font-size:21px;text-align:center}
+.menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
+.help{position:absolute;left:18px;right:18px;bottom:28px;border-top:1px solid #edf0f4;padding-top:22px}
+
+.main{margin-left:250px;width:calc(100% - 250px)}
+.topbar{height:86px;background:#fff;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:9}
+.left-title{display:flex;align-items:center;gap:18px}
+.back{font-size:22px;cursor:pointer}
+.left-title h1{font-size:22px}
+.project{text-align:center}
+.project h2{font-size:24px;margin-bottom:7px}
+.project i{color:#555;font-size:17px;cursor:pointer}
+.tags{display:flex;gap:12px;justify-content:center}
+.tag{background:#f7f7f8;color:#667085;padding:7px 13px;border-radius:8px;font-size:13px;font-weight:700}
+.top-actions{display:flex;align-items:center;gap:16px}
+.cost-pill,.token-pill{height:46px;border:1px solid #edf0f4;border-radius:12px;background:#fff;display:flex;align-items:center;gap:8px;padding:0 16px;font-weight:800}
+.cost-pill{background:#fff7f2;color:#ff5a00}
+.token-pill span{color:#ff5a00}
+.buy-btn{height:46px;border:none;border-radius:12px;background:#ff5a00;color:#fff;font-weight:800;font-size:15px;padding:0 20px;cursor:pointer}
+
+.content{padding:26px 34px 60px}
+.editor-layout{display:grid;grid-template-columns:1fr 320px;gap:24px;max-width:1320px;margin:auto}
+
+.preview-card{background:#fff;border:1px solid #edf0f4;border-radius:18px;padding:0;box-shadow:0 5px 18px rgba(0,0,0,.04);overflow:hidden}
+.video-preview{height:460px;border-radius:18px;overflow:hidden;background:#000;position:relative}
+.video-preview img{width:100%;height:100%;object-fit:cover}
+.video-preview:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.58))}
+.player-controls{position:absolute;left:28px;right:28px;bottom:22px;z-index:4;color:#fff}
+.progress{height:6px;background:rgba(255,255,255,.35);border-radius:8px;margin-bottom:16px;position:relative}
+.progress span{display:block;width:43%;height:100%;background:#ff5a00;border-radius:8px}
+.progress:after{content:"";position:absolute;left:43%;top:50%;transform:translate(-50%,-50%);width:18px;height:18px;background:#fff;border-radius:50%}
+.controls-row{display:flex;justify-content:space-between;align-items:center}
+.control-left,.control-right{display:flex;align-items:center;gap:24px;font-size:22px}
+.time{font-size:16px;font-weight:700}
+
+.timeline-card{background:#fff;border:1px solid #edf0f4;border-radius:18px;margin-top:18px;box-shadow:0 5px 18px rgba(0,0,0,.04);overflow:hidden}
+.timeline-tools{height:64px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.tool-left,.tool-right{display:flex;align-items:center;gap:10px}
+.tool-btn{height:38px;border:1px solid #edf0f4;background:#fff;border-radius:9px;padding:0 14px;font-weight:800;color:#444;cursor:pointer}
+.tool-btn:disabled{opacity:.4;cursor:not-allowed}
+.zoom{display:flex;align-items:center;gap:12px}
+.zoom-line{width:120px;height:4px;background:#edf0f4;border-radius:8px;position:relative}
+.zoom-line:after{content:"";position:absolute;left:45%;top:50%;transform:translateY(-50%);width:14px;height:14px;background:#ff5a00;border-radius:50%}
+
+.timeline{padding:24px 22px 28px;position:relative}
+.time-ruler{display:grid;grid-template-columns:repeat(13,1fr);color:#777;font-size:13px;font-weight:700;margin-left:72px;margin-bottom:16px}
+.track-row{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.track-icon{width:42px;height:42px;border-radius:10px;background:#f7f7f8;color:#555;display:flex;align-items:center;justify-content:center;font-size:20px}
+.video-track{flex:1;border:2px solid #ff5a00;border-radius:10px;height:78px;display:grid;grid-template-columns:repeat(6,1fr);overflow:hidden;position:relative;background:#fff7f2}
+.clip{background-size:cover;background-position:center;border-right:2px solid #fff}
+.clip:last-child{border-right:none}
+.audio-track{flex:1;height:58px;border:1px solid #bbf7d0;background:#ecfdf5;border-radius:10px;display:flex;align-items:center;padding:0 12px;overflow:hidden}
+.wave{height:28px;width:3px;background:#4ade80;margin-right:3px;border-radius:4px}
+.playhead{position:absolute;top:43px;bottom:0;left:23.8%;width:3px;background:#ff5a00;z-index:5}
+.playhead:before{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:18px;height:18px;background:#ff5a00;border-radius:50%}
+.highlights{position:absolute;top:72px;left:78px;color:#ff5a00;font-weight:800;font-size:13px}
+.pin{position:absolute;top:94px;color:#ff5a00;font-size:20px}
+.pin.p1{left:15%}.pin.p2{left:29%}.pin.p3{left:34%}.pin.p4{left:55%}.pin.p5{left:73%}.pin.p6{left:92%}
+
+.info-box{background:#fff;border:1px solid #edf0f4;border-radius:14px;margin-top:18px;padding:18px 22px;color:#667085;display:flex;align-items:center;gap:14px;font-size:14px}
+.info-box i{font-size:22px;color:#9aa1ad}
+
+.side-panel{background:#fff;border:1px solid #edf0f4;border-radius:18px;padding:24px;box-shadow:0 5px 18px rgba(0,0,0,.04);height:max-content}
+.side-panel h2{font-size:22px;margin-bottom:8px}
+.side-panel p{color:#667085;font-size:14px;margin-bottom:20px}
+.edit-option{display:grid;grid-template-columns:42px 1fr 48px;gap:14px;align-items:start;padding:18px 0;border-top:1px solid #edf0f4}
+.edit-icon{width:42px;height:42px;border-radius:10px;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-size:22px}
+.edit-option h3{font-size:16px;margin-bottom:7px}
+.edit-option p{font-size:13px;color:#555;line-height:1.5;margin:0}
+.switch{width:42px;height:24px;border-radius:20px;background:#d1d5db;position:relative;cursor:pointer}
+.switch:after{content:"";position:absolute;width:20px;height:20px;top:2px;left:2px;background:#fff;border-radius:50%;transition:.25s}
+.switch.on{background:#ff5a00}
+.switch.on:after{left:20px}
+.generate{width:100%;height:52px;border:none;border-radius:10px;background:#ff5a00;color:#fff;font-size:17px;font-weight:800;cursor:pointer;margin-top:20px}
+.cost-note{height:48px;border:1px solid #edf0f4;border-radius:10px;background:#fafafa;display:flex;align-items:center;justify-content:center;gap:8px;color:#667085;font-weight:800;margin-top:12px}
+.preview-btn{float:right;margin-top:18px;height:46px;padding:0 22px;border:1px solid #edf0f4;border-radius:10px;background:#fff;font-weight:800;cursor:pointer;color:#444}
+
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:100}
+.modal-bg.show{display:flex}
+.modal{width:430px;background:#fff;border-radius:22px;padding:26px;box-shadow:0 16px 50px rgba(0,0,0,.22)}
+.modal h2{margin-bottom:16px}
+.modal input,.modal select{width:100%;height:48px;border:1px solid #edf0f4;border-radius:14px;padding:0 14px;margin-bottom:12px;outline:none}
+.modal-actions{display:flex;gap:10px;margin-top:14px}
+.modal-btn{flex:1;height:46px;border:none;border-radius:12px;font-weight:800;cursor:pointer}
+.cancel{background:#f1f1f1}
+.submit{background:#ff5a00;color:#fff}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-size:14px;font-weight:700;display:none;z-index:200}
+
+@media(max-width:1100px){
+.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px)}
+.editor-layout{grid-template-columns:1fr}.topbar{height:auto;min-height:86px;flex-wrap:wrap;gap:12px;padding:14px 24px}
+.project{text-align:left}.video-preview{height:360px}
+}
+@media(max-width:780px){
+.sidebar{display:none}.main{margin-left:0;width:100%}.content{padding:18px}.top-actions{flex-wrap:wrap}
+.video-preview{height:260px}.time-ruler{font-size:10px;margin-left:55px}.tools-row{overflow:auto}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<aside class="sidebar">
+  <a href="index.html" class="logo">
+    <div class="logo-circle">Jio</div>
+    <div class="logo-text">Vibe</div>
+  </a>
+
+  <nav class="menu">
+    <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="my-channel.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Content</a>
+    <a href="ai-studio.html" class="menu-item active"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio</a>
+    <a href="analytics.html" class="menu-item"><i class="fa-solid fa-chart-simple"></i> Analytics</a>
+    <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
+    <a href="settings.html" class="menu-item"><i class="fa-solid fa-gear"></i> Settings</a>
+  </nav>
+
+  <div class="help">
+    <a href="help-support.html" class="menu-item"><i class="fa-regular fa-circle-question"></i> Help & Support</a>
+  </div>
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+  <div class="left-title">
+    <i class="fa-solid fa-arrow-left back" onclick="window.location.href='ai-studio.html'"></i>
+    <h1>AI Video Editor</h1>
+  </div>
+
+  <div class="project">
+    <h2>Weekend Trip to Manali <i class="fa-regular fa-pen-to-square" onclick="renameProject()"></i></h2>
+    <div class="tags">
+      <span class="tag">Duration: 12:45</span>
+      <span class="tag">Resolution: 1920x1080</span>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <div class="cost-pill">🪙 20 Tokens <span style="color:#555;font-weight:600">per edit</span> <i class="fa-regular fa-circle-question"></i></div>
+    <div class="token-pill">🪙 My Tokens: <span id="tokenCount">1,250</span></div>
+    <button class="buy-btn" onclick="openModal('buyModal')"><i class="fa-solid fa-plus"></i> Buy Tokens</button>
+  </div>
+</header>
+
+<section class="content">
+  <div class="editor-layout">
+
+    <div>
+      <div class="preview-card">
+        <div class="video-preview">
+          <img id="previewImage" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1600&auto=format&fit=crop">
+          <div class="player-controls">
+            <div class="progress"><span></span></div>
+            <div class="controls-row">
+              <div class="control-left">
+                <i id="playIcon" class="fa-solid fa-play" onclick="togglePlay()"></i>
+                <i class="fa-solid fa-volume-high" onclick="toast('Volume changed')"></i>
+                <span class="time">02:15 / 12:45</span>
+              </div>
+              <div class="control-right">
+                <i class="fa-regular fa-closed-captioning" onclick="toast('Captions toggled')"></i>
+                <i class="fa-solid fa-gear" onclick="toast('Player settings opened')"></i>
+                <i class="fa-solid fa-expand" onclick="toggleFullscreen()"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-tools">
+          <div class="tool-left">
+            <button class="tool-btn" onclick="undoAction()"><i class="fa-solid fa-rotate-left"></i> Undo</button>
+            <button class="tool-btn" disabled><i class="fa-solid fa-rotate-right"></i> Redo</button>
+            <button class="tool-btn" onclick="splitClip()"><i class="fa-solid fa-scissors"></i> Split</button>
+            <button class="tool-btn" onclick="deleteClip()"><i class="fa-regular fa-trash-can"></i> Delete</button>
+          </div>
+          <div class="tool-right">
+            <button class="tool-btn" onclick="zoomOut()"><i class="fa-solid fa-minus"></i></button>
+            <div class="zoom"><div class="zoom-line"></div></div>
+            <button class="tool-btn" onclick="zoomIn()"><i class="fa-solid fa-plus"></i></button>
+            <button class="tool-btn" onclick="toggleFullscreen()"><i class="fa-solid fa-expand"></i></button>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="time-ruler">
+            <span>00:00</span><span>01:00</span><span>02:00</span><span>03:00</span><span>04:00</span><span>05:00</span><span>06:00</span><span>07:00</span><span>08:00</span><span>09:00</span><span>10:00</span><span>11:00</span><span>12:00</span>
+          </div>
+
+          <div class="highlights">✨ AI Highlights</div>
+          <i class="fa-solid fa-location-dot pin p1"></i>
+          <i class="fa-solid fa-location-dot pin p2"></i>
+          <i class="fa-solid fa-location-dot pin p3"></i>
+          <i class="fa-solid fa-location-dot pin p4"></i>
+          <i class="fa-solid fa-location-dot pin p5"></i>
+          <i class="fa-solid fa-location-dot pin p6"></i>
+          <div class="playhead"></div>
+
+          <div class="track-row">
+            <div class="track-icon"><i class="fa-regular fa-circle-play"></i></div>
+            <div class="video-track" id="videoTrack">
+              <div class="clip" style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=400&auto=format&fit=crop')"></div>
+              <div class="clip" style="background-image:url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=400&auto=format&fit=crop')"></div>
+              <div class="clip" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=400&auto=format&fit=crop')"></div>
+              <div class="clip" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400&auto=format&fit=crop')"></div>
+              <div class="clip" style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=400&auto=format&fit=crop')"></div>
+              <div class="clip" style="background-image:url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=400&auto=format&fit=crop')"></div>
+            </div>
+          </div>
+
+          <div class="track-row">
+            <div class="track-icon"><i class="fa-solid fa-music"></i></div>
+            <div class="audio-track" id="waveTrack"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <i class="fa-regular fa-lightbulb"></i>
+        AI will analyze your video and apply the selected edits. You can preview before generating the final video.
+        <button class="preview-btn" onclick="previewChanges()"><i class="fa-regular fa-eye"></i> Preview Changes</button>
+      </div>
+    </div>
+
+    <aside class="side-panel">
+      <h2>✨ AI Editing</h2>
+      <p>Smart tools to edit your video instantly</p>
+
+      <div class="edit-option">
+        <div class="edit-icon"><i class="fa-solid fa-scissors"></i></div>
+        <div>
+          <h3>Auto Cut</h3>
+          <p>Automatically remove pauses, long gaps and unnecessary parts.</p>
+        </div>
+        <div class="switch on" onclick="toggleSwitch(this)"></div>
+      </div>
+
+      <div class="edit-option">
+        <div class="edit-icon"><i class="fa-solid fa-volume-xmark"></i></div>
+        <div>
+          <h3>Remove Silence</h3>
+          <p>Detects and removes silent parts to make your video concise.</p>
+        </div>
+        <div class="switch on" onclick="toggleSwitch(this)"></div>
+      </div>
+
+      <div class="edit-option">
+        <div class="edit-icon"><i class="fa-regular fa-object-group"></i></div>
+        <div>
+          <h3>Add Transitions</h3>
+          <p>Add smooth transitions between scenes automatically.</p>
+        </div>
+        <div class="switch on" onclick="toggleSwitch(this)"></div>
+      </div>
+
+      <div class="edit-option">
+        <div class="edit-icon"><i class="fa-solid fa-wave-square"></i></div>
+        <div>
+          <h3>Enhance Audio</h3>
+          <p>Improve voice clarity and balance background noise.</p>
+        </div>
+        <div class="switch" onclick="toggleSwitch(this)"></div>
+      </div>
+
+      <div class="edit-option">
+        <div class="edit-icon"><i class="fa-solid fa-palette"></i></div>
+        <div>
+          <h3>Color Enhance</h3>
+          <p>Automatically adjust color and lighting for better visuals.</p>
+        </div>
+        <div class="switch" onclick="toggleSwitch(this)"></div>
+      </div>
+
+      <button class="generate" onclick="generateVideo()">✨ Generate Video</button>
+      <div class="cost-note">🪙 This will cost <span style="color:#ff5a00">20 Tokens</span></div>
+    </aside>
+
+  </div>
+</section>
+</main>
+</div>
+
+<div class="modal-bg" id="buyModal">
+  <div class="modal">
+    <h2>Buy Tokens</h2>
+    <select id="tokenPack">
+      <option value="100">100 Tokens - ₹99</option>
+      <option value="500">500 Tokens - ₹399</option>
+      <option value="1000">1000 Tokens - ₹699</option>
+    </select>
+    <select>
+      <option>UPI</option>
+      <option>Credit Card</option>
+      <option>Debit Card</option>
+      <option>Net Banking</option>
+    </select>
+    <input placeholder="UPI ID / Card details">
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeModal('buyModal')">Cancel</button>
+      <button class="modal-btn submit" onclick="buyTokens()">Pay Now</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let tokens = 1250;
+let playing = false;
+
+const waveTrack = document.getElementById("waveTrack");
+for(let i=0;i<170;i++){
+  const w = document.createElement("div");
+  w.className = "wave";
+  w.style.height = (8 + Math.random()*34) + "px";
+  waveTrack.appendChild(w);
+}
+
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.innerText=msg;
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",1600);
+}
+
+function openModal(id){document.getElementById(id).classList.add("show")}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+document.querySelectorAll(".modal-bg").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}))
+
+function togglePlay(){
+  playing = !playing;
+  document.getElementById("playIcon").className = playing ? "fa-solid fa-pause" : "fa-solid fa-play";
+  toast(playing ? "Preview playing" : "Preview paused");
+}
+
+function toggleSwitch(el){
+  el.classList.toggle("on");
+  toast(el.classList.contains("on") ? "Tool enabled" : "Tool disabled");
+}
+
+function renameProject(){
+  const name = prompt("Enter project name:", "Weekend Trip to Manali");
+  if(name) document.querySelector(".project h2").innerHTML = `${name} <i class="fa-regular fa-pen-to-square" onclick="renameProject()"></i>`;
+}
+
+function undoAction(){ toast("Last action undone"); }
+function splitClip(){ toast("Clip split at playhead"); }
+function deleteClip(){
+  const clips = document.querySelectorAll(".clip");
+  if(clips.length > 1){
+    clips[clips.length-1].remove();
+    toast("Selected clip deleted");
+  } else {
+    toast("No more clips to delete");
+  }
+}
+function zoomIn(){ toast("Timeline zoomed in"); }
+function zoomOut(){ toast("Timeline zoomed out"); }
+function toggleFullscreen(){ toast("Fullscreen preview opened"); }
+function previewChanges(){ toast("Preview generated with selected AI edits"); }
+
+function generateVideo(){
+  if(tokens < 20){
+    toast("Not enough tokens");
+    openModal("buyModal");
+    return;
+  }
+
+  tokens -= 20;
+  document.getElementById("tokenCount").innerText = tokens.toLocaleString();
+  toast("AI video generated. 20 tokens used.");
+}
+
+function buyTokens(){
+  const amount = Number(document.getElementById("tokenPack").value);
+  tokens += amount;
+  document.getElementById("tokenCount").innerText = tokens.toLocaleString();
+  closeModal("buyModal");
+  toast(amount + " tokens added");
+}
+</script>
+
+</body>
+</html>
