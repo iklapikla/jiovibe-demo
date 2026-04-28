@@ -691,25 +691,66 @@
 
   <!-- HERO -->
   <div class="hero-section">
-    <div class="hero-track">
+  <button class="hero-btn prev" onclick="slideHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="hero-btn next" onclick="slideHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
 
-      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1527224538127-2104bb71c51b?q=80&w=1800');">
-        <div class="hero-content">
-          <label>COMEDY FEATURED</label>
-          <h1>Standup Nights</h1>
-          <p>Laugh out loud with top comedians and viral jokes.</p>
-          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
-        </div>
-      </div>
+  <div class="hero-track" id="heroTrack">
 
-      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=1800');">
-        <div class="hero-content">
-          <label>FUNNY SKITS</label>
-          <h1>Relatable Comedy</h1>
-          <p>Daily life jokes and hilarious relatable moments.</p>
-          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
-        </div>
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1527224538127-2104bb71c51b?q=80&w=1800&auto=format&fit=crop');">
+      <div class="hero-content">
+        <label>COMEDY FEATURED</label>
+        <h1>Standup Nights</h1>
+        <p>Laugh out loud with top comedians and viral jokes.</p>
+        <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
       </div>
+    </div>
+
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1800&auto=format&fit=crop');">
+      <div class="hero-content">
+        <label>FUNNY SKITS</label>
+        <h1>Relatable Comedy</h1>
+        <p>Daily life jokes and hilarious relatable moments.</p>
+        <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+      </div>
+    </div>
+
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1800&auto=format&fit=crop');">
+      <div class="hero-content">
+        <label>FRIENDS COMEDY</label>
+        <h1>Laugh With Friends</h1>
+        <p>Funny group moments, pranks and friendship comedy.</p>
+        <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+      </div>
+    </div>
+
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1543269664-7eef42226a21?q=80&w=1800&auto=format&fit=crop');">
+      <div class="hero-content">
+        <label>OFFICE HUMOUR</label>
+        <h1>Office Comedy</h1>
+        <p>Workplace jokes, meeting fails and everyday office fun.</p>
+        <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+      </div>
+    </div>
+
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1800&auto=format&fit=crop');">
+      <div class="hero-content">
+        <label>STAGE SPECIAL</label>
+        <h1>Comedy Special</h1>
+        <p>Stage shows, crowd work and best punchline moments.</p>
+        <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dots" id="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
 
     </div>
   </div>
