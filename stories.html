@@ -37,7 +37,7 @@ a{text-decoration:none;color:inherit}
 .profile img{width:48px;height:48px;object-fit:cover;border-radius:50%}
 .profile span{font-weight:700;font-size:15px}
 
-/* FEED GRID */
+/* STORIES HOME */
 .story-home{
   flex:1;
   overflow-y:auto;
@@ -301,8 +301,9 @@ a{text-decoration:none;color:inherit}
   font-weight:800;
   cursor:pointer;
 }
+.more-stories:hover{background:#fff0e8;color:#ff5a00}
 
-/* SMALL MODAL */
+/* OPTIONS */
 .story-options{
   position:absolute;
   top:92px;
@@ -388,7 +389,7 @@ a{text-decoration:none;color:inherit}
   </div>
 </header>
 
-<section class="story-home" id="storyHome">
+<section class="story-home">
   <div class="story-title">
     <div>
       <h1>Stories</h1>
@@ -448,12 +449,12 @@ a{text-decoration:none;color:inherit}
     <div class="story-list-card">
       <div class="list-head">
         <h2>Stories</h2>
-        <button onclick="loadMoreStories()">View all</button>
+        <button onclick="showAllStories()">View all</button>
       </div>
 
       <div id="storyList"></div>
 
-      <button class="more-stories" onclick="loadMoreStories()">
+      <button class="more-stories" onclick="showAllStories()">
         <i class="fa-solid fa-clock-rotate-left"></i> Watch More Stories
       </button>
     </div>
@@ -461,7 +462,7 @@ a{text-decoration:none;color:inherit}
 </div>
 
 <script>
-const baseStories = [
+const stories = [
   {
     name:"Neha Moves",
     time:"2h ago",
@@ -511,15 +512,44 @@ const baseStories = [
       "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=900&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=900&auto=format&fit=crop"
     ]
+  },
+  {
+    name:"Comedy Circle",
+    time:"7h ago",
+    avatar:"https://i.pravatar.cc/100?img=18",
+    images:[
+      "https://images.unsplash.com/photo-1527224857830-43a7acc85260?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=900&auto=format&fit=crop"
+    ]
+  },
+  {
+    name:"Tech Simplified",
+    time:"8h ago",
+    avatar:"https://i.pravatar.cc/100?img=52",
+    images:[
+      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=900&auto=format&fit=crop"
+    ]
+  },
+  {
+    name:"Fit With Riya",
+    time:"9h ago",
+    avatar:"https://i.pravatar.cc/100?img=47",
+    images:[
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1571019613914-85f342c6a11e?q=80&w=900&auto=format&fit=crop"
+    ]
   }
 ];
 
-let stories = [...baseStories];
 let currentUser = 0;
 let currentImage = 0;
-let timer = null;
 let progressTimer = null;
 let progress = 0;
+let showingAll = false;
 
 function renderGrid(){
   const grid = document.getElementById("storyGrid");
@@ -545,11 +575,14 @@ function renderSideList(){
   const list = document.getElementById("storyList");
   list.innerHTML = "";
 
-  stories.forEach((s,index)=>{
+  const showStories = showingAll ? stories : stories.slice(0,5);
+
+  showStories.forEach((s,index)=>{
+    const realIndex = stories.indexOf(s);
     const row = document.createElement("div");
-    row.className = "story-person" + (index === currentUser ? " active" : "");
+    row.className = "story-person" + (realIndex === currentUser ? " active" : "");
     row.onclick = () => {
-      currentUser = index;
+      currentUser = realIndex;
       currentImage = 0;
       showStory();
     };
@@ -564,6 +597,24 @@ function renderSideList(){
   });
 }
 
+function showAllStories(){
+  showingAll = !showingAll;
+  renderSideList();
+
+  const btns = document.querySelectorAll(".list-head button, .more-stories");
+  btns.forEach(btn=>{
+    if(showingAll){
+      btn.innerHTML = btn.classList.contains("more-stories") 
+        ? '<i class="fa-solid fa-chevron-up"></i> Show Less Stories' 
+        : 'Show less';
+    }else{
+      btn.innerHTML = btn.classList.contains("more-stories") 
+        ? '<i class="fa-solid fa-clock-rotate-left"></i> Watch More Stories' 
+        : 'View all';
+    }
+  });
+}
+
 function openViewer(index){
   currentUser = index;
   currentImage = 0;
@@ -574,7 +625,6 @@ function openViewer(index){
 
 function closeViewer(){
   document.getElementById("viewer").classList.remove("show");
-  clearInterval(timer);
   clearInterval(progressTimer);
   document.getElementById("storyImage").src = "";
 }
@@ -594,6 +644,7 @@ function showStory(){
 function renderProgressBars(){
   const box = document.getElementById("progressBars");
   box.innerHTML = "";
+
   stories[currentUser].images.forEach((img, i)=>{
     const bar = document.createElement("div");
     bar.className = "bar";
@@ -603,7 +654,6 @@ function renderProgressBars(){
 }
 
 function startAutoProgress(){
-  clearInterval(timer);
   clearInterval(progressTimer);
   progress = 0;
 
@@ -615,14 +665,9 @@ function startAutoProgress(){
       nextStory();
     }
   },100);
-
-  timer = setInterval(()=>{
-    nextStory();
-  },5000);
 }
 
 function nextStory(){
-  clearInterval(timer);
   clearInterval(progressTimer);
 
   const total = stories[currentUser].images.length;
@@ -632,15 +677,13 @@ function nextStory(){
     currentImage = 0;
     currentUser++;
     if(currentUser >= stories.length){
-      loadMoreStories();
-      currentUser = stories.length - baseStories.length;
+      currentUser = 0;
     }
   }
   showStory();
 }
 
 function prevStory(){
-  clearInterval(timer);
   clearInterval(progressTimer);
 
   if(currentImage > 0){
@@ -674,24 +717,6 @@ function toggleOptions(e){
 
 document.addEventListener("click",()=>{
   document.getElementById("storyOptions").classList.remove("show");
-});
-
-function loadMoreStories(){
-  const more = baseStories.map((s,i)=>({
-    ...s,
-    name: s.name + " " + (Math.floor(stories.length / baseStories.length) + 1),
-    time: (7 + i + stories.length) + "h ago"
-  }));
-  stories = stories.concat(more);
-  renderGrid();
-  renderSideList();
-}
-
-/* Unlimited scroll for story home */
-document.getElementById("storyHome").addEventListener("scroll", function(){
-  if(this.scrollTop + this.clientHeight >= this.scrollHeight - 300){
-    loadMoreStories();
-  }
 });
 
 document.addEventListener("keydown", e=>{
