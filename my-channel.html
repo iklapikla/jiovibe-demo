@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Channel - JioVibe</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#fbfbfc;color:#222;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.app{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:32px 18px;position:fixed;left:0;top:0;background:#fff;z-index:10}
+.logo{display:flex;align-items:center;gap:4px;margin-bottom:45px;padding-left:8px}
+.logo-circle{width:54px;height:54px;background:#ff5a00;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
+.logo-text{font-size:32px;font-weight:800;color:#2b070b;letter-spacing:-1.2px}
+.menu{display:flex;flex-direction:column;gap:12px}
+.menu-item{display:flex;align-items:center;gap:18px;padding:17px 22px;border-radius:14px;font-weight:600;color:#383838;font-size:16px;transition:.25s}
+.menu-item i{width:22px;font-size:22px;text-align:center}
+.menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
+
+/* MAIN */
+.main{margin-left:250px;width:calc(100% - 250px)}
+.topbar{height:82px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;position:sticky;top:0;z-index:8}
+.search{width:720px;height:50px;border:1px solid #edf0f4;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad;background:#fff}
+.search input{border:none;outline:none;flex:1;font-size:15px;background:transparent}
+.top-actions{display:flex;align-items:center;gap:22px;position:relative}
+.bell{font-size:23px;position:relative}
+.bell::after{content:"3";position:absolute;top:-8px;right:-7px;background:#ff5a00;color:#fff;font-size:10px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.profile{display:flex;align-items:center;gap:12px;cursor:pointer}
+.profile img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.profile span{font-weight:700;font-size:15px}
+
+/* CONTENT */
+.content{padding:24px 34px 70px;max-width:1250px;margin:auto}
+
+/* CHANNEL HEADER */
+.banner{height:260px;border-radius:22px;background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop') center/cover;position:relative;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.08)}
+.banner:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.08))}
+.edit-banner{position:absolute;right:22px;bottom:22px;z-index:2;background:#fff;color:#333;border:none;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer}
+
+.channel-info{display:flex;align-items:flex-end;justify-content:space-between;margin-top:-52px;position:relative;z-index:3;padding:0 18px 18px}
+.channel-left{display:flex;align-items:flex-end;gap:18px}
+.avatar{width:118px;height:118px;border-radius:50%;border:5px solid #fff;object-fit:cover;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+.channel-text h1{font-size:32px;margin-bottom:6px}
+.verified{color:#ff5a00}
+.channel-text p{color:#667085;font-weight:600;margin-bottom:4px}
+.channel-actions{display:flex;gap:12px;align-items:center}
+.action-main{height:46px;padding:0 20px;border:none;border-radius:24px;background:#ff5a00;color:#fff;font-weight:800;cursor:pointer}
+.action-secondary{height:46px;padding:0 20px;border:1px solid #edf0f4;border-radius:24px;background:#fff;color:#333;font-weight:800;cursor:pointer}
+.action-secondary.active{background:#fff0e8;color:#ff5a00;border-color:#ffd8c5}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:18px 0}
+.stat{background:#fff;border:1px solid #edf0f4;border-radius:16px;padding:18px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+.stat h2{font-size:26px;margin-bottom:4px}
+.stat p{font-size:13px;color:#777;font-weight:700}
+
+/* TABS */
+.tabs{display:flex;gap:14px;margin:24px 0 20px;overflow:auto;border-bottom:1px solid #edf0f4;padding-bottom:12px}
+.tab{padding:12px 22px;border:1px solid #edf0f4;border-radius:24px;background:#fff;font-weight:800;cursor:pointer;white-space:nowrap}
+.tab.active,.tab:hover{background:#ff5a00;color:#fff;border-color:#ff5a00}
+
+/* SECTIONS */
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.section-head h2{font-size:22px}
+.section-head button{border:none;background:none;color:#ff5a00;font-weight:800;cursor:pointer}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:#fff;border:1px solid #edf0f4;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.04);transition:.25s;cursor:pointer}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.10)}
+.thumb{width:100%;aspect-ratio:16/9;background-size:cover;background-position:center;position:relative}
+.duration{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;border-radius:5px;font-size:12px;font-weight:800;padding:4px 7px}
+.live{position:absolute;left:8px;bottom:8px;background:#ff1f1f;color:#fff;border-radius:5px;font-size:11px;font-weight:800;padding:4px 7px}
+.card-body{padding:12px}
+.card-title{font-size:15px;font-weight:800;line-height:1.35;margin-bottom:8px}
+.meta{font-size:13px;color:#777;line-height:1.5}
+
+.short-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.short-card{height:310px;border-radius:18px;overflow:hidden;position:relative;background:#000;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.08)}
+.short-card img{width:100%;height:100%;object-fit:cover}
+.short-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.68))}
+.short-card p{position:absolute;left:12px;right:12px;bottom:12px;color:#fff;font-size:14px;font-weight:800;z-index:2}
+.short-card span{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.5);color:#fff;padding:6px 9px;border-radius:8px;font-size:12px;font-weight:800;z-index:2}
+
+.post-card{background:#fff;border:1px solid #edf0f4;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+.post-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.post-head img{width:46px;height:46px;border-radius:50%;object-fit:cover}
+.post-head h3{font-size:16px}.post-head p{font-size:13px;color:#777}
+.post-text{font-size:16px;line-height:1.55;margin-bottom:12px}
+.post-img{width:100%;height:260px;border-radius:14px;object-fit:cover;margin-bottom:12px}
+.post-actions{display:flex;gap:34px}
+.post-actions button{border:none;background:none;color:#667085;font-weight:800;cursor:pointer}
+.post-actions button.active{color:#ff5a00}
+
+.empty{display:none;text-align:center;background:#fff;border:1px solid #edf0f4;border-radius:20px;padding:50px;margin-top:20px}
+.empty i{font-size:52px;color:#ff5a00;margin-bottom:16px}
+.empty h2{margin-bottom:8px}
+.empty p{color:#777}
+
+/* MODALS */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:60}
+.modal-bg.show{display:flex}
+.modal{background:#fff;width:460px;border-radius:20px;padding:24px;box-shadow:0 15px 45px rgba(0,0,0,.25)}
+.modal h2{margin-bottom:16px}
+.modal input,.modal textarea{width:100%;border:1px solid #edf0f4;border-radius:14px;padding:14px;outline:none;font-size:14px;margin-bottom:12px}
+.modal textarea{height:120px;resize:none}
+.modal-actions{display:flex;gap:10px;margin-top:12px}
+.modal-btn{flex:1;height:46px;border:none;border-radius:12px;font-weight:800;cursor:pointer}
+.cancel{background:#f1f1f1}
+.submit{background:#ff5a00;color:#fff}
+.share-icons{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.share-icon{text-align:center;font-size:13px;font-weight:700;cursor:pointer}
+.share-icon i{width:54px;height:54px;border-radius:50%;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-size:25px;margin:0 auto 8px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-size:14px;font-weight:700;display:none;z-index:90}
+
+@media(max-width:1100px){
+.search{width:450px}
+.grid{grid-template-columns:repeat(3,1fr)}
+.short-grid{grid-template-columns:repeat(4,1fr)}
+.stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:780px){
+.sidebar{display:none}.main{margin-left:0;width:100%}.topbar{padding:0 16px}
+.search{width:100%}.profile span{display:none}.content{padding:18px}
+.banner{height:190px}.channel-info{flex-direction:column;align-items:flex-start;gap:14px}
+.channel-actions{flex-wrap:wrap}
+.grid{grid-template-columns:1fr}
+.short-grid{grid-template-columns:repeat(2,1fr)}
+.short-card{height:260px}
+.stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<aside class="sidebar">
+<a href="index.html" class="logo"><div class="logo-circle">Jio</div><div class="logo-text">Vibe</div></a>
+<nav class="menu">
+<a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+<a href="explore.html" class="menu-item"><i class="fa-regular fa-compass"></i> Explore</a>
+<a href="live.html" class="menu-item"><i class="fa-solid fa-video"></i> Live</a>
+<a href="video.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Video</a>
+<a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
+<a href="stories.html" class="menu-item"><i class="fa-regular fa-circle"></i> Stories</a>
+<a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community</a>
+<a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
+<a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
+</nav>
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+<div class="search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input id="searchInput" placeholder="Search your channel content..." oninput="searchContent()">
+</div>
+<div class="top-actions">
+<a href="notifications.html" class="bell"><i class="fa-regular fa-bell"></i></a>
+<div class="profile">
+<img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop">
+<span>Trupti Latur</span>
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+</div>
+</header>
+
+<section class="content">
+
+<div class="banner">
+<button class="edit-banner" onclick="openModal('editModal')"><i class="fa-regular fa-pen-to-square"></i> Edit Banner</button>
+</div>
+
+<div class="channel-info">
+<div class="channel-left">
+<img class="avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=250&auto=format&fit=crop">
+<div class="channel-text">
+<h1>Trupti Latur <span class="verified"><i class="fa-solid fa-certificate"></i></span></h1>
+<p>@truptilatur • 128K subscribers • 84 videos</p>
+<p>Creator, live streamer, music lover and JioVibe community builder.</p>
+</div>
+</div>
+
+<div class="channel-actions">
+<button class="action-main" onclick="openModal('uploadModal')"><i class="fa-solid fa-upload"></i> Upload</button>
+<button class="action-secondary" onclick="openModal('editModal')"><i class="fa-regular fa-pen-to-square"></i> Customize Channel</button>
+<button class="action-secondary" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
+</div>
+</div>
+
+<div class="stats">
+<div class="stat"><h2>128K</h2><p>Subscribers</p></div>
+<div class="stat"><h2>8.4M</h2><p>Total Views</p></div>
+<div class="stat"><h2>84</h2><p>Videos</p></div>
+<div class="stat"><h2>₹48K</h2><p>This Month Earnings</p></div>
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab(this,'home')">Home</button>
+<button class="tab" onclick="showTab(this,'videos')">Videos</button>
+<button class="tab" onclick="showTab(this,'shorts')">Shorts</button>
+<button class="tab" onclick="showTab(this,'live')">Live</button>
+<button class="tab" onclick="showTab(this,'stories')">Stories</button>
+<button class="tab" onclick="showTab(this,'posts')">Community</button>
+<button class="tab" onclick="showTab(this,'about')">About</button>
+</div>
+
+<div id="channelContent"></div>
+
+<div class="empty" id="emptyState">
+<i class="fa-regular fa-circle-play"></i>
+<h2>No content found</h2>
+<p>Try another tab or search keyword.</p>
+</div>
+
+</section>
+</main>
+</div>
+
+<!-- UPLOAD MODAL -->
+<div class="modal-bg" id="uploadModal">
+<div class="modal">
+<h2>Upload Content</h2>
+<input id="uploadTitle" placeholder="Content title">
+<input id="uploadType" placeholder="Type: Video / Short / Live / Story / Post">
+<input id="uploadImage" placeholder="Thumbnail image URL optional">
+<textarea id="uploadDesc" placeholder="Description"></textarea>
+<div class="modal-actions">
+<button class="modal-btn cancel" onclick="closeModal('uploadModal')">Cancel</button>
+<button class="modal-btn submit" onclick="uploadContent()">Upload</button>
+</div>
+</div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-bg" id="editModal">
+<div class="modal">
+<h2>Customize Channel</h2>
+<input id="editName" placeholder="Channel name" value="Trupti Latur">
+<input id="editHandle" placeholder="Handle" value="@truptilatur">
+<textarea id="editBio">Creator, live streamer, music lover and JioVibe community builder.</textarea>
+<div class="modal-actions">
+<button class="modal-btn cancel" onclick="closeModal('editModal')">Cancel</button>
+<button class="modal-btn submit" onclick="saveChannel()">Save</button>
+</div>
+</div>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="modal-bg" id="shareModal">
+<div class="modal">
+<h2>Share Channel</h2>
+<div class="share-icons">
+<div class="share-icon"><i class="fa-brands fa-whatsapp"></i>WhatsApp</div>
+<div class="share-icon"><i class="fa-brands fa-instagram"></i>Instagram</div>
+<div class="share-icon"><i class="fa-brands fa-facebook"></i>Facebook</div>
+<div class="share-icon"><i class="fa-brands fa-x-twitter"></i>Twitter</div>
+<div class="share-icon"><i class="fa-brands fa-telegram"></i>Telegram</div>
+<div class="share-icon" onclick="toast('Channel link copied')"><i class="fa-solid fa-link"></i>Copy Link</div>
+<div class="share-icon"><i class="fa-solid fa-envelope"></i>Email</div>
+<div class="share-icon"><i class="fa-solid fa-message"></i>SMS</div>
+</div>
+<div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('shareModal')">Close</button></div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const content = {
+  home: [
+    {type:"video",title:"Acoustic Evening with Trupti 🎸",img:"https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=900&auto=format&fit=crop",meta:"1.2M views • 2 days ago",duration:"12:34"},
+    {type:"video",title:"My Creator Journey on JioVibe",img:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=900&auto=format&fit=crop",meta:"856K views • 5 days ago",duration:"8:15"},
+    {type:"short",title:"Sunset Dance Vibes ✨",img:"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",meta:"24.5K likes"},
+    {type:"live",title:"Live Music Session",img:"https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=900&auto=format&fit=crop",meta:"Live replay • 128K views",duration:"LIVE"}
+  ],
+  videos: [
+    {type:"video",title:"Acoustic Evening with Trupti 🎸",img:"https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=900&auto=format&fit=crop",meta:"1.2M views • 2 days ago",duration:"12:34"},
+    {type:"video",title:"Creator Setup Tour 2026",img:"https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=900&auto=format&fit=crop",meta:"620K views • 1 week ago",duration:"9:45"},
+    {type:"video",title:"Behind The Scenes Vlog",img:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=900&auto=format&fit=crop",meta:"856K views • 5 days ago",duration:"8:15"},
+    {type:"video",title:"Travel Day With Friends",img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop",meta:"420K views • 2 weeks ago",duration:"10:20"}
+  ],
+  shorts: [
+    {type:"short",title:"Sunset Dance Vibes ✨",img:"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",meta:"24.5K likes"},
+    {type:"short",title:"Studio Mood 🎧",img:"https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",meta:"18.2K likes"},
+    {type:"short",title:"Funny Moment 😂",img:"https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",meta:"31.7K likes"},
+    {type:"short",title:"Food Break 🤤",img:"https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif",meta:"14.8K likes"},
+    {type:"short",title:"Music Vibe Check",img:"https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif",meta:"27.8K likes"}
+  ],
+  live: [
+    {type:"live",title:"Live Music Session",img:"https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=900&auto=format&fit=crop",meta:"Replay • 128K views",duration:"LIVE"},
+    {type:"live",title:"Q&A With Fans",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=900&auto=format&fit=crop",meta:"Replay • 76K views",duration:"LIVE"},
+    {type:"live",title:"Creator Talk Live",img:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=900&auto=format&fit=crop",meta:"Replay • 54K views",duration:"LIVE"}
+  ],
+  stories: [
+    {type:"story",title:"Morning Story",img:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=900&auto=format&fit=crop",meta:"2h ago"},
+    {type:"story",title:"Studio Story",img:"https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=900&auto=format&fit=crop",meta:"4h ago"},
+    {type:"story",title:"Travel Story",img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop",meta:"6h ago"}
+  ],
+  posts: [
+    {type:"post",title:"Sunsets, good music and even better company! 🌅✨",img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1100&auto=format&fit=crop",meta:"2h ago • 1.2K likes"},
+    {type:"post",title:"Thank you for 128K subscribers! ❤️",img:"",meta:"1 day ago • 4.5K likes"}
+  ],
+  about: []
+};
+
+let currentTab = "home";
+
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.innerText=msg;t.style.display="block";
+  setTimeout(()=>t.style.display="none",1600);
+}
+function openModal(id){document.getElementById(id).classList.add("show")}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+document.querySelectorAll(".modal-bg").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}))
+
+function showTab(btn,tab){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  btn.classList.add("active");
+  currentTab=tab;
+  renderContent();
+}
+
+function renderContent(){
+  const box=document.getElementById("channelContent");
+  const empty=document.getElementById("emptyState");
+  const list=content[currentTab];
+
+  box.innerHTML="";
+  empty.style.display="none";
+
+  if(currentTab==="about"){
+    box.innerHTML=`
+      <div class="post-card">
+        <h2 style="margin-bottom:12px">About Trupti Latur</h2>
+        <p style="color:#667085;line-height:1.7">Creator, live streamer, music lover and JioVibe community builder. This channel includes music videos, live sessions, shorts, stories and community updates.</p>
+        <br>
+        <p><b>Joined:</b> May 2024</p>
+        <p><b>Total views:</b> 8.4M</p>
+        <p><b>Email:</b> creator@jiovibe.demo</p>
+      </div>`;
+    return;
+  }
+
+  if(!list.length){empty.style.display="block";return;}
+
+  if(currentTab==="shorts"){
+    box.innerHTML=`<div class="section-head"><h2>Shorts</h2><button onclick="toast('More shorts loaded')">View all</button></div><div class="short-grid"></div>`;
+    const grid=box.querySelector(".short-grid");
+    list.forEach(item=>{
+      grid.innerHTML+=`
+      <a href="shorts.html" class="short-card" data-title="${item.title.toLowerCase()}">
+        <img src="${item.img}">
+        <span>${item.meta}</span>
+        <p>${item.title}</p>
+      </a>`;
+    });
+    return;
+  }
+
+  if(currentTab==="posts"){
+    box.innerHTML=`<div class="section-head"><h2>Community Posts</h2><button onclick="openModal('uploadModal')">Create Post</button></div>`;
+    list.forEach(item=>{
+      box.innerHTML+=`
+      <div class="post-card" data-title="${item.title.toLowerCase()}">
+        <div class="post-head">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop">
+          <div><h3>Trupti Latur <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3><p>${item.meta}</p></div>
+        </div>
+        <div class="post-text">${item.title}</div>
+        ${item.img ? `<img class="post-img" src="${item.img}">` : ""}
+        <div class="post-actions">
+          <button onclick="togglePostLike(this)"><i class="fa-regular fa-heart"></i> Like</button>
+          <button onclick="toast('Comment box opened')"><i class="fa-regular fa-comment"></i> Comment</button>
+          <button onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
+        </div>
+      </div>`;
+    });
+    return;
+  }
+
+  box.innerHTML=`<div class="section-head"><h2>${currentTab==="home"?"Featured Content":currentTab.charAt(0).toUpperCase()+currentTab.slice(1)}</h2><button onclick="toast('More content loaded')">View all</button></div><div class="grid"></div>`;
+  const grid=box.querySelector(".grid");
+
+  list.forEach(item=>{
+    const link=item.type==="live"?"live.html":item.type==="story"?"stories.html":"video.html";
+    grid.innerHTML+=`
+    <a href="${link}" class="card" data-title="${item.title.toLowerCase()}">
+      <div class="thumb" style="background-image:url('${item.img}')">
+        ${item.type==="live"?`<span class="live">LIVE</span>`:""}
+        ${item.duration?`<span class="duration">${item.duration}</span>`:""}
+      </div>
+      <div class="card-body">
+        <div class="card-title">${item.title}</div>
+        <div class="meta">${item.meta}</div>
+      </div>
+    </a>`;
+  });
+}
+
+function togglePostLike(btn){
+  btn.classList.toggle("active");
+  btn.innerHTML=btn.classList.contains("active")?'<i class="fa-solid fa-heart"></i> Liked':'<i class="fa-regular fa-heart"></i> Like';
+}
+
+function searchContent(){
+  const q=document.getElementById("searchInput").value.toLowerCase().trim();
+  document.querySelectorAll("[data-title]").forEach(card=>{
+    card.style.display=card.dataset.title.includes(q)?"":"none";
+  });
+}
+
+function uploadContent(){
+  const title=document.getElementById("uploadTitle").value;
+  const type=document.getElementById("uploadType").value.toLowerCase();
+  const img=document.getElementById("uploadImage").value || "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=900&auto=format&fit=crop";
+
+  if(!title.trim()){toast("Please add title");return;}
+
+  let key="videos";
+  if(type.includes("short"))key="shorts";
+  if(type.includes("live"))key="live";
+  if(type.includes("story"))key="stories";
+  if(type.includes("post"))key="posts";
+
+  content[key].unshift({type:key==="videos"?"video":key==="posts"?"post":key.slice(0,-1),title,img,meta:"Just now",duration:key==="videos"?"5:00":key==="live"?"LIVE":""});
+  closeModal("uploadModal");
+  toast("Content uploaded");
+
+  document.getElementById("uploadTitle").value="";
+  document.getElementById("uploadType").value="";
+  document.getElementById("uploadImage").value="";
+  document.getElementById("uploadDesc").value="";
+
+  renderContent();
+}
+
+function saveChannel(){
+  const name=document.getElementById("editName").value;
+  const handle=document.getElementById("editHandle").value;
+  const bio=document.getElementById("editBio").value;
+
+  document.querySelector(".channel-text h1").innerHTML=name+' <span class="verified"><i class="fa-solid fa-certificate"></i></span>';
+  document.querySelector(".channel-text p").innerText=handle+" • 128K subscribers • 84 videos";
+  document.querySelectorAll(".channel-text p")[1].innerText=bio;
+
+  closeModal("editModal");
+  toast("Channel updated");
+}
+
+renderContent();
+</script>
+</body>
+</html>
