@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Multilingual Tool</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#fff;color:#222}
+a{text-decoration:none;color:inherit}
+.app{display:flex;min-height:100vh}
+
+.sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:32px 18px;position:fixed;background:#fff}
+.logo{display:flex;align-items:center;gap:4px;margin-bottom:45px}
+.logo-circle{width:54px;height:54px;background:#ff5a00;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
+.logo-text{font-size:32px;font-weight:800;color:#2b070b}
+.menu{display:flex;flex-direction:column;gap:12px}
+.menu-item{display:flex;align-items:center;gap:18px;padding:17px 22px;border-radius:14px;font-weight:600;color:#383838}
+.menu-item i{width:22px;font-size:22px}
+.menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
+.help{position:absolute;bottom:32px;left:28px;font-weight:600;color:#333}
+
+.main{margin-left:250px;width:calc(100% - 250px)}
+.topbar{height:94px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:#fff}
+.page-title{display:flex;align-items:center;gap:18px}
+.back{font-size:22px;cursor:pointer}
+.page-title h1{font-size:24px}
+.page-title p{color:#777;margin-top:6px}
+.top-actions{display:flex;align-items:center;gap:18px}
+.token-box,.buy-btn{height:48px;border-radius:12px;border:1px solid #edf0f4;background:#fff;padding:0 18px;display:flex;align-items:center;gap:10px;font-weight:800}
+.token-box i{color:#ff9800}
+.buy-btn{background:#ff5a00;color:#fff;border:none;cursor:pointer}
+.profile{display:flex;align-items:center;gap:12px}
+.profile img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.profile span{font-weight:800}
+
+.content{padding:26px 34px 60px;background:#fbfbfc}
+.grid{display:grid;grid-template-columns:1fr 1.15fr;gap:22px}
+.card{background:#fff;border:1px solid #edf0f4;border-radius:18px;box-shadow:0 3px 16px rgba(0,0,0,.04);padding:24px}
+.step{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.num{width:28px;height:28px;border-radius:50%;background:#ff5a00;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.step h2{font-size:20px}
+
+.upload{border:2px dashed #ffd1bc;background:#fff7f2;border-radius:18px;padding:34px;text-align:center;cursor:pointer;margin-bottom:18px}
+.upload i{font-size:42px;color:#ff5a00;margin-bottom:12px}
+.upload h3{font-size:18px;margin-bottom:8px}
+.upload p{color:#777;font-size:14px}
+
+.preview{border:1px solid #edf0f4;border-radius:16px;overflow:hidden;margin-top:18px}
+.preview img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.video-meta{padding:16px;display:flex;align-items:center;gap:12px}
+.video-meta i{width:42px;height:42px;background:#fff0e8;color:#ff5a00;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.video-meta h3{font-size:16px}.video-meta p{font-size:13px;color:#777;margin-top:4px}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+label{font-size:14px;font-weight:800;margin-bottom:8px;display:block}
+select,input{width:100%;height:48px;border:1px solid #edf0f4;border-radius:12px;padding:0 14px;font-size:15px;outline:none;background:#fff}
+.lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0 22px}
+.lang{border:1px solid #edf0f4;border-radius:14px;padding:14px;cursor:pointer;font-weight:800;display:flex;align-items:center;gap:10px}
+.lang.active{border-color:#ff5a00;background:#fff0e8;color:#ff5a00}
+.check{margin-left:auto;color:#22c55e;display:none}
+.lang.active .check{display:block}
+
+.option-list{display:grid;gap:12px;margin-bottom:22px}
+.option{display:flex;align-items:center;justify-content:space-between;border:1px solid #edf0f4;border-radius:14px;padding:16px}
+.option i{color:#ff5a00;font-size:22px;margin-right:12px}
+.option-left{display:flex;align-items:center}
+.option h3{font-size:15px}.option p{font-size:13px;color:#777;margin-top:4px}
+.toggle{width:46px;height:25px;border-radius:20px;background:#ff5a00;position:relative;cursor:pointer}
+.toggle::after{content:"";position:absolute;width:21px;height:21px;background:#fff;border-radius:50%;top:2px;right:2px}
+.toggle.off{background:#cfd3da}
+.toggle.off::after{right:23px}
+
+.generate{width:100%;height:54px;border:none;border-radius:14px;background:#ff5a00;color:#fff;font-weight:800;font-size:16px;cursor:pointer}
+.cost{text-align:center;margin-top:12px;color:#777;font-size:14px}
+.cost b{color:#ff9800}
+
+.results{margin-top:22px}
+.result-row{display:flex;align-items:center;gap:14px;border-bottom:1px solid #edf0f4;padding:16px 0}
+.result-row:last-child{border-bottom:none}
+.flag{width:46px;height:46px;border-radius:50%;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-weight:800}
+.result-row h3{font-size:16px}.result-row p{font-size:13px;color:#777;margin-top:4px}
+.result-actions{margin-left:auto;display:flex;gap:10px}
+.small-btn{height:38px;padding:0 16px;border:1px solid #ffd1bc;background:#fff;color:#ff5a00;border-radius:10px;font-weight:800;cursor:pointer}
+.small-btn.primary{background:#ff5a00;color:#fff}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-weight:700;display:none}
+@media(max-width:1000px){.grid{grid-template-columns:1fr}.sidebar{display:none}.main{margin-left:0;width:100%}.topbar{padding:0 18px}.top-actions{display:none}}
+</style>
+</head>
+
+<body>
+<div class="app">
+<aside class="sidebar">
+  <a href="dashboard.html" class="logo"><div class="logo-circle">Jio</div><div class="logo-text">Vibe</div></a>
+  <nav class="menu">
+    <a href="dashboard.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="content.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Content</a>
+    <a href="ai-studio.html" class="menu-item active"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio</a>
+    <a href="analytics.html" class="menu-item"><i class="fa-solid fa-chart-simple"></i> Analytics</a>
+    <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
+    <a href="settings.html" class="menu-item"><i class="fa-solid fa-gear"></i> Settings</a>
+  </nav>
+  <div class="help"><i class="fa-regular fa-circle-question"></i> Help & Support</div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div class="page-title">
+    <i class="fa-solid fa-arrow-left back" onclick="location.href='ai-studio.html'"></i>
+    <div>
+      <h1>AI Multilingual Tool</h1>
+      <p>Translate, subtitle and dub your content in multiple languages.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <div class="token-box"><i class="fa-solid fa-coins"></i> 15 Tokens per generation</div>
+    <div class="token-box"><i class="fa-solid fa-coins"></i> My Tokens: <span style="color:#ff5a00">1,250</span></div>
+    <button class="buy-btn" onclick="location.href='buy-tokens.html'"><i class="fa-solid fa-plus"></i> Buy Tokens</button>
+    <div class="profile"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop"><span>Ankit Jayant</span></div>
+  </div>
+</header>
+
+<section class="content">
+<div class="grid">
+  <div>
+    <div class="card">
+      <div class="step"><div class="num">1</div><h2>Upload Your Video</h2></div>
+      <div class="upload" onclick="dummyUpload()">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <h3>Click to upload video</h3>
+        <p>MP4, MOV or AVI. Dummy upload preview will appear.</p>
+      </div>
+
+      <div class="preview" id="previewBox" style="display:none">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=900&auto=format&fit=crop">
+        <div class="video-meta">
+          <i class="fa-solid fa-video"></i>
+          <div><h3>Weekend Trip to Manali</h3><p>Duration: 12:45 | Resolution: 1920x1080</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card results">
+      <div class="step"><div class="num">3</div><h2>Generated Outputs</h2></div>
+      <div id="resultsBox">
+        <div class="result-row"><div class="flag">HI</div><div><h3>Hindi Subtitles</h3><p>Ready to download</p></div><div class="result-actions"><button class="small-btn">Preview</button><button class="small-btn primary">Download</button></div></div>
+        <div class="result-row"><div class="flag">TA</div><div><h3>Tamil Dubbed Audio</h3><p>Processing completed</p></div><div class="result-actions"><button class="small-btn">Preview</button><button class="small-btn primary">Download</button></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="step"><div class="num">2</div><h2>Choose Language Settings</h2></div>
+
+    <div class="form-row">
+      <div>
+        <label>Original Language</label>
+        <select><option>English</option><option>Hindi</option><option>Tamil</option></select>
+      </div>
+      <div>
+        <label>Voice Style</label>
+        <select><option>Natural Creator Voice</option><option>Studio Narration</option><option>Energetic Voice</option></select>
+      </div>
+    </div>
+
+    <label>Select Target Languages</label>
+    <div class="lang-grid">
+      <div class="lang active" onclick="toggleLang(this)">Hindi <i class="fa-solid fa-check check"></i></div>
+      <div class="lang active" onclick="toggleLang(this)">Tamil <i class="fa-solid fa-check check"></i></div>
+      <div class="lang" onclick="toggleLang(this)">Telugu <i class="fa-solid fa-check check"></i></div>
+      <div class="lang" onclick="toggleLang(this)">Bengali <i class="fa-solid fa-check check"></i></div>
+      <div class="lang" onclick="toggleLang(this)">Marathi <i class="fa-solid fa-check check"></i></div>
+      <div class="lang" onclick="toggleLang(this)">Gujarati <i class="fa-solid fa-check check"></i></div>
+    </div>
+
+    <div class="option-list">
+      <div class="option"><div class="option-left"><i class="fa-regular fa-closed-captioning"></i><div><h3>Generate Subtitles</h3><p>Create accurate subtitles with timestamps.</p></div></div><div class="toggle"></div></div>
+      <div class="option"><div class="option-left"><i class="fa-solid fa-microphone-lines"></i><div><h3>AI Dubbing</h3><p>Generate dubbed audio in selected languages.</p></div></div><div class="toggle"></div></div>
+      <div class="option"><div class="option-left"><i class="fa-solid fa-user-voice"></i><div><h3>Voice Clone</h3><p>Keep voice tone similar to original creator.</p></div></div><div class="toggle off"></div></div>
+      <div class="option"><div class="option-left"><i class="fa-solid fa-file-export"></i><div><h3>Export SRT Files</h3><p>Download subtitle files separately.</p></div></div><div class="toggle"></div></div>
+    </div>
+
+    <button class="generate" onclick="generateOutput()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate Multilingual Content</button>
+    <div class="cost">This will cost <b>15 Tokens</b></div>
+  </div>
+</div>
+</section>
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function toast(msg){const t=document.getElementById("toast");t.innerText=msg;t.style.display="block";setTimeout(()=>t.style.display="none",1600)}
+function dummyUpload(){document.getElementById("previewBox").style.display="block";toast("Dummy video uploaded")}
+function toggleLang(el){el.classList.toggle("active")}
+document.querySelectorAll(".toggle").forEach(t=>t.onclick=()=>t.classList.toggle("off"))
+function generateOutput(){
+  toast("Generating multilingual content...");
+  setTimeout(()=>toast("Hindi, Tamil and Telugu outputs generated"),900);
+}
+</script>
+</body>
+</html>
