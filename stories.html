@@ -58,7 +58,8 @@ a{text-decoration:none;color:inherit}
   gap:18px;
 }
 .story-card{
-  height:340px;
+  width:100%;
+  aspect-ratio:9/16;
   border-radius:20px;
   overflow:hidden;
   position:relative;
@@ -73,7 +74,7 @@ a{text-decoration:none;color:inherit}
 .story-card .story-info{position:absolute;left:14px;right:14px;bottom:14px;color:#fff;z-index:2}
 .story-info h3{font-size:15px;margin-bottom:6px}
 .story-info p{font-size:12px;color:#eee}
-.story-avatar{position:absolute;top:12px;left:12px;width:52px;height:52px;border-radius:15px;border:3px solid #ff5a00;object-fit:cover;z-index:2}
+.story-avatar{position:absolute;top:12px;left:12px;width:52px!important;height:52px!important;border-radius:15px;border:3px solid #ff5a00;object-fit:cover;z-index:2}
 
 /* STORY VIEWER */
 .viewer{
@@ -102,10 +103,10 @@ a{text-decoration:none;color:inherit}
 .viewer-layout{
   height:100vh;
   display:grid;
-  grid-template-columns:250px 1fr 390px;
+  grid-template-columns:220px 1fr 390px;
   gap:34px;
   align-items:center;
-  padding:40px 46px;
+  padding:34px 46px;
 }
 .blur-column{
   opacity:.42;
@@ -122,9 +123,9 @@ a{text-decoration:none;color:inherit}
   box-shadow:0 8px 24px rgba(0,0,0,.14);
 }
 .story-phone{
-  width:510px;
-  height:84vh;
-  max-height:820px;
+  height:calc(100vh - 68px);
+  aspect-ratio:9/16;
+  max-height:900px;
   border-radius:24px;
   overflow:hidden;
   position:relative;
@@ -143,7 +144,18 @@ a{text-decoration:none;color:inherit}
   position:absolute;
   inset:0;
   background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.05) 45%,rgba(0,0,0,.70));
+  pointer-events:none;
 }
+.click-zone{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:50%;
+  z-index:3;
+  cursor:pointer;
+}
+.click-zone.left{left:0}
+.click-zone.right{right:0}
 .progress-bars{
   position:absolute;
   top:28px;
@@ -152,6 +164,7 @@ a{text-decoration:none;color:inherit}
   display:flex;
   gap:6px;
   z-index:4;
+  pointer-events:none;
 }
 .bar{
   height:4px;
@@ -177,29 +190,18 @@ a{text-decoration:none;color:inherit}
   gap:12px;
   color:#fff;
   z-index:4;
+  pointer-events:none;
 }
 .story-head img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #fff}
 .story-head h3{font-size:17px}
 .story-head p{font-size:13px;color:#eee;margin-top:3px}
 .verified{color:#ff5a00}
-.menu-dot{margin-left:auto;font-size:24px;cursor:pointer}
-.nav-btn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:58px;
-  height:58px;
-  border:none;
-  border-radius:50%;
-  background:#fff;
-  color:#ff5a00;
-  box-shadow:0 10px 28px rgba(0,0,0,.16);
-  font-size:27px;
+.menu-dot{
+  margin-left:auto;
+  font-size:24px;
   cursor:pointer;
-  z-index:5;
+  pointer-events:auto;
 }
-.prev{left:-29px}
-.next{right:-29px}
 .reply-box{
   position:absolute;
   left:40px;
@@ -331,7 +333,6 @@ a{text-decoration:none;color:inherit}
 .story-grid{grid-template-columns:repeat(3,1fr)}
 .viewer-layout{grid-template-columns:1fr;padding:20px}
 .story-list-card{display:none}
-.story-phone{width:480px}
 }
 @media(max-width:780px){
 .sidebar{display:none}
@@ -339,12 +340,9 @@ a{text-decoration:none;color:inherit}
 .profile span{display:none}
 .search{width:100%}
 .story-grid{grid-template-columns:repeat(2,1fr);gap:14px}
-.story-card{height:280px}
 .viewer-layout{padding:0}
-.story-phone{width:100%;height:100vh;max-height:none;border-radius:0}
+.story-phone{width:100%;height:100vh;max-height:none;border-radius:0;aspect-ratio:auto}
 .close-viewer{top:18px;right:18px}
-.prev{left:14px}
-.next{right:14px}
 }
 </style>
 </head>
@@ -367,8 +365,7 @@ a{text-decoration:none;color:inherit}
     <a href="stories.html" class="menu-item active"><i class="fa-regular fa-circle"></i> Stories</a>
     <a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community Post</a>
     <a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
-   <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
-
+    <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
   </nav>
 </aside>
 
@@ -419,6 +416,10 @@ a{text-decoration:none;color:inherit}
 
     <div class="story-phone">
       <img id="storyImage" src="">
+
+      <div class="click-zone left" onclick="prevStory()"></div>
+      <div class="click-zone right" onclick="nextStory()"></div>
+
       <div class="progress-bars" id="progressBars"></div>
 
       <div class="story-head">
@@ -429,9 +430,6 @@ a{text-decoration:none;color:inherit}
         </div>
         <i class="fa-solid fa-ellipsis-vertical menu-dot" onclick="toggleOptions(event)"></i>
       </div>
-
-      <button class="nav-btn prev" onclick="prevStory()"><i class="fa-solid fa-chevron-left"></i></button>
-      <button class="nav-btn next" onclick="nextStory()"><i class="fa-solid fa-chevron-right"></i></button>
 
       <div class="reply-box">
         <input id="replyInput" placeholder="Send a reply...">
@@ -579,7 +577,7 @@ function renderSideList(){
 
   const showStories = showingAll ? stories : stories.slice(0,5);
 
-  showStories.forEach((s,index)=>{
+  showStories.forEach((s)=>{
     const realIndex = stories.indexOf(s);
     const row = document.createElement("div");
     row.className = "story-person" + (realIndex === currentUser ? " active" : "");
