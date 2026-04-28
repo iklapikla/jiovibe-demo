@@ -1037,6 +1037,138 @@ a{
     min-height:500px;
   }
 }
+  /* CREATOR STORY RING */
+.creator-story{
+  position:relative;
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  padding:3px;
+  background:#22c55e;
+  cursor:pointer;
+  flex-shrink:0;
+}
+
+.creator-story img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #fff;
+}
+
+.creator-story::after{
+  content:"";
+  position:absolute;
+  right:3px;
+  bottom:4px;
+  width:13px;
+  height:13px;
+  background:#22c55e;
+  border:3px solid #fff;
+  border-radius:50%;
+}
+
+/* STORY POPUP */
+.story-popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.story-popup.show{
+  display:flex;
+}
+
+.story-card-live{
+  width:390px;
+  max-width:90vw;
+  aspect-ratio:9/16;
+  border-radius:24px;
+  overflow:hidden;
+  position:relative;
+  background:#000;
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+
+.story-card-live img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.story-card-live::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.05) 45%,rgba(0,0,0,.65));
+}
+
+.story-top-live{
+  position:absolute;
+  top:18px;
+  left:18px;
+  right:18px;
+  z-index:2;
+  color:#fff;
+}
+
+.story-progress-live{
+  height:4px;
+  background:rgba(255,255,255,.45);
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:14px;
+}
+
+.story-progress-live span{
+  display:block;
+  width:0%;
+  height:100%;
+  background:#22c55e;
+}
+
+.story-user-live{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.story-user-live img{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+}
+
+.story-user-live h4{
+  font-size:15px;
+}
+
+.story-user-live p{
+  font-size:12px;
+  opacity:.9;
+}
+
+.story-close-live{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:38px;
+  height:38px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,.92);
+  color:#ff5a00;
+  z-index:4;
+  cursor:pointer;
+  font-size:18px;
+}
 </style>
 </head>
 
@@ -1139,9 +1271,11 @@ a{
           <h1>Acoustic Evening with Neha | Soulful Live Session</h1>
 
           <div class="creator-row">
-            <div class="creator-box">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop">
-              <div>
+       <div class="creator-box">
+  <div class="creator-story" onclick="openCreatorStory()">
+    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop">
+  </div>
+  <div>
                 <h3>Neha Sounds <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3>
                 <p>128K subscribers</p>
               </div>
@@ -1385,7 +1519,29 @@ a{
     <button class="close" onclick="closeModal('superModal')">Close</button>
   </div>
 </div>
+<div class="story-popup" id="creatorStoryPopup">
+  <div class="story-card-live" onclick="nextCreatorStory()">
+    <button class="story-close-live" onclick="closeCreatorStory(event)">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
 
+    <img id="creatorStoryImage" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=900&auto=format&fit=crop">
+
+    <div class="story-top-live">
+      <div class="story-progress-live">
+        <span id="creatorStoryProgress"></span>
+      </div>
+
+      <div class="story-user-live">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop">
+        <div>
+          <h4>Neha Sounds</h4>
+          <p>2h ago</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1623,6 +1779,55 @@ function toast(msg){
   t.innerText=msg;
   t.style.display="block";
   setTimeout(()=>t.style.display="none",1600);
+}
+  const creatorStories = [
+  "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=900&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=900&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=900&auto=format&fit=crop"
+];
+
+let creatorStoryIndex = 0;
+let creatorStoryProgress = 0;
+let creatorStoryTimer = null;
+
+function openCreatorStory(){
+  creatorStoryIndex = 0;
+  document.getElementById("creatorStoryPopup").classList.add("show");
+  showCreatorStory();
+}
+
+function showCreatorStory(){
+  clearInterval(creatorStoryTimer);
+  creatorStoryProgress = 0;
+
+  document.getElementById("creatorStoryImage").src = creatorStories[creatorStoryIndex];
+  document.getElementById("creatorStoryProgress").style.width = "0%";
+
+  creatorStoryTimer = setInterval(()=>{
+    creatorStoryProgress += 2;
+    document.getElementById("creatorStoryProgress").style.width = creatorStoryProgress + "%";
+
+    if(creatorStoryProgress >= 100){
+      nextCreatorStory();
+    }
+  },100);
+}
+
+function nextCreatorStory(){
+  creatorStoryIndex++;
+
+  if(creatorStoryIndex >= creatorStories.length){
+    closeCreatorStory();
+    return;
+  }
+
+  showCreatorStory();
+}
+
+function closeCreatorStory(e){
+  if(e) e.stopPropagation();
+  clearInterval(creatorStoryTimer);
+  document.getElementById("creatorStoryPopup").classList.remove("show");
 }
 </script>
 
