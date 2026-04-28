@@ -14,16 +14,16 @@ body{background:#fbfbfc;color:#222;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 .app{display:flex;min-height:100vh}
 
-.sidebar{width:250px;height:100vh;background:#fff;border-right:1px solid #edf0f4;padding:32px 18px;position:fixed;left:0;top:0;z-index:10}
-.logo{display:flex;align-items:center;gap:4px;margin-bottom:45px;padding-left:8px}
-.logo-circle{width:54px;height:54px;background:#ff5a00;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:900}
-.logo-text{font-size:32px;font-weight:900;color:#2b070b;letter-spacing:-1.2px}
-.menu{display:flex;flex-direction:column;gap:12px}
-.menu-item{display:flex;align-items:center;gap:18px;padding:17px 22px;border-radius:14px;font-weight:700;color:#383838;font-size:16px;transition:.25s}
-.menu-item i{width:22px;font-size:22px;text-align:center}
+.sidebar{width:210px;height:100vh;background:#fff;border-right:1px solid #edf0f4;padding:30px 14px;position:fixed;left:0;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:4px;margin-bottom:44px;padding-left:6px}
+.logo-circle{width:52px;height:52px;background:#ff5a00;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900}
+.logo-text{font-size:31px;font-weight:900;color:#2b070b;letter-spacing:-1.2px}
+.menu{display:flex;flex-direction:column;gap:10px}
+.menu-item{display:flex;align-items:center;gap:16px;padding:15px 18px;border-radius:13px;font-weight:800;color:#343434;font-size:15px;transition:.25s}
+.menu-item i{width:22px;font-size:20px;text-align:center}
 .menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
 
-.main{margin-left:250px;width:calc(100% - 250px)}
+.main{margin-left:210px;width:calc(100% - 210px)}
 .topbar{height:82px;background:#fff;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:8}
 .search{width:620px;height:48px;border:1px solid #edf0f4;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad;background:#fff}
 .search input{border:none;outline:none;flex:1;font-size:15px;background:transparent}
@@ -43,46 +43,47 @@ a{text-decoration:none;color:inherit}
 .drop-item:hover,.drop-item.active{background:#fff0e8;color:#ff5a00}
 .drop-line{height:1px;background:#edf0f4;margin:16px 0}
 
-.content{padding:26px 34px 60px;max-width:1280px;margin:auto}
+.content{padding:22px 34px 60px;width:100%}
 
-.tabs{display:flex;gap:14px;overflow:auto;margin-bottom:24px;padding-bottom:4px}
-.tab{height:46px;padding:0 22px;border:1px solid #edf0f4;border-radius:24px;background:#fff;font-weight:800;color:#333;display:flex;align-items:center;gap:10px;white-space:nowrap;cursor:pointer}
+.tabs{display:flex;gap:14px;overflow:auto;margin:0 0 22px 0;padding-bottom:4px}
+.tab{height:46px;padding:0 22px;border:1px solid #edf0f4;border-radius:24px;background:#fff;font-weight:900;color:#333;display:flex;align-items:center;gap:10px;white-space:nowrap;cursor:pointer}
 .tab.active,.tab:hover{background:#ff5a00;color:#fff;border-color:#ff5a00}
 
-.hero{height:320px;border-radius:20px;overflow:hidden;position:relative;background-size:cover;background-position:center;box-shadow:0 10px 35px rgba(0,0,0,.12);margin-bottom:28px}
-.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.22),rgba(0,0,0,.05))}
-.hero-content{position:absolute;left:44px;top:46px;color:#fff;z-index:2;max-width:470px}
+.hero{height:320px;width:100%;border-radius:18px;overflow:hidden;position:relative;background-size:cover;background-position:center;box-shadow:0 10px 35px rgba(0,0,0,.12);margin-bottom:26px}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.35),rgba(0,0,0,.05))}
+.hero-content{position:absolute;left:44px;top:48px;color:#fff;z-index:2;max-width:470px}
 .hero-label{color:#ff5a00;font-weight:900;letter-spacing:.8px;margin-bottom:12px}
 .hero-content h1{font-size:44px;line-height:1.05;margin-bottom:14px}
 .hero-content p{font-size:17px;color:#eee;line-height:1.55;margin-bottom:24px}
-.watch-btn{height:52px;padding:0 24px;border:none;border-radius:12px;background:#ff5a00;color:#fff;font-size:17px;font-weight:800;cursor:pointer}
-.hero-dots{position:absolute;left:44px;bottom:28px;display:flex;gap:9px;z-index:3}
+.watch-btn{height:52px;padding:0 24px;border:none;border-radius:12px;background:#ff5a00;color:#fff;font-size:17px;font-weight:900;cursor:pointer}
+.hero-dots{position:absolute;left:44px;bottom:26px;display:flex;gap:9px;z-index:3}
 .dot{width:22px;height:4px;border-radius:10px;background:rgba(255,255,255,.45);cursor:pointer}
 .dot.active{background:#ff5a00;width:30px}
 
 .section{margin-bottom:30px}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.section-head h2{font-size:22px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.section-head h2{font-size:22px;font-weight:900}
 .section-head span{color:#ff5a00;font-size:23px}
-.section-head button{border:none;background:none;color:#ff5a00;font-weight:800;cursor:pointer;font-size:15px}
+.section-head button{border:none;background:none;color:#ff5a00;font-weight:900;cursor:pointer;font-size:15px}
 
-.video-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.video-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
 .large-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.video-card{background:#fff;border:1px solid #edf0f4;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.04);cursor:pointer;transition:.25s}
+.video-card{background:#fff;border:1px solid #edf0f4;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.04);cursor:pointer;transition:.25s}
 .video-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.10)}
 .thumb{width:100%;aspect-ratio:16/9;background-size:cover;background-position:center;position:relative;overflow:hidden}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.duration,.views,.live{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;border-radius:6px;font-size:12px;font-weight:800;padding:5px 8px}
+.duration,.views,.live{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;border-radius:6px;font-size:12px;font-weight:900;padding:5px 8px}
 .live{left:8px;right:auto;background:#ff1f1f}
-.card-body{padding:12px}
-.card-title{font-size:15px;font-weight:900;line-height:1.35;margin-bottom:8px}
-.meta{font-size:13px;color:#777;line-height:1.45}
+.card-body{padding:11px}
+.card-title{font-size:14px;font-weight:900;line-height:1.35;margin-bottom:7px}
+.meta{font-size:12px;color:#777;line-height:1.45}
 .verify{color:#ff5a00}
 .gif{display:none}
 .video-card:hover .static{display:none}
 .video-card:hover .gif{display:block}
 .extra{display:none}
 .extra.show{display:grid}
+
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-size:14px;font-weight:700;display:none;z-index:200}
 
 @media(max-width:1150px){
@@ -246,6 +247,7 @@ a{text-decoration:none;color:inherit}
         <div class="thumb"><img class="static" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=600&auto=format&fit=crop"><img class="gif" src="https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif"><span class="duration">5:12</span></div>
         <div class="card-body"><div class="card-title">Guitar Practice Routine</div><div class="meta">Guitar Guru <span class="verify">●</span><br>221K views • 5 days ago</div></div>
       </a>
+
       <a href="video.html" class="video-card">
         <div class="thumb"><img class="static" src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=600&auto=format&fit=crop"><img class="gif" src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"><span class="duration">9:01</span></div>
         <div class="card-body"><div class="card-title">Piano Mood: Calm Morning</div><div class="meta">Piano Lounge <span class="verify">●</span><br>340K views • 6 days ago</div></div>
@@ -261,24 +263,40 @@ a{text-decoration:none;color:inherit}
 
     <div class="large-grid">
       <a href="video.html" class="video-card">
-        <div class="thumb"><img class="static" src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=900&auto=format&fit=crop"><img class="gif" src="https://media.giphy.com/media/l0HlQ7LRalQqdWfao/giphy.gif"><span class="duration">11:32</span></div>
+        <div class="thumb">
+          <img class="static" src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=900&auto=format&fit=crop">
+          <img class="gif" src="https://media.giphy.com/media/l0HlQ7LRalQqdWfao/giphy.gif">
+          <span class="duration">11:32</span>
+        </div>
         <div class="card-body"><div class="card-title">How to Record Clean Vocals at Home</div><div class="meta">Studio Simplified <span class="verify">●</span><br>978K views • 4 days ago</div></div>
       </a>
 
       <a href="video.html" class="video-card">
-        <div class="thumb"><img class="static" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=900&auto=format&fit=crop"><img class="gif" src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif"><span class="duration">7:18</span></div>
+        <div class="thumb">
+          <img class="static" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=900&auto=format&fit=crop">
+          <img class="gif" src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif">
+          <span class="duration">7:18</span>
+        </div>
         <div class="card-body"><div class="card-title">Unplugged Sessions Ep. 4</div><div class="meta">Acoustic Thoughts <span class="verify">●</span><br>856K views • 5 days ago</div></div>
       </a>
 
       <a href="video.html" class="video-card">
-        <div class="thumb"><img class="static" src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=900&auto=format&fit=crop"><img class="gif" src="https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif"><span class="duration">9:45</span></div>
+        <div class="thumb">
+          <img class="static" src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=900&auto=format&fit=crop">
+          <img class="gif" src="https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif">
+          <span class="duration">9:45</span>
+        </div>
         <div class="card-body"><div class="card-title">Best Indie Songs for Long Drives</div><div class="meta">Roadtrip Beats <span class="verify">●</span><br>2.1M views • 1 week ago</div></div>
       </a>
     </div>
 
     <div class="large-grid extra" id="recommendedExtra" style="margin-top:18px">
       <a href="video.html" class="video-card">
-        <div class="thumb"><img class="static" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=900&auto=format&fit=crop"><img class="gif" src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"><span class="duration">8:59</span></div>
+        <div class="thumb">
+          <img class="static" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=900&auto=format&fit=crop">
+          <img class="gif" src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif">
+          <span class="duration">8:59</span>
+        </div>
         <div class="card-body"><div class="card-title">Top 10 Covers This Month</div><div class="meta">Cover Central <span class="verify">●</span><br>544K views • 2 weeks ago</div></div>
       </a>
     </div>
