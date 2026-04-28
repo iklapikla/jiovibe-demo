@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>JioVibe Wallet</title>
+<title>JioVibe Subscriptions</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -34,93 +34,77 @@ a{text-decoration:none;color:inherit}
 .profile img{width:48px;height:48px;border-radius:50%;object-fit:cover}
 .profile span{font-weight:700;font-size:15px}
 
-.content{padding:26px 34px 60px}
-.wallet-layout{display:grid;grid-template-columns:1fr 330px;gap:28px;max-width:1250px;margin:auto}
-h1{font-size:24px;margin-bottom:18px}
-.card{background:#fff;border:1px solid #edf0f4;border-radius:18px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
-.overview{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:22px}
-.balance-card{padding:22px;display:flex;gap:18px;align-items:flex-start}
-.icon{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px}
-.orange{background:#ff8a3d}.green{background:#72bf44}.purple{background:#8b5cf6}
-.balance-card h3{font-size:14px;color:#5d6370;margin-bottom:8px}
-.balance-card h2{font-size:28px;margin-bottom:4px}
-.balance-card p{font-size:13px;color:#777}
-.small-btn{margin-top:18px;height:38px;padding:0 18px;border-radius:10px;border:1px solid #ffd8c5;background:#fff;color:#ff5a00;font-weight:800;cursor:pointer}
-.small-btn.green-btn{color:#4f9f32;border-color:#cce8c2}
-.small-btn.purple-btn{color:#7c4dff;border-color:#ded3ff}
+.content{padding:26px 34px 60px;max-width:1250px;margin:auto}
+.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.page-head h1{font-size:28px}
+.page-head p{color:#777;margin-top:6px;font-weight:600}
+.manage-btn{height:42px;padding:0 20px;border:1px solid #ffd8c5;border-radius:22px;background:#fff;color:#ff5a00;font-weight:800;cursor:pointer}
 
-.section-head{display:flex;justify-content:space-between;align-items:center;margin:20px 0 14px}
-.section-head h2{font-size:20px}
+.tabs{display:flex;gap:14px;margin-bottom:24px;overflow:auto}
+.tab{padding:12px 22px;border:1px solid #edf0f4;border-radius:24px;background:#fff;font-weight:800;cursor:pointer;white-space:nowrap}
+.tab.active,.tab:hover{background:#ff5a00;color:#fff;border-color:#ff5a00}
+
+.section{margin-bottom:30px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.section-head h2{font-size:22px}
 .section-head button{border:none;background:none;color:#ff5a00;font-weight:800;cursor:pointer}
-.usage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.usage-card{padding:20px}
-.usage-card h3{font-size:14px;color:#5d6370;margin-bottom:12px}
-.usage-card h2{font-size:28px}
-.progress{height:6px;background:#edf0f4;border-radius:10px;margin-top:18px;overflow:hidden}
-.progress span{display:block;height:100%;background:#ff5a00;border-radius:10px}
-.progress.green-line span{background:#25a244}
-.recent p{font-size:13px;color:#666;margin-bottom:10px;display:flex;justify-content:space-between}
 
-.token-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.token-card{padding:28px;text-align:center;position:relative}
-.token-card.popular{border:2px solid #ffb58d}
-.badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#ff5a00;color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:800}
-.coin{font-size:48px;color:#ffb020;margin-bottom:12px}
-.token-card h3{font-size:18px;margin-bottom:8px}
-.token-card h2{font-size:26px;margin-bottom:8px}
-.buy-btn{width:100%;height:44px;border:1px solid #ffd8c5;border-radius:10px;background:#fff;color:#ff5a00;font-weight:800;cursor:pointer}
-.token-card.popular .buy-btn{background:#ff5a00;color:#fff}
+.channel-row{display:flex;gap:18px;overflow:auto;padding-bottom:8px}
+.channel-card{min-width:190px;background:#fff;border:1px solid #edf0f4;border-radius:18px;padding:20px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+.channel-card img{width:78px;height:78px;border-radius:50%;object-fit:cover;margin-bottom:12px}
+.channel-card h3{font-size:16px;margin-bottom:5px}
+.channel-card p{font-size:13px;color:#777;margin-bottom:14px}
+.sub-btn{height:36px;padding:0 16px;border:none;border-radius:18px;background:#eee;color:#444;font-weight:800;cursor:pointer}
+.sub-btn.off{background:#ff5a00;color:#fff}
 
-.breakdown{padding:20px;margin-top:18px}
-.break-content{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:end}
-.earning-line{display:flex;justify-content:space-between;margin-bottom:16px;font-size:14px}
-.earning-line b{color:#333}
-.chart{height:150px;display:flex;align-items:end;gap:7px;border-left:1px solid #edf0f4;border-bottom:1px solid #edf0f4;padding:10px}
-.bar{width:9px;background:#ff8a3d;border-radius:6px 6px 0 0}
+.video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.video-card{background:#fff;border:1px solid #edf0f4;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.04);cursor:pointer;transition:.25s}
+.video-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.10)}
+.thumb{width:100%;aspect-ratio:16/9;background-size:cover;background-position:center;position:relative}
+.duration{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;border-radius:5px;font-size:12px;font-weight:800;padding:4px 7px}
+.live{position:absolute;left:8px;bottom:8px;background:#ff1f1f;color:#fff;border-radius:5px;font-size:11px;font-weight:800;padding:4px 7px}
+.video-body{padding:12px}
+.video-title{font-size:15px;font-weight:800;line-height:1.35;margin-bottom:8px}
+.video-meta{font-size:13px;color:#777;line-height:1.5}
+.verified{color:#ff5a00}
 
-.table-card{padding:18px;margin-top:18px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{text-align:left;padding:12px;border-bottom:1px solid #edf0f4}
-th{color:#667085}
-.status{padding:6px 12px;border-radius:18px;background:#e8f8e8;color:#2f9d44;font-weight:800;font-size:12px}
-.view-all{margin-top:12px;text-align:right;color:#ff5a00;font-weight:800;cursor:pointer}
+.list-view{display:none}
+.list-card{display:grid;grid-template-columns:230px 1fr auto;gap:16px;background:#fff;border:1px solid #edf0f4;border-radius:16px;padding:12px;margin-bottom:14px;align-items:center}
+.list-thumb{height:130px;border-radius:12px;background-size:cover;background-position:center;position:relative}
+.list-card h3{font-size:18px;margin-bottom:8px}
+.list-card p{color:#777;font-size:14px;line-height:1.6}
+.more{font-size:22px;cursor:pointer;position:relative;color:#777}
+.menu-popup{display:none;position:absolute;right:0;top:28px;width:210px;background:#fff;border:1px solid #edf0f4;border-radius:14px;box-shadow:0 10px 28px rgba(0,0,0,.14);overflow:hidden;z-index:4}
+.menu-popup.show{display:block}
+.menu-popup div{padding:13px 14px;font-size:14px;font-weight:700;cursor:pointer}
+.menu-popup div:hover{background:#fff0e8;color:#ff5a00}
 
-.side-card{padding:22px;margin-bottom:18px}
-.side-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.side-head h2{font-size:18px}
-.side-head button{border:none;background:none;color:#ff5a00;font-weight:800;cursor:pointer}
-.donut{width:120px;height:120px;border-radius:50%;background:conic-gradient(#8b5cf6 0 40%,#ff5a00 40% 66%,#72bf44 66% 86%,#4b9fff 86% 100%);margin:8px auto 20px;display:flex;align-items:center;justify-content:center}
-.donut div{width:72px;height:72px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:18px}
-.legend{display:flex;justify-content:space-between;margin:12px 0;font-size:13px;color:#666}
-.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px}
-.reco{border:1px solid #ffd8c5;border-radius:14px;padding:16px}
-.reco h3{font-size:16px;margin-bottom:8px}
-.reco ul{margin:12px 0 18px 18px;font-size:13px;color:#555;line-height:1.8}
-.quick{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid #edf0f4;border-radius:14px;margin-bottom:12px;cursor:pointer}
-.quick i{color:#ff5a00;font-size:22px}
-.quick h3{font-size:14px}.quick p{font-size:12px;color:#777;margin-top:3px}
-.quick .arrow{margin-left:auto;color:#9aa1ad}
+.empty{display:none;text-align:center;background:#fff;border:1px solid #edf0f4;border-radius:20px;padding:50px;margin-top:20px}
+.empty i{font-size:52px;color:#ff5a00;margin-bottom:16px}
+.empty h2{margin-bottom:8px}
+.empty p{color:#777}
 
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:60}
 .modal-bg.show{display:flex}
-.modal{background:#fff;width:430px;border-radius:20px;padding:24px;box-shadow:0 15px 45px rgba(0,0,0,.25)}
+.modal{background:#fff;width:460px;border-radius:20px;padding:24px;box-shadow:0 15px 45px rgba(0,0,0,.25)}
 .modal h2{margin-bottom:16px}
-.modal input,.modal select{width:100%;height:46px;border:1px solid #edf0f4;border-radius:12px;padding:0 14px;margin-bottom:12px;outline:none}
-.modal-actions{display:flex;gap:10px;margin-top:10px}
-.modal-btn{flex:1;height:46px;border:none;border-radius:12px;font-weight:800;cursor:pointer}
-.cancel{background:#f1f1f1}
-.submit{background:#ff5a00;color:#fff}
+.manage-item{display:flex;align-items:center;gap:14px;border-bottom:1px solid #edf0f4;padding:14px 0}
+.manage-item img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.manage-item div{flex:1}
+.manage-item h3{font-size:15px}.manage-item p{font-size:12px;color:#777}
+.close{margin-top:18px;width:100%;height:46px;border:none;border-radius:12px;background:#f1f1f1;font-weight:800;cursor:pointer}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-size:14px;font-weight:700;display:none;z-index:90}
 
 @media(max-width:1100px){
-.wallet-layout{grid-template-columns:1fr}
+.video-grid{grid-template-columns:repeat(3,1fr)}
 .search{width:450px}
-.overview,.usage-grid,.token-grid{grid-template-columns:1fr}
-.break-content{grid-template-columns:1fr}
 }
 @media(max-width:780px){
 .sidebar{display:none}.main{margin-left:0;width:100%}.topbar{padding:0 16px}
 .search{width:100%}.profile span{display:none}.content{padding:18px}
+.video-grid{grid-template-columns:1fr}
+.list-card{grid-template-columns:1fr}
+.list-thumb{height:200px}
 }
 </style>
 </head>
@@ -138,8 +122,8 @@ th{color:#667085}
 <a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
 <a href="stories.html" class="menu-item"><i class="fa-regular fa-circle"></i> Stories</a>
 <a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community</a>
-<a href="wallet.html" class="menu-item active"><i class="fa-solid fa-wallet"></i> Wallet</a>
-<a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
+<a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
+<a href="subscriptions.html" class="menu-item active"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
 </nav>
 </aside>
 
@@ -148,7 +132,7 @@ th{color:#667085}
 <header class="topbar">
 <div class="search">
 <i class="fa-solid fa-magnifying-glass"></i>
-<input placeholder="Search creators, videos, topics...">
+<input placeholder="Search subscriptions, creators, videos...">
 </div>
 <div class="top-actions">
 <a href="notifications.html" class="bell"><i class="fa-regular fa-bell"></i></a>
@@ -161,252 +145,209 @@ th{color:#667085}
 </header>
 
 <section class="content">
-<div class="wallet-layout">
 
+<div class="page-head">
 <div>
-<h1>Wallet Overview</h1>
-
-<div class="overview">
-<div class="card balance-card">
-<div class="icon orange"><i class="fa-solid fa-coins"></i></div>
-<div>
-<h3>Token Balance</h3>
-<h2 id="tokenBalance">1,250 <small style="font-size:13px">JioTokens</small></h2>
-<p>≈ ₹1,250 Value</p>
-<button class="small-btn" onclick="openModal('buyModal')">Buy Tokens <i class="fa-solid fa-arrow-right"></i></button>
+<h1>Subscriptions</h1>
+<p>Latest videos from creators you follow</p>
 </div>
+<button class="manage-btn" onclick="openModal('manageModal')"><i class="fa-solid fa-gear"></i> Manage</button>
 </div>
 
-<div class="card balance-card">
-<div class="icon green"><i class="fa-solid fa-indian-rupee-sign"></i></div>
-<div>
-<h3>Money Balance</h3>
-<h2 id="moneyBalance">₹12,540.00</h2>
-<p>Available to withdraw</p>
-<button class="small-btn green-btn" onclick="openModal('withdrawModal')">Withdraw Money <i class="fa-solid fa-chevron-right"></i></button>
-</div>
-</div>
-
-<div class="card balance-card">
-<div class="icon purple"><i class="fa-solid fa-arrow-trend-up"></i></div>
-<div>
-<h3>Monthly Earnings</h3>
-<h2>₹48,320.50</h2>
-<p>+22.5% vs last month ↗</p>
-<button class="small-btn purple-btn" onclick="toast('Earnings details opened')">View Earnings <i class="fa-solid fa-chevron-right"></i></button>
-</div>
-</div>
+<div class="tabs">
+<button class="tab active" onclick="filterTab(this,'all')">All</button>
+<button class="tab" onclick="filterTab(this,'today')">Today</button>
+<button class="tab" onclick="filterTab(this,'continue')">Continue Watching</button>
+<button class="tab" onclick="filterTab(this,'unwatched')">Unwatched</button>
+<button class="tab" onclick="filterTab(this,'live')">Live</button>
+<button class="tab" onclick="toggleView(this)">List View</button>
 </div>
 
+<div class="section">
 <div class="section-head">
-<h2>Token Usage & Activity</h2>
-<button onclick="toast('More activity opened')"><i class="fa-solid fa-chevron-right"></i></button>
+<h2>Subscribed Channels</h2>
+<button onclick="openModal('manageModal')">View all</button>
 </div>
 
-<div class="usage-grid">
-<div class="card usage-card">
-<h3>Tokens Used This Month</h3>
-<h2>750 <small style="font-size:15px;color:#777">of 2,000</small></h2>
-<div class="progress"><span style="width:37%"></span></div>
-</div>
-<div class="card usage-card">
-<h3>Tokens Remaining</h3>
-<h2>1,250 <small style="font-size:15px;color:#777">of 2,000</small></h2>
-<div class="progress green-line"><span style="width:63%"></span></div>
-</div>
-<div class="card usage-card recent">
-<h3>Recent AI Usage</h3>
-<p><b>AI Video Script</b><span style="color:#ff5a00">-20 🪙</span></p>
-<p><b>AI Thumbnail Pro</b><span style="color:#ff5a00">-15 🪙</span></p>
+<div class="channel-row">
+<div class="channel-card"><img src="https://i.pravatar.cc/120?img=32"><h3>Neha Moves <span class="verified">●</span></h3><p>523K subscribers</p><button class="sub-btn" onclick="toggleSub(this)">Subscribed</button></div>
+<div class="channel-card"><img src="https://i.pravatar.cc/120?img=12"><h3>WanderWithRaj <span class="verified">●</span></h3><p>312K subscribers</p><button class="sub-btn" onclick="toggleSub(this)">Subscribed</button></div>
+<div class="channel-card"><img src="https://i.pravatar.cc/120?img=22"><h3>MusicVibes <span class="verified">●</span></h3><p>284K subscribers</p><button class="sub-btn" onclick="toggleSub(this)">Subscribed</button></div>
+<div class="channel-card"><img src="https://i.pravatar.cc/120?img=45"><h3>Travel Simran <span class="verified">●</span></h3><p>198K subscribers</p><button class="sub-btn" onclick="toggleSub(this)">Subscribed</button></div>
+<div class="channel-card"><img src="https://i.pravatar.cc/120?img=28"><h3>Foodie Naina <span class="verified">●</span></h3><p>150K subscribers</p><button class="sub-btn" onclick="toggleSub(this)">Subscribed</button></div>
 </div>
 </div>
 
-<div class="section-head"><h2>Buy Tokens <small style="color:#9aa1ad;font-size:13px"> 🔒 Secure Payments</small></h2></div>
-
-<div class="token-grid">
-<div class="card token-card">
-<div class="coin">🪙</div>
-<h3>100 Tokens</h3>
-<h2>₹99</h2>
-<p style="color:#777;font-size:13px;margin-bottom:16px">Use across all AI tools</p>
-<button class="buy-btn" onclick="buyTokens(100,99)">Buy Now</button>
-</div>
-<div class="card token-card popular">
-<div class="badge">Most Popular</div>
-<div class="coin">🪙</div>
-<h3>500 Tokens</h3>
-<h2>₹399</h2>
-<p style="color:#777;font-size:13px;margin-bottom:16px">Use across all AI tools</p>
-<button class="buy-btn" onclick="buyTokens(500,399)">Buy Now</button>
-</div>
-<div class="card token-card">
-<div class="coin">🪙</div>
-<h3>1000 Tokens</h3>
-<h2>₹699</h2>
-<p style="color:#777;font-size:13px;margin-bottom:16px">Use across all AI tools</p>
-<button class="buy-btn" onclick="buyTokens(1000,699)">Buy Now</button>
-</div>
+<div class="section">
+<div class="section-head">
+<h2>Latest Videos</h2>
+<button onclick="showMoreVideos(this)">Show more</button>
 </div>
 
-<div class="card breakdown">
-<div class="section-head" style="margin:0 0 14px"><h2>Earnings Breakdown</h2><button>This Month <i class="fa-solid fa-chevron-down"></i></button></div>
-<div class="break-content">
-<div>
-<div class="earning-line"><span>🟦 Ads Revenue</span><b>₹24,540.00</b></div>
-<div class="earning-line"><span>🟩 Subscriptions</span><b>₹15,230.00</b></div>
-<div class="earning-line"><span>🟪 Donations / Superchat</span><b>₹8,550.50</b></div>
-</div>
-<div class="chart" id="chart"></div>
-</div>
+<div class="video-grid" id="gridView">
+<a href="video.html" class="video-card" data-type="today unwatched">
+<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=900&auto=format&fit=crop')"><span class="duration">12:34</span></div>
+<div class="video-body"><div class="video-title">Camping in the Hidden Valley</div><div class="video-meta">WanderWithRaj ●<br>98K views • 3 hours ago</div></div>
+</a>
+
+<a href="live.html" class="video-card" data-type="today live">
+<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=900&auto=format&fit=crop')"><span class="live">LIVE</span><span class="duration">8.2K</span></div>
+<div class="video-body"><div class="video-title">Acoustic Live Evening</div><div class="video-meta">MusicVibes ●<br>Live now</div></div>
+</a>
+
+<a href="video.html" class="video-card" data-type="continue">
+<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop')"><span class="duration">10:20</span></div>
+<div class="video-body"><div class="video-title">Exploring the Blue Lagoon</div><div class="video-meta">Travel Simran ●<br>76K views • 1 day ago</div></div>
+</a>
+
+<a href="video.html" class="video-card" data-type="unwatched">
+<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=900&auto=format&fit=crop')"><span class="duration">6:45</span></div>
+<div class="video-body"><div class="video-title">5 Easy Pasta Recipes You’ll Love</div><div class="video-meta">Foodie Naina ●<br>38K views • 2 days ago</div></div>
+</a>
+
+<a href="shorts.html" class="video-card extra-video" data-type="today">
+<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=900&auto=format&fit=crop')"><span class="duration">0:45</span></div>
+<div class="video-body"><div class="video-title">Morning Fitness Shorts</div><div class="video-meta">Neha Moves ●<br>120K views • Today</div></div>
+</a>
+
+<a href="video.html" class="video-card extra-video" data-type="unwatched">
+<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=900&auto=format&fit=crop')"><span class="duration">9:18</span></div>
+<div class="video-body"><div class="video-title">AI Tools for Creators</div><div class="video-meta">Tech Simplified ●<br>88K views • 4 days ago</div></div>
+</a>
+
+<a href="live.html" class="video-card extra-video" data-type="live">
+<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=900&auto=format&fit=crop')"><span class="live">LIVE</span><span class="duration">4.1K</span></div>
+<div class="video-body"><div class="video-title">Gaming Night Live</div><div class="video-meta">Gaming Beast ●<br>Live now</div></div>
+</a>
+
+<a href="video.html" class="video-card extra-video" data-type="continue">
+<div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=900&auto=format&fit=crop')"><span class="duration">8:15</span></div>
+<div class="video-body"><div class="video-title">Night Photography Tips</div><div class="video-meta">Click Master ●<br>54K views • 1 week ago</div></div>
+</a>
 </div>
 
-<div class="card table-card">
-<h2 style="font-size:18px;margin-bottom:14px">Transaction History</h2>
-<table>
-<thead><tr><th>Date</th><th>Type</th><th>Description</th><th>Amount</th><th>Status</th></tr></thead>
-<tbody id="txnBody">
-<tr><td>28 May 2025, 11:30 AM</td><td>Token Purchase</td><td>500 Tokens Package</td><td>- ₹399.00</td><td><span class="status">Success</span></td></tr>
-<tr><td>27 May 2025, 09:15 PM</td><td>Earnings</td><td>Ads Revenue</td><td>+ ₹1,250.00</td><td><span class="status">Completed</span></td></tr>
-<tr><td>27 May 2025, 04:45 PM</td><td>Earnings</td><td>Membership Earnings</td><td>+ ₹850.00</td><td><span class="status">Completed</span></td></tr>
-<tr><td>26 May 2025, 10:20 AM</td><td>Token Purchase</td><td>100 Tokens</td><td>- ₹99.00</td><td><span class="status">Success</span></td></tr>
-</tbody>
-</table>
-<div class="view-all" onclick="addTransactions()">View All</div>
-</div>
-</div>
+<div class="list-view" id="listView"></div>
 
-<aside>
-<div class="card side-card">
-<div class="side-head"><h2>AI Usage Insights</h2><button onclick="toast('AI insights opened')">View all</button></div>
-<div class="donut"><div>750<br><small style="font-size:11px;color:#777">Tokens Used</small></div></div>
-<div class="legend"><span><span class="dot" style="background:#8b5cf6"></span>AI Video Script</span><b>300</b></div>
-<div class="legend"><span><span class="dot" style="background:#ff5a00"></span>AI Thumbnail Pro</span><b>200</b></div>
-<div class="legend"><span><span class="dot" style="background:#72bf44"></span>AI Title Generator</span><b>150</b></div>
-<div class="legend"><span><span class="dot" style="background:#4b9fff"></span>AI Voice Clone</span><b>100</b></div>
-</div>
-
-<div class="card side-card">
-<div class="side-head"><h2>Recommended for You</h2><button>Most Popular</button></div>
-<div class="reco">
-<h3>🪙 500 Tokens (AI Package)</h3>
-<p style="font-size:13px;color:#777">Best for creators using AI tools regularly.</p>
-<ul>
-<li>500 Tokens</li>
-<li>Valid for 30 days</li>
-<li>Use across all AI tools</li>
-</ul>
-<h2>₹399</h2>
-<button class="buy-btn" style="background:#ff5a00;color:white;margin-top:12px" onclick="buyTokens(500,399)">Buy Now</button>
+<div class="empty" id="emptyState">
+<i class="fa-regular fa-circle-play"></i>
+<h2>No videos found</h2>
+<p>Try selecting another filter.</p>
 </div>
 </div>
 
-<div class="card side-card">
-<div class="side-head"><h2>Quick Actions</h2></div>
-<div class="quick" onclick="openModal('withdrawModal')"><i class="fa-solid fa-wallet"></i><div><h3>Withdraw Money</h3><p>Transfer earnings to bank</p></div><i class="fa-solid fa-chevron-right arrow"></i></div>
-<div class="quick" onclick="openModal('buyModal')"><i class="fa-solid fa-coins"></i><div><h3>Buy Tokens</h3><p>Add tokens to your wallet</p></div><i class="fa-solid fa-chevron-right arrow"></i></div>
-</div>
-
-<div class="card side-card">
-<div class="quick" onclick="toast('Help Center opened')"><i class="fa-regular fa-circle-question"></i><div><h3>Visit Help Center</h3><p>Get support for wallet, payments & more</p></div></div>
-</div>
-</aside>
-
-</div>
 </section>
 </main>
 </div>
 
-<div class="modal-bg" id="buyModal">
+<div class="modal-bg" id="manageModal">
 <div class="modal">
-<h2>Buy Tokens</h2>
-<select id="tokenSelect">
-<option value="100|99">100 Tokens - ₹99</option>
-<option value="500|399">500 Tokens - ₹399</option>
-<option value="1000|699">1000 Tokens - ₹699</option>
-</select>
-<select>
-<option>UPI</option>
-<option>Credit Card</option>
-<option>Debit Card</option>
-<option>Net Banking</option>
-</select>
-<div class="modal-actions">
-<button class="modal-btn cancel" onclick="closeModal('buyModal')">Cancel</button>
-<button class="modal-btn submit" onclick="confirmBuy()">Pay Now</button>
-</div>
-</div>
-</div>
+<h2>Manage Subscriptions</h2>
 
-<div class="modal-bg" id="withdrawModal">
-<div class="modal">
-<h2>Withdraw Money</h2>
-<input id="withdrawAmount" type="number" placeholder="Enter amount ₹">
-<select>
-<option>UPI</option>
-<option>Bank Account</option>
-</select>
-<input placeholder="UPI ID / Bank details">
-<div class="modal-actions">
-<button class="modal-btn cancel" onclick="closeModal('withdrawModal')">Cancel</button>
-<button class="modal-btn submit" onclick="confirmWithdraw()">Withdraw</button>
-</div>
+<div class="manage-item"><img src="https://i.pravatar.cc/100?img=32"><div><h3>Neha Moves</h3><p>Notifications: All</p></div><button class="sub-btn" onclick="toggleSub(this)">Subscribed</button></div>
+<div class="manage-item"><img src="https://i.pravatar.cc/100?img=12"><div><h3>WanderWithRaj</h3><p>Notifications: Personalized</p></div><button class="sub-btn" onclick="toggleSub(this)">Subscribed</button></div>
+<div class="manage-item"><img src="https://i.pravatar.cc/100?img=22"><div><h3>MusicVibes</h3><p>Notifications: All</p></div><button class="sub-btn" onclick="toggleSub(this)">Subscribed</button></div>
+<div class="manage-item"><img src="https://i.pravatar.cc/100?img=45"><div><h3>Travel Simran</h3><p>Notifications: None</p></div><button class="sub-btn" onclick="toggleSub(this)">Subscribed</button></div>
+
+<button class="close" onclick="closeModal('manageModal')">Close</button>
 </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-let tokens=1250;
-let money=12540;
+let listMode=false;
+let extraVisible=false;
 
 function toast(msg){
 const t=document.getElementById("toast");
-t.innerText=msg;t.style.display="block";
+t.innerText=msg;
+t.style.display="block";
 setTimeout(()=>t.style.display="none",1600);
 }
+
 function openModal(id){document.getElementById(id).classList.add("show")}
 function closeModal(id){document.getElementById(id).classList.remove("show")}
 document.querySelectorAll(".modal-bg").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}))
 
-function buyTokens(amount,price){
-document.getElementById("tokenSelect").value=amount+"|"+price;
-openModal("buyModal");
+function toggleSub(btn){
+btn.classList.toggle("off");
+btn.innerText=btn.classList.contains("off")?"Subscribe":"Subscribed";
+toast(btn.classList.contains("off")?"Unsubscribed":"Subscribed");
 }
-function confirmBuy(){
-const [amount,price]=document.getElementById("tokenSelect").value.split("|").map(Number);
-tokens+=amount;
-document.getElementById("tokenBalance").innerHTML=tokens.toLocaleString()+" <small style='font-size:13px'>JioTokens</small>";
-addTxn("Today, Now","Token Purchase",amount+" Tokens Package","- ₹"+price+".00","Success");
-closeModal("buyModal");
-toast(amount+" tokens added");
+
+function filterTab(btn,type){
+document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+btn.classList.add("active");
+
+const cards=document.querySelectorAll(".video-card");
+let visible=0;
+
+cards.forEach(card=>{
+const match=type==="all" || card.dataset.type.includes(type);
+card.style.display=match ? "block" : "none";
+if(match) visible++;
+});
+
+document.getElementById("emptyState").style.display=visible ? "none":"block";
+renderListView();
 }
-function confirmWithdraw(){
-const amt=Number(document.getElementById("withdrawAmount").value);
-if(!amt){toast("Enter amount");return}
-if(amt>money){toast("Insufficient balance");return}
-money-=amt;
-document.getElementById("moneyBalance").innerText="₹"+money.toLocaleString("en-IN")+".00";
-addTxn("Today, Now","Withdrawal","Money Withdrawn","- ₹"+amt+".00","Processing");
-closeModal("withdrawModal");
-toast("Withdrawal requested");
+
+function showMoreVideos(btn){
+extraVisible=!extraVisible;
+document.querySelectorAll(".extra-video").forEach(v=>v.style.display=extraVisible?"block":"none");
+btn.innerText=extraVisible?"Show less":"Show more";
+renderListView();
+toast(extraVisible?"More videos loaded":"Extra videos hidden");
 }
-function addTxn(date,type,desc,amount,status){
-const tr=document.createElement("tr");
-tr.innerHTML=`<td>${date}</td><td>${type}</td><td>${desc}</td><td>${amount}</td><td><span class="status">${status}</span></td>`;
-document.getElementById("txnBody").prepend(tr);
+
+function toggleView(btn){
+listMode=!listMode;
+btn.innerText=listMode?"Grid View":"List View";
+document.getElementById("gridView").style.display=listMode?"none":"grid";
+document.getElementById("listView").style.display=listMode?"block":"none";
+renderListView();
 }
-function addTransactions(){
-addTxn("24 May 2025, 06:30 PM","Earnings","Superchat","+ ₹620.00","Completed");
-addTxn("23 May 2025, 02:10 PM","Token Usage","AI Voice Clone","- 100 Tokens","Success");
-toast("More transactions loaded");
+
+function renderListView(){
+const list=document.getElementById("listView");
+list.innerHTML="";
+document.querySelectorAll(".video-card").forEach(card=>{
+if(card.style.display==="none")return;
+const bg=card.querySelector(".thumb").style.backgroundImage;
+const title=card.querySelector(".video-title").innerText;
+const meta=card.querySelector(".video-meta").innerText;
+const link=card.getAttribute("href");
+const div=document.createElement("div");
+div.className="list-card";
+div.innerHTML=`
+<a href="${link}" class="list-thumb" style="background-image:${bg}">${card.querySelector(".duration")?.outerHTML || ""}${card.querySelector(".live")?.outerHTML || ""}</a>
+<div><h3>${title}</h3><p>${meta}</p><p>New video from your subscribed creator. Tap to watch now.</p></div>
+<div class="more" onclick="toggleMenu(this)">
+<i class="fa-solid fa-ellipsis-vertical"></i>
+<div class="menu-popup">
+<div onclick="toast('Saved to Watch Later')"><i class="fa-regular fa-clock"></i> Save to Watch Later</div>
+<div onclick="toast('Added to playlist')"><i class="fa-solid fa-list"></i> Add to Playlist</div>
+<div onclick="toast('Removed from feed')"><i class="fa-regular fa-eye-slash"></i> Hide this video</div>
+</div>
+</div>`;
+list.appendChild(div);
+});
 }
-const chart=document.getElementById("chart");
-for(let i=0;i<32;i++){
-const b=document.createElement("div");
-b.className="bar";
-b.style.height=(25+Math.random()*110)+"px";
-chart.appendChild(b);
+
+function toggleMenu(el){
+const p=el.querySelector(".menu-popup");
+document.querySelectorAll(".menu-popup").forEach(x=>{if(x!==p)x.classList.remove("show")});
+p.classList.toggle("show");
 }
+
+document.addEventListener("click",e=>{
+if(!e.target.closest(".more")){
+document.querySelectorAll(".menu-popup").forEach(p=>p.classList.remove("show"));
+}
+});
+
+document.querySelectorAll(".extra-video").forEach(v=>v.style.display="none");
+renderListView();
 </script>
 </body>
 </html>
