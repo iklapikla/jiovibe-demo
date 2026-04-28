@@ -47,7 +47,8 @@ a{text-decoration:none;color:inherit}
 .channel-info{display:flex;align-items:flex-end;justify-content:space-between;margin-top:-52px;position:relative;z-index:3;padding:0 18px 18px}
 .channel-left{display:flex;align-items:flex-end;gap:18px}
 .avatar{width:118px;height:118px;border-radius:50%;border:5px solid #fff;object-fit:cover;box-shadow:0 8px 28px rgba(0,0,0,.18)}
-.channel-text h1{font-size:32px;margin-bottom:6px}
+.channel-text{background:rgba(255,255,255,.88);padding:14px 20px;border-radius:18px;backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.channel-text h1{font-size:32px;margin-bottom:6px;color:#1f1f1f}
 .verified{color:#ff5a00}
 .channel-text p{color:#667085;font-weight:600;margin-bottom:4px}
 .channel-actions{display:flex;gap:12px;align-items:center}
@@ -191,6 +192,7 @@ a{text-decoration:none;color:inherit}
 
 <div class="channel-actions">
 <button class="action-main" onclick="openModal('uploadModal')"><i class="fa-solid fa-upload"></i> Upload</button>
+<button class="action-main" onclick="window.location.href='live.html'"><i class="fa-solid fa-tower-broadcast"></i> Go Live</button>
 <button class="action-secondary" onclick="openModal('editModal')"><i class="fa-regular fa-pen-to-square"></i> Customize Channel</button>
 <button class="action-secondary" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
 </div>
