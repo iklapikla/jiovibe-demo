@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Analytics & Insights - JioVibe</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#fbfbfc;color:#222;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.app{display:flex;min-height:100vh}
+
+.sidebar{width:210px;height:100vh;background:#fff;border-right:1px solid #edf0f4;padding:30px 14px;position:fixed;left:0;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:4px;margin-bottom:44px;padding-left:6px}
+.logo-circle{width:52px;height:52px;background:#ff5a00;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900}
+.logo-text{font-size:31px;font-weight:900;color:#2b070b;letter-spacing:-1.2px}
+.menu{display:flex;flex-direction:column;gap:10px}
+.menu-item{display:flex;align-items:center;gap:16px;padding:15px 18px;border-radius:13px;font-weight:800;color:#343434;font-size:15px;transition:.25s}
+.menu-item i{width:22px;font-size:20px;text-align:center}
+.menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
+.help{position:absolute;left:14px;right:14px;bottom:28px;border-top:1px solid #edf0f4;padding-top:22px}
+
+.main{margin-left:210px;width:calc(100% - 210px)}
+.topbar{height:90px;background:#fff;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:8}
+.page-title h1{font-size:25px;margin-bottom:6px}
+.page-title p{font-size:14px;color:#667085;font-weight:600}
+.page-title h1 i{color:#ff5a00;margin-right:8px}
+.top-actions{display:flex;align-items:center;gap:18px;position:relative}
+.date-pill,.token-pill{height:46px;border:1px solid #edf0f4;background:#fff;border-radius:12px;padding:0 18px;display:flex;align-items:center;gap:10px;font-weight:800;color:#444}
+.token-pill span{color:#ff5a00}
+.bell{font-size:23px;position:relative;cursor:pointer}
+.bell::after{content:"3";position:absolute;top:-8px;right:-8px;width:18px;height:18px;border-radius:50%;background:#ff5a00;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:900}
+.profile{display:flex;align-items:center;gap:12px;cursor:pointer}
+.profile img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.profile b{display:block;font-size:15px}.profile span{font-size:13px;color:#777}
+
+.content{padding:22px 28px 60px}
+.layout{display:grid;grid-template-columns:1fr 300px;gap:22px;max-width:1340px;margin:auto}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:18px}
+.stat{background:#fff;border:1px solid #edf0f4;border-radius:14px;padding:20px;display:flex;gap:16px;align-items:center;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+.icon{width:54px;height:54px;border-radius:50%;background:#ff5a00;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px}
+.stat h3{font-size:13px;color:#555;margin-bottom:6px}
+.stat h2{font-size:24px;margin-bottom:6px}
+.growth{font-size:13px;color:#16a34a;font-weight:900}
+
+.card{background:#fff;border:1px solid #edf0f4;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.04);margin-bottom:16px}
+.card-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px 0}
+.card-head h2{font-size:18px}
+.card-head h2 i{font-size:14px;color:#9aa1ad;margin-left:6px}
+.select{height:38px;border:1px solid #edf0f4;border-radius:10px;background:#fff;padding:0 14px;font-weight:700;color:#555;cursor:pointer}
+.legend{display:flex;gap:22px;padding:14px 20px 0;font-size:13px;color:#555;font-weight:700}
+.legend span:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px}
+.likes:before{background:#ff5a00}.comments:before{background:#8b5cf6}.shares:before{background:#fbbf24}.revenue:before{background:#ff5a00}
+
+.chart{height:210px;padding:16px 24px 22px;position:relative}
+.grid-lines{position:absolute;left:24px;right:24px;top:18px;bottom:36px;background:repeating-linear-gradient(to bottom,#edf0f4 0,#edf0f4 1px,transparent 1px,transparent 42px)}
+.svg-chart{position:absolute;left:24px;right:24px;top:18px;bottom:36px;width:calc(100% - 48px);height:155px;overflow:visible}
+.axis{position:absolute;left:24px;right:24px;bottom:12px;display:flex;justify-content:space-between;color:#667085;font-size:12px;font-weight:700}
+.tooltip{position:absolute;background:#fff;border:1px solid #edf0f4;border-radius:10px;box-shadow:0 8px 26px rgba(0,0,0,.12);padding:12px 14px;font-size:12px;line-height:1.7}
+.tooltip b{display:block;margin-bottom:5px}
+
+.revenue-chart{height:210px;padding:16px 24px 22px;position:relative}
+.area{position:absolute;left:24px;right:24px;top:18px;bottom:36px;height:155px}
+
+.audience{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;padding:22px}
+.donut-wrap{display:flex;align-items:center;gap:26px}
+.donut{width:160px;height:160px;border-radius:50%;background:conic-gradient(#ff5a00 0 28.5%,#fbbf24 28.5% 70.8%,#34d399 70.8% 88.6%,#8b5cf6 88.6% 100%);position:relative}
+.donut:after{content:"Total Audience\A 125.4K";white-space:pre;position:absolute;inset:38px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;color:#222;font-size:17px;line-height:1.5}
+.demo-list{flex:1}
+.demo{display:grid;grid-template-columns:12px 1fr 70px 70px;gap:10px;align-items:center;margin-bottom:14px;font-size:13px;font-weight:700}
+.color{width:9px;height:9px;border-radius:50%}
+.orange{background:#ff5a00}.yellow{background:#fbbf24}.green{background:#34d399}.purple{background:#8b5cf6}.gray{background:#9ca3af}
+.locations h3{font-size:15px;margin-bottom:14px}
+.loc{display:grid;grid-template-columns:70px 1fr 50px;gap:12px;align-items:center;margin-bottom:14px;font-size:13px;font-weight:700}
+.bar{height:6px;background:#edf0f4;border-radius:10px;overflow:hidden}
+.bar span{display:block;height:100%;background:#ff5a00;border-radius:10px}
+
+/* RIGHT SIDE */
+.side-card{background:#fff;border:1px solid #edf0f4;border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+.side-card h2{font-size:18px;margin-bottom:8px}
+.side-card h2 i{color:#ff5a00;margin-right:8px}
+.side-card p{font-size:13px;color:#667085;font-weight:600;line-height:1.5}
+.time-box{border:1px solid #edf0f4;border-radius:14px;padding:18px;margin-top:16px}
+.time-box h3{font-size:16px;margin-bottom:12px}.time-box h3 i{color:#8b5cf6}
+.time-box h1{font-size:24px;color:#ff5a00;margin:18px 0}
+.days{display:flex;gap:8px;flex-wrap:wrap}
+.day{padding:8px 10px;border-radius:18px;background:#ff5a00;color:#fff;font-size:12px;font-weight:900}
+.day.off{background:#f3f4f6;color:#999}
+
+.idea-list,.tip-list{margin-top:18px}
+.idea,.tip-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;font-size:13px;color:#444;font-weight:700;line-height:1.4}
+.idea i{color:#ff5a00}.tip-item i{color:#22c55e}
+.outline-btn{width:100%;height:42px;border:1px solid #ffb58d;background:#fff;border-radius:10px;color:#ff5a00;font-weight:900;cursor:pointer;margin-top:8px}
+
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-size:14px;font-weight:700;display:none;z-index:200}
+
+@media(max-width:1150px){
+.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:780px){
+.sidebar{display:none}.main{margin-left:0;width:100%}.topbar{height:auto;min-height:90px;flex-wrap:wrap;padding:16px}.profile div{display:none}
+.content{padding:18px}.stats{grid-template-columns:1fr}.audience{grid-template-columns:1fr}.donut-wrap{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<aside class="sidebar">
+  <a href="index.html" class="logo"><div class="logo-circle">Jio</div><div class="logo-text">Vibe</div></a>
+
+  <nav class="menu">
+    <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="my-channel.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Content</a>
+    <a href="ai-studio.html" class="menu-item"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio</a>
+    <a href="analytics.html" class="menu-item active"><i class="fa-solid fa-chart-simple"></i> Analytics</a>
+    <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
+    <a href="settings.html" class="menu-item"><i class="fa-solid fa-gear"></i> Settings</a>
+  </nav>
+
+  <div class="help">
+    <a href="help-support.html" class="menu-item"><i class="fa-regular fa-circle-question"></i> Help & Support</a>
+  </div>
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+  <div class="page-title">
+    <h1><i class="fa-solid fa-wand-magic-sparkles"></i>AI Analytics & Insights</h1>
+    <p>Smart insights to grow your channel and maximize earnings</p>
+  </div>
+
+  <div class="top-actions">
+    <button class="date-pill" onclick="toast('Date range opened')">May 12 – May 18, 2025 <i class="fa-regular fa-calendar"></i></button>
+    <div class="token-pill">🪙 My Tokens: <span>1,250</span></div>
+    <div class="bell" onclick="toast('Notifications opened')"><i class="fa-regular fa-bell"></i></div>
+    <div class="profile">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop">
+      <div><b>Ankit Jayant</b><span>Creator</span></div>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
+</header>
+
+<section class="content">
+  <div class="layout">
+
+    <div>
+      <div class="stats">
+        <div class="stat"><div class="icon"><i class="fa-regular fa-eye"></i></div><div><h3>Total Views</h3><h2>125.4K</h2><div class="growth">↑ 18.6% vs last 7 days</div></div></div>
+        <div class="stat"><div class="icon"><i class="fa-solid fa-wave-square"></i></div><div><h3>Engagement Rate</h3><h2>7.45%</h2><div class="growth">↑ 12.4% vs last 7 days</div></div></div>
+        <div class="stat"><div class="icon"><i class="fa-solid fa-wallet"></i></div><div><h3>Total Revenue</h3><h2>₹45,230</h2><div class="growth">↑ 21.8% vs last 7 days</div></div></div>
+        <div class="stat"><div class="icon"><i class="fa-regular fa-clock"></i></div><div><h3>Watch Time (hrs)</h3><h2>8,240</h2><div class="growth">↑ 16.2% vs last 7 days</div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>Engagement Overview <i class="fa-regular fa-circle-question"></i></h2><button class="select" onclick="toast('Daily filter opened')">Daily <i class="fa-solid fa-chevron-down"></i></button></div>
+        <div class="legend"><span class="likes">Likes</span><span class="comments">Comments</span><span class="shares">Shares</span></div>
+        <div class="chart">
+          <div class="grid-lines"></div>
+          <svg class="svg-chart" viewBox="0 0 900 155" preserveAspectRatio="none">
+            <polyline points="0,105 140,58 280,72 420,66 560,48 700,79 840,42 900,54" fill="none" stroke="#ff6b2b" stroke-width="4"/>
+            <polyline points="0,120 140,96 280,102 420,99 560,94 700,108 840,93 900,100" fill="none" stroke="#8b5cf6" stroke-width="4"/>
+            <polyline points="0,145 140,135 280,137 420,136 560,134 700,139 840,134 900,136" fill="none" stroke="#fbbf24" stroke-width="4"/>
+            <g fill="#ff6b2b"><circle cx="0" cy="105" r="5"/><circle cx="140" cy="58" r="5"/><circle cx="420" cy="66" r="5"/><circle cx="560" cy="48" r="5"/><circle cx="840" cy="42" r="5"/><circle cx="900" cy="54" r="5"/></g>
+          </svg>
+          <div class="tooltip" style="left:58%;top:30px"><b>May 16, 2025</b>🟠 Likes 6,521<br>🟣 Comments 2,312<br>🟡 Shares 1,256</div>
+          <div class="axis"><span>May 12</span><span>May 13</span><span>May 14</span><span>May 15</span><span>May 16</span><span>May 17</span><span>May 18</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>Revenue Overview <i class="fa-regular fa-circle-question"></i></h2><button class="select" onclick="toast('Daily filter opened')">Daily <i class="fa-solid fa-chevron-down"></i></button></div>
+        <div class="legend"><span class="revenue">Revenue (₹)</span></div>
+        <div class="revenue-chart">
+          <div class="grid-lines"></div>
+          <svg class="area" viewBox="0 0 900 155" preserveAspectRatio="none">
+            <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6b2b" stop-opacity=".32"/><stop offset="1" stop-color="#ff6b2b" stop-opacity=".02"/></linearGradient></defs>
+            <path d="M0 125 C80 60,130 78,180 80 C250 85,240 128,320 118 C430 105,430 30,520 48 C610 68,610 118,700 84 C780 50,780 92,900 82 L900 155 L0 155 Z" fill="url(#g)"/>
+            <path d="M0 125 C80 60,130 78,180 80 C250 85,240 128,320 118 C430 105,430 30,520 48 C610 68,610 118,700 84 C780 50,780 92,900 82" fill="none" stroke="#ff6b2b" stroke-width="4"/>
+            <g fill="#ff6b2b"><circle cx="0" cy="125" r="5"/><circle cx="180" cy="80" r="5"/><circle cx="320" cy="118" r="5"/><circle cx="520" cy="48" r="5"/><circle cx="700" cy="84" r="5"/><circle cx="900" cy="82" r="5"/></g>
+          </svg>
+          <div class="tooltip" style="left:60%;top:48px"><b>May 17, 2025</b>🟠 Revenue ₹32,450</div>
+          <div class="axis"><span>May 12</span><span>May 13</span><span>May 14</span><span>May 15</span><span>May 16</span><span>May 17</span><span>May 18</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>Audience Segmentation <i class="fa-regular fa-circle-question"></i></h2></div>
+        <div class="audience">
+          <div class="donut-wrap">
+            <div class="donut"></div>
+            <div class="demo-list">
+              <div class="demo"><span class="color orange"></span><span>18–24 Years</span><b>28.5%</b><span>(35.7K)</span></div>
+              <div class="demo"><span class="color yellow"></span><span>25–34 Years</span><b>42.3%</b><span>(53.1K)</span></div>
+              <div class="demo"><span class="color green"></span><span>35–44 Years</span><b>17.8%</b><span>(22.3K)</span></div>
+              <div class="demo"><span class="color purple"></span><span>45+ Years</span><b>11.4%</b><span>(14.3K)</span></div>
+              <div class="demo"><span class="color gray"></span><span>Others</span><b>0.0%</b><span>(0)</span></div>
+            </div>
+          </div>
+
+          <div class="locations">
+            <h3><i class="fa-solid fa-globe"></i> Top Locations</h3>
+            <div class="loc"><span>India</span><div class="bar"><span style="width:78%"></span></div><b>78.4%</b></div>
+            <div class="loc"><span>USA</span><div class="bar"><span style="width:6.7%"></span></div><b>6.7%</b></div>
+            <div class="loc"><span>UK</span><div class="bar"><span style="width:3.8%"></span></div><b>3.8%</b></div>
+            <div class="loc"><span>Canada</span><div class="bar"><span style="width:2.9%"></span></div><b>2.9%</b></div>
+            <div class="loc"><span>Australia</span><div class="bar"><span style="width:2.1%"></span></div><b>2.1%</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside>
+      <div class="side-card">
+        <h2><i class="fa-solid fa-wand-magic-sparkles"></i>AI Insights & Suggestions</h2>
+        <p>Personalized recommendations to grow faster</p>
+
+        <div class="time-box">
+          <h3><i class="fa-regular fa-clock"></i> Best Time to Post</h3>
+          <p>Your audience is most active during these times:</p>
+          <h1>7:00 PM – 10:00 PM</h1>
+          <div class="days">
+            <span class="day">Mon</span><span class="day">Tue</span><span class="day">Wed</span><span class="day">Thu</span><span class="day">Fri</span><span class="day off">Sat</span><span class="day off">Sun</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <h2><i class="fa-regular fa-lightbulb"></i>Content Ideas for You</h2>
+        <p>AI generated ideas based on your audience interest</p>
+        <div class="idea-list">
+          <div class="idea"><i class="fa-solid fa-wand-magic-sparkles"></i>Budget travel tips for students</div>
+          <div class="idea"><i class="fa-solid fa-wand-magic-sparkles"></i>Exploring hidden places in India</div>
+          <div class="idea"><i class="fa-solid fa-wand-magic-sparkles"></i>Travel packing hacks & checklist</div>
+          <div class="idea"><i class="fa-solid fa-wand-magic-sparkles"></i>Food vlog: Must try local street food</div>
+          <div class="idea"><i class="fa-solid fa-wand-magic-sparkles"></i>How to plan a trip on a low budget</div>
+        </div>
+        <button class="outline-btn" onclick="toast('More content ideas generated')">Get More Ideas</button>
+      </div>
+
+      <div class="side-card">
+        <h2><i class="fa-solid fa-indian-rupee-sign"></i>Revenue Optimization Tips</h2>
+        <p>AI tips to increase your earnings</p>
+        <div class="tip-list">
+          <div class="tip-item"><i class="fa-regular fa-circle-check"></i>Upload more shorts – they are getting 2x more views</div>
+          <div class="tip-item"><i class="fa-regular fa-circle-check"></i>Use custom thumbnails to increase CTR</div>
+          <div class="tip-item"><i class="fa-regular fa-circle-check"></i>Add pinned comment to drive more engagement</div>
+          <div class="tip-item"><i class="fa-regular fa-circle-check"></i>Optimize video titles with trending keywords</div>
+          <div class="tip-item"><i class="fa-regular fa-circle-check"></i>Enable memberships & exclusive content</div>
+        </div>
+        <button class="outline-btn" onclick="toast('Detailed report opened')">View Detailed Report</button>
+      </div>
+    </aside>
+
+  </div>
+</section>
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.innerText=msg;
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",1600);
+}
+</script>
+
+</body>
+</html>
