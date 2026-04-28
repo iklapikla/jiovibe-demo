@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>JioVibe Wallet</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Tokens - JioVibe</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -14,113 +14,116 @@ body{background:#fbfbfc;color:#222;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 .app{display:flex;min-height:100vh}
 
-.sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:32px 18px;position:fixed;left:0;top:0;background:#fff;z-index:10}
+.sidebar{width:250px;height:100vh;background:#fff;border-right:1px solid #edf0f4;padding:32px 18px;position:fixed;left:0;top:0;z-index:10}
 .logo{display:flex;align-items:center;gap:4px;margin-bottom:45px;padding-left:8px}
-.logo-circle{width:54px;height:54px;background:#ff5a00;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
-.logo-text{font-size:32px;font-weight:800;color:#2b070b;letter-spacing:-1.2px}
+.logo-circle{width:54px;height:54px;background:#ff5a00;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:900}
+.logo-text{font-size:32px;font-weight:900;color:#2b070b;letter-spacing:-1.2px}
 .menu{display:flex;flex-direction:column;gap:12px}
-.menu-item{display:flex;align-items:center;gap:18px;padding:17px 22px;border-radius:14px;font-weight:600;color:#383838;font-size:16px;transition:.25s}
+.menu-item{display:flex;align-items:center;gap:18px;padding:17px 22px;border-radius:14px;font-weight:700;color:#383838;font-size:16px;transition:.25s}
 .menu-item i{width:22px;font-size:22px;text-align:center}
 .menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
+.help{position:absolute;left:18px;right:18px;bottom:28px;border-top:1px solid #edf0f4;padding-top:22px}
 
 .main{margin-left:250px;width:calc(100% - 250px)}
-.topbar{height:82px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;position:sticky;top:0;z-index:8}
-.search{width:720px;height:50px;border:1px solid #edf0f4;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad;background:#fff}
-.search input{border:none;outline:none;flex:1;font-size:15px;background:transparent}
-.top-actions{display:flex;align-items:center;gap:22px}
-.bell{font-size:23px;position:relative}
-.bell::after{content:"3";position:absolute;top:-8px;right:-7px;background:#ff5a00;color:#fff;font-size:10px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.profile{display:flex;align-items:center;gap:12px}
+.topbar{height:86px;background:#fff;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:8}
+.page-title{display:flex;align-items:center;gap:18px}
+.back{font-size:22px;cursor:pointer}
+.page-title h1{font-size:27px;margin-bottom:6px}
+.page-title p{font-size:15px;color:#667085;font-weight:600}
+.top-actions{display:flex;align-items:center;gap:18px;position:relative}
+.token-pill{height:48px;padding:0 20px;border:1px solid #edf0f4;background:#fff;border-radius:12px;display:flex;align-items:center;gap:10px;font-weight:900}
+.token-pill span{color:#ff5a00}
+.bell{font-size:23px;position:relative;cursor:pointer}
+.bell::after{content:"3";position:absolute;top:-8px;right:-8px;width:18px;height:18px;border-radius:50%;background:#ff5a00;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:900}
+.profile{display:flex;align-items:center;gap:12px;cursor:pointer}
 .profile img{width:48px;height:48px;border-radius:50%;object-fit:cover}
-.profile span{font-weight:700;font-size:15px}
+.profile b{display:block;font-size:15px}.profile span{font-size:13px;color:#777}
 
-.content{padding:26px 34px 60px}
-.wallet-layout{display:grid;grid-template-columns:1fr 330px;gap:28px;max-width:1250px;margin:auto}
-h1{font-size:24px;margin-bottom:18px}
-.card{background:#fff;border:1px solid #edf0f4;border-radius:18px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
-.overview{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:22px}
-.balance-card{padding:22px;display:flex;gap:18px;align-items:flex-start}
-.icon{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px}
-.orange{background:#ff8a3d}.green{background:#72bf44}.purple{background:#8b5cf6}
-.balance-card h3{font-size:14px;color:#5d6370;margin-bottom:8px}
-.balance-card h2{font-size:28px;margin-bottom:4px}
-.balance-card p{font-size:13px;color:#777}
-.small-btn{margin-top:18px;height:38px;padding:0 18px;border-radius:10px;border:1px solid #ffd8c5;background:#fff;color:#ff5a00;font-weight:800;cursor:pointer}
-.small-btn.green-btn{color:#4f9f32;border-color:#cce8c2}
-.small-btn.purple-btn{color:#7c4dff;border-color:#ded3ff}
+.content{padding:28px 34px 70px;max-width:1280px;margin:auto}
 
-.section-head{display:flex;justify-content:space-between;align-items:center;margin:20px 0 14px}
-.section-head h2{font-size:20px}
-.section-head button{border:none;background:none;color:#ff5a00;font-weight:800;cursor:pointer}
-.usage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.usage-card{padding:20px}
-.usage-card h3{font-size:14px;color:#5d6370;margin-bottom:12px}
-.usage-card h2{font-size:28px}
-.progress{height:6px;background:#edf0f4;border-radius:10px;margin-top:18px;overflow:hidden}
-.progress span{display:block;height:100%;background:#ff5a00;border-radius:10px}
-.progress.green-line span{background:#25a244}
-.recent p{font-size:13px;color:#666;margin-bottom:10px;display:flex;justify-content:space-between}
+/* BALANCE BANNER */
+.balance-banner{
+  background:#fff7f2;
+  border:1px solid #ffd8c5;
+  border-radius:18px;
+  padding:30px;
+  display:grid;
+  grid-template-columns:410px 1fr 210px;
+  gap:34px;
+  align-items:center;
+  margin-bottom:38px;
+  box-shadow:0 6px 20px rgba(0,0,0,.04);
+}
+.balance-left{display:flex;align-items:center;gap:26px;border-right:1px solid #ffd8c5;padding-right:30px}
+.coin-big{width:96px;height:96px;border-radius:50%;background:#ff5a00;color:#fff;display:flex;align-items:center;justify-content:center;font-size:48px}
+.balance-left h3{font-size:19px;margin-bottom:10px}
+.balance-left h1{font-size:54px;color:#ff5a00;line-height:1}
+.balance-left h1 span{font-size:22px;color:#222;margin-left:8px}
+.benefit-list h3{font-size:18px;margin-bottom:16px}
+.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
+.benefit-grid div{font-weight:700;color:#333}
+.benefit-grid i{color:#ff5a00;margin-right:10px}
+.wallet-illustration{font-size:92px;text-align:center;color:#ff8a3d}
 
-.token-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.token-card{padding:28px;text-align:center;position:relative}
-.token-card.popular{border:2px solid #ffb58d}
-.badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#ff5a00;color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:800}
-.coin{font-size:48px;color:#ffb020;margin-bottom:12px}
-.token-card h3{font-size:18px;margin-bottom:8px}
-.token-card h2{font-size:26px;margin-bottom:8px}
-.buy-btn{width:100%;height:44px;border:1px solid #ffd8c5;border-radius:10px;background:#fff;color:#ff5a00;font-weight:800;cursor:pointer}
-.token-card.popular .buy-btn{background:#ff5a00;color:#fff}
+/* TITLE DIVIDER */
+.pack-head{display:flex;align-items:center;justify-content:center;gap:28px;margin-bottom:24px}
+.line{height:1px;background:#edf0f4;flex:1}
+.pack-head h2{font-size:26px}
+.pack-head i{color:#ff5a00}
 
-.breakdown{padding:20px;margin-top:18px}
-.break-content{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:end}
-.earning-line{display:flex;justify-content:space-between;margin-bottom:16px;font-size:14px}
-.earning-line b{color:#333}
-.chart{height:150px;display:flex;align-items:end;gap:7px;border-left:1px solid #edf0f4;border-bottom:1px solid #edf0f4;padding:10px}
-.bar{width:9px;background:#ff8a3d;border-radius:6px 6px 0 0}
+/* PACKS */
+.packs{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-bottom:28px}
+.pack{background:#fff;border:1px solid #edf0f4;border-radius:18px;padding:32px 28px;min-height:310px;text-align:center;position:relative;box-shadow:0 6px 20px rgba(0,0,0,.05);cursor:pointer;transition:.25s}
+.pack:hover,.pack.selected{border-color:#ff8a3d;box-shadow:0 14px 32px rgba(255,90,0,.12);transform:translateY(-3px)}
+.badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#ff5a00;color:#fff;padding:9px 28px;border-radius:8px;font-weight:900}
+.pack-icon{width:88px;height:88px;border-radius:50%;background:#fff0e8;color:#ff9d00;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:42px}
+.pack h1{font-size:48px;color:#ff5a00}.pack h2{font-size:24px;margin-bottom:22px}
+.divider{height:1px;background:#edf0f4;margin:18px 0}
+.price{font-size:38px;margin-bottom:7px}
+.pack p{color:#777;font-weight:600;margin-bottom:18px}
+.buy-pack{height:50px;width:100%;border:none;border-radius:10px;background:#ff5a00;color:#fff;font-size:17px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px}
 
-.table-card{padding:18px;margin-top:18px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{text-align:left;padding:12px;border-bottom:1px solid #edf0f4}
-th{color:#667085}
-.status{padding:6px 12px;border-radius:18px;background:#e8f8e8;color:#2f9d44;font-weight:800;font-size:12px}
-.view-all{margin-top:12px;text-align:right;color:#ff5a00;font-weight:800;cursor:pointer}
+/* PAYMENT */
+.payment-head{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+.payment-head h2{font-size:20px}
+.secure{color:#667085;font-weight:700;border-left:1px solid #edf0f4;padding-left:18px}
+.secure i{color:#22c55e;margin-right:8px}
+.payment-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:24px}
+.payment{height:100px;background:#fff;border:1px solid #edf0f4;border-radius:16px;padding:18px;display:flex;align-items:center;gap:18px;cursor:pointer;transition:.25s;position:relative}
+.payment.selected{border-color:#ff5a00;background:#fffaf7}
+.radio{width:22px;height:22px;border:2px solid #cfd4dc;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.payment.selected .radio{border-color:#ff5a00}
+.payment.selected .radio:after{content:"";width:10px;height:10px;border-radius:50%;background:#ff5a00}
+.pay-icon{font-size:38px;color:#333;width:54px;text-align:center}
+.payment h3{font-size:17px;margin-bottom:5px}.payment p{font-size:13px;color:#777;font-weight:600}
+.instant{position:absolute;right:16px;top:18px;background:#e8f8e8;color:#16a34a;border-radius:8px;padding:5px 9px;font-size:12px;font-weight:900}
 
-.side-card{padding:22px;margin-bottom:18px}
-.side-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.side-head h2{font-size:18px}
-.side-head button{border:none;background:none;color:#ff5a00;font-weight:800;cursor:pointer}
-.donut{width:120px;height:120px;border-radius:50%;background:conic-gradient(#8b5cf6 0 40%,#ff5a00 40% 66%,#72bf44 66% 86%,#4b9fff 86% 100%);margin:8px auto 20px;display:flex;align-items:center;justify-content:center}
-.donut div{width:72px;height:72px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:18px}
-.legend{display:flex;justify-content:space-between;margin:12px 0;font-size:13px;color:#666}
-.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px}
-.reco{border:1px solid #ffd8c5;border-radius:14px;padding:16px}
-.reco h3{font-size:16px;margin-bottom:8px}
-.reco ul{margin:12px 0 18px 18px;font-size:13px;color:#555;line-height:1.8}
-.quick{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid #edf0f4;border-radius:14px;margin-bottom:12px;cursor:pointer}
-.quick i{color:#ff5a00;font-size:22px}
-.quick h3{font-size:14px}.quick p{font-size:12px;color:#777;margin-top:3px}
-.quick .arrow{margin-left:auto;color:#9aa1ad}
+/* TRUST */
+.trust{background:#fff;border:1px solid #edf0f4;border-radius:16px;display:grid;grid-template-columns:repeat(3,1fr);padding:20px;margin-bottom:24px}
+.trust-item{display:flex;align-items:center;gap:18px;justify-content:center;border-right:1px solid #edf0f4}
+.trust-item:last-child{border-right:none}
+.trust-item i{font-size:34px;color:#ff8a3d}
+.trust-item h3{font-size:16px;margin-bottom:5px}.trust-item p{color:#777;font-size:13px}
 
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:60}
-.modal-bg.show{display:flex}
-.modal{background:#fff;width:430px;border-radius:20px;padding:24px;box-shadow:0 15px 45px rgba(0,0,0,.25)}
-.modal h2{margin-bottom:16px}
-.modal input,.modal select{width:100%;height:46px;border:1px solid #edf0f4;border-radius:12px;padding:0 14px;margin-bottom:12px;outline:none}
-.modal-actions{display:flex;gap:10px;margin-top:10px}
-.modal-btn{flex:1;height:46px;border:none;border-radius:12px;font-weight:800;cursor:pointer}
-.cancel{background:#f1f1f1}
-.submit{background:#ff5a00;color:#fff}
-.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-size:14px;font-weight:700;display:none;z-index:90}
+/* CHECKOUT */
+.checkout{background:#fff;border:1px solid #edf0f4;border-radius:18px;padding:22px;display:none;margin-top:20px}
+.checkout.show{display:block}
+.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.checkout input{width:100%;height:48px;border:1px solid #edf0f4;border-radius:12px;padding:0 14px;outline:none;margin-bottom:12px}
+.pay-now{width:100%;height:50px;border:none;border-radius:12px;background:#ff5a00;color:#fff;font-size:17px;font-weight:900;cursor:pointer}
+.summary{background:#fff7f2;border:1px solid #ffd8c5;border-radius:14px;padding:18px}
+.summary h3{margin-bottom:14px}.summary p{display:flex;justify-content:space-between;margin-bottom:10px;font-weight:700}.summary b{color:#ff5a00}
+
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-size:14px;font-weight:700;display:none;z-index:200}
 
 @media(max-width:1100px){
-.wallet-layout{grid-template-columns:1fr}
-.search{width:450px}
-.overview,.usage-grid,.token-grid{grid-template-columns:1fr}
-.break-content{grid-template-columns:1fr}
+.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px)}
+.balance-banner{grid-template-columns:1fr}.balance-left{border-right:none;border-bottom:1px solid #ffd8c5;padding-bottom:24px}
+.packs,.payment-methods{grid-template-columns:1fr}.trust{grid-template-columns:1fr;gap:18px}.trust-item{border-right:none;border-bottom:1px solid #edf0f4;padding-bottom:18px}
 }
 @media(max-width:780px){
-.sidebar{display:none}.main{margin-left:0;width:100%}.topbar{padding:0 16px}
-.search{width:100%}.profile span{display:none}.content{padding:18px}
+.sidebar{display:none}.main{margin-left:0;width:100%}.topbar{height:auto;min-height:86px;flex-wrap:wrap;padding:16px}.profile span,.profile b{display:none}
+.content{padding:18px}.checkout-grid{grid-template-columns:1fr}.balance-left{flex-direction:column;align-items:flex-start}.balance-left h1{font-size:44px}
 }
 </style>
 </head>
@@ -129,284 +132,232 @@ th{color:#667085}
 <div class="app">
 
 <aside class="sidebar">
-<a href="index.html" class="logo"><div class="logo-circle">Jio</div><div class="logo-text">Vibe</div></a>
-<nav class="menu">
-<a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
-<a href="explore.html" class="menu-item"><i class="fa-regular fa-compass"></i> Explore</a>
-<a href="live.html" class="menu-item"><i class="fa-solid fa-video"></i> Live</a>
-<a href="video.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Video</a>
-<a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
-<a href="stories.html" class="menu-item"><i class="fa-regular fa-circle"></i> Stories</a>
-<a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community</a>
-<a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
-<a href="wallet.html" class="menu-item active"><i class="fa-solid fa-wallet"></i> Wallet</a>
-</nav>
+  <a href="index.html" class="logo"><div class="logo-circle">Jio</div><div class="logo-text">Vibe</div></a>
+
+  <nav class="menu">
+    <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="my-channel.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Content</a>
+    <a href="ai-studio.html" class="menu-item"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio</a>
+    <a href="analytics.html" class="menu-item"><i class="fa-solid fa-chart-simple"></i> Analytics</a>
+    <a href="wallet.html" class="menu-item active"><i class="fa-solid fa-wallet"></i> Wallet</a>
+    <a href="settings.html" class="menu-item"><i class="fa-solid fa-gear"></i> Settings</a>
+  </nav>
+
+  <div class="help">
+    <a href="help-support.html" class="menu-item"><i class="fa-regular fa-circle-question"></i> Help & Support</a>
+  </div>
 </aside>
 
 <main class="main">
 
 <header class="topbar">
-<div class="search">
-<i class="fa-solid fa-magnifying-glass"></i>
-<input placeholder="Search creators, videos, topics...">
-</div>
-<div class="top-actions">
-<a href="notifications.html" class="bell"><i class="fa-regular fa-bell"></i></a>
-<div class="profile">
-<img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop">
-<span>Trupti Latur</span>
-<i class="fa-solid fa-chevron-down"></i>
-</div>
-</div>
+  <div class="page-title">
+    <i class="fa-solid fa-arrow-left back" onclick="history.back()"></i>
+    <div>
+      <h1>Buy Tokens</h1>
+      <p>Buy tokens to access premium AI tools and features</p>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <div class="token-pill">🪙 My Tokens: <span id="topTokens">1,250</span></div>
+    <div class="bell" onclick="toast('Notifications opened')"><i class="fa-regular fa-bell"></i></div>
+    <div class="profile">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop">
+      <div><b>Ankit Jayant</b><span>Creator</span></div>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
 </header>
 
 <section class="content">
-<div class="wallet-layout">
 
-<div>
-<h1>Wallet Overview</h1>
+  <div class="balance-banner">
+    <div class="balance-left">
+      <div class="coin-big"><i class="fa-solid fa-coins"></i></div>
+      <div>
+        <h3>Current Token Balance</h3>
+        <h1><span id="currentTokens">1,250</span> <span>Tokens</span></h1>
+      </div>
+    </div>
 
-<div class="overview">
-<div class="card balance-card">
-<div class="icon orange"><i class="fa-solid fa-coins"></i></div>
-<div>
-<h3>Token Balance</h3>
-<h2 id="tokenBalance">1,250 <small style="font-size:13px">JioTokens</small></h2>
-<p>≈ ₹1,250 Value</p>
-<button class="small-btn" onclick="openModal('buyModal')">Buy Tokens <i class="fa-solid fa-arrow-right"></i></button>
-</div>
-</div>
+    <div class="benefit-list">
+      <h3>Tokens let you use AI tools like</h3>
+      <div class="benefit-grid">
+        <div><i class="fa-regular fa-circle-check"></i> AI Video Editor</div>
+        <div><i class="fa-regular fa-circle-check"></i> AI Shorts Generator</div>
+        <div><i class="fa-regular fa-circle-check"></i> AI Thumbnail Generator</div>
+        <div><i class="fa-regular fa-circle-check"></i> AI Multilingual Tools</div>
+        <div><i class="fa-regular fa-circle-check"></i> AI Title & Description Generator</div>
+        <div><i class="fa-regular fa-circle-check"></i> And many more...</div>
+      </div>
+    </div>
 
-<div class="card balance-card">
-<div class="icon green"><i class="fa-solid fa-indian-rupee-sign"></i></div>
-<div>
-<h3>Money Balance</h3>
-<h2 id="moneyBalance">₹12,540.00</h2>
-<p>Available to withdraw</p>
-<button class="small-btn green-btn" onclick="openModal('withdrawModal')">Withdraw Money <i class="fa-solid fa-chevron-right"></i></button>
-</div>
-</div>
+    <div class="wallet-illustration">
+      <i class="fa-solid fa-wallet"></i>
+    </div>
+  </div>
 
-<div class="card balance-card">
-<div class="icon purple"><i class="fa-solid fa-arrow-trend-up"></i></div>
-<div>
-<h3>Monthly Earnings</h3>
-<h2>₹48,320.50</h2>
-<p>+22.5% vs last month ↗</p>
-<button class="small-btn purple-btn" onclick="toast('Earnings details opened')">View Earnings <i class="fa-solid fa-chevron-right"></i></button>
-</div>
-</div>
-</div>
+  <div class="pack-head">
+    <div class="line"></div>
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+    <h2>Choose a Token Pack</h2>
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+    <div class="line"></div>
+  </div>
 
-<div class="section-head">
-<h2>Token Usage & Activity</h2>
-<button onclick="toast('More activity opened')"><i class="fa-solid fa-chevron-right"></i></button>
-</div>
+  <div class="packs">
+    <div class="pack" onclick="selectPack(this,100,99)">
+      <div class="pack-icon"><i class="fa-solid fa-coins"></i></div>
+      <h1>100</h1>
+      <h2>Tokens</h2>
+      <div class="divider"></div>
+      <div class="price">₹99</div>
+      <p>One-time payment</p>
+      <button class="buy-pack">Buy Now <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
 
-<div class="usage-grid">
-<div class="card usage-card">
-<h3>Tokens Used This Month</h3>
-<h2>750 <small style="font-size:15px;color:#777">of 2,000</small></h2>
-<div class="progress"><span style="width:37%"></span></div>
-</div>
-<div class="card usage-card">
-<h3>Tokens Remaining</h3>
-<h2>1,250 <small style="font-size:15px;color:#777">of 2,000</small></h2>
-<div class="progress green-line"><span style="width:63%"></span></div>
-</div>
-<div class="card usage-card recent">
-<h3>Recent AI Usage</h3>
-<p><b>AI Video Script</b><span style="color:#ff5a00">-20 🪙</span></p>
-<p><b>AI Thumbnail Pro</b><span style="color:#ff5a00">-15 🪙</span></p>
-</div>
-</div>
+    <div class="pack selected" onclick="selectPack(this,500,399)">
+      <div class="badge">BEST VALUE</div>
+      <div class="pack-icon"><i class="fa-solid fa-coins"></i></div>
+      <h1>500</h1>
+      <h2>Tokens</h2>
+      <div class="divider"></div>
+      <div class="price">₹399</div>
+      <p>One-time payment</p>
+      <button class="buy-pack">Buy Now <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
 
-<div class="section-head"><h2>Buy Tokens <small style="color:#9aa1ad;font-size:13px"> 🔒 Secure Payments</small></h2></div>
+    <div class="pack" onclick="selectPack(this,1000,699)">
+      <div class="pack-icon"><i class="fa-solid fa-coins"></i></div>
+      <h1>1000</h1>
+      <h2>Tokens</h2>
+      <div class="divider"></div>
+      <div class="price">₹699</div>
+      <p>One-time payment</p>
+      <button class="buy-pack">Buy Now <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
 
-<div class="token-grid">
-<div class="card token-card">
-<div class="coin">🪙</div>
-<h3>100 Tokens</h3>
-<h2>₹99</h2>
-<p style="color:#777;font-size:13px;margin-bottom:16px">Use across all AI tools</p>
-<button class="buy-btn" onclick="buyTokens(100,99)">Buy Now</button>
-</div>
-<div class="card token-card popular">
-<div class="badge">Most Popular</div>
-<div class="coin">🪙</div>
-<h3>500 Tokens</h3>
-<h2>₹399</h2>
-<p style="color:#777;font-size:13px;margin-bottom:16px">Use across all AI tools</p>
-<button class="buy-btn" onclick="buyTokens(500,399)">Buy Now</button>
-</div>
-<div class="card token-card">
-<div class="coin">🪙</div>
-<h3>1000 Tokens</h3>
-<h2>₹699</h2>
-<p style="color:#777;font-size:13px;margin-bottom:16px">Use across all AI tools</p>
-<button class="buy-btn" onclick="buyTokens(1000,699)">Buy Now</button>
-</div>
-</div>
+  <div class="payment-head">
+    <h2>Select Payment Method</h2>
+    <div class="secure"><i class="fa-solid fa-shield-halved"></i> Secure & Encrypted Payments</div>
+  </div>
 
-<div class="card breakdown">
-<div class="section-head" style="margin:0 0 14px"><h2>Earnings Breakdown</h2><button>This Month <i class="fa-solid fa-chevron-down"></i></button></div>
-<div class="break-content">
-<div>
-<div class="earning-line"><span>🟦 Ads Revenue</span><b>₹24,540.00</b></div>
-<div class="earning-line"><span>🟩 Subscriptions</span><b>₹15,230.00</b></div>
-<div class="earning-line"><span>🟪 Donations / Superchat</span><b>₹8,550.50</b></div>
-</div>
-<div class="chart" id="chart"></div>
-</div>
-</div>
+  <div class="payment-methods">
+    <div class="payment selected" onclick="selectPayment(this,'UPI')">
+      <div class="radio"></div>
+      <div class="pay-icon">UPI</div>
+      <div>
+        <h3>UPI</h3>
+        <p>Pay using any UPI app</p>
+      </div>
+      <span class="instant">Instant</span>
+    </div>
 
-<div class="card table-card">
-<h2 style="font-size:18px;margin-bottom:14px">Transaction History</h2>
-<table>
-<thead><tr><th>Date</th><th>Type</th><th>Description</th><th>Amount</th><th>Status</th></tr></thead>
-<tbody id="txnBody">
-<tr><td>28 May 2025, 11:30 AM</td><td>Token Purchase</td><td>500 Tokens Package</td><td>- ₹399.00</td><td><span class="status">Success</span></td></tr>
-<tr><td>27 May 2025, 09:15 PM</td><td>Earnings</td><td>Ads Revenue</td><td>+ ₹1,250.00</td><td><span class="status">Completed</span></td></tr>
-<tr><td>27 May 2025, 04:45 PM</td><td>Earnings</td><td>Membership Earnings</td><td>+ ₹850.00</td><td><span class="status">Completed</span></td></tr>
-<tr><td>26 May 2025, 10:20 AM</td><td>Token Purchase</td><td>100 Tokens</td><td>- ₹99.00</td><td><span class="status">Success</span></td></tr>
-</tbody>
-</table>
-<div class="view-all" onclick="addTransactions()">View All</div>
-</div>
-</div>
+    <div class="payment" onclick="selectPayment(this,'Card')">
+      <div class="radio"></div>
+      <div class="pay-icon"><i class="fa-regular fa-credit-card"></i></div>
+      <div>
+        <h3>Credit / Debit Card</h3>
+        <p>Visa, Mastercard, Rupay</p>
+      </div>
+      <span class="instant">Instant</span>
+    </div>
 
-<aside>
-<div class="card side-card">
-<div class="side-head"><h2>AI Usage Insights</h2><button onclick="toast('AI insights opened')">View all</button></div>
-<div class="donut"><div>750<br><small style="font-size:11px;color:#777">Tokens Used</small></div></div>
-<div class="legend"><span><span class="dot" style="background:#8b5cf6"></span>AI Video Script</span><b>300</b></div>
-<div class="legend"><span><span class="dot" style="background:#ff5a00"></span>AI Thumbnail Pro</span><b>200</b></div>
-<div class="legend"><span><span class="dot" style="background:#72bf44"></span>AI Title Generator</span><b>150</b></div>
-<div class="legend"><span><span class="dot" style="background:#4b9fff"></span>AI Voice Clone</span><b>100</b></div>
-</div>
+    <div class="payment" onclick="selectPayment(this,'Wallet')">
+      <div class="radio"></div>
+      <div class="pay-icon"><i class="fa-solid fa-wallet"></i></div>
+      <div>
+        <h3>Wallets</h3>
+        <p>Paytm, PhonePe, Amazon Pay</p>
+      </div>
+      <span class="instant">Instant</span>
+    </div>
+  </div>
 
-<div class="card side-card">
-<div class="side-head"><h2>Recommended for You</h2><button>Most Popular</button></div>
-<div class="reco">
-<h3>🪙 500 Tokens (AI Package)</h3>
-<p style="font-size:13px;color:#777">Best for creators using AI tools regularly.</p>
-<ul>
-<li>500 Tokens</li>
-<li>Valid for 30 days</li>
-<li>Use across all AI tools</li>
-</ul>
-<h2>₹399</h2>
-<button class="buy-btn" style="background:#ff5a00;color:white;margin-top:12px" onclick="buyTokens(500,399)">Buy Now</button>
-</div>
-</div>
+  <div class="checkout show" id="checkout">
+    <div class="checkout-grid">
+      <div>
+        <input id="paymentInput" placeholder="Enter UPI ID">
+        <button class="pay-now" onclick="completePayment()">Pay Now</button>
+      </div>
+      <div class="summary">
+        <h3>Order Summary</h3>
+        <p><span>Token Pack</span><b id="summaryTokens">500 Tokens</b></p>
+        <p><span>Amount</span><b id="summaryPrice">₹399</b></p>
+        <p><span>Payment Method</span><b id="summaryMethod">UPI</b></p>
+      </div>
+    </div>
+  </div>
 
-<div class="card side-card">
-<div class="side-head"><h2>Quick Actions</h2></div>
-<div class="quick" onclick="openModal('withdrawModal')"><i class="fa-solid fa-wallet"></i><div><h3>Withdraw Money</h3><p>Transfer earnings to bank</p></div><i class="fa-solid fa-chevron-right arrow"></i></div>
-<div class="quick" onclick="openModal('buyModal')"><i class="fa-solid fa-coins"></i><div><h3>Buy Tokens</h3><p>Add tokens to your wallet</p></div><i class="fa-solid fa-chevron-right arrow"></i></div>
-</div>
+  <div class="trust">
+    <div class="trust-item">
+      <i class="fa-solid fa-shield-halved"></i>
+      <div><h3>100% Secure</h3><p>Your payments are safe with us</p></div>
+    </div>
+    <div class="trust-item">
+      <i class="fa-solid fa-bolt"></i>
+      <div><h3>Instant Delivery</h3><p>Tokens added instantly to your account</p></div>
+    </div>
+    <div class="trust-item">
+      <i class="fa-solid fa-lock"></i>
+      <div><h3>Secure Payments</h3><p>PCI DSS compliant</p></div>
+    </div>
+  </div>
 
-<div class="card side-card">
-<div class="quick" onclick="toast('Help Center opened')"><i class="fa-regular fa-circle-question"></i><div><h3>Visit Help Center</h3><p>Get support for wallet, payments & more</p></div></div>
-</div>
-</aside>
-
-</div>
 </section>
 </main>
-</div>
-
-<div class="modal-bg" id="buyModal">
-<div class="modal">
-<h2>Buy Tokens</h2>
-<select id="tokenSelect">
-<option value="100|99">100 Tokens - ₹99</option>
-<option value="500|399">500 Tokens - ₹399</option>
-<option value="1000|699">1000 Tokens - ₹699</option>
-</select>
-<select>
-<option>UPI</option>
-<option>Credit Card</option>
-<option>Debit Card</option>
-<option>Net Banking</option>
-</select>
-<div class="modal-actions">
-<button class="modal-btn cancel" onclick="closeModal('buyModal')">Cancel</button>
-<button class="modal-btn submit" onclick="confirmBuy()">Pay Now</button>
-</div>
-</div>
-</div>
-
-<div class="modal-bg" id="withdrawModal">
-<div class="modal">
-<h2>Withdraw Money</h2>
-<input id="withdrawAmount" type="number" placeholder="Enter amount ₹">
-<select>
-<option>UPI</option>
-<option>Bank Account</option>
-</select>
-<input placeholder="UPI ID / Bank details">
-<div class="modal-actions">
-<button class="modal-btn cancel" onclick="closeModal('withdrawModal')">Cancel</button>
-<button class="modal-btn submit" onclick="confirmWithdraw()">Withdraw</button>
-</div>
-</div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-let tokens=1250;
-let money=12540;
+let currentTokens = 1250;
+let selectedTokens = 500;
+let selectedPrice = 399;
+let selectedMethod = "UPI";
 
 function toast(msg){
-const t=document.getElementById("toast");
-t.innerText=msg;t.style.display="block";
-setTimeout(()=>t.style.display="none",1600);
+  const t=document.getElementById("toast");
+  t.innerText=msg;
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",1600);
 }
-function openModal(id){document.getElementById(id).classList.add("show")}
-function closeModal(id){document.getElementById(id).classList.remove("show")}
-document.querySelectorAll(".modal-bg").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}))
 
-function buyTokens(amount,price){
-document.getElementById("tokenSelect").value=amount+"|"+price;
-openModal("buyModal");
+function selectPack(card,tokens,price){
+  document.querySelectorAll(".pack").forEach(p=>p.classList.remove("selected"));
+  card.classList.add("selected");
+  selectedTokens=tokens;
+  selectedPrice=price;
+  document.getElementById("summaryTokens").innerText=tokens+" Tokens";
+  document.getElementById("summaryPrice").innerText="₹"+price;
+  document.getElementById("checkout").classList.add("show");
+  toast(tokens+" token pack selected");
 }
-function confirmBuy(){
-const [amount,price]=document.getElementById("tokenSelect").value.split("|").map(Number);
-tokens+=amount;
-document.getElementById("tokenBalance").innerHTML=tokens.toLocaleString()+" <small style='font-size:13px'>JioTokens</small>";
-addTxn("Today, Now","Token Purchase",amount+" Tokens Package","- ₹"+price+".00","Success");
-closeModal("buyModal");
-toast(amount+" tokens added");
+
+function selectPayment(card,method){
+  document.querySelectorAll(".payment").forEach(p=>p.classList.remove("selected"));
+  card.classList.add("selected");
+  selectedMethod=method;
+  document.getElementById("summaryMethod").innerText=method;
+
+  const input=document.getElementById("paymentInput");
+  if(method==="UPI") input.placeholder="Enter UPI ID";
+  if(method==="Card") input.placeholder="Enter card number";
+  if(method==="Wallet") input.placeholder="Enter wallet mobile number";
+
+  toast(method+" selected");
 }
-function confirmWithdraw(){
-const amt=Number(document.getElementById("withdrawAmount").value);
-if(!amt){toast("Enter amount");return}
-if(amt>money){toast("Insufficient balance");return}
-money-=amt;
-document.getElementById("moneyBalance").innerText="₹"+money.toLocaleString("en-IN")+".00";
-addTxn("Today, Now","Withdrawal","Money Withdrawn","- ₹"+amt+".00","Processing");
-closeModal("withdrawModal");
-toast("Withdrawal requested");
-}
-function addTxn(date,type,desc,amount,status){
-const tr=document.createElement("tr");
-tr.innerHTML=`<td>${date}</td><td>${type}</td><td>${desc}</td><td>${amount}</td><td><span class="status">${status}</span></td>`;
-document.getElementById("txnBody").prepend(tr);
-}
-function addTransactions(){
-addTxn("24 May 2025, 06:30 PM","Earnings","Superchat","+ ₹620.00","Completed");
-addTxn("23 May 2025, 02:10 PM","Token Usage","AI Voice Clone","- 100 Tokens","Success");
-toast("More transactions loaded");
-}
-const chart=document.getElementById("chart");
-for(let i=0;i<32;i++){
-const b=document.createElement("div");
-b.className="bar";
-b.style.height=(25+Math.random()*110)+"px";
-chart.appendChild(b);
+
+function completePayment(){
+  currentTokens += selectedTokens;
+  document.getElementById("currentTokens").innerText=currentTokens.toLocaleString();
+  document.getElementById("topTokens").innerText=currentTokens.toLocaleString();
+  document.getElementById("paymentInput").value="";
+  toast("Payment successful. "+selectedTokens+" tokens added.");
 }
 </script>
+
 </body>
 </html>
