@@ -673,11 +673,8 @@
         </div>
       </header>
 
-     <!-- ONLY CONTENT SECTION CHANGE (rest same as your file) -->
+   <section class="content">
 
-<section class="content">
-
-  <!-- TABS SAME -->
   <div class="tabs-wrap">
     <a href="index.html" class="tab">All</a>
     <a href="category-gaming.html" class="tab active"><i class="fa-solid fa-gamepad"></i> Gaming</a>
@@ -687,117 +684,248 @@
     <a href="category-education.html" class="tab"><i class="fa-solid fa-graduation-cap"></i> Education</a>
     <a href="category-lifestyle.html" class="tab"><i class="fa-solid fa-mug-hot"></i> Lifestyle</a>
     <a href="category-movies.html" class="tab"><i class="fa-solid fa-clapperboard"></i> Movies</a>
+    <a href="stories.html" class="tab"><i class="fa-regular fa-circle"></i> Stories</a>
+    <a href="community.html" class="tab"><i class="fa-solid fa-users"></i> Community Post</a>
+    <span class="tab-next"><i class="fa-solid fa-chevron-right"></i></span>
   </div>
 
-  <!-- HERO GAMING -->
   <div class="hero-section">
-    <div class="hero-track">
+    <button class="hero-btn prev" onclick="slideHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="hero-btn next" onclick="slideHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
 
-      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1800');">
+    <div class="hero-track" id="heroTrack">
+
+      <a href="watch-road-to-victory.html" class="hero" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1800&auto=format&fit=crop&v=gaming1');">
         <div class="hero-content">
           <label>GAMING FEATURED</label>
           <h1>Road to Victory</h1>
-          <p>Epic battles, clutch plays and intense gameplay moments.</p>
+          <p>Epic battles, clutch plays and intense gaming moments from top creators.</p>
           <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
         </div>
-      </div>
+      </a>
 
-      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1605902711622-cfb43c4437d1?q=80&w=1800');">
+      <a href="watch-final-zone-clutch.html" class="hero" style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1800&auto=format&fit=crop&v=gaming2');">
         <div class="hero-content">
           <label>ESPORTS</label>
-          <h1>Grand Finals Live</h1>
-          <p>Watch top players compete for ultimate glory.</p>
+          <h1>Final Zone Clutch</h1>
+          <p>Watch insane 1v4 moments, ranked matches and pro-level gameplay.</p>
           <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
         </div>
-      </div>
+      </a>
 
+      <a href="watch-gaming-setup.html" class="hero" style="background-image:url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1800&auto=format&fit=crop&v=gaming3');">
+        <div class="hero-content">
+          <label>SETUP TOUR</label>
+          <h1>Ultimate Gaming Setup</h1>
+          <p>Explore creator gaming rooms, streaming desks and premium gear setups.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </a>
+
+      <a href="watch-esports-finals.html" class="hero" style="background-image:url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=1800&auto=format&fit=crop&v=gaming4');">
+        <div class="hero-content">
+          <label>TOURNAMENT</label>
+          <h1>Esports Grand Finals</h1>
+          <p>High-pressure matches, MVP moments and tournament-winning plays.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </a>
+
+      <a href="watch-mobile-gaming.html" class="hero" style="background-image:url('https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=1800&auto=format&fit=crop&v=gaming5');">
+        <div class="hero-content">
+          <label>MOBILE GAMING</label>
+          <h1>Rank Push Season</h1>
+          <p>Best mobile gaming highlights, tips and ranked gameplay strategies.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="dots" id="dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
     </div>
   </div>
 
-  <!-- TRENDING GAMING -->
   <div class="section">
     <div class="section-head">
-      <h2>Trending Gaming</h2>
+      <h2>Trending Gaming <span>🔥</span></h2>
+      <button onclick="toggleVideos('trendingExtra', this, 'View all')">View all <i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
     <div class="video-row">
 
-      <div class="card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=900');">
-          <span class="live-tag">LIVE</span>
+      <a href="watch-final-zone-clutch.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-a-man-playing-a-video-game-9092/1080p.mp4"></video>
+          <span class="live-tag">● LIVE</span>
+          <span class="duration">18.4K</span>
         </div>
         <div class="card-body">
-          <div class="card-title">Final Zone Clutch 🔥</div>
-          <div class="creator">Gaming Beast</div>
+          <div class="card-title">Final Zone Clutch Live</div>
+          <div class="creator">Gaming Beast <span class="verified">●</span></div>
         </div>
-      </div>
+      </a>
 
-      <div class="card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1598550476439-6847785fcea6?q=80&w=900');"></div>
+      <a href="watch-1v4-clutch.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-a-man-playing-a-video-game-9092/1080p.mp4"></video>
+          <span class="duration">8:32</span>
+        </div>
         <div class="card-body">
-          <div class="card-title">1v4 Clutch Moment</div>
-          <div class="creator">Pro Gamer Raj</div>
+          <div class="card-title">1v4 Clutch in Last Circle</div>
+          <div class="creator">Pro Gamer Raj <span class="verified">●</span></div>
         </div>
-      </div>
+      </a>
 
-      <div class="card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=900');"></div>
+      <a href="watch-top-mobile-games.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-gamer-room-4780/1080p.mp4"></video>
+          <span class="duration">12:10</span>
+        </div>
         <div class="card-body">
-          <div class="card-title">Top 10 Mobile Games</div>
-          <div class="creator">Game Radar</div>
+          <div class="card-title">Top 10 Mobile Games This Week</div>
+          <div class="creator">Game Radar <span class="verified">●</span></div>
         </div>
-      </div>
+      </a>
 
-      <div class="card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1606813907291-d86efa9b94db?q=80&w=900');"></div>
+      <a href="watch-gaming-setup-tour.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-gamer-room-4780/1080p.mp4"></video>
+          <span class="duration">6:45</span>
+        </div>
         <div class="card-body">
-          <div class="card-title">Gaming Setup Tour</div>
-          <div class="creator">Setup Master</div>
+          <div class="card-title">Ultimate Gaming Setup Tour</div>
+          <div class="creator">Setup Master <span class="verified">●</span></div>
         </div>
-      </div>
+      </a>
 
-      <div class="card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=900');"></div>
+      <a href="watch-tournament-highlights.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-a-man-playing-a-video-game-9092/1080p.mp4"></video>
+          <span class="duration">9:18</span>
+        </div>
         <div class="card-body">
           <div class="card-title">Tournament Highlights</div>
-          <div class="creator">Esports Arena</div>
+          <div class="creator">Esports Arena <span class="verified">●</span></div>
         </div>
-      </div>
+      </a>
+
+    </div>
+
+    <div class="video-row extra" id="trendingExtra">
+
+      <a href="watch-aim-training.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-a-man-playing-a-video-game-9092/1080p.mp4"></video>
+          <span class="duration">7:05</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Best Aim Training Routine</div>
+          <div class="creator">Aim Coach <span class="verified">●</span></div>
+        </div>
+      </a>
+
+      <a href="watch-console-vs-mobile.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-gamer-room-4780/1080p.mp4"></video>
+          <span class="duration">11:22</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Console vs Mobile Gaming</div>
+          <div class="creator">Tech Gamer <span class="verified">●</span></div>
+        </div>
+      </a>
+
+      <a href="watch-rank-push.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-a-man-playing-a-video-game-9092/1080p.mp4"></video>
+          <span class="duration">10:40</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Rank Push Strategy Guide</div>
+          <div class="creator">Rank Pushers <span class="verified">●</span></div>
+        </div>
+      </a>
 
     </div>
   </div>
 
-  <!-- RECOMMENDED -->
   <div class="section">
     <div class="section-head">
-      <h2>Recommended Gaming Videos</h2>
+      <h2>Recommended Gaming Videos <span>✨</span></h2>
+      <button onclick="toggleVideos('recommendedExtra', this, 'See more')">See more <i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
     <div class="video-grid">
 
-      <div class="card large">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000');"></div>
-        <div class="card-body">
-          <div class="card-title">Extreme Sniper Gameplay</div>
-          <div class="creator">Sniper King</div>
+      <a href="watch-gaming-strategy-guide.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-a-man-playing-a-video-game-9092/1080p.mp4"></video>
+          <span class="duration">14:20</span>
         </div>
-      </div>
+        <div class="card-body">
+          <div class="card-title">Beginner to Pro: Strategy Guide</div>
+          <div class="creator">Gaming School <span class="verified">●</span></div>
+          <div class="views">978K views • 4 days ago</div>
+        </div>
+      </a>
 
-      <div class="card large">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1603484477859-abe6a73f9366?q=80&w=1000');"></div>
-        <div class="card-body">
-          <div class="card-title">BGMI Rank Push</div>
-          <div class="creator">BGMI Pro</div>
+      <a href="watch-best-gaming-phones.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=1000&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-gamer-room-4780/1080p.mp4"></video>
+          <span class="duration">7:48</span>
         </div>
-      </div>
+        <div class="card-body">
+          <div class="card-title">Best Gaming Phones Under Budget</div>
+          <div class="creator">Mobile Gamer India <span class="verified">●</span></div>
+          <div class="views">650K views • 6 days ago</div>
+        </div>
+      </a>
 
-      <div class="card large">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1580327332925-a10e6cb11baa?q=80&w=1000');"></div>
-        <div class="card-body">
-          <div class="card-title">Call of Duty Highlights</div>
-          <div class="creator">COD Warrior</div>
+      <a href="watch-squad-communication.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=1000&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-a-man-playing-a-video-game-9092/1080p.mp4"></video>
+          <span class="duration">10:05</span>
         </div>
-      </div>
+        <div class="card-body">
+          <div class="card-title">Squad Communication Tips</div>
+          <div class="creator">TeamPlay Pro <span class="verified">●</span></div>
+          <div class="views">288K views • 1 week ago</div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="video-grid extra" id="recommendedExtra">
+
+      <a href="watch-ranked-matches.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=1000&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-a-man-playing-a-video-game-9092/1080p.mp4"></video>
+          <span class="duration">8:59</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">How to Win More Ranked Matches</div>
+          <div class="creator">Rank Pushers <span class="verified">●</span></div>
+          <div class="views">199K views • 2 weeks ago</div>
+        </div>
+      </a>
+
+      <a href="watch-live-stream-setup.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-gamer-room-4780/1080p.mp4"></video>
+          <span class="duration">12:05</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Best Live Stream Setup for Gamers</div>
+          <div class="creator">Stream Lab <span class="verified">●</span></div>
+          <div class="views">420K views • 3 weeks ago</div>
+        </div>
+      </a>
 
     </div>
   </div>
