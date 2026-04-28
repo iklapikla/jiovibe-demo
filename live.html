@@ -9,143 +9,1029 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-body{background:#fff;color:#222;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-.app{display:flex;min-height:100vh}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,sans-serif;
+}
+
+body{
+  background:#fff;
+  color:#222;
+  overflow-x:hidden;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.app{
+  display:flex;
+  min-height:100vh;
+}
 
 /* SIDEBAR */
-.sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:32px 18px;position:fixed;left:0;top:0;background:#fff;z-index:10}
-.logo{display:flex;align-items:center;gap:4px;margin-bottom:45px;padding-left:8px}
-.logo-circle{width:54px;height:54px;background:#ff5a00;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
-.logo-text{font-size:32px;font-weight:800;color:#2b070b;letter-spacing:-1.2px}
-.menu{display:flex;flex-direction:column;gap:12px}
-.menu-item{display:flex;align-items:center;gap:18px;padding:17px 22px;border-radius:14px;font-weight:600;color:#383838;font-size:16px;transition:.25s}
-.menu-item i{width:22px;font-size:22px;text-align:center}
-.menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
-.divider{height:1px;background:#edf0f4;margin:22px 8px}
+.sidebar{
+  width:250px;
+  height:100vh;
+  border-right:1px solid #edf0f4;
+  padding:32px 18px;
+  position:fixed;
+  left:0;
+  top:0;
+  background:#fff;
+  z-index:10;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  margin-bottom:45px;
+  padding-left:8px;
+}
+
+.logo-circle{
+  width:54px;
+  height:54px;
+  background:#ff5a00;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:25px;
+}
+
+.logo-text{
+  font-size:32px;
+  font-weight:800;
+  color:#2b070b;
+  letter-spacing:-1.2px;
+}
+
+.menu{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:17px 22px;
+  border-radius:14px;
+  font-weight:600;
+  color:#383838;
+  font-size:16px;
+  transition:.25s;
+}
+
+.menu-item i{
+  width:22px;
+  font-size:22px;
+  text-align:center;
+}
+
+.menu-item:hover,
+.menu-item.active{
+  background:#fff0e8;
+  color:#ff5a00;
+}
+
+.divider{
+  height:1px;
+  background:#edf0f4;
+  margin:22px 8px;
+}
 
 /* MAIN */
-.main{margin-left:250px;width:calc(100% - 250px)}
-.topbar{height:82px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;position:sticky;top:0;z-index:8}
-.search{width:720px;height:50px;border:1px solid #e8ebf0;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad;box-shadow:0 1px 6px rgba(0,0,0,.03)}
-.search input{border:none;outline:none;flex:1;font-size:15px}
-.top-actions{display:flex;align-items:center;gap:22px;position:relative}
-.bell{font-size:23px;position:relative}
-.bell::after{content:"1";position:absolute;top:-8px;right:-7px;background:#ff5a00;color:#fff;font-size:10px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.profile{display:flex;align-items:center;gap:12px;cursor:pointer}
-.profile img{width:48px;height:48px;object-fit:cover;border-radius:50%}
-.profile span{font-weight:700;font-size:15px}
+.main{
+  margin-left:250px;
+  width:calc(100% - 250px);
+}
+
+.topbar{
+  height:82px;
+  border-bottom:1px solid #edf0f4;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 34px;
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:8;
+}
+
+.search{
+  width:720px;
+  height:50px;
+  border:1px solid #e8ebf0;
+  border-radius:28px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:0 22px;
+  color:#9ba1ad;
+  box-shadow:0 1px 6px rgba(0,0,0,.03);
+}
+
+.search input{
+  border:none;
+  outline:none;
+  flex:1;
+  font-size:15px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  position:relative;
+}
+
+.bell-top{
+  font-size:23px;
+  position:relative;
+}
+
+.bell-top::after{
+  content:"1";
+  position:absolute;
+  top:-8px;
+  right:-7px;
+  background:#ff5a00;
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.profile{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+}
+
+.profile img{
+  width:48px;
+  height:48px;
+  object-fit:cover;
+  border-radius:50%;
+}
+
+.profile span{
+  font-weight:700;
+  font-size:15px;
+}
 
 /* CONTENT */
-.content{padding:24px 28px 60px}
-.live-layout{display:grid;grid-template-columns:1fr 430px;gap:22px}
-.player-card,.chat-card,.info-card,.live-card{border:1px solid #edf0f4;border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.04)}
-.player{height:455px;position:relative;border-radius:16px 16px 0 0;overflow:hidden;background:#000}
-.player img{width:100%;height:100%;object-fit:cover}
-.player::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.65))}
-.badges{position:absolute;top:24px;left:24px;display:flex;gap:10px;z-index:2}
-.live-badge{background:#ff4b10;color:#fff;padding:9px 12px;border-radius:7px;font-weight:800;font-size:14px}
-.view-badge{background:rgba(0,0,0,.55);color:#fff;padding:9px 12px;border-radius:7px;font-weight:800;font-size:14px}
-.player-icons{position:absolute;top:24px;right:22px;display:flex;gap:18px;color:#fff;font-size:22px;z-index:2}
-.controls{position:absolute;left:24px;right:24px;bottom:18px;color:#fff;z-index:3}
-.progress{height:4px;background:rgba(255,255,255,.4);border-radius:8px;margin-bottom:14px;overflow:hidden}
-.progress span{display:block;width:47%;height:100%;background:#ff3d00}
-.control-row{display:flex;align-items:center;justify-content:space-between}
-.control-left,.control-right{display:flex;gap:22px;align-items:center;font-size:23px}
-.live-dot{font-size:15px;font-weight:800}.live-dot span{color:#ff3d00}
+.content{
+  padding:24px 28px 60px;
+}
 
-.video-info{padding:18px 22px 22px}
-.video-info h1{font-size:22px;margin-bottom:18px}
-.creator-row{display:flex;align-items:center;justify-content:space-between;gap:18px}
-.creator-box{display:flex;align-items:center;gap:14px}
-.creator-box img{width:54px;height:54px;border-radius:50%;object-fit:cover}
-.creator-box h3{font-size:17px}.creator-box p{color:#777;font-size:13px;margin-top:3px}
-.verified{color:#ff5a00}
-.subscribe{background:#ff5a00;color:white;border:none;border-radius:12px;padding:15px 28px;font-size:16px;font-weight:800;cursor:pointer}
-.subscribe.subscribed{background:#e9e9e9;color:#555}
-.actions{display:flex;gap:14px}
-.action-btn{height:50px;padding:0 22px;border:1px solid #edf0f4;border-radius:14px;background:#fff;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px}
-.action-btn.active{background:#f0f0f0;color:#777}
-.action-btn i{font-size:20px}
+.live-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 430px;
+  gap:22px;
+  align-items:start;
+}
 
-.info-grid{display:grid;grid-template-columns:1.4fr .9fr;gap:14px;margin-top:14px}
-.info-card{padding:18px}
-.info-card h3{font-size:16px;margin-bottom:12px}
-.info-card p{color:#666;line-height:1.6;font-size:14px}
-.tags{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-.tag{background:#f5f6f8;padding:9px 12px;border-radius:10px;font-size:13px;font-weight:700;color:#555}
-.stat-box{display:flex;align-items:center;gap:16px;padding:17px;border:1px solid #edf0f4;border-radius:15px;margin-bottom:10px}
-.stat-box i{font-size:25px;color:#ff5a00}.stat-box span{color:#777;font-size:13px}.stat-box b{display:block;margin-top:5px}
+/* VIDEO */
+.player-card{
+  border:1px solid #edf0f4;
+  border-radius:16px;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+
+.player{
+  width:100%;
+  aspect-ratio:16/9;
+  position:relative;
+  background:#000;
+  overflow:hidden;
+}
+
+.player img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.player::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.65));
+  pointer-events:none;
+}
+
+.badges{
+  position:absolute;
+  top:24px;
+  left:24px;
+  display:flex;
+  gap:10px;
+  z-index:2;
+}
+
+.live-badge{
+  background:#ff4b10;
+  color:#fff;
+  padding:9px 12px;
+  border-radius:7px;
+  font-weight:800;
+  font-size:14px;
+}
+
+.view-badge{
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  padding:9px 12px;
+  border-radius:7px;
+  font-weight:800;
+  font-size:14px;
+}
+
+.player-icons{
+  position:absolute;
+  top:24px;
+  right:22px;
+  display:flex;
+  gap:18px;
+  color:#fff;
+  font-size:22px;
+  z-index:2;
+}
+
+.player-icons i{
+  cursor:pointer;
+}
+
+.controls{
+  position:absolute;
+  left:24px;
+  right:24px;
+  bottom:18px;
+  color:#fff;
+  z-index:3;
+}
+
+.progress{
+  height:4px;
+  background:rgba(255,255,255,.4);
+  border-radius:8px;
+  margin-bottom:14px;
+  overflow:hidden;
+}
+
+.progress span{
+  display:block;
+  width:55%;
+  height:100%;
+  background:#ff3d00;
+}
+
+.control-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.control-left,
+.control-right{
+  display:flex;
+  gap:22px;
+  align-items:center;
+  font-size:23px;
+}
+
+.control-left i,
+.control-right i{
+  cursor:pointer;
+}
+
+.live-dot{
+  font-size:15px;
+  font-weight:800;
+}
+
+.live-dot span{
+  color:#ff3d00;
+}
+
+.settings-menu{
+  position:absolute;
+  right:62px;
+  bottom:58px;
+  width:260px;
+  background:rgba(20,20,20,.96);
+  color:#fff;
+  border-radius:12px;
+  padding:8px;
+  z-index:20;
+  display:none;
+  box-shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+.settings-menu.show{
+  display:block;
+}
+
+.setting-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:13px 12px;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+}
+
+.setting-row:hover{
+  background:rgba(255,255,255,.12);
+}
+
+.setting-row small{
+  color:#cfcfcf;
+  font-weight:600;
+}
+
+.video-info{
+  padding:18px 22px 22px;
+}
+
+.video-info h1{
+  font-size:22px;
+  margin-bottom:18px;
+}
+
+.creator-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.creator-box{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.creator-box img{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.creator-box h3{
+  font-size:17px;
+}
+
+.creator-box p{
+  color:#777;
+  font-size:13px;
+  margin-top:3px;
+}
+
+.verified{
+  color:#ff5a00;
+}
+
+.subscribe-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.subscribe{
+  background:#ff5a00;
+  color:white;
+  border:none;
+  border-radius:12px;
+  padding:15px 28px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.subscribe.subscribed{
+  background:#e9e9e9;
+  color:#555;
+}
+
+.channel-bell{
+  width:50px;
+  height:50px;
+  border:1px solid #edf0f4;
+  border-radius:50%;
+  background:#fff;
+  font-size:19px;
+  cursor:pointer;
+}
+
+.channel-bell.active{
+  background:#fff0e8;
+  color:#ff5a00;
+  border-color:#ffd2bd;
+}
+
+.actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.action-btn{
+  height:50px;
+  padding:0 22px;
+  border:1px solid #edf0f4;
+  border-radius:14px;
+  background:#fff;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.action-btn.active{
+  background:#f0f0f0;
+  color:#777;
+}
+
+.action-btn i{
+  font-size:20px;
+}
+
+/* DESCRIPTION */
+.info-grid{
+  display:grid;
+  grid-template-columns:1.4fr .9fr;
+  gap:14px;
+  margin-top:14px;
+}
+
+.info-card{
+  border:1px solid #edf0f4;
+  border-radius:16px;
+  background:#fff;
+  padding:18px;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+
+.info-card h3{
+  font-size:16px;
+  margin-bottom:12px;
+}
+
+.info-card p{
+  color:#666;
+  line-height:1.6;
+  font-size:14px;
+}
+
+.more-desc{
+  display:none;
+}
+
+.more-desc.show{
+  display:block;
+}
+
+.see-more{
+  margin-top:12px;
+  color:#ff5a00;
+  font-weight:800;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+
+.tags{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+
+.tag{
+  background:#f5f6f8;
+  padding:9px 12px;
+  border-radius:10px;
+  font-size:13px;
+  font-weight:700;
+  color:#555;
+}
+
+.stat-box{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:17px;
+  border:1px solid #edf0f4;
+  border-radius:15px;
+  margin-bottom:10px;
+  background:#fff;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+
+.stat-box i{
+  font-size:25px;
+  color:#ff5a00;
+}
+
+.stat-box span{
+  color:#777;
+  font-size:13px;
+}
+
+.stat-box b{
+  display:block;
+  margin-top:5px;
+}
 
 /* CHAT */
-.chat-card{height:747px;display:flex;flex-direction:column}
-.chat-head{padding:20px;border-bottom:1px solid #edf0f4;font-weight:800;font-size:17px}
-.super-row{display:flex;gap:10px;padding:0 18px 16px;border-bottom:1px solid #edf0f4}
-.super-pill{background:linear-gradient(90deg,#ff9800,#ff4b10);color:#fff;border-radius:20px;padding:9px 14px;font-weight:800;font-size:14px}
-.chat-list{padding:12px 18px;overflow-y:auto;flex:1}
-.chat-msg{display:flex;gap:12px;margin-bottom:18px;animation:fadeIn .25s ease}
-.chat-msg img{width:34px;height:34px;border-radius:50%;object-fit:cover}
-.chat-msg h4{font-size:14px;margin-bottom:5px}.chat-msg p{font-size:14px;color:#555;line-height:1.4}
-.chat-msg time{margin-left:auto;font-size:11px;color:#777}
-.superchat{background:linear-gradient(90deg,#ff5a00,#ffb01f);color:white;border-radius:12px;padding:15px;margin:10px 0 18px;display:flex;gap:12px;align-items:flex-start}
-.superchat p,.superchat h4{color:white}
-.superchat img{width:42px;height:42px;border-radius:50%}
-.mode{margin:12px 18px;background:#f7f7f8;border-radius:14px;padding:18px;display:flex;gap:14px;color:#666;font-size:13px}
-.mode i{color:#ff9800;font-size:28px}
-.chat-input{padding:18px;display:flex;gap:10px;border-top:1px solid #edf0f4}
-.chat-input input{flex:1;border:1px solid #edf0f4;border-radius:25px;padding:0 18px;font-size:14px;outline:none}
-.round-btn{width:48px;height:48px;border:none;border-radius:50%;background:#fff;border:1px solid #edf0f4;font-size:20px;cursor:pointer}
-.send{background:#ff5a00;color:white;border:none}
+.chat-card{
+  border:1px solid #edf0f4;
+  border-radius:16px;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+  height:calc((100vw - 250px - 28px - 28px - 22px - 430px) * 9 / 16 + 187px);
+  min-height:620px;
+  display:flex;
+  flex-direction:column;
+}
 
-/* LIVE SECTION */
-.section{margin-top:24px}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.section-head h2{font-size:20px}.section-head span{color:#ff5a00}
-.section-head button{background:transparent;border:none;color:#ff5a00;font-weight:800;cursor:pointer}
-.live-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.live-card{cursor:pointer;transition:.25s}
-.live-card:hover{transform:translateY(-4px)}
-.thumb{height:120px;background-size:cover;background-position:center;position:relative}
-.thumb .live-badge{position:absolute;top:8px;left:8px;font-size:12px;padding:6px 9px}
-.thumb .count{position:absolute;right:8px;top:8px;color:#fff;font-size:12px;font-weight:800}
-.live-card-body{padding:12px}
-.live-card-body h3{font-size:15px;margin-bottom:5px}
-.live-card-body p{font-size:13px;color:#777}
-.extra{display:none;margin-top:18px}
-.extra.show{display:grid}
+.chat-head{
+  padding:18px 20px;
+  border-bottom:1px solid #edf0f4;
+  font-weight:800;
+  font-size:17px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.super-row{
+  display:flex;
+  gap:10px;
+  padding:14px 18px;
+  border-bottom:1px solid #edf0f4;
+}
+
+.super-pill{
+  background:linear-gradient(90deg,#ff9800,#ff4b10);
+  color:#fff;
+  border-radius:20px;
+  padding:9px 14px;
+  font-weight:800;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.chat-list{
+  padding:12px 18px;
+  overflow-y:auto;
+  flex:1;
+}
+
+.chat-msg{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+  animation:fadeIn .25s ease;
+}
+
+.chat-msg img{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.chat-msg h4{
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+.chat-msg p{
+  font-size:14px;
+  color:#555;
+  line-height:1.4;
+}
+
+.chat-msg time{
+  margin-left:auto;
+  font-size:11px;
+  color:#777;
+}
+
+.superchat{
+  background:linear-gradient(90deg,#ff5a00,#ffb01f);
+  color:white;
+  border-radius:12px;
+  padding:15px;
+  margin:10px 0 18px;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  animation:fadeIn .25s ease;
+}
+
+.superchat p,
+.superchat h4{
+  color:white;
+}
+
+.superchat img{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+}
+
+.mode{
+  margin:12px 18px;
+  background:#f7f7f8;
+  border-radius:14px;
+  padding:18px;
+  display:flex;
+  gap:14px;
+  color:#666;
+  font-size:13px;
+}
+
+.mode i{
+  color:#ff9800;
+  font-size:28px;
+}
+
+.chat-input{
+  padding:16px 18px;
+  display:flex;
+  gap:10px;
+  border-top:1px solid #edf0f4;
+}
+
+.chat-input input{
+  flex:1;
+  border:1px solid #edf0f4;
+  border-radius:25px;
+  padding:0 18px;
+  font-size:14px;
+  outline:none;
+}
+
+.round-btn{
+  width:48px;
+  height:48px;
+  border:none;
+  border-radius:50%;
+  background:#fff;
+  border:1px solid #edf0f4;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.send{
+  background:#ff5a00;
+  color:white;
+  border:none;
+}
+
+/* LIVE NOW FULL WIDTH */
+.section{
+  margin-top:26px;
+  grid-column:1 / -1;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.section-head h2{
+  font-size:20px;
+}
+
+.section-head span{
+  color:#ff5a00;
+}
+
+.section-head button{
+  background:transparent;
+  border:none;
+  color:#ff5a00;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.live-row{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:18px;
+}
+
+.live-card{
+  border:1px solid #edf0f4;
+  border-radius:16px;
+  background:#fff;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+
+.live-card:hover{
+  transform:translateY(-4px);
+}
+
+.thumb{
+  width:100%;
+  aspect-ratio:16/9;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+}
+
+.thumb .live-badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  font-size:12px;
+  padding:6px 9px;
+}
+
+.thumb .count{
+  position:absolute;
+  right:8px;
+  top:8px;
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+  background:rgba(0,0,0,.5);
+  padding:5px 8px;
+  border-radius:7px;
+}
+
+.live-card-body{
+  padding:12px;
+}
+
+.live-card-body h3{
+  font-size:15px;
+  margin-bottom:5px;
+}
+
+.live-card-body p{
+  font-size:13px;
+  color:#777;
+}
+
+.extra{
+  display:none;
+  margin-top:18px;
+}
+
+.extra.show{
+  display:grid;
+}
 
 /* MODALS */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:50}
-.modal-bg.show{display:flex}
-.modal{background:white;width:390px;border-radius:20px;padding:24px;box-shadow:0 15px 40px rgba(0,0,0,.25)}
-.modal h2{margin-bottom:18px}
-.share-icons{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.share-icon{text-align:center;font-size:13px;font-weight:700;cursor:pointer}
-.share-icon i{width:54px;height:54px;border-radius:50%;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-size:25px;margin:0 auto 8px}
-.close{margin-top:18px;width:100%;height:46px;border:none;border-radius:12px;background:#f1f1f1;font-weight:800;cursor:pointer}
-
-.emoji-box{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;font-size:25px}
-.emoji-box span{cursor:pointer;text-align:center;padding:8px;border-radius:8px}
-.emoji-box span:hover{background:#fff0e8}
-
-.super-form label{font-size:13px;font-weight:700;margin-top:12px;display:block}
-.super-form input,.super-form select{width:100%;height:44px;border:1px solid #edf0f4;border-radius:10px;margin-top:7px;padding:0 12px}
-.pay-btn{margin-top:18px;width:100%;height:48px;background:#ff5a00;color:#fff;border:none;border-radius:12px;font-weight:800;cursor:pointer}
-
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-@media(max-width:1100px){
-.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px)}
-.live-layout{grid-template-columns:1fr}.chat-card{height:520px}
-.live-row{grid-template-columns:repeat(2,1fr)}
-.search{width:450px}
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
 }
+
+.modal-bg.show{
+  display:flex;
+}
+
+.modal{
+  background:white;
+  width:410px;
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.modal h2{
+  margin-bottom:18px;
+}
+
+.share-icons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.share-icon{
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.share-icon i{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:#fff0e8;
+  color:#ff5a00;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  margin:0 auto 8px;
+}
+
+.close{
+  margin-top:18px;
+  width:100%;
+  height:46px;
+  border:none;
+  border-radius:12px;
+  background:#f1f1f1;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.emoji-box{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:8px;
+  font-size:25px;
+}
+
+.emoji-box span{
+  cursor:pointer;
+  text-align:center;
+  padding:8px;
+  border-radius:8px;
+}
+
+.emoji-box span:hover{
+  background:#fff0e8;
+}
+
+.super-form label{
+  font-size:13px;
+  font-weight:700;
+  margin-top:12px;
+  display:block;
+}
+
+.super-form input,
+.super-form select{
+  width:100%;
+  height:44px;
+  border:1px solid #edf0f4;
+  border-radius:10px;
+  margin-top:7px;
+  padding:0 12px;
+}
+
+.amount-chips{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+
+.amount-chip{
+  border:1px solid #ffd1bc;
+  background:#fff7f2;
+  color:#ff5a00;
+  border-radius:20px;
+  padding:8px 14px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.pay-btn{
+  margin-top:18px;
+  width:100%;
+  height:48px;
+  background:#ff5a00;
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:28px;
+  transform:translateX(-50%);
+  background:#222;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:20px;
+  font-size:14px;
+  font-weight:700;
+  display:none;
+  z-index:200;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:1200px){
+  .live-layout{
+    grid-template-columns:1fr;
+  }
+
+  .chat-card{
+    height:540px;
+  }
+
+  .live-row{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .search{
+    width:450px;
+  }
+}
+
 @media(max-width:780px){
-.sidebar{display:none}.main{margin-left:0;width:100%}.topbar{padding:0 16px}
-.search{width:100%}.profile span{display:none}.content{padding:16px}
-.player{height:280px}.info-grid{grid-template-columns:1fr}.creator-row{flex-direction:column;align-items:flex-start}
-.actions{flex-wrap:wrap}.live-row{grid-template-columns:1fr}
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+  }
+
+  .topbar{
+    padding:0 16px;
+  }
+
+  .search{
+    width:100%;
+  }
+
+  .profile span{
+    display:none;
+  }
+
+  .content{
+    padding:16px;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .creator-row{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .actions{
+    flex-wrap:wrap;
+  }
+
+  .live-row{
+    grid-template-columns:1fr;
+  }
+
+  .chat-card{
+    min-height:500px;
+  }
 }
 </style>
 </head>
@@ -168,8 +1054,7 @@ a{text-decoration:none;color:inherit}
     <a href="stories.html" class="menu-item"><i class="fa-regular fa-circle"></i> Stories</a>
     <a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community Post</a>
     <a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
-   <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
-
+    <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
   </nav>
 </aside>
 
@@ -182,7 +1067,7 @@ a{text-decoration:none;color:inherit}
   </div>
 
   <div class="top-actions">
-    <a class="bell" href="notifications.html"><i class="fa-regular fa-bell"></i></a>
+    <a class="bell-top" href="notifications.html"><i class="fa-regular fa-bell"></i></a>
     <div class="profile">
       <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop">
       <span>Trupti Latur</span>
@@ -192,189 +1077,244 @@ a{text-decoration:none;color:inherit}
 </header>
 
 <section class="content">
-<div class="live-layout">
 
-<div>
-  <div class="player-card">
-    <div class="player">
-      <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
-      <div class="badges">
-        <span class="live-badge"><i class="fa-solid fa-play"></i> LIVE</span>
-        <span class="view-badge"><i class="fa-solid fa-eye"></i> <span id="liveCount">12.4K</span></span>
-      </div>
-      <div class="player-icons">
-        <i class="fa-solid fa-share"></i>
-        <i class="fa-solid fa-ellipsis-vertical"></i>
-      </div>
-      <div class="controls">
-        <div class="progress"><span></span></div>
-        <div class="control-row">
-          <div class="control-left">
-            <i class="fa-solid fa-pause"></i>
-            <i class="fa-solid fa-volume-high"></i>
-            <div class="live-dot"><span>●</span> LIVE</div>
-          </div>
-          <div class="control-right">
-            <i class="fa-solid fa-gear"></i>
-            <i class="fa-regular fa-square"></i>
-            <i class="fa-solid fa-expand"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="video-info">
-      <h1>Acoustic Evening with Neha 🎸 | Soulful Live Session</h1>
-
-      <div class="creator-row">
-        <div class="creator-box">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop">
-          <div>
-            <h3>Neha Sounds <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3>
-            <p>128K subscribers</p>
-          </div>
-        </div>
-
-        <button class="subscribe" id="subBtn">Subscribe</button>
-
-        <div class="actions">
-          <button class="action-btn" id="likeBtn"><i class="fa-regular fa-thumbs-up"></i> <span id="likeText">1.2K</span></button>
-          <button class="action-btn" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
-          <button class="action-btn"><i class="fa-regular fa-bookmark"></i> Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="info-grid">
-    <div class="info-card">
-      <h3>About this live stream</h3>
-      <p>A cozy acoustic evening with your favorite indie and unplugged hits.</p>
-      <p>Sit back, relax and vibe with me. ❤️</p>
-      <div class="tags">
-        <span class="tag">#Acoustic</span>
-        <span class="tag">#LiveMusic</span>
-        <span class="tag">#Unplugged</span>
-        <span class="tag">#NehaLive</span>
-      </div>
-    </div>
+  <div class="live-layout">
 
     <div>
-      <div class="stat-box">
-        <i class="fa-regular fa-calendar"></i>
-        <div><span>Started at</span><b>Today, 7:30 PM</b></div>
+      <div class="player-card">
+        <div class="player" id="playerBox">
+          <img id="liveGif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+
+          <div class="badges">
+            <span class="live-badge"><i class="fa-solid fa-play"></i> LIVE</span>
+            <span class="view-badge"><i class="fa-solid fa-eye"></i> <span id="liveCount">12.4K</span></span>
+          </div>
+
+          <div class="player-icons">
+            <i class="fa-solid fa-share" onclick="openModal('shareModal')"></i>
+            <i class="fa-solid fa-ellipsis-vertical" onclick="toast('More options opened')"></i>
+          </div>
+
+          <div class="controls">
+            <div class="progress"><span></span></div>
+            <div class="control-row">
+              <div class="control-left">
+                <i class="fa-solid fa-pause" id="playPauseBtn" onclick="togglePlay()"></i>
+                <i class="fa-solid fa-volume-high" id="volumeBtn" onclick="toggleMute()"></i>
+                <div class="live-dot"><span>●</span> LIVE</div>
+              </div>
+
+              <div class="control-right">
+                <i class="fa-solid fa-gear" onclick="toggleSettings()"></i>
+                <i class="fa-regular fa-closed-captioning" onclick="toast('Captions turned on')"></i>
+                <i class="fa-solid fa-expand" onclick="toggleFullscreen()"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-menu" id="settingsMenu">
+            <div class="setting-row" onclick="selectQuality('Auto')">
+              <span>Quality</span><small id="qualityText">Auto</small>
+            </div>
+            <div class="setting-row" onclick="selectSpeed('Normal')">
+              <span>Playback speed</span><small id="speedText">Normal</small>
+            </div>
+            <div class="setting-row" onclick="toast('Subtitles changed')">
+              <span>Subtitles/CC</span><small>Off</small>
+            </div>
+            <div class="setting-row" onclick="toast('Ambient mode changed')">
+              <span>Ambient mode</span><small>On</small>
+            </div>
+            <div class="setting-row" onclick="toast('Stats for nerds opened')">
+              <span>Stats for nerds</span><small></small>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-info">
+          <h1>Acoustic Evening with Neha | Soulful Live Session</h1>
+
+          <div class="creator-row">
+            <div class="creator-box">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop">
+              <div>
+                <h3>Neha Sounds <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3>
+                <p>128K subscribers</p>
+              </div>
+            </div>
+
+            <div class="subscribe-wrap">
+              <button class="subscribe" id="subBtn">Subscribe</button>
+              <button class="channel-bell" id="channelBell"><i class="fa-regular fa-bell"></i></button>
+            </div>
+
+            <div class="actions">
+              <button class="action-btn" id="likeBtn"><i class="fa-regular fa-thumbs-up"></i> <span id="likeText">1.2K</span></button>
+              <button class="action-btn" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
+              <button class="action-btn" id="saveBtn"><i class="fa-regular fa-bookmark"></i> Save</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="stat-box">
-        <i class="fa-solid fa-stopwatch"></i>
-        <div><span>Streaming for</span><b id="timer">01:24:36</b></div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>About this live stream</h3>
+          <p>A cozy acoustic evening with your favorite indie and unplugged hits.</p>
+          <p>Sit back, relax and vibe with me.</p>
+
+          <div class="more-desc" id="moreDesc">
+            <p>This live stream includes soulful acoustic covers, audience requests, soft guitar melodies and a calm studio vibe. New songs and shoutouts will be added during the stream.</p>
+            <p>Subscribe to join future exclusive live sessions and get notified whenever Neha goes live.</p>
+          </div>
+
+          <div class="see-more" onclick="toggleDescription(this)">
+            See more <i class="fa-solid fa-chevron-down"></i>
+          </div>
+
+          <div class="tags">
+            <span class="tag">#Acoustic</span>
+            <span class="tag">#LiveMusic</span>
+            <span class="tag">#Unplugged</span>
+            <span class="tag">#NehaLive</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="stat-box">
+            <i class="fa-regular fa-calendar"></i>
+            <div><span>Started at</span><b>Today, 7:30 PM</b></div>
+          </div>
+
+          <div class="stat-box">
+            <i class="fa-solid fa-stopwatch"></i>
+            <div><span>Streaming for</span><b id="timer">01:24:36</b></div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <aside>
+      <div class="chat-card">
+        <div class="chat-head">
+          <span>Top chat <i class="fa-solid fa-chevron-down"></i></span>
+          <i class="fa-solid fa-ellipsis-vertical" onclick="toast('Chat options opened')"></i>
+        </div>
+
+        <div class="super-row">
+          <span class="super-pill" onclick="openSuperWithAmount(2000)">₹2,000</span>
+          <span class="super-pill" onclick="openSuperWithAmount(1000)">₹1,000</span>
+          <span class="super-pill" onclick="openSuperWithAmount(500)">₹500</span>
+        </div>
+
+        <div class="chat-list" id="chatList">
+          <div class="chat-msg"><img src="https://i.pravatar.cc/80?img=12"><div><h4>Rohan Verma</h4><p>Amazing voice!</p></div><time>Now</time></div>
+          <div class="chat-msg"><img src="https://i.pravatar.cc/80?img=32"><div><h4>Music Lover</h4><p>This vibe is next level</p></div><time>Now</time></div>
+          <div class="chat-msg"><img src="https://i.pravatar.cc/80?img=20"><div><h4>Anjali Singh</h4><p>Goosebumps!</p></div><time>Now</time></div>
+
+          <div class="superchat">
+            <img src="https://i.pravatar.cc/80?img=8">
+            <div><h4>Karan Mehta<br>₹2,000</h4><p>Super soulful. Keep shining Neha.</p></div>
+          </div>
+        </div>
+
+        <div class="mode">
+          <i class="fa-solid fa-crown"></i>
+          <div><b>Subscribers-only mode</b><br>Messages that appear are from people who have subscribed to this channel.</div>
+        </div>
+
+        <div class="chat-input">
+          <input id="messageInput" placeholder="Type a message...">
+          <button class="round-btn" onclick="openModal('emojiModal')"><i class="fa-regular fa-face-smile"></i></button>
+          <button class="round-btn" onclick="openModal('superModal')"><i class="fa-solid fa-indian-rupee-sign"></i></button>
+          <button class="round-btn send" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="section">
+      <div class="section-head">
+        <h2><span><i class="fa-solid fa-tower-broadcast"></i></span> Live now on JioVibe</h2>
+        <button onclick="toggleLive(this)">View all</button>
+      </div>
+
+      <div class="live-row">
+        <a href="watch-live-gaming.html" class="live-card">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=700&auto=format&fit=crop')">
+            <span class="live-badge">LIVE</span><span class="count">2K</span>
+          </div>
+          <div class="live-card-body"><h3>Battle Royale Live</h3><p>Gaming Beast</p></div>
+        </a>
+
+        <a href="watch-live-dj.html" class="live-card">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=700&auto=format&fit=crop')">
+            <span class="live-badge">LIVE</span><span class="count">6.1K</span>
+          </div>
+          <div class="live-card-body"><h3>DJ Night Session</h3><p>Club India</p></div>
+        </a>
+
+        <a href="watch-live-class.html" class="live-card">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=700&auto=format&fit=crop')">
+            <span class="live-badge">LIVE</span><span class="count">6.1K</span>
+          </div>
+          <div class="live-card-body"><h3>Math Class Live</h3><p>Study Smart</p></div>
+        </a>
+
+        <a href="watch-live-yoga.html" class="live-card">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=700&auto=format&fit=crop')">
+            <span class="live-badge">LIVE</span><span class="count">2.7K</span>
+          </div>
+          <div class="live-card-body"><h3>Yoga Flow</h3><p>Fit With Riya</p></div>
+        </a>
+
+        <a href="watch-live-comedy.html" class="live-card">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1527224857830-43a7acc85260?q=80&w=700&auto=format&fit=crop')">
+            <span class="live-badge">LIVE</span><span class="count">4.4K</span>
+          </div>
+          <div class="live-card-body"><h3>Comedy Room</h3><p>Laugh Circle</p></div>
+        </a>
+      </div>
+
+      <div class="live-row extra" id="extraLive">
+        <a href="watch-live-cooking.html" class="live-card">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=700&auto=format&fit=crop')">
+            <span class="live-badge">LIVE</span><span class="count">3.8K</span>
+          </div>
+          <div class="live-card-body"><h3>Cooking Live</h3><p>Foodie Yatra</p></div>
+        </a>
+
+        <a href="watch-live-tech.html" class="live-card">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=700&auto=format&fit=crop')">
+            <span class="live-badge">LIVE</span><span class="count">1.9K</span>
+          </div>
+          <div class="live-card-body"><h3>Tech Talk Live</h3><p>Tech Simplified</p></div>
+        </a>
+
+        <a href="watch-live-travel.html" class="live-card">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=700&auto=format&fit=crop')">
+            <span class="live-badge">LIVE</span><span class="count">5.2K</span>
+          </div>
+          <div class="live-card-body"><h3>Beach Walk Live</h3><p>Wander India</p></div>
+        </a>
+
+        <a href="watch-live-fashion.html" class="live-card">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=700&auto=format&fit=crop')">
+            <span class="live-badge">LIVE</span><span class="count">2.9K</span>
+          </div>
+          <div class="live-card-body"><h3>Fashion Live</h3><p>Style Studio</p></div>
+        </a>
+
+        <a href="watch-live-news.html" class="live-card">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=700&auto=format&fit=crop')">
+            <span class="live-badge">LIVE</span><span class="count">8.7K</span>
+          </div>
+          <div class="live-card-body"><h3>Creator News Live</h3><p>JioVibe News</p></div>
+        </a>
+      </div>
+    </div>
+
   </div>
 
-  <div class="section">
-    <div class="section-head">
-      <h2><span><i class="fa-solid fa-tower-broadcast"></i></span> Live now on JioVibe</h2>
-      <button onclick="toggleLive(this)">View all</button>
-    </div>
-
-    <div class="live-row">
-      <a href="watch-live-gaming.html" class="live-card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=700&auto=format&fit=crop')">
-          <span class="live-badge">LIVE</span><span class="count">2K</span>
-        </div>
-        <div class="live-card-body"><h3>Battle Royale Live</h3><p>Gaming Beast</p></div>
-      </a>
-
-      <a href="watch-live-dj.html" class="live-card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=700&auto=format&fit=crop')">
-          <span class="live-badge">LIVE</span><span class="count">6.1K</span>
-        </div>
-        <div class="live-card-body"><h3>DJ Night Session</h3><p>Club India</p></div>
-      </a>
-
-      <a href="watch-live-class.html" class="live-card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=700&auto=format&fit=crop')">
-          <span class="live-badge">LIVE</span><span class="count">6.1K</span>
-        </div>
-        <div class="live-card-body"><h3>Math Class Live</h3><p>Study Smart</p></div>
-      </a>
-
-      <a href="watch-live-yoga.html" class="live-card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=700&auto=format&fit=crop')">
-          <span class="live-badge">LIVE</span><span class="count">2.7K</span>
-        </div>
-        <div class="live-card-body"><h3>Yoga Flow</h3><p>Fit With Riya</p></div>
-      </a>
-    </div>
-
-    <div class="live-row extra" id="extraLive">
-      <a href="watch-live-cooking.html" class="live-card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=700&auto=format&fit=crop')">
-          <span class="live-badge">LIVE</span><span class="count">3.8K</span>
-        </div>
-        <div class="live-card-body"><h3>Cooking Live</h3><p>Foodie Yatra</p></div>
-      </a>
-
-      <a href="watch-live-tech.html" class="live-card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=700&auto=format&fit=crop')">
-          <span class="live-badge">LIVE</span><span class="count">1.9K</span>
-        </div>
-        <div class="live-card-body"><h3>Tech Talk Live</h3><p>Tech Simplified</p></div>
-      </a>
-
-      <a href="watch-live-comedy.html" class="live-card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1527224857830-43a7acc85260?q=80&w=700&auto=format&fit=crop')">
-          <span class="live-badge">LIVE</span><span class="count">4.4K</span>
-        </div>
-        <div class="live-card-body"><h3>Comedy Room</h3><p>Laugh Circle</p></div>
-      </a>
-
-      <a href="watch-live-travel.html" class="live-card">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=700&auto=format&fit=crop')">
-          <span class="live-badge">LIVE</span><span class="count">5.2K</span>
-        </div>
-        <div class="live-card-body"><h3>Beach Walk Live</h3><p>Wander India</p></div>
-      </a>
-    </div>
-  </div>
-</div>
-
-<aside>
-  <div class="chat-card">
-    <div class="chat-head">Top chat <i class="fa-solid fa-chevron-down"></i></div>
-
-    <div class="super-row">
-      <span class="super-pill">₹2,000</span>
-      <span class="super-pill">₹1,000</span>
-      <span class="super-pill">₹500</span>
-    </div>
-
-    <div class="chat-list" id="chatList">
-      <div class="chat-msg"><img src="https://i.pravatar.cc/80?img=12"><div><h4>Rohan Verma</h4><p>Amazing voice! ❤️</p></div><time>7:31 PM</time></div>
-      <div class="chat-msg"><img src="https://i.pravatar.cc/80?img=32"><div><h4>Music Lover</h4><p>This vibe is next level 🔥</p></div><time>7:31 PM</time></div>
-      <div class="chat-msg"><img src="https://i.pravatar.cc/80?img=20"><div><h4>Anjali Singh</h4><p>Goosebumps! ✨</p></div><time>7:31 PM</time></div>
-
-      <div class="superchat">
-        <img src="https://i.pravatar.cc/80?img=8">
-        <div><h4>Karan Mehta<br>₹2,000</h4><p>Super soulful! Keep shining Neha ✨</p></div>
-      </div>
-    </div>
-
-    <div class="mode">
-      <i class="fa-solid fa-crown"></i>
-      <div><b>Subscribers-only mode</b><br>Messages that appear are from people who have subscribed to this channel.</div>
-    </div>
-
-    <div class="chat-input">
-      <input id="messageInput" placeholder="Type a message...">
-      <button class="round-btn" onclick="openModal('emojiModal')"><i class="fa-regular fa-face-smile"></i></button>
-      <button class="round-btn" onclick="openModal('superModal')"><i class="fa-solid fa-indian-rupee-sign"></i></button>
-      <button class="round-btn send" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-    </div>
-  </div>
-</aside>
-
-</div>
 </section>
 </main>
 </div>
@@ -384,14 +1324,14 @@ a{text-decoration:none;color:inherit}
   <div class="modal">
     <h2>Share this live</h2>
     <div class="share-icons">
-      <div class="share-icon"><i class="fa-brands fa-whatsapp"></i>WhatsApp</div>
-      <div class="share-icon"><i class="fa-brands fa-instagram"></i>Instagram</div>
-      <div class="share-icon"><i class="fa-brands fa-facebook"></i>Facebook</div>
-      <div class="share-icon"><i class="fa-brands fa-x-twitter"></i>Twitter</div>
-      <div class="share-icon"><i class="fa-brands fa-telegram"></i>Telegram</div>
-      <div class="share-icon"><i class="fa-solid fa-link"></i>Copy Link</div>
-      <div class="share-icon"><i class="fa-solid fa-envelope"></i>Email</div>
-      <div class="share-icon"><i class="fa-solid fa-message"></i>SMS</div>
+      <div class="share-icon" onclick="toast('Shared on WhatsApp')"><i class="fa-brands fa-whatsapp"></i>WhatsApp</div>
+      <div class="share-icon" onclick="toast('Shared on Instagram')"><i class="fa-brands fa-instagram"></i>Instagram</div>
+      <div class="share-icon" onclick="toast('Shared on Facebook')"><i class="fa-brands fa-facebook"></i>Facebook</div>
+      <div class="share-icon" onclick="toast('Shared on Twitter')"><i class="fa-brands fa-x-twitter"></i>Twitter</div>
+      <div class="share-icon" onclick="toast('Shared on Telegram')"><i class="fa-brands fa-telegram"></i>Telegram</div>
+      <div class="share-icon" onclick="copyLink()"><i class="fa-solid fa-link"></i>Copy Link</div>
+      <div class="share-icon" onclick="toast('Email opened')"><i class="fa-solid fa-envelope"></i>Email</div>
+      <div class="share-icon" onclick="toast('SMS opened')"><i class="fa-solid fa-message"></i>SMS</div>
     </div>
     <button class="close" onclick="closeModal('shareModal')">Close</button>
   </div>
@@ -409,13 +1349,21 @@ a{text-decoration:none;color:inherit}
   </div>
 </div>
 
-<!-- SUPERCHAT MODAL -->
+<!-- SUPER SUPPORT MODAL -->
 <div class="modal-bg" id="superModal">
   <div class="modal">
-    <h2>Send Super Chat</h2>
+    <h2>Send Super Support</h2>
     <div class="super-form">
       <label>Amount</label>
       <input id="amountInput" type="number" placeholder="Enter amount ₹" value="500">
+
+      <div class="amount-chips">
+        <span class="amount-chip" onclick="setAmount(100)">₹100</span>
+        <span class="amount-chip" onclick="setAmount(500)">₹500</span>
+        <span class="amount-chip" onclick="setAmount(1000)">₹1,000</span>
+        <span class="amount-chip" onclick="setAmount(2000)">₹2,000</span>
+      </div>
+
       <label>Payment Method</label>
       <select id="paymentMethod">
         <option>UPI</option>
@@ -424,44 +1372,141 @@ a{text-decoration:none;color:inherit}
         <option>Net Banking</option>
         <option>Wallet</option>
       </select>
+
       <label>Message</label>
-      <input id="superMsg" placeholder="Write your super chat message">
-      <button class="pay-btn" onclick="sendSuperChat()">Pay & Send</button>
+      <input id="superMsg" placeholder="Write your Super Support message">
+
+      <button class="pay-btn" onclick="sendSuperChat()">Pay & Send Super Support</button>
     </div>
     <button class="close" onclick="closeModal('superModal')">Close</button>
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script>
 const subBtn=document.getElementById("subBtn");
-subBtn.onclick=function(){
-  subBtn.classList.toggle("subscribed");
-  subBtn.innerText=subBtn.classList.contains("subscribed")?"Subscribed":"Subscribe";
-};
-
+const channelBell=document.getElementById("channelBell");
+const saveBtn=document.getElementById("saveBtn");
 const likeBtn=document.getElementById("likeBtn");
 const likeText=document.getElementById("likeText");
+const settingsMenu=document.getElementById("settingsMenu");
+const liveGif=document.getElementById("liveGif");
+const playPauseBtn=document.getElementById("playPauseBtn");
+const volumeBtn=document.getElementById("volumeBtn");
+
 let liked=false;
+let saved=false;
+let subscribed=false;
+let bellOn=false;
+let playing=true;
+let muted=false;
+
+subBtn.onclick=function(){
+  subscribed=!subscribed;
+  subBtn.classList.toggle("subscribed");
+  subBtn.innerText=subscribed ? "Subscribed" : "Subscribe";
+  toast(subscribed ? "Subscribed to Neha Sounds" : "Unsubscribed");
+};
+
+channelBell.onclick=function(){
+  bellOn=!bellOn;
+  channelBell.classList.toggle("active");
+  channelBell.innerHTML=bellOn ? '<i class="fa-solid fa-bell"></i>' : '<i class="fa-regular fa-bell"></i>';
+  toast(bellOn ? "All notifications enabled" : "Notifications disabled");
+};
+
 likeBtn.onclick=function(){
   liked=!liked;
   likeBtn.classList.toggle("active");
-  likeBtn.querySelector("i").className=liked?"fa-solid fa-thumbs-up":"fa-regular fa-thumbs-up";
-  likeText.innerText=liked?"1.3K":"1.2K";
+  likeBtn.querySelector("i").className=liked ? "fa-solid fa-thumbs-up" : "fa-regular fa-thumbs-up";
+  likeText.innerText=liked ? "1.3K" : "1.2K";
 };
 
-function openModal(id){document.getElementById(id).classList.add("show")}
-function closeModal(id){document.getElementById(id).classList.remove("show")}
+saveBtn.onclick=function(){
+  saved=!saved;
+  saveBtn.classList.toggle("active");
+  saveBtn.innerHTML=saved ? '<i class="fa-solid fa-bookmark"></i> Saved' : '<i class="fa-regular fa-bookmark"></i> Save';
+  toast(saved ? "Saved to your list" : "Removed from saved");
+};
+
+function togglePlay(){
+  playing=!playing;
+  playPauseBtn.className=playing ? "fa-solid fa-pause" : "fa-solid fa-play";
+  liveGif.style.filter=playing ? "none" : "grayscale(1)";
+  toast(playing ? "Playing" : "Paused");
+}
+
+function toggleMute(){
+  muted=!muted;
+  volumeBtn.className=muted ? "fa-solid fa-volume-xmark" : "fa-solid fa-volume-high";
+  toast(muted ? "Muted" : "Unmuted");
+}
+
+function toggleSettings(){
+  settingsMenu.classList.toggle("show");
+}
+
+function selectQuality(q){
+  const options=["Auto","1080p","720p","480p","360p"];
+  const current=document.getElementById("qualityText").innerText;
+  const next=options[(options.indexOf(current)+1)%options.length];
+  document.getElementById("qualityText").innerText=next;
+  toast("Quality set to "+next);
+}
+
+function selectSpeed(){
+  const options=["Normal","1.25x","1.5x","2x","0.75x"];
+  const current=document.getElementById("speedText").innerText;
+  const next=options[(options.indexOf(current)+1)%options.length];
+  document.getElementById("speedText").innerText=next;
+  toast("Speed set to "+next);
+}
+
+function toggleFullscreen(){
+  const player=document.getElementById("playerBox");
+  if(!document.fullscreenElement){
+    player.requestFullscreen().then(()=>toast("Fullscreen opened")).catch(()=>toast("Fullscreen not supported"));
+  }else{
+    document.exitFullscreen();
+  }
+}
+
+document.addEventListener("click",function(e){
+  if(!settingsMenu.contains(e.target) && !e.target.classList.contains("fa-gear")){
+    settingsMenu.classList.remove("show");
+  }
+});
+
+function openModal(id){
+  document.getElementById(id).classList.add("show");
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove("show");
+}
 
 document.querySelectorAll(".modal-bg").forEach(m=>{
-  m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")})
+  m.addEventListener("click",e=>{
+    if(e.target===m)m.classList.remove("show");
+  });
 });
 
 document.querySelectorAll(".emoji-box span").forEach(e=>{
   e.onclick=function(){
     document.getElementById("messageInput").value+=this.innerText;
     closeModal("emojiModal");
-  }
+  };
 });
+
+function setAmount(amount){
+  document.getElementById("amountInput").value=amount;
+}
+
+function openSuperWithAmount(amount){
+  setAmount(amount);
+  openModal("superModal");
+}
 
 function sendMessage(){
   const input=document.getElementById("messageInput");
@@ -470,16 +1515,22 @@ function sendMessage(){
   input.value="";
 }
 
+document.getElementById("messageInput").addEventListener("keydown",function(e){
+  if(e.key==="Enter")sendMessage();
+});
+
 function sendSuperChat(){
   const amount=document.getElementById("amountInput").value||500;
-  const msg=document.getElementById("superMsg").value||"Love this live session! ✨";
+  const method=document.getElementById("paymentMethod").value;
+  const msg=document.getElementById("superMsg").value||"Love this live session.";
   const chat=document.getElementById("chatList");
   const div=document.createElement("div");
   div.className="superchat";
-  div.innerHTML=`<img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=80&auto=format&fit=crop"><div><h4>You<br>₹${amount}</h4><p>${msg}</p></div>`;
+  div.innerHTML=`<img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=80&auto=format&fit=crop"><div><h4>You<br>₹${amount}</h4><p>${msg}</p><small>Paid via ${method}</small></div>`;
   chat.appendChild(div);
   chat.scrollTop=chat.scrollHeight;
   closeModal("superModal");
+  toast("Super Support sent");
 }
 
 function addChat(name,msg,img){
@@ -488,27 +1539,54 @@ function addChat(name,msg,img){
   div.className="chat-msg";
   div.innerHTML=`<img src="${img}"><div><h4>${name}</h4><p>${msg}</p></div><time>Now</time>`;
   chat.appendChild(div);
+
+  if(chat.children.length>80){
+    chat.removeChild(chat.children[0]);
+  }
+
   chat.scrollTop=chat.scrollHeight;
 }
 
-const names=["Amit Gamer","Priya Sharma","Neha Fan Club","Rahul Beats","Anjali Singh","Music Lover","Sana Khan","Rohan Verma","Arjun Beats"];
-const msgs=["Amazing voice! ❤️","One more song please 🎵","This is beautiful ✨","Goosebumps 🔥","Love from Mumbai","Superb live!","Kasoor next please 😊","What a vibe!","Keep going Neha!"];
+const names=[
+  "Amit Gamer","Priya Sharma","Neha Fan Club","Rahul Beats","Anjali Singh",
+  "Music Lover","Sana Khan","Rohan Verma","Arjun Beats","Karan Mehta",
+  "Live Viewer","Mumbai Vibes","Acoustic Fan","Ritika Jain","Varun Live"
+];
+
+const msgs=[
+  "Amazing voice!",
+  "One more song please",
+  "This is beautiful",
+  "Goosebumps",
+  "Love from Mumbai",
+  "Superb live!",
+  "Please sing one more",
+  "What a vibe!",
+  "Keep going Neha!",
+  "This feels so peaceful",
+  "Audio is very clear",
+  "Best live session today",
+  "Loved this performance",
+  "Great energy",
+  "Watching with friends"
+];
+
 setInterval(()=>{
   const n=Math.floor(Math.random()*names.length);
   const m=Math.floor(Math.random()*msgs.length);
   const img=`https://i.pravatar.cc/80?img=${Math.floor(Math.random()*60)+1}`;
   addChat(names[n],msgs[m],img);
-},2800);
+},2200);
 
 const liveCount=document.getElementById("liveCount");
 let count=12400;
 setInterval(()=>{
-  count+=Math.floor(Math.random()*80)-30;
+  count+=Math.floor(Math.random()*110)-40;
   if(count<11900)count=12100;
   liveCount.innerText=(count/1000).toFixed(1)+"K";
 },1800);
 
-let sec=24*3600+36*60;
+let sec=1*3600+24*60+36;
 setInterval(()=>{
   sec++;
   let h=String(Math.floor(sec/3600)).padStart(2,"0");
@@ -517,15 +1595,32 @@ setInterval(()=>{
   document.getElementById("timer").innerText=`${h}:${m}:${s}`;
 },1000);
 
+function toggleDescription(btn){
+  const desc=document.getElementById("moreDesc");
+  desc.classList.toggle("show");
+  btn.innerHTML=desc.classList.contains("show")
+    ? 'Show less <i class="fa-solid fa-chevron-up"></i>'
+    : 'See more <i class="fa-solid fa-chevron-down"></i>';
+}
+
 function toggleLive(btn){
   const extra=document.getElementById("extraLive");
   extra.classList.toggle("show");
-  btn.innerText=extra.classList.contains("show")?"Show less":"View all";
+  btn.innerText=extra.classList.contains("show") ? "Show less" : "View all";
 }
 
-document.getElementById("messageInput").addEventListener("keydown",function(e){
-  if(e.key==="Enter")sendMessage();
-});
+function copyLink(){
+  navigator.clipboard?.writeText(window.location.href);
+  toast("Live link copied");
+}
+
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.innerText=msg;
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",1600);
+}
 </script>
+
 </body>
 </html>
