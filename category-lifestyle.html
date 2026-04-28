@@ -690,35 +690,66 @@
 
   <!-- HERO -->
   <div class="hero-section">
-    <div class="hero-track">
+  <button class="hero-btn prev" onclick="slideHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="hero-btn next" onclick="slideHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
 
-      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=1800');">
-        <div class="hero-content">
-          <label>LIFESTYLE FEATURED</label>
-          <h1>Daily Life Upgrade</h1>
-          <p>Simple habits, routines and lifestyle improvements.</p>
-          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
-        </div>
+  <div class="hero-track" id="heroTrack">
+
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=1800&auto=format&fit=crop');">
+      <div class="hero-content">
+        <label>LIFESTYLE FEATURED</label>
+        <h1>Daily Life Upgrade</h1>
+        <p>Simple habits, routines and lifestyle improvements.</p>
+        <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
       </div>
+    </div>
 
-      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1800');">
-        <div class="hero-content">
-          <label>FITNESS</label>
-          <h1>Stay Fit Everyday</h1>
-          <p>Home workouts, health tips and daily fitness motivation.</p>
-          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
-        </div>
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1800&auto=format&fit=crop');">
+      <div class="hero-content">
+        <label>FITNESS</label>
+        <h1>Stay Fit Everyday</h1>
+        <p>Home workouts, health tips and daily fitness motivation.</p>
+        <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
       </div>
+    </div>
 
-      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1800');">
-        <div class="hero-content">
-          <label>TRAVEL</label>
-          <h1>Explore New Places</h1>
-          <p>Travel vlogs, destinations and experiences around the world.</p>
-          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
-        </div>
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1800&auto=format&fit=crop');">
+      <div class="hero-content">
+        <label>TRAVEL</label>
+        <h1>Explore New Places</h1>
+        <p>Travel vlogs, destinations and experiences around the world.</p>
+        <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
       </div>
+    </div>
 
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1800&auto=format&fit=crop');">
+      <div class="hero-content">
+        <label>FOOD</label>
+        <h1>Easy Food Ideas</h1>
+        <p>Simple recipes, daily meals and creator food stories.</p>
+        <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+      </div>
+    </div>
+
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1800&auto=format&fit=crop');">
+      <div class="hero-content">
+        <label>STYLE</label>
+        <h1>Everyday Fashion</h1>
+        <p>Simple style tips, outfit ideas and daily wear inspiration.</p>
+        <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dots" id="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
     </div>
   </div>
 
