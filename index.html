@@ -495,16 +495,21 @@
     }
 
     .thumb {
-      height: 116px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      overflow: hidden;
-    }
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+}
 
-    .large .thumb {
-      height: 122px;
-    }
+.large .thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
 
     .thumb video {
       width: 100%;
