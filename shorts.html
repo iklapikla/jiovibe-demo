@@ -14,6 +14,7 @@ body{background:#fff;color:#222;overflow:hidden}
 a{text-decoration:none;color:inherit}
 .app{display:flex;height:100vh}
 
+/* SIDEBAR */
 .sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:32px 18px;background:#fff;z-index:10}
 .logo{display:flex;align-items:center;gap:4px;margin-bottom:45px;padding-left:8px}
 .logo-circle{width:54px;height:54px;background:#ff5a00;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
@@ -23,6 +24,7 @@ a{text-decoration:none;color:inherit}
 .menu-item i{width:22px;font-size:22px;text-align:center}
 .menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
 
+/* MAIN */
 .main{flex:1;height:100vh;display:flex;flex-direction:column}
 .topbar{height:82px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;z-index:8}
 .search{width:620px;height:48px;border:1px solid #edf0f4;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad;background:#fafafa}
@@ -35,18 +37,32 @@ a{text-decoration:none;color:inherit}
 .profile img{width:48px;height:48px;object-fit:cover;border-radius:50%}
 .profile span{font-weight:700;font-size:15px}
 
-/* FEED */
-.feed-home{flex:1;overflow-y:auto;padding:28px 34px 50px;background:#fbfbfc}
-.feed-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.feed-title h1{font-size:28px;font-weight:800}
-.feed-title p{color:#777;font-weight:600}
-
+/* FEED HOME */
+.feed-home{
+  flex:1;
+  overflow-y:auto;
+  padding:28px 34px 50px;
+  background:#fbfbfc;
+}
+.feed-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:22px;
+}
+.feed-title h1{
+  font-size:28px;
+  font-weight:800;
+}
+.feed-title p{
+  color:#777;
+  font-weight:600;
+}
 .feed-grid{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:18px;
 }
-
 .feed-card{
   width:100%;
   aspect-ratio:9/16;
@@ -58,21 +74,64 @@ a{text-decoration:none;color:inherit}
   box-shadow:0 10px 28px rgba(0,0,0,.10);
   transition:.25s;
 }
-
-.feed-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.16)}
-.feed-card img{width:100%;height:100%;object-fit:cover}
-.feed-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.72))}
-.feed-card .views{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.50);color:#fff;padding:7px 10px;border-radius:9px;font-size:12px;font-weight:800;z-index:2}
-.feed-card .feed-info{position:absolute;left:14px;right:14px;bottom:14px;color:#fff;z-index:2}
-.feed-info h3{font-size:15px;line-height:1.35;margin-bottom:7px}
-.feed-info p{font-size:12px;color:#eee}
-
-/* SINGLE SHORT PLAYER */
-.player-mode{position:fixed;inset:0;background:#fbfbfc;z-index:60;display:none;align-items:center;justify-content:center}
-.player-mode.show{display:flex}
-
-.close-player{
+.feed-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 40px rgba(0,0,0,.16);
+}
+.feed-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.feed-card:after{
+  content:"";
   position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.72));
+}
+.feed-card .views{
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:rgba(0,0,0,.50);
+  color:#fff;
+  padding:7px 10px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:800;
+  z-index:2;
+}
+.feed-card .feed-info{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:14px;
+  color:#fff;
+  z-index:2;
+}
+.feed-info h3{
+  font-size:15px;
+  line-height:1.35;
+  margin-bottom:7px;
+}
+.feed-info p{
+  font-size:12px;
+  color:#eee;
+}
+
+/* FULL SCREEN SHORT PLAYER */
+.player-mode{
+  position:fixed;
+  inset:0;
+  background:#fbfbfc;
+  z-index:60;
+  display:none;
+}
+.player-mode.show{
+  display:block;
+}
+.close-player{
+  position:fixed;
   top:22px;
   right:28px;
   width:48px;
@@ -86,29 +145,53 @@ a{text-decoration:none;color:inherit}
   font-size:22px;
   cursor:pointer;
 }
-
-.single-short-wrap{
+.short-scroll{
+  height:100vh;
+  overflow-y:auto;
+  scroll-snap-type:y mandatory;
+  scrollbar-width:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:24px 0;
+}
+.short-scroll::-webkit-scrollbar{
+  display:none;
+}
+.short-item{
+  height:100vh;
+  width:620px;
+  max-width:92vw;
   position:relative;
+  scroll-snap-align:start;
   display:flex;
   align-items:center;
   justify-content:center;
-  width:620px;
-  max-width:90vw;
+  flex-shrink:0;
 }
-
 .phone{
-  width:430px;
+  height:calc(100vh - 48px);
   aspect-ratio:9/16;
+  max-height:920px;
   border-radius:24px;
   overflow:hidden;
   position:relative;
   background:#000;
   box-shadow:0 24px 55px rgba(0,0,0,.20);
 }
-
-.phone img{width:100%;height:100%;object-fit:cover;display:block}
-.phone::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.06) 45%,rgba(0,0,0,.72));pointer-events:none}
-
+.phone img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.phone::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.06) 45%,rgba(0,0,0,.72));
+  pointer-events:none;
+}
 .mute{
   position:absolute;
   top:22px;
@@ -123,32 +206,96 @@ a{text-decoration:none;color:inherit}
   font-size:18px;
   cursor:pointer;
 }
+.short-info{
+  position:absolute;
+  left:24px;
+  right:24px;
+  bottom:38px;
+  z-index:4;
+  color:#fff;
+}
+.creator-line{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+}
+.creator-line img{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+}
+.creator-line b{
+  font-size:15px;
+}
+.verify{
+  color:#ff5a00;
+}
+.follow-btn{
+  margin-left:auto;
+  border:1px solid #ff5a00;
+  background:rgba(0,0,0,.25);
+  color:#fff;
+  border-radius:20px;
+  padding:9px 20px;
+  font-weight:800;
+  cursor:pointer;
+}
+.follow-btn.following{
+  background:#fff;
+  color:#333;
+  border-color:#fff;
+}
+.caption{
+  font-size:15px;
+  line-height:1.5;
+  margin-bottom:8px;
+}
+.tags{
+  font-size:14px;
+  font-weight:800;
+  color:#ff5a00;
+}
+.short-progress{
+  position:absolute;
+  left:24px;
+  right:24px;
+  bottom:22px;
+  height:4px;
+  background:rgba(255,255,255,.35);
+  border-radius:10px;
+  z-index:4;
+}
+.short-progress span{
+  display:block;
+  height:100%;
+  width:40%;
+  background:#ff5a00;
+  border-radius:10px;
+}
+.time{
+  position:absolute;
+  right:24px;
+  bottom:14px;
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+  z-index:4;
+}
 
-.short-info{position:absolute;left:24px;right:24px;bottom:38px;z-index:4;color:#fff}
-.creator-line{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.creator-line img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #fff}
-.creator-line b{font-size:15px}
-.verify{color:#ff5a00}
-.follow-btn{margin-left:auto;border:1px solid #ff5a00;background:rgba(0,0,0,.25);color:#fff;border-radius:20px;padding:9px 20px;font-weight:800;cursor:pointer}
-.follow-btn.following{background:#fff;color:#333;border-color:#fff}
-.caption{font-size:15px;line-height:1.5;margin-bottom:8px}
-.tags{font-size:14px;font-weight:800;color:#ff5a00}
-
-.short-progress{position:absolute;left:24px;right:24px;bottom:22px;height:4px;background:rgba(255,255,255,.35);border-radius:10px;z-index:4}
-.short-progress span{display:block;height:100%;width:40%;background:#ff5a00;border-radius:10px}
-.time{position:absolute;right:24px;bottom:14px;color:#fff;font-size:13px;font-weight:700;z-index:4}
-
+/* ACTION BUTTONS */
 .actions{
   position:absolute;
   right:0;
-  transform:translateX(86px);
+  transform:translateX(88px);
   top:50%;
   margin-top:-150px;
   display:flex;
   flex-direction:column;
   gap:18px;
 }
-
 .action{
   width:66px;
   min-height:66px;
@@ -165,10 +312,15 @@ a{text-decoration:none;color:inherit}
   font-weight:800;
   color:#555;
 }
-.action i{font-size:24px}
-.action.liked i{color:#ff5a00}
-.action span{font-size:12px}
-
+.action i{
+  font-size:24px;
+}
+.action.liked i{
+  color:#ff5a00;
+}
+.action span{
+  font-size:12px;
+}
 .more-menu{
   display:none;
   position:absolute;
@@ -182,43 +334,144 @@ a{text-decoration:none;color:inherit}
   z-index:30;
   overflow:hidden;
 }
-.more-menu.show{display:block}
-.more-menu div{padding:14px 16px;font-size:14px;font-weight:700;cursor:pointer}
-.more-menu div:hover{background:#fff0e8;color:#ff5a00}
+.more-menu.show{
+  display:block;
+}
+.more-menu div{
+  padding:14px 16px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+.more-menu div:hover{
+  background:#fff0e8;
+  color:#ff5a00;
+}
 
 /* MODALS */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:100}
-.modal-bg.show{display:flex}
-.modal{background:#fff;width:400px;border-radius:20px;padding:24px;box-shadow:0 15px 45px rgba(0,0,0,.25)}
-.modal h2{margin-bottom:18px}
-.close{margin-top:18px;width:100%;height:46px;border:none;border-radius:12px;background:#f1f1f1;font-weight:800;cursor:pointer}
-.comment-list{max-height:250px;overflow:auto;margin-bottom:16px}
-.comment{display:flex;gap:10px;margin-bottom:14px}
-.comment img{width:34px;height:34px;border-radius:50%;object-fit:cover}
-.comment h4{font-size:13px}.comment p{font-size:13px;color:#555;margin-top:4px}
-.comment-input{display:flex;gap:8px}
-.comment-input input{flex:1;height:44px;border:1px solid #edf0f4;border-radius:24px;padding:0 14px;outline:none}
-.send{width:46px;border:none;border-radius:50%;background:#ff5a00;color:#fff;font-size:18px;cursor:pointer}
-.share-icons{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.share-icon{text-align:center;font-size:13px;font-weight:700;cursor:pointer}
-.share-icon i{width:54px;height:54px;border-radius:50%;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-size:25px;margin:0 auto 8px}
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+}
+.modal-bg.show{
+  display:flex;
+}
+.modal{
+  background:#fff;
+  width:400px;
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 15px 45px rgba(0,0,0,.25);
+}
+.modal h2{
+  margin-bottom:18px;
+}
+.close{
+  margin-top:18px;
+  width:100%;
+  height:46px;
+  border:none;
+  border-radius:12px;
+  background:#f1f1f1;
+  font-weight:800;
+  cursor:pointer;
+}
+.comment-list{
+  max-height:250px;
+  overflow:auto;
+  margin-bottom:16px;
+}
+.comment{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
+.comment img{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  object-fit:cover;
+}
+.comment h4{
+  font-size:13px;
+}
+.comment p{
+  font-size:13px;
+  color:#555;
+  margin-top:4px;
+}
+.comment-input{
+  display:flex;
+  gap:8px;
+}
+.comment-input input{
+  flex:1;
+  height:44px;
+  border:1px solid #edf0f4;
+  border-radius:24px;
+  padding:0 14px;
+  outline:none;
+}
+.send{
+  width:46px;
+  border:none;
+  border-radius:50%;
+  background:#ff5a00;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+.share-icons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+.share-icon{
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+}
+.share-icon i{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:#fff0e8;
+  color:#ff5a00;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  margin:0 auto 8px;
+}
 
-@media(max-width:1200px){.feed-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:1000px){.sidebar{width:220px}.search{width:440px}.feed-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1200px){
+  .feed-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:1000px){
+  .sidebar{width:220px}
+  .search{width:440px}
+  .feed-grid{grid-template-columns:repeat(3,1fr)}
+}
 @media(max-width:780px){
-.sidebar{display:none}
-.topbar{padding:0 16px}
-.profile span{display:none}
-.search{width:100%}
-.feed-home{padding:20px}
-.feed-grid{grid-template-columns:repeat(2,1fr);gap:14px}
-.player-mode{align-items:stretch;justify-content:stretch}
-.single-short-wrap{width:100%;max-width:100%;height:100vh}
-.phone{width:100%;height:100%;border-radius:0;aspect-ratio:auto}
-.actions{right:16px;top:auto;bottom:120px;transform:none;margin-top:0}
-.action{background:rgba(255,255,255,.92)}
-.more-menu{right:20px;top:auto;bottom:105px}
-.close-player{top:18px;right:18px}
+  body{overflow:hidden}
+  .sidebar{display:none}
+  .topbar{padding:0 16px}
+  .profile span{display:none}
+  .search{width:100%}
+  .feed-home{padding:20px}
+  .feed-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .short-item{width:100%;height:100vh;max-width:100%;margin-bottom:0}
+  .phone{width:100%;height:100%;border-radius:0;max-height:none}
+  .actions{right:16px;top:auto;bottom:120px;transform:none;margin-top:0}
+  .action{background:rgba(255,255,255,.92)}
+  .more-menu{right:20px;top:auto;bottom:105px}
+  .close-player{top:18px;right:18px}
 }
 </style>
 </head>
@@ -268,7 +521,7 @@ a{text-decoration:none;color:inherit}
   <div class="feed-title">
     <div>
       <h1>Shorts</h1>
-      <p>Tap any short to open single reel view</p>
+      <p>Tap any short to open full-screen reel view</p>
     </div>
   </div>
 
@@ -278,11 +531,10 @@ a{text-decoration:none;color:inherit}
 </main>
 </div>
 
-<!-- SINGLE SHORT PLAYER -->
+<!-- FULL SCREEN SHORT PLAYER -->
 <div class="player-mode" id="playerMode">
   <button class="close-player" onclick="closePlayer()"><i class="fa-solid fa-xmark"></i></button>
-
-  <div class="single-short-wrap" id="singleShortWrap"></div>
+  <div class="short-scroll" id="shortScroll"></div>
 </div>
 
 <!-- COMMENT MODAL -->
@@ -290,9 +542,9 @@ a{text-decoration:none;color:inherit}
   <div class="modal">
     <h2>Comments</h2>
     <div class="comment-list" id="commentList">
-      <div class="comment"><img src="https://i.pravatar.cc/80?img=11"><div><h4>Rohan</h4><p>This is so good 🔥</p></div></div>
-      <div class="comment"><img src="https://i.pravatar.cc/80?img=18"><div><h4>Priya</h4><p>Vibe is perfect ✨</p></div></div>
-      <div class="comment"><img src="https://i.pravatar.cc/80?img=24"><div><h4>Amit</h4><p>Watched it 5 times already 😂</p></div></div>
+      <div class="comment"><img src="https://i.pravatar.cc/80?img=11"><div><h4>Rohan</h4><p>This is so good</p></div></div>
+      <div class="comment"><img src="https://i.pravatar.cc/80?img=18"><div><h4>Priya</h4><p>Vibe is perfect</p></div></div>
+      <div class="comment"><img src="https://i.pravatar.cc/80?img=24"><div><h4>Amit</h4><p>Watched it 5 times already</p></div></div>
     </div>
 
     <div class="comment-input">
@@ -328,7 +580,7 @@ const shortsData = [
     gif:"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
     creator:"Neha Moves",
     avatar:"https://i.pravatar.cc/80?img=32",
-    caption:"Sunsets, beats and good vibes ✨",
+    caption:"Sunsets, beats and good vibes",
     tags:"#DanceVibes #SunsetMagic",
     likes:"24.5K",
     comments:"785",
@@ -339,7 +591,7 @@ const shortsData = [
     gif:"https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
     creator:"Tech Daay",
     avatar:"https://i.pravatar.cc/80?img=12",
-    caption:"Future tech in 15 seconds 🚀",
+    caption:"Future tech in 15 seconds",
     tags:"#AI #TechShorts",
     likes:"18.2K",
     comments:"420",
@@ -350,7 +602,7 @@ const shortsData = [
     gif:"https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
     creator:"Comedy Circle",
     avatar:"https://i.pravatar.cc/80?img=20",
-    caption:"When friends say just 5 minutes 😂",
+    caption:"When friends say just 5 minutes",
     tags:"#Comedy #Relatable",
     likes:"31.7K",
     comments:"1.1K",
@@ -361,7 +613,7 @@ const shortsData = [
     gif:"https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif",
     creator:"Foodie Yatra",
     avatar:"https://i.pravatar.cc/80?img=45",
-    caption:"Street food that hits different 🤤",
+    caption:"Street food that hits different",
     tags:"#FoodShorts #IndiaFood",
     likes:"14.8K",
     comments:"602",
@@ -372,7 +624,7 @@ const shortsData = [
     gif:"https://media.giphy.com/media/3ohhwfAa9rbXaZe86c/giphy.gif",
     creator:"Travel Diary",
     avatar:"https://i.pravatar.cc/80?img=28",
-    caption:"Blue lagoon travel mood 🌊",
+    caption:"Blue lagoon travel mood",
     tags:"#Travel #Explore",
     likes:"21.9K",
     comments:"710",
@@ -383,7 +635,7 @@ const shortsData = [
     gif:"https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
     creator:"Laugh Hub",
     avatar:"https://i.pravatar.cc/80?img=36",
-    caption:"That one friend in every group 😂",
+    caption:"That one friend in every group",
     tags:"#Funny #Friends",
     likes:"42.1K",
     comments:"2.4K",
@@ -394,7 +646,7 @@ const shortsData = [
     gif:"https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif",
     creator:"Fitness Flow",
     avatar:"https://i.pravatar.cc/80?img=47",
-    caption:"Morning energy routine 💪",
+    caption:"Morning energy routine",
     tags:"#Fitness #Morning",
     likes:"16.3K",
     comments:"330",
@@ -405,7 +657,7 @@ const shortsData = [
     gif:"https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif",
     creator:"Music Room",
     avatar:"https://i.pravatar.cc/80?img=52",
-    caption:"Acoustic vibe check 🎸",
+    caption:"Acoustic vibe check",
     tags:"#Music #Acoustic",
     likes:"27.8K",
     comments:"900",
@@ -422,9 +674,10 @@ function renderFeed(){
 
   for(let round=0; round<feedMultiplier; round++){
     shortsData.forEach((item,index)=>{
+      const realIndex = index;
       const card = document.createElement("div");
       card.className = "feed-card";
-      card.onclick = () => openPlayer(index);
+      card.onclick = () => openPlayer(realIndex);
       card.innerHTML = `
         <img src="${item.gif}">
         <span class="views"><i class="fa-solid fa-play"></i> ${item.views}</span>
@@ -438,9 +691,9 @@ function renderFeed(){
   }
 }
 
-function openPlayer(index){
-  const item = shortsData[index];
-  const wrap = document.getElementById("singleShortWrap");
+function createShortItem(item, index){
+  const wrap = document.createElement("div");
+  wrap.className = "short-item";
 
   wrap.innerHTML = `
     <div class="phone">
@@ -457,18 +710,18 @@ function openPlayer(index){
         <div class="tags">${item.tags}</div>
       </div>
 
-      <div class="short-progress"><span></span></div>
-      <div class="time">00:08 / 00:25</div>
+      <div class="short-progress"><span style="width:${35 + (index % 5) * 10}%"></span></div>
+      <div class="time">00:${String(8 + (index % 15)).padStart(2,"0")} / 00:25</div>
     </div>
 
     <div class="actions">
       <button class="action like" onclick="toggleLike(this)"><i class="fa-solid fa-heart"></i><span>${item.likes}</span></button>
       <button class="action" onclick="openModal('commentModal')"><i class="fa-regular fa-comment-dots"></i><span>${item.comments}</span></button>
       <button class="action" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i><span>${item.shares}</span></button>
-      <button class="action" onclick="toggleMoreMenu()"><i class="fa-solid fa-ellipsis"></i></button>
+      <button class="action" onclick="toggleMoreMenu(this)"><i class="fa-solid fa-ellipsis"></i></button>
     </div>
 
-    <div class="more-menu" id="moreMenu">
+    <div class="more-menu">
       <div><i class="fa-regular fa-bookmark"></i> Save short</div>
       <div><i class="fa-solid fa-list"></i> Add to playlist</div>
       <div><i class="fa-regular fa-eye-slash"></i> Not interested</div>
@@ -476,12 +729,34 @@ function openPlayer(index){
     </div>
   `;
 
-  document.getElementById("playerMode").classList.add("show");
+  return wrap;
+}
+
+function openPlayer(index){
+  const player = document.getElementById("playerMode");
+  const scroll = document.getElementById("shortScroll");
+
+  scroll.innerHTML = "";
+
+  let playerList = [];
+  for(let i = 0; i < 30; i++){
+    playerList.push(shortsData[(index + i) % shortsData.length]);
+  }
+
+  playerList.forEach((item, i)=>{
+    scroll.appendChild(createShortItem(item, i));
+  });
+
+  player.classList.add("show");
+
+  setTimeout(()=>{
+    scroll.scrollTop = 0;
+  },50);
 }
 
 function closePlayer(){
   document.getElementById("playerMode").classList.remove("show");
-  document.getElementById("singleShortWrap").innerHTML = "";
+  document.getElementById("shortScroll").innerHTML = "";
 }
 
 function toggleLike(btn){
@@ -502,21 +777,35 @@ function toggleMute(btn){
   icon.classList.toggle("fa-volume-high");
 }
 
-function toggleMoreMenu(){
-  document.getElementById("moreMenu").classList.toggle("show");
-}
+function toggleMoreMenu(btn){
+  const menu = btn.closest(".short-item").querySelector(".more-menu");
 
-document.addEventListener("click",function(e){
-  if(!e.target.closest(".action") && !e.target.closest(".more-menu")){
-    const menu = document.getElementById("moreMenu");
-    if(menu) menu.classList.remove("show");
-  }
-});
+  document.querySelectorAll(".more-menu").forEach(m=>{
+    if(m !== menu) m.classList.remove("show");
+  });
+
+  menu.classList.toggle("show");
+}
 
 document.getElementById("feedHome").addEventListener("scroll", function(){
   if(this.scrollTop + this.clientHeight >= this.scrollHeight - 300){
     feedMultiplier++;
     renderFeed();
+  }
+});
+
+document.getElementById("shortScroll").addEventListener("scroll", function(){
+  if(this.scrollTop + this.clientHeight >= this.scrollHeight - 500){
+    for(let i=0; i<8; i++){
+      const item = shortsData[Math.floor(Math.random() * shortsData.length)];
+      this.appendChild(createShortItem(item, this.children.length));
+    }
+  }
+});
+
+document.addEventListener("click",function(e){
+  if(!e.target.closest(".action") && !e.target.closest(".more-menu")){
+    document.querySelectorAll(".more-menu").forEach(m=>m.classList.remove("show"));
   }
 });
 
