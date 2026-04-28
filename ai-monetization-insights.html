@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Monetization Insights</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#fbfbfc;color:#222}
+a{text-decoration:none;color:inherit}
+.app{display:flex;min-height:100vh}
+
+.sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:32px 18px;position:fixed;background:#fff}
+.logo{display:flex;align-items:center;gap:4px;margin-bottom:45px}
+.logo-circle{width:54px;height:54px;background:#ff5a00;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
+.logo-text{font-size:32px;font-weight:800;color:#2b070b}
+.menu{display:flex;flex-direction:column;gap:12px}
+.menu-item{display:flex;align-items:center;gap:18px;padding:17px 22px;border-radius:14px;font-weight:600;color:#383838}
+.menu-item i{width:22px;font-size:22px}
+.menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
+.help{position:absolute;bottom:32px;left:28px;font-weight:600;color:#333}
+
+.main{margin-left:250px;width:calc(100% - 250px)}
+.topbar{height:94px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:#fff}
+.page-title{display:flex;align-items:center;gap:18px}
+.back{font-size:22px;cursor:pointer}
+.page-title h1{font-size:24px}
+.page-title p{color:#777;margin-top:6px}
+.top-actions{display:flex;align-items:center;gap:18px}
+.token-box,.buy-btn{height:48px;border-radius:12px;border:1px solid #edf0f4;background:#fff;padding:0 18px;display:flex;align-items:center;gap:10px;font-weight:800}
+.token-box i{color:#ff9800}
+.buy-btn{background:#ff5a00;color:#fff;border:none;cursor:pointer}
+.profile{display:flex;align-items:center;gap:12px}
+.profile img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.profile span{font-weight:800}
+
+.content{padding:26px 34px 60px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:22px}
+.stat{background:#fff;border:1px solid #edf0f4;border-radius:18px;padding:22px;box-shadow:0 3px 16px rgba(0,0,0,.04)}
+.stat-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.icon{width:54px;height:54px;border-radius:16px;background:#ff5a00;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px}
+.stat h3{font-size:14px;color:#555;margin-bottom:6px}
+.stat b{font-size:28px}
+.up{color:#22c55e;font-weight:800;margin-top:10px;font-size:14px}
+
+.grid{display:grid;grid-template-columns:1fr 360px;gap:22px}
+.card{background:#fff;border:1px solid #edf0f4;border-radius:18px;box-shadow:0 3px 16px rgba(0,0,0,.04);padding:24px}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.card-head h2{font-size:20px}
+.card-head button,select{height:40px;border:1px solid #edf0f4;background:#fff;border-radius:10px;padding:0 14px;font-weight:700;cursor:pointer}
+
+.chart{height:280px;display:flex;align-items:end;gap:13px;border-bottom:1px solid #edf0f4;border-left:1px solid #edf0f4;padding:20px 12px 0;margin-bottom:10px}
+.bar{flex:1;background:linear-gradient(180deg,#ff5a00,#ffb28b);border-radius:8px 8px 0 0;position:relative;cursor:pointer}
+.bar:hover::after{content:attr(data-value);position:absolute;top:-36px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:7px 10px;border-radius:8px;font-size:12px;white-space:nowrap}
+.chart-labels{display:grid;grid-template-columns:repeat(7,1fr);font-size:12px;color:#777;text-align:center}
+
+.revenue-row{display:grid;grid-template-columns:1fr 110px 90px;align-items:center;gap:14px;border-bottom:1px solid #edf0f4;padding:16px 0}
+.revenue-row:last-child{border-bottom:none}
+.revenue-left{display:flex;align-items:center;gap:12px}
+.revenue-left i{width:42px;height:42px;border-radius:12px;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-size:20px}
+.revenue-left h3{font-size:15px}.revenue-left p{font-size:13px;color:#777;margin-top:4px}
+.amount{font-weight:800}
+.badge{background:#e9f9ef;color:#16a34a;border-radius:20px;padding:7px 10px;font-size:12px;font-weight:800;text-align:center}
+
+.insight{display:flex;gap:14px;border:1px solid #edf0f4;border-radius:16px;padding:16px;margin-bottom:14px}
+.insight i{width:44px;height:44px;min-width:44px;border-radius:50%;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-size:20px}
+.insight h3{font-size:15px;margin-bottom:6px}
+.insight p{font-size:13px;color:#666;line-height:1.5}
+.action-btn{width:100%;height:46px;border:1px solid #ffd1bc;background:#fff;color:#ff5a00;border-radius:12px;font-weight:800;cursor:pointer;margin-top:8px}
+.action-btn.primary{background:#ff5a00;color:#fff}
+
+.idea{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;font-size:14px;color:#555;line-height:1.45}
+.idea i{color:#22c55e;margin-top:3px}
+
+.table{width:100%;border-collapse:collapse}
+.table th{text-align:left;font-size:13px;color:#777;padding:12px;border-bottom:1px solid #edf0f4}
+.table td{padding:14px 12px;border-bottom:1px solid #edf0f4;font-size:14px}
+.table b{font-size:15px}
+.status{background:#e9f9ef;color:#16a34a;padding:7px 10px;border-radius:20px;font-size:12px;font-weight:800}
+
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:60}
+.modal-bg.show{display:flex}
+.modal{background:#fff;width:430px;border-radius:20px;padding:24px;box-shadow:0 15px 45px rgba(0,0,0,.25)}
+.modal h2{margin-bottom:14px}
+.modal p{color:#666;line-height:1.6;margin-bottom:18px}
+.close{width:100%;height:46px;border:none;border-radius:12px;background:#f1f1f1;font-weight:800;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-weight:700;display:none}
+
+@media(max-width:1100px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.top-actions{display:none}}
+@media(max-width:780px){.sidebar{display:none}.main{margin-left:0;width:100%}.topbar{padding:0 18px}.stats{grid-template-columns:1fr}.content{padding:18px}}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<aside class="sidebar">
+  <a href="dashboard.html" class="logo"><div class="logo-circle">Jio</div><div class="logo-text">Vibe</div></a>
+  <nav class="menu">
+    <a href="dashboard.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="content.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Content</a>
+    <a href="ai-studio.html" class="menu-item active"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio</a>
+    <a href="analytics.html" class="menu-item"><i class="fa-solid fa-chart-simple"></i> Analytics</a>
+    <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
+    <a href="settings.html" class="menu-item"><i class="fa-solid fa-gear"></i> Settings</a>
+  </nav>
+  <div class="help"><i class="fa-regular fa-circle-question"></i> Help & Support</div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div class="page-title">
+    <i class="fa-solid fa-arrow-left back" onclick="location.href='ai-studio.html'"></i>
+    <div>
+      <h1>AI Monetization Insights</h1>
+      <p>Get smart insights and recommendations to increase your revenue.</p>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <div class="token-box"><i class="fa-solid fa-coins"></i> My Tokens: <span style="color:#ff5a00">1,250</span></div>
+    <button class="buy-btn" onclick="location.href='buy-tokens.html'"><i class="fa-solid fa-plus"></i> Buy Tokens</button>
+    <div class="profile"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop"><span>Ankit Jayant</span></div>
+  </div>
+</header>
+
+<section class="content">
+
+<div class="stats">
+  <div class="stat"><div class="stat-top"><div class="icon"><i class="fa-solid fa-indian-rupee-sign"></i></div><div><h3>Monthly Revenue</h3><b>₹48,320</b></div></div><div class="up">↑ 22.5% vs last month</div></div>
+  <div class="stat"><div class="stat-top"><div class="icon"><i class="fa-solid fa-users"></i></div><div><h3>Paid Supporters</h3><b>1,284</b></div></div><div class="up">↑ 18.7% vs last month</div></div>
+  <div class="stat"><div class="stat-top"><div class="icon"><i class="fa-solid fa-bullseye"></i></div><div><h3>Conversion Rate</h3><b>7.8%</b></div></div><div class="up">↑ 9.4% vs last month</div></div>
+  <div class="stat"><div class="stat-top"><div class="icon"><i class="fa-solid fa-chart-line"></i></div><div><h3>Revenue Potential</h3><b>₹72K</b></div></div><div class="up">AI forecast for next month</div></div>
+</div>
+
+<div class="grid">
+  <div>
+    <div class="card" style="margin-bottom:22px">
+      <div class="card-head">
+        <h2>Revenue Growth Forecast</h2>
+        <select onchange="toast('Chart range updated')">
+          <option>This Month</option>
+          <option>Last 30 Days</option>
+          <option>Last 90 Days</option>
+        </select>
+      </div>
+
+      <div class="chart">
+        <div class="bar" style="height:35%" data-value="₹18.2K"></div>
+        <div class="bar" style="height:48%" data-value="₹24.4K"></div>
+        <div class="bar" style="height:42%" data-value="₹21.9K"></div>
+        <div class="bar" style="height:68%" data-value="₹36.8K"></div>
+        <div class="bar" style="height:58%" data-value="₹31.5K"></div>
+        <div class="bar" style="height:82%" data-value="₹48.3K"></div>
+        <div class="bar" style="height:95%" data-value="₹72K forecast"></div>
+      </div>
+      <div class="chart-labels"><span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span><span>Now</span><span>Next</span><span>AI Goal</span></div>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <div class="card-head">
+        <h2>Revenue Breakdown</h2>
+        <button onclick="toast('Detailed breakdown opened')">View Details</button>
+      </div>
+
+      <div class="revenue-row">
+        <div class="revenue-left"><i class="fa-solid fa-rectangle-ad"></i><div><h3>Ads Revenue</h3><p>Videos and reels monetization</p></div></div>
+        <div class="amount">₹24,540</div><div class="badge">+18.6%</div>
+      </div>
+      <div class="revenue-row">
+        <div class="revenue-left"><i class="fa-solid fa-user-check"></i><div><h3>Subscriptions</h3><p>Paid community and fan support</p></div></div>
+        <div class="amount">₹15,230</div><div class="badge">+24.4%</div>
+      </div>
+      <div class="revenue-row">
+        <div class="revenue-left"><i class="fa-solid fa-gift"></i><div><h3>Super Support</h3><p>Live donations and creator tips</p></div></div>
+        <div class="amount">₹8,550</div><div class="badge">+10.3%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Top Revenue Opportunities</h2>
+        <button onclick="toast('Exported report')">Export</button>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Opportunity</th>
+            <th>Expected Gain</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Enable channel membership</b><br><span style="color:#777">Recommended for loyal viewers</span></td>
+            <td>₹12K–₹18K</td>
+            <td><span class="status">High</span></td>
+          </tr>
+          <tr>
+            <td><b>Post 3 more shorts weekly</b><br><span style="color:#777">Shorts are getting 2x reach</span></td>
+            <td>₹8K–₹11K</td>
+            <td><span class="status">High</span></td>
+          </tr>
+          <tr>
+            <td><b>Improve thumbnail CTR</b><br><span style="color:#777">Use brighter faces and bold text</span></td>
+            <td>₹5K–₹7K</td>
+            <td><span class="status">Medium</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <aside>
+    <div class="card" style="margin-bottom:22px">
+      <div class="card-head"><h2>AI Suggestions</h2></div>
+
+      <div class="insight">
+        <i class="fa-solid fa-clock"></i>
+        <div>
+          <h3>Best Time to Post</h3>
+          <p>Your audience is most active between 7:00 PM and 10:00 PM. Schedule your top content in this slot.</p>
+        </div>
+      </div>
+
+      <div class="insight">
+        <i class="fa-solid fa-crown"></i>
+        <div>
+          <h3>Start Membership Tier</h3>
+          <p>Create a ₹99 monthly supporter tier with early access, badges and members-only live chat.</p>
+        </div>
+      </div>
+
+      <div class="insight">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <div>
+          <h3>Use AI Thumbnail Generator</h3>
+          <p>Videos with stronger thumbnails can increase click-through rate by 12–18%.</p>
+        </div>
+      </div>
+
+      <button class="action-btn primary" onclick="openModal()">Apply AI Plan</button>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <div class="card-head"><h2>Content Ideas</h2></div>
+
+      <div class="idea"><i class="fa-solid fa-circle-check"></i><span>Budget travel tips for students</span></div>
+      <div class="idea"><i class="fa-solid fa-circle-check"></i><span>Behind the scenes of your content setup</span></div>
+      <div class="idea"><i class="fa-solid fa-circle-check"></i><span>Live Q&A with paid supporters</span></div>
+      <div class="idea"><i class="fa-solid fa-circle-check"></i><span>Weekly shorts challenge for community</span></div>
+
+      <button class="action-btn" onclick="toast('More ideas generated')">Generate More Ideas</button>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>Quick Actions</h2></div>
+
+      <button class="action-btn" onclick="location.href='ai-thumbnail-generator.html'">Improve Thumbnails</button>
+      <button class="action-btn" onclick="location.href='ai-title-description-generator.html'">Optimize Titles</button>
+      <button class="action-btn" onclick="location.href='ai-shorts-generator.html'">Generate Shorts</button>
+      <button class="action-btn" onclick="location.href='wallet.html'">View Earnings</button>
+    </div>
+  </aside>
+</div>
+
+</section>
+</main>
+</div>
+
+<div class="modal-bg" id="planModal">
+  <div class="modal">
+    <h2>AI Monetization Plan Applied</h2>
+    <p>Your recommended growth plan has been added to your creator dashboard. Suggested next steps: launch membership, optimize thumbnails and post shorts weekly.</p>
+    <button class="close" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.innerText=msg;
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",1600);
+}
+function openModal(){
+  document.getElementById("planModal").classList.add("show");
+}
+function closeModal(){
+  document.getElementById("planModal").classList.remove("show");
+}
+document.getElementById("planModal").addEventListener("click",e=>{
+  if(e.target.id==="planModal") closeModal();
+});
+</script>
+</body>
+</html>
