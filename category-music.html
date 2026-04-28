@@ -1,169 +1,682 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JioVibe Music</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JioVibe Home</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-body{background:#fbfbfc;color:#222;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-.app{display:flex;min-height:100vh}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-.sidebar{width:210px;height:100vh;background:#fff;border-right:1px solid #edf0f4;padding:30px 14px;position:fixed;left:0;top:0;z-index:10}
-.logo{display:flex;align-items:center;gap:4px;margin-bottom:44px;padding-left:6px}
-.logo-circle{width:52px;height:52px;background:#ff5a00;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900}
-.logo-text{font-size:31px;font-weight:900;color:#2b070b;letter-spacing:-1.2px}
-.menu{display:flex;flex-direction:column;gap:10px}
-.menu-item{display:flex;align-items:center;gap:16px;padding:15px 18px;border-radius:13px;font-weight:800;color:#343434;font-size:15px;transition:.25s}
-.menu-item i{width:22px;font-size:20px;text-align:center}
-.menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
+    body {
+      background: #ffffff;
+      color: #1f1f1f;
+      overflow-x: hidden;
+    }
 
-.main{margin-left:210px;width:calc(100% - 210px)}
-.topbar{height:82px;background:#fff;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:8}
-.search{width:620px;height:48px;border:1px solid #edf0f4;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad;background:#fff}
-.search input{border:none;outline:none;flex:1;font-size:15px;background:transparent}
-.top-actions{display:flex;align-items:center;gap:22px;position:relative}
-.bell{font-size:23px;position:relative;cursor:pointer}
-.bell::after{content:"3";position:absolute;top:-8px;right:-7px;background:#ff5a00;color:#fff;font-size:10px;font-weight:800;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.profile{display:flex;align-items:center;gap:12px;cursor:pointer}
-.profile img{width:48px;height:48px;border-radius:50%;object-fit:cover}
-.profile span{font-weight:800;font-size:15px}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.dropdown{position:absolute;top:68px;right:0;width:360px;background:#fff;border-radius:22px;padding:22px;box-shadow:0 18px 55px rgba(0,0,0,.18);display:none;z-index:50}
-.dropdown.show{display:block}
-.drop-head{display:flex;align-items:center;gap:16px;margin-bottom:20px}
-.drop-head img{width:70px;height:70px;border-radius:50%;object-fit:cover}
-.drop-head h2{font-size:22px}.drop-head p{color:#ff5a00;font-weight:800}
-.drop-item{display:flex;align-items:center;gap:18px;padding:15px 16px;border-radius:12px;font-weight:800;font-size:17px;cursor:pointer}
-.drop-item:hover,.drop-item.active{background:#fff0e8;color:#ff5a00}
-.drop-line{height:1px;background:#edf0f4;margin:16px 0}
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
 
-.content{padding:22px 34px 60px;width:100%}
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      border-right: 1px solid #edf0f4;
+      padding: 32px 18px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background: #fff;
+      z-index: 10;
+    }
 
-.tabs{display:flex;gap:14px;overflow:auto;margin:0 0 22px 0;padding-bottom:4px}
-.tab{height:46px;padding:0 22px;border:1px solid #edf0f4;border-radius:24px;background:#fff;font-weight:900;color:#333;display:flex;align-items:center;gap:10px;white-space:nowrap;cursor:pointer}
-.tab.active,.tab:hover{background:#ff5a00;color:#fff;border-color:#ff5a00}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 45px;
+      padding-left: 8px;
+    }
 
-.hero{height:320px;width:100%;border-radius:18px;overflow:hidden;position:relative;background-size:cover;background-position:center;box-shadow:0 10px 35px rgba(0,0,0,.12);margin-bottom:26px}
-.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.35),rgba(0,0,0,.05))}
-.hero-content{position:absolute;left:44px;top:48px;color:#fff;z-index:2;max-width:470px}
-.hero-label{color:#ff5a00;font-weight:900;letter-spacing:.8px;margin-bottom:12px}
-.hero-content h1{font-size:44px;line-height:1.05;margin-bottom:14px}
-.hero-content p{font-size:17px;color:#eee;line-height:1.55;margin-bottom:24px}
-.watch-btn{height:52px;padding:0 24px;border:none;border-radius:12px;background:#ff5a00;color:#fff;font-size:17px;font-weight:900;cursor:pointer}
-.hero-dots{position:absolute;left:44px;bottom:26px;display:flex;gap:9px;z-index:3}
-.dot{width:22px;height:4px;border-radius:10px;background:rgba(255,255,255,.45);cursor:pointer}
-.dot.active{background:#ff5a00;width:30px}
+    .logo-circle {
+      width: 54px;
+      height: 54px;
+      background: #ff5a00;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 25px;
+    }
 
-.section{margin-bottom:30px}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.section-head h2{font-size:22px;font-weight:900}
-.section-head span{color:#ff5a00;font-size:23px}
-.section-head button{border:none;background:none;color:#ff5a00;font-weight:900;cursor:pointer;font-size:15px}
+    .logo-text {
+      font-size: 32px;
+      font-weight: 800;
+      color: #2b070b;
+      letter-spacing: -1.2px;
+    }
 
-.video-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-.large-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.video-card{background:#fff;border:1px solid #edf0f4;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.04);cursor:pointer;transition:.25s}
-.video-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.10)}
-.thumb{width:100%;aspect-ratio:16/9;background-size:cover;background-position:center;position:relative;overflow:hidden}
-.thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.duration,.views,.live{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;border-radius:6px;font-size:12px;font-weight:900;padding:5px 8px}
-.live{left:8px;right:auto;background:#ff1f1f}
-.card-body{padding:11px}
-.card-title{font-size:14px;font-weight:900;line-height:1.35;margin-bottom:7px}
-.meta{font-size:12px;color:#777;line-height:1.45}
-.verify{color:#ff5a00}
-.gif{display:none}
-.video-card:hover .static{display:none}
-.video-card:hover .gif{display:block}
-.extra{display:none}
-.extra.show{display:grid}
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
-.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:20px;font-size:14px;font-weight:700;display:none;z-index:200}
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 17px 22px;
+      border-radius: 14px;
+      font-weight: 600;
+      color: #383838;
+      font-size: 16px;
+      transition: 0.25s ease;
+    }
 
-@media(max-width:1150px){
-.video-row{grid-template-columns:repeat(3,1fr)}
-.large-grid{grid-template-columns:repeat(2,1fr)}
-.search{width:430px}
+    .menu-item i {
+      width: 22px;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .menu-item:hover,
+    .menu-item.active {
+      background: #fff0e8;
+      color: #ff5a00;
+    }
+
+    .divider {
+      height: 1px;
+      background: #edf0f4;
+      margin: 22px 8px;
+    }
+
+    .main {
+      margin-left: 250px;
+      width: calc(100% - 250px);
+    }
+
+    .topbar {
+      height: 94px;
+      border-bottom: 1px solid #edf0f4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 8;
+    }
+
+    .search {
+      width: 720px;
+      height: 50px;
+      border: 1px solid #e8ebf0;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 22px;
+      color: #9ba1ad;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+    }
+
+    .search input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      position: relative;
+    }
+
+    .bell {
+      font-size: 23px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .bell::after {
+      content: "1";
+      position: absolute;
+      top: -8px;
+      right: -7px;
+      background: #ff5a00;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 18px;
+    }
+
+    .profile img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .profile span {
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 72px;
+      right: 0;
+      width: 410px;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.14);
+      padding: 28px;
+      display: none;
+      z-index: 20;
+    }
+
+    .dropdown.active {
+      display: block;
+    }
+
+    .dropdown::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      right: 150px;
+      width: 24px;
+      height: 24px;
+      background: white;
+      transform: rotate(45deg);
+    }
+
+    .drop-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .drop-head img {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .drop-head h3 {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .drop-head p {
+      color: #ff5a00;
+      font-weight: 700;
+    }
+
+    .drop-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 17px 20px;
+      border-radius: 13px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #2f2f2f;
+      transition: 0.2s;
+    }
+
+    .drop-item:hover,
+    .drop-item.highlight {
+      background: #fff0e8;
+      color: #ff5a00;
+    }
+
+    .drop-item i {
+      width: 24px;
+    }
+
+    .content {
+      padding: 26px 44px 60px;
+    }
+
+    .tabs-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .tab {
+      padding: 14px 24px;
+      border: 1px solid #e8ebf0;
+      border-radius: 24px;
+      background: #fff;
+      font-weight: 700;
+      color: #3d3d3d;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      white-space: nowrap;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+      transition: .25s;
+    }
+
+    .tab:hover,
+    .tab.active {
+      background: #ff5a00;
+      color: white;
+      border-color: #ff5a00;
+    }
+
+    .tab-next {
+      margin-left: auto;
+      font-size: 26px;
+    }
+
+    .hero-section {
+      position: relative;
+      margin-bottom: 34px;
+    }
+
+    .hero-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      border-radius: 16px;
+      scrollbar-width: none;
+    }
+
+    .hero-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hero {
+      min-width: 100%;
+      height: 320px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      scroll-snap-align: start;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.55) 34%, rgba(0,0,0,.04) 70%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      padding: 42px 46px;
+      width: 50%;
+      animation: fadeUp .8s ease;
+    }
+
+    .hero-content label {
+      color: #ff5a00;
+      font-weight: 800;
+      letter-spacing: .7px;
+      font-size: 15px;
+    }
+
+    .hero-content h1 {
+      font-size: 43px;
+      line-height: 1.05;
+      margin: 14px 0;
+      font-weight: 800;
+    }
+
+    .hero-content p {
+      color: #e7e7e7;
+      line-height: 1.6;
+      font-size: 16px;
+      margin-bottom: 26px;
+    }
+
+    .watch-btn {
+      background: #ff5a00;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 15px 24px;
+      font-size: 17px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .hero-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,.15);
+      cursor: pointer;
+      z-index: 3;
+      font-size: 18px;
+    }
+
+    .hero-btn.prev { left: 14px; }
+    .hero-btn.next { right: 14px; }
+
+    .dots {
+      position: absolute;
+      left: 48px;
+      bottom: 28px;
+      display: flex;
+      gap: 10px;
+      z-index: 4;
+    }
+
+    .dot {
+      width: 22px;
+      height: 4px;
+      background: rgba(255,255,255,.6);
+      border-radius: 10px;
+    }
+
+    .dot.active {
+      background: #ff5a00;
+      width: 28px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-head h2 {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .section-head h2 span {
+      color: #ff5a00;
+    }
+
+    .section-head button {
+      background: transparent;
+      border: none;
+      color: #ff5a00;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .video-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(0,0,0,.06);
+      transition: .25s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.11);
+    }
+
+    .thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
 }
-@media(max-width:780px){
-.sidebar{display:none}.main{margin-left:0;width:100%}.topbar{padding:0 16px}.profile span{display:none}.search{width:100%}
-.content{padding:18px}.hero{height:260px}.hero-content{left:24px;top:34px}.hero-content h1{font-size:32px}
-.video-row,.large-grid{grid-template-columns:1fr}
-.dropdown{width:320px;right:-8px}
+
+.large .thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
 }
-</style>
+
+    .thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .card:hover video {
+      display: block;
+    }
+
+    .duration {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      background: rgba(0,0,0,.76);
+      color: white;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 5px;
+    }
+
+    .live-tag {
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      background: red;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .card-body {
+      padding: 12px 12px 14px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .creator {
+      color: #6f7480;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .verified {
+      color: #ff5a00;
+      font-size: 12px;
+    }
+
+    .views {
+      color: #747985;
+      font-size: 13px;
+    }
+
+    .extra {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .extra.show {
+      display: grid;
+    }
+
+    @media(max-width: 1100px) {
+      .sidebar { width: 220px; }
+      .main { margin-left: 220px; width: calc(100% - 220px); }
+      .search { width: 450px; }
+      .video-row { grid-template-columns: repeat(3, 1fr); }
+      .video-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media(max-width: 780px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; width: 100%; }
+      .topbar { padding: 0 18px; }
+      .search { width: 100%; }
+      .profile span { display: none; }
+      .content { padding: 20px; }
+      .hero { height: 280px; }
+      .hero-content { width: 80%; padding: 32px; }
+      .hero-content h1 { font-size: 34px; }
+      .video-row, .video-grid { grid-template-columns: 1fr; }
+      .dropdown { right: -10px; width: 330px; }
+    }
+  </style>
 </head>
 
 <body>
-<div class="app">
+  <div class="app">
 
-<aside class="sidebar">
-  <a href="index.html" class="logo">
-    <div class="logo-circle">Jio</div>
-    <div class="logo-text">Vibe</div>
-  </a>
+    <aside class="sidebar">
+      <a href="index.html" class="logo">
+        <div class="logo-circle">Jio</div>
+        <div class="logo-text">Vibe</div>
+      </a>
 
-  <nav class="menu">
-    <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
-    <a href="explore.html" class="menu-item"><i class="fa-regular fa-compass"></i> Explore</a>
-    <a href="live.html" class="menu-item"><i class="fa-solid fa-video"></i> Live</a>
-    <a href="video.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Video</a>
-    <a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
-    <a href="stories.html" class="menu-item"><i class="fa-regular fa-circle"></i> Stories</a>
-    <a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community</a>
-    <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
-    <a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
-  </nav>
-</aside>
+      <nav class="menu">
+        <a href="index.html" class="menu-item active"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="explore.html" class="menu-item"><i class="fa-regular fa-compass"></i> Explore</a>
+        <a href="live.html" class="menu-item"><i class="fa-solid fa-tower-broadcast"></i> Live</a>
+        <a href="video.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Video</a>
+        <a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
+        <a href="stories.html" class="menu-item"><i class="fa-regular fa-circle"></i> Stories</a>
+        <a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community Post</a>
+        <a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
+        <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
 
-<main class="main">
+      </nav>
 
-<header class="topbar">
-  <div class="search">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input placeholder="Search music videos, creators, live sessions...">
-  </div>
+      <div class="divider"></div>
+    </aside>
 
-  <div class="top-actions">
-    <div class="bell" onclick="toast('Notifications opened')"><i class="fa-regular fa-bell"></i></div>
+    <main class="main">
 
-    <div class="profile" onclick="toggleDropdown()">
-      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop">
-      <span>Ankit Jayant</span>
-      <i class="fa-solid fa-chevron-down" id="arrow"></i>
-    </div>
-
-    <div class="dropdown" id="profileDropdown">
-      <div class="drop-head">
-        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop">
-        <div>
-          <h2>Ankit Jayant</h2>
-          <p>Creator Account</p>
+      <header class="topbar">
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search creators, videos, topics..." />
         </div>
-      </div>
 
-      <a href="dashboard.html" class="drop-item active"><i class="fa-solid fa-table-cells-large"></i> Go to Dashboard</a>
-      <a href="my-channel.html" class="drop-item"><i class="fa-regular fa-user"></i> My Channel</a>
-      <a href="ai-studio.html" class="drop-item"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio</a>
-      <a href="wallet.html" class="drop-item"><i class="fa-regular fa-wallet"></i> Wallet</a>
-      <a href="settings.html" class="drop-item"><i class="fa-solid fa-gear"></i> Settings</a>
+        <div class="top-actions">
+          <a href="notifications.html" class="bell"><i class="fa-regular fa-bell"></i></a>
 
-      <div class="drop-line"></div>
-      <a href="logout.html" class="drop-item"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
-    </div>
-  </div>
-</header>
+          <div class="profile" onclick="toggleDropdown()">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop" alt="Trupti Latur">
+            <span>Trupti Latur</span>
+            <i class="fa-solid fa-chevron-down" id="arrow"></i>
+          </div>
 
-<section class="content">
+          <div class="dropdown" id="profileDropdown">
+            <div class="drop-head">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop">
+              <div>
+                <h3>Trupti Latur</h3>
+                <p>Creator Account</p>
+              </div>
+            </div>
 
-  <div class="tabs">
-    <a href="index.html" class="tab"><i class="fa-solid fa-border-all"></i> All</a>
+            <a href="dashboard.html" class="drop-item highlight"><i class="fa-solid fa-table-cells-large"></i> Go to Dashboard</a>
+            <a href="my-channel.html" class="drop-item"><i class="fa-regular fa-user"></i> My Channel</a>
+            <a href="ai-studio.html" class="drop-item"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio</a>
+            <a href="wallet.html" class="drop-item"><i class="fa-regular fa-wallet"></i> Wallet</a>
+            <a href="settings.html" class="drop-item"><i class="fa-solid fa-gear"></i> Settings</a>
+
+            <div class="divider"></div>
+
+            <a href="logout.html" class="drop-item"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+          </div>
+        </div>
+      </header>
+
+     <section class="content">
+
+  <div class="tabs-wrap">
+    <a href="index.html" class="tab">All</a>
     <a href="category-gaming.html" class="tab"><i class="fa-solid fa-gamepad"></i> Gaming</a>
     <a href="category-music.html" class="tab active"><i class="fa-solid fa-music"></i> Music</a>
     <a href="category-comedy.html" class="tab"><i class="fa-regular fa-face-smile"></i> Comedy</a>
@@ -171,215 +684,337 @@ a{text-decoration:none;color:inherit}
     <a href="category-education.html" class="tab"><i class="fa-solid fa-graduation-cap"></i> Education</a>
     <a href="category-lifestyle.html" class="tab"><i class="fa-solid fa-mug-hot"></i> Lifestyle</a>
     <a href="category-movies.html" class="tab"><i class="fa-solid fa-clapperboard"></i> Movies</a>
+    <a href="stories.html" class="tab"><i class="fa-regular fa-circle"></i> Stories</a>
+    <a href="community.html" class="tab"><i class="fa-solid fa-users"></i> Community Post</a>
+    <span class="tab-next"><i class="fa-solid fa-chevron-right"></i></span>
   </div>
 
-  <div class="hero" id="hero">
-    <div class="hero-content">
-      <div class="hero-label">MUSIC FEATURED</div>
-      <h1 id="heroTitle">Midnight Vibes</h1>
-      <p id="heroText">Live acoustic sessions, indie music, soulful covers and trending music creators.</p>
-      <button class="watch-btn" onclick="window.location.href='video.html'"><i class="fa-solid fa-play"></i> Listen Now</button>
+  <div class="hero-section">
+    <button class="hero-btn prev" onclick="slideHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="hero-btn next" onclick="slideHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
+
+    <div class="hero-track" id="heroTrack">
+
+      <a href="watch-music-live-session.html" class="hero" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1800&auto=format&fit=crop');">
+        <div class="hero-content">
+          <label>LIVE MUSIC</label>
+          <h1>Music Live Session</h1>
+          <p>Feel the rhythm with exclusive creator performances.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </a>
+
+      <a href="watch-unplugged-sessions-ep-4.html" class="hero" style="background-image:url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1800&auto=format&fit=crop');">
+        <div class="hero-content">
+          <label>ACOUSTIC</label>
+          <h1>Unplugged Sessions</h1>
+          <p>Raw vocals, soft guitar and beautiful studio performances.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </a>
+
+      <a href="watch-concert-night.html" class="hero" style="background-image:url('https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=1800&auto=format&fit=crop');">
+        <div class="hero-content">
+          <label>CONCERT</label>
+          <h1>Concert Night</h1>
+          <p>Lights, crowd energy and unforgettable stage moments.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </a>
+
+      <a href="watch-dj-night.html" class="hero" style="background-image:url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1800&auto=format&fit=crop');">
+        <div class="hero-content">
+          <label>DJ MIX</label>
+          <h1>DJ Night Mix</h1>
+          <p>High-energy beats, party tracks and creator mixes.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </a>
+
+      <a href="watch-studio-vocals.html" class="hero" style="background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1800&auto=format&fit=crop');">
+        <div class="hero-content">
+          <label>STUDIO</label>
+          <h1>Studio Vocals</h1>
+          <p>Behind the scenes of recording, mixing and vocal sessions.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </a>
+
     </div>
 
-    <div class="hero-dots">
-      <div class="dot active" onclick="setHero(0)"></div>
-      <div class="dot" onclick="setHero(1)"></div>
-      <div class="dot" onclick="setHero(2)"></div>
-      <div class="dot" onclick="setHero(3)"></div>
+    <div class="dots" id="dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
     </div>
   </div>
 
   <div class="section">
     <div class="section-head">
-      <h2>Trending Music <span>🎵</span></h2>
-      <button onclick="toggleMore('trendingExtra',this)">View all <i class="fa-solid fa-chevron-right"></i></button>
+      <h2>Trending Music <span>🔥</span></h2>
+      <button onclick="toggleVideos('trendingExtra', this, 'View all')">View all <i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
     <div class="video-row">
-      <a href="live.html" class="video-card">
-        <div class="thumb">
-          <img class="static" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=600&auto=format&fit=crop">
-          <img class="gif" src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif">
-          <span class="live">LIVE</span><span class="views">12.8K</span>
+
+      <a href="watch-acoustic-evening.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-singer-in-a-studio-1850/1080p.mp4"></video>
+          <span class="live-tag">● LIVE</span>
+          <span class="duration">9.8K</span>
         </div>
-        <div class="card-body"><div class="card-title">Acoustic Evening Live Session</div><div class="meta">Neha Sounds <span class="verify">●</span><br>Live now</div></div>
+        <div class="card-body">
+          <div class="card-title">Acoustic Evening Live</div>
+          <div class="creator">Neha Sounds <span class="verified">●</span></div>
+        </div>
       </a>
 
-      <a href="video.html" class="video-card">
-        <div class="thumb">
-          <img class="static" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=600&auto=format&fit=crop">
-          <img class="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+      <a href="watch-midnight-vibes.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-dj-performing-1601/1080p.mp4"></video>
           <span class="duration">3:45</span>
         </div>
-        <div class="card-body"><div class="card-title">Midnight Vibes | Indie Chill</div><div class="meta">Neha Sounds <span class="verify">●</span><br>856K views • 2 days ago</div></div>
-      </a>
-
-      <a href="video.html" class="video-card">
-        <div class="thumb">
-          <img class="static" src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=600&auto=format&fit=crop">
-          <img class="gif" src="https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif">
-          <span class="duration">6:18</span>
+        <div class="card-body">
+          <div class="card-title">Midnight Vibes</div>
+          <div class="creator">Beat Lounge <span class="verified">●</span></div>
         </div>
-        <div class="card-body"><div class="card-title">Concert Night Highlights</div><div class="meta">MusicVibes <span class="verify">●</span><br>1.4M views • 3 days ago</div></div>
       </a>
 
-      <a href="video.html" class="video-card">
-        <div class="thumb">
-          <img class="static" src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=600&auto=format&fit=crop">
-          <img class="gif" src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif">
-          <span class="duration">7:20</span>
+      <a href="watch-concert-highlights.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-concert-crowd-2685/1080p.mp4"></video>
+          <span class="duration">8:15</span>
         </div>
-        <div class="card-body"><div class="card-title">Studio Jam: Unplugged Covers</div><div class="meta">Acoustic Thoughts <span class="verify">●</span><br>690K views • 4 days ago</div></div>
+        <div class="card-body">
+          <div class="card-title">Concert Highlights</div>
+          <div class="creator">MusicVibes <span class="verified">●</span></div>
+        </div>
       </a>
 
-      <a href="video.html" class="video-card">
-        <div class="thumb">
-          <img class="static" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=600&auto=format&fit=crop">
-          <img class="gif" src="https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif">
+      <a href="watch-studio-jam.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-music-studio-1565/1080p.mp4"></video>
+          <span class="duration">6:20</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Studio Jam Session</div>
+          <div class="creator">Acoustic Thoughts <span class="verified">●</span></div>
+        </div>
+      </a>
+
+      <a href="watch-dj-party-mix.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-dj-performing-1601/1080p.mp4"></video>
           <span class="duration">4:10</span>
         </div>
-        <div class="card-body"><div class="card-title">DJ Night: Party Mix 2026</div><div class="meta">Beat Factory <span class="verify">●</span><br>2.2M views • 1 week ago</div></div>
+        <div class="card-body">
+          <div class="card-title">DJ Party Mix</div>
+          <div class="creator">Beat Factory <span class="verified">●</span></div>
+        </div>
       </a>
+
     </div>
 
-    <div class="video-row extra" id="trendingExtra" style="margin-top:18px">
-      <a href="video.html" class="video-card">
-        <div class="thumb"><img class="static" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=600&auto=format&fit=crop"><img class="gif" src="https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif"><span class="duration">5:12</span></div>
-        <div class="card-body"><div class="card-title">Guitar Practice Routine</div><div class="meta">Guitar Guru <span class="verify">●</span><br>221K views • 5 days ago</div></div>
+    <div class="video-row extra" id="trendingExtra">
+
+      <a href="watch-guitar-practice.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1525201548942-d8732f6617a0?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-playing-guitar-5241/1080p.mp4"></video>
+          <span class="duration">5:12</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Guitar Practice Routine</div>
+          <div class="creator">Guitar Guru <span class="verified">●</span></div>
+        </div>
       </a>
 
-      <a href="video.html" class="video-card">
-        <div class="thumb"><img class="static" src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=600&auto=format&fit=crop"><img class="gif" src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"><span class="duration">9:01</span></div>
-        <div class="card-body"><div class="card-title">Piano Mood: Calm Morning</div><div class="meta">Piano Lounge <span class="verify">●</span><br>340K views • 6 days ago</div></div>
+      <a href="watch-piano-mood.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-pianist-playing-piano-9864/1080p.mp4"></video>
+          <span class="duration">9:01</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Piano Mood</div>
+          <div class="creator">Piano Lounge <span class="verified">●</span></div>
+        </div>
       </a>
+
+      <a href="watch-indie-chill.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=900&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-musician-playing-guitar-2964/1080p.mp4"></video>
+          <span class="duration">7:40</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Indie Chill Playlist</div>
+          <div class="creator">Roadtrip Beats <span class="verified">●</span></div>
+        </div>
+      </a>
+
     </div>
   </div>
 
   <div class="section">
     <div class="section-head">
-      <h2>Recommended Music Videos ✨</h2>
-      <button onclick="toggleMore('recommendedExtra',this)">See more <i class="fa-solid fa-chevron-right"></i></button>
+      <h2>Recommended Music Videos <span>✨</span></h2>
+      <button onclick="toggleVideos('recommendedExtra', this, 'See more')">See more <i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
-    <div class="large-grid">
-      <a href="video.html" class="video-card">
-        <div class="thumb">
-          <img class="static" src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=900&auto=format&fit=crop">
-          <img class="gif" src="https://media.giphy.com/media/l0HlQ7LRalQqdWfao/giphy.gif">
+    <div class="video-grid">
+
+      <a href="watch-clean-vocals.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=1000&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-singer-in-a-studio-1850/1080p.mp4"></video>
           <span class="duration">11:32</span>
         </div>
-        <div class="card-body"><div class="card-title">How to Record Clean Vocals at Home</div><div class="meta">Studio Simplified <span class="verify">●</span><br>978K views • 4 days ago</div></div>
+        <div class="card-body">
+          <div class="card-title">How to Record Clean Vocals</div>
+          <div class="creator">Studio Simplified <span class="verified">●</span></div>
+          <div class="views">978K views • 4 days ago</div>
+        </div>
       </a>
 
-      <a href="video.html" class="video-card">
-        <div class="thumb">
-          <img class="static" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=900&auto=format&fit=crop">
-          <img class="gif" src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif">
+      <a href="watch-unplugged-sessions-ep-4.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1000&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-musician-playing-guitar-2964/1080p.mp4"></video>
           <span class="duration">7:18</span>
         </div>
-        <div class="card-body"><div class="card-title">Unplugged Sessions Ep. 4</div><div class="meta">Acoustic Thoughts <span class="verify">●</span><br>856K views • 5 days ago</div></div>
+        <div class="card-body">
+          <div class="card-title">Unplugged Sessions Ep. 4</div>
+          <div class="creator">Acoustic Thoughts <span class="verified">●</span></div>
+          <div class="views">856K views • 5 days ago</div>
+        </div>
       </a>
 
-      <a href="video.html" class="video-card">
-        <div class="thumb">
-          <img class="static" src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=900&auto=format&fit=crop">
-          <img class="gif" src="https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif">
+      <a href="watch-best-indie-songs.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=1000&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-dj-performing-1601/1080p.mp4"></video>
           <span class="duration">9:45</span>
         </div>
-        <div class="card-body"><div class="card-title">Best Indie Songs for Long Drives</div><div class="meta">Roadtrip Beats <span class="verify">●</span><br>2.1M views • 1 week ago</div></div>
+        <div class="card-body">
+          <div class="card-title">Best Indie Songs for Long Drives</div>
+          <div class="creator">Roadtrip Beats <span class="verified">●</span></div>
+          <div class="views">2.1M views • 1 week ago</div>
+        </div>
       </a>
+
     </div>
 
-    <div class="large-grid extra" id="recommendedExtra" style="margin-top:18px">
-      <a href="video.html" class="video-card">
-        <div class="thumb">
-          <img class="static" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=900&auto=format&fit=crop">
-          <img class="gif" src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif">
+    <div class="video-grid extra" id="recommendedExtra">
+
+      <a href="watch-top-covers.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1000&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-concert-crowd-2685/1080p.mp4"></video>
           <span class="duration">8:59</span>
         </div>
-        <div class="card-body"><div class="card-title">Top 10 Covers This Month</div><div class="meta">Cover Central <span class="verify">●</span><br>544K views • 2 weeks ago</div></div>
+        <div class="card-body">
+          <div class="card-title">Top 10 Covers This Month</div>
+          <div class="creator">Cover Central <span class="verified">●</span></div>
+          <div class="views">544K views • 2 weeks ago</div>
+        </div>
       </a>
+
+      <a href="watch-lofi-night.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1000&auto=format&fit=crop');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-music-studio-1565/1080p.mp4"></video>
+          <span class="duration">12:05</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Lo-fi Night Session</div>
+          <div class="creator">Late Night Beats <span class="verified">●</span></div>
+          <div class="views">620K views • 3 weeks ago</div>
+        </div>
+      </a>
+
     </div>
   </div>
 
 </section>
-</main>
-</div>
+    </main>
+  </div>
 
-<div class="toast" id="toast"></div>
+  <script>
+    const dropdown = document.getElementById("profileDropdown");
+    const arrow = document.getElementById("arrow");
 
-<script>
-const heroData=[
-  {
-    img:"https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1600&auto=format&fit=crop",
-    title:"Midnight Vibes",
-    text:"Live acoustic sessions, indie music, soulful covers and trending music creators."
-  },
-  {
-    img:"https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=1600&auto=format&fit=crop",
-    title:"Concert Energy",
-    text:"Feel the crowd, lights, beats and live performances from top music creators."
-  },
-  {
-    img:"https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1600&auto=format&fit=crop",
-    title:"Studio Sessions",
-    text:"Behind the scenes, original songs, unplugged covers and creator music stories."
-  },
-  {
-    img:"https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1600&auto=format&fit=crop",
-    title:"DJ Nights",
-    text:"Party mixes, electronic vibes and trending beats for your next playlist."
-  }
-];
+    function toggleDropdown() {
+      dropdown.classList.toggle("active");
+      arrow.classList.toggle("fa-chevron-up");
+      arrow.classList.toggle("fa-chevron-down");
+    }
 
-let heroIndex=0;
+    document.addEventListener("click", function(e) {
+      const profile = document.querySelector(".profile");
+      if (!profile.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.remove("active");
+        arrow.classList.remove("fa-chevron-up");
+        arrow.classList.add("fa-chevron-down");
+      }
+    });
 
-function setHero(i){
-  heroIndex=i;
-  const hero=document.getElementById("hero");
-  hero.style.backgroundImage=`url('${heroData[i].img}')`;
-  document.getElementById("heroTitle").innerText=heroData[i].title;
-  document.getElementById("heroText").innerText=heroData[i].text;
-  document.querySelectorAll(".dot").forEach((d,index)=>d.classList.toggle("active",index===i));
-}
+    const heroTrack = document.getElementById("heroTrack");
+    const dots = document.querySelectorAll(".dot");
+    let heroIndex = 0;
+    const totalSlides = document.querySelectorAll(".hero").length;
 
-function autoHero(){
-  heroIndex=(heroIndex+1)%heroData.length;
-  setHero(heroIndex);
-}
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === heroIndex);
+      });
+    }
 
-function toggleMore(id,btn){
-  const box=document.getElementById(id);
-  box.classList.toggle("show");
-  btn.innerHTML=box.classList.contains("show")?'Show less <i class="fa-solid fa-chevron-up"></i>':'View all <i class="fa-solid fa-chevron-right"></i>';
-}
+    function goToHero(index) {
+      heroIndex = (index + totalSlides) % totalSlides;
+      heroTrack.scrollTo({
+        left: heroIndex * heroTrack.clientWidth,
+        behavior: "smooth"
+      });
+      updateDots();
+    }
 
-function toggleDropdown(){
-  document.getElementById("profileDropdown").classList.toggle("show");
-  document.getElementById("arrow").classList.toggle("fa-chevron-up");
-  document.getElementById("arrow").classList.toggle("fa-chevron-down");
-}
+    function slideHero(direction) {
+      goToHero(heroIndex + direction);
+    }
 
-document.addEventListener("click",e=>{
-  const profile=document.querySelector(".profile");
-  const dropdown=document.getElementById("profileDropdown");
-  if(!profile.contains(e.target) && !dropdown.contains(e.target)){
-    dropdown.classList.remove("show");
-    document.getElementById("arrow").classList.remove("fa-chevron-up");
-    document.getElementById("arrow").classList.add("fa-chevron-down");
-  }
-});
+    setInterval(() => {
+      goToHero(heroIndex + 1);
+    }, 4000);
 
-function toast(msg){
-  const t=document.getElementById("toast");
-  t.innerText=msg;
-  t.style.display="block";
-  setTimeout(()=>t.style.display="none",1600);
-}
+    heroTrack.addEventListener("scroll", () => {
+      const index = Math.round(heroTrack.scrollLeft / heroTrack.clientWidth);
+      if (index !== heroIndex) {
+        heroIndex = index;
+        updateDots();
+      }
+    });
 
-setHero(0);
-setInterval(autoHero,4500);
-</script>
+    function toggleVideos(id, btn, originalText) {
+      const box = document.getElementById(id);
+      box.classList.toggle("show");
 
+      if (box.classList.contains("show")) {
+        btn.innerHTML = 'Show less <i class="fa-solid fa-chevron-up"></i>';
+      } else {
+        btn.innerHTML = originalText + ' <i class="fa-solid fa-chevron-right"></i>';
+      }
+    }
+
+    document.querySelectorAll(".card").forEach(card => {
+      const video = card.querySelector("video");
+
+      if (video) {
+        card.addEventListener("mouseenter", () => {
+          video.currentTime = 0;
+          video.play();
+        });
+
+        card.addEventListener("mouseleave", () => {
+          video.pause();
+          video.currentTime = 0;
+        });
+      }
+    });
+  </script>
 </body>
 </html>
