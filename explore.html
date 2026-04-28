@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JioVibe Explore</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#fff;color:#222;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.app{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{
+  width:250px;
+  height:100vh;
+  border-right:1px solid #edf0f4;
+  padding:32px 18px;
+  position:fixed;
+  left:0;
+  top:0;
+  background:#fff;
+  z-index:10;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  margin-bottom:45px;
+  padding-left:8px;
+}
+
+.logo-circle{
+  width:54px;
+  height:54px;
+  background:#ff5a00;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:25px;
+}
+
+.logo-text{
+  font-size:32px;
+  font-weight:800;
+  color:#2b070b;
+  letter-spacing:-1.2px;
+}
+
+.menu{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:17px 22px;
+  border-radius:14px;
+  font-weight:600;
+  color:#383838;
+  font-size:16px;
+  transition:.25s;
+}
+
+.menu-item i{
+  width:22px;
+  font-size:22px;
+  text-align:center;
+}
+
+.menu-item:hover,
+.menu-item.active{
+  background:#fff0e8;
+  color:#ff5a00;
+}
+
+/* MAIN */
+.main{
+  margin-left:250px;
+  width:calc(100% - 250px);
+  min-height:100vh;
+}
+
+/* TOPBAR SAME AS HOME */
+.topbar{
+  height:94px;
+  border-bottom:1px solid #edf0f4;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 48px;
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:8;
+}
+
+.search{
+  width:720px;
+  height:50px;
+  border:1px solid #e8ebf0;
+  border-radius:28px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:0 22px;
+  color:#9ba1ad;
+  background:#fff;
+  box-shadow:0 1px 6px rgba(0,0,0,.03);
+}
+
+.search input{
+  border:none;
+  outline:none;
+  flex:1;
+  font-size:15px;
+  background:transparent;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+
+.bell{
+  font-size:23px;
+  position:relative;
+  width:28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.bell::after{
+  content:"1";
+  position:absolute;
+  top:-8px;
+  right:-7px;
+  background:#ff5a00;
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.profile{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  height:54px;
+}
+
+.profile img{
+  width:48px!important;
+  height:48px!important;
+  min-width:48px!important;
+  max-width:48px!important;
+  min-height:48px!important;
+  max-height:48px!important;
+  border-radius:50%!important;
+  object-fit:cover!important;
+  display:block!important;
+}
+
+.profile span{
+  font-weight:700;
+  font-size:15px;
+  white-space:nowrap;
+}
+
+.profile i{
+  font-size:14px;
+}
+
+/* CONTENT */
+.content{
+  padding:28px 34px 70px;
+  background:#fff;
+}
+
+/* HERO */
+.feature-title{
+  font-size:24px;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.hero-section{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  height:360px;
+  margin-bottom:34px;
+  background:#000;
+}
+
+.hero-track{
+  display:flex;
+  height:100%;
+  transition:.55s ease;
+}
+
+.hero{
+  min-width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.18),rgba(0,0,0,.05));
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  color:white;
+  padding-left:52px;
+  max-width:520px;
+}
+
+.hero-content label{
+  color:#ff5a00;
+  font-weight:800;
+  font-size:15px;
+  letter-spacing:.8px;
+}
+
+.hero-content h1{
+  font-size:44px;
+  margin:12px 0 12px;
+  line-height:1.05;
+}
+
+.hero-content p{
+  font-size:17px;
+  line-height:1.5;
+  color:#eee;
+  margin-bottom:28px;
+}
+
+.watch-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#ff5a00;
+  color:#fff;
+  border:none;
+  border-radius:11px;
+  padding:16px 25px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.hero-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:50%;
+  background:#fff;
+  color:#111;
+  z-index:3;
+  cursor:pointer;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+  font-size:18px;
+}
+
+.hero-arrow.left{left:20px}
+.hero-arrow.right{right:20px}
+
+.hero-dots{
+  position:absolute;
+  left:52px;
+  bottom:28px;
+  display:flex;
+  gap:10px;
+  z-index:4;
+}
+
+.hero-dot{
+  width:22px;
+  height:4px;
+  border-radius:10px;
+  background:rgba(255,255,255,.6);
+}
+
+.hero-dot.active{
+  background:#ff5a00;
+}
+
+/* SECTIONS */
+.section{
+  margin-bottom:34px;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:16px;
+}
+
+.section-head h2{
+  font-size:22px;
+  font-weight:800;
+}
+
+.section-head button{
+  border:none;
+  background:transparent;
+  color:#ff5a00;
+  font-weight:800;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:18px;
+}
+
+.video-card{
+  border:1px solid #edf0f4;
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 4px 16px rgba(0,0,0,.04);
+  cursor:pointer;
+  transition:.25s;
+}
+
+.video-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 28px rgba(0,0,0,.10);
+}
+
+.thumb{
+  width:100%;
+  aspect-ratio:16/9;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.thumb img,
+.thumb video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.thumb video{
+  display:none;
+}
+
+.video-card:hover video{
+  display:block;
+}
+
+.video-card:hover .thumb-img{
+  display:none;
+}
+
+.duration{
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  background:rgba(0,0,0,.78);
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+  padding:4px 7px;
+  border-radius:5px;
+}
+
+.live-tag{
+  position:absolute;
+  left:8px;
+  bottom:8px;
+  background:#ff2f00;
+  color:#fff;
+  border-radius:5px;
+  padding:5px 8px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.views{
+  position:absolute;
+  right:8px;
+  top:8px;
+  background:rgba(0,0,0,.60);
+  color:#fff;
+  border-radius:7px;
+  padding:5px 8px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.video-info{
+  padding:12px;
+}
+
+.video-info h3{
+  font-size:15px;
+  line-height:1.35;
+  margin-bottom:6px;
+}
+
+.video-info p{
+  color:#707783;
+  font-size:13px;
+  line-height:1.4;
+}
+
+.orange-dot{
+  color:#ff5a00;
+}
+
+/* CATEGORIES 9:16 */
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:18px;
+}
+
+.cat-card{
+  aspect-ratio:9/16;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  background:#000;
+  cursor:pointer;
+  box-shadow:0 10px 28px rgba(0,0,0,.10);
+  transition:.25s;
+}
+
+.cat-card:hover{
+  transform:translateY(-5px);
+}
+
+.cat-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.cat-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.75));
+}
+
+.cat-card h3{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:16px;
+  color:white;
+  z-index:2;
+  font-size:17px;
+}
+
+/* REELS */
+.reel-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:18px;
+}
+
+.reel-card{
+  aspect-ratio:9/16;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  background:#000;
+  box-shadow:0 10px 28px rgba(0,0,0,.10);
+}
+
+.reel-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.reel-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.72));
+}
+
+.reel-card h3{
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:36px;
+  color:#fff;
+  z-index:2;
+  font-size:14px;
+  line-height:1.3;
+}
+
+.reel-card p{
+  position:absolute;
+  left:12px;
+  bottom:14px;
+  color:#eee;
+  z-index:2;
+  font-size:12px;
+}
+
+.extra{
+  display:none;
+  margin-top:18px;
+}
+
+.extra.show{
+  display:grid;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:28px;
+  transform:translateX(-50%);
+  background:#222;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:20px;
+  font-size:14px;
+  font-weight:700;
+  display:none;
+  z-index:200;
+}
+
+/* CATEGORY MODAL */
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:80;
+}
+
+.modal-bg.show{
+  display:flex;
+}
+
+.modal{
+  width:900px;
+  max-width:92vw;
+  max-height:86vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 20px 55px rgba(0,0,0,.22);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.modal-head h2{
+  font-size:24px;
+}
+
+.close-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:#fff0e8;
+  color:#ff5a00;
+  font-size:20px;
+  cursor:pointer;
+}
+
+@media(max-width:1200px){
+  .video-grid{grid-template-columns:repeat(3,1fr)}
+  .category-grid{grid-template-columns:repeat(4,1fr)}
+  .reel-grid{grid-template-columns:repeat(4,1fr)}
+  .search{width:520px}
+}
+
+@media(max-width:780px){
+  .sidebar{display:none}
+  .main{margin-left:0;width:100%}
+  .topbar{padding:0 16px}
+  .search{width:100%}
+  .profile span{display:none}
+  .content{padding:18px}
+  .hero-section{height:300px}
+  .hero-content{padding-left:28px}
+  .hero-content h1{font-size:32px}
+  .video-grid{grid-template-columns:1fr}
+  .category-grid{grid-template-columns:repeat(2,1fr)}
+  .reel-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<aside class="sidebar">
+  <a href="index.html" class="logo">
+    <div class="logo-circle">Jio</div>
+    <div class="logo-text">Vibe</div>
+  </a>
+
+  <nav class="menu">
+    <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="explore.html" class="menu-item active"><i class="fa-regular fa-compass"></i> Explore</a>
+    <a href="live.html" class="menu-item"><i class="fa-solid fa-tower-broadcast"></i> Live</a>
+    <a href="video.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Video</a>
+    <a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
+    <a href="stories.html" class="menu-item"><i class="fa-regular fa-circle"></i> Stories</a>
+    <a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community Post</a>
+    <a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
+    <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
+  </nav>
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+  <div class="search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input placeholder="Search creators, videos, topics..." />
+  </div>
+
+  <div class="top-actions">
+    <a href="notifications.html" class="bell"><i class="fa-regular fa-bell"></i></a>
+    <div class="profile">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop">
+      <span>Trupti Latur</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
+</header>
+
+<section class="content">
+
+  <h1 class="feature-title">Featured Content</h1>
+
+  <div class="hero-section">
+    <button class="hero-arrow left" onclick="slideHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="hero-arrow right" onclick="slideHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
+
+    <div class="hero-track" id="heroTrack">
+      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1800&auto=format&fit=crop')">
+        <div class="hero-content">
+          <label>EXPLORE SPECIAL</label>
+          <h1>Discover What’s Trending</h1>
+          <p>Find live streams, videos, reels, creators and special JioVibe moments in one place.</p>
+          <button class="watch-btn" onclick="location.href='video.html'"><i class="fa-solid fa-play"></i> Watch Now</button>
+        </div>
+      </div>
+
+      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1800&auto=format&fit=crop')">
+        <div class="hero-content">
+          <label>LIVE MUSIC</label>
+          <h1>Creator Music Nights</h1>
+          <p>Watch creators perform live, interact with fans and build a real-time community.</p>
+          <button class="watch-btn" onclick="location.href='live.html'"><i class="fa-solid fa-play"></i> Go Live</button>
+        </div>
+      </div>
+
+      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1800&auto=format&fit=crop')">
+        <div class="hero-content">
+          <label>TECH PICKS</label>
+          <h1>AI Tools & Creator Growth</h1>
+          <p>Explore creator tools, AI videos, thumbnails, insights and platform updates.</p>
+          <button class="watch-btn" onclick="location.href='ai-studio.html'"><i class="fa-solid fa-wand-magic-sparkles"></i> Explore AI</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-dots" id="heroDots"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>Live Now</h2>
+      <button onclick="toggleSection('extraLive',this)">See more <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="video-grid" id="liveNow"></div>
+    <div class="video-grid extra" id="extraLive"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>JioVibe Launch Event</h2>
+      <button onclick="toggleSection('extraLaunch',this)">See more <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="video-grid" id="launchEvent"></div>
+    <div class="video-grid extra" id="extraLaunch"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>Trending Videos</h2>
+      <button onclick="toggleSection('extraTrending',this)">See more <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="video-grid" id="trendingVideos"></div>
+    <div class="video-grid extra" id="extraTrending"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>Categories</h2>
+      <button onclick="toast('All categories opened')">View all <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="category-grid" id="categories"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>Reels</h2>
+      <button onclick="toggleSection('extraReels',this)">See more <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="reel-grid" id="reels"></div>
+    <div class="reel-grid extra" id="extraReels"></div>
+  </div>
+
+</section>
+</main>
+</div>
+
+<div class="modal-bg" id="catModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="catModalTitle">Category</h2>
+      <button class="close-btn" onclick="closeModal('catModal')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="section-head">
+      <h2>Related Videos & Live</h2>
+    </div>
+    <div class="video-grid" id="catModalGrid"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let heroIndex = 0;
+
+function slideHero(dir){
+  const track = document.getElementById("heroTrack");
+  const total = track.children.length;
+  heroIndex = (heroIndex + dir + total) % total;
+  track.style.transform = `translateX(-${heroIndex * 100}%)`;
+  updateDots();
+}
+
+function updateDots(){
+  const dots = document.getElementById("heroDots");
+  dots.innerHTML = "";
+  const total = document.getElementById("heroTrack").children.length;
+  for(let i=0;i<total;i++){
+    const d=document.createElement("span");
+    d.className="hero-dot"+(i===heroIndex?" active":"");
+    d.onclick=()=>{heroIndex=i;document.getElementById("heroTrack").style.transform=`translateX(-${i*100}%)`;updateDots();}
+    dots.appendChild(d);
+  }
+}
+setInterval(()=>slideHero(1),4500);
+updateDots();
+
+const hoverVideo = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
+
+const liveData = [
+  ["Acoustic Night Live","Neha Sounds","13.2K","https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=700&auto=format&fit=crop","watch-live-music.html"],
+  ["Gaming Tournament Live","Gaming Beast","8.4K","https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=700&auto=format&fit=crop","watch-live-gaming.html"],
+  ["Creator Talk Live","JioVibe Studio","5.2K","https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=700&auto=format&fit=crop","watch-live-talk.html"],
+  ["Yoga Morning Live","Fit With Riya","3.9K","https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=700&auto=format&fit=crop","watch-live-yoga.html"],
+  ["Comedy Room Live","Laugh Circle","6.6K","https://images.unsplash.com/photo-1527224857830-43a7acc85260?q=80&w=700&auto=format&fit=crop","watch-live-comedy.html"],
+  ["Food Live Kitchen","Foodie Naina","2.8K","https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=700&auto=format&fit=crop","watch-live-food.html"],
+  ["Travel Walk Live","Travel With Simran","4.5K","https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=700&auto=format&fit=crop","watch-live-travel.html"]
+];
+
+const launchData = [
+  ["JioVibe Launch Highlights","JioVibe Official","8:45","https://images.unsplash.com/photo-1515169067865-5387ec356754?q=80&w=700&auto=format&fit=crop","watch-launch-highlights.html"],
+  ["Creator Stage Moments","JioVibe Events","12:20","https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=700&auto=format&fit=crop","watch-creator-stage.html"],
+  ["Behind the Launch","JioVibe Studio","9:10","https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=700&auto=format&fit=crop","watch-behind-launch.html"],
+  ["AI Studio Reveal","JioVibe AI","7:30","https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=700&auto=format&fit=crop","watch-ai-reveal.html"],
+  ["Launch Crowd Reactions","JioVibe Official","6:55","https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=700&auto=format&fit=crop","watch-launch-reactions.html"],
+  ["Founder Welcome Note","JioVibe Team","5:40","https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=700&auto=format&fit=crop","watch-founder-note.html"],
+  ["Creator Economy Panel","JioVibe Events","18:10","https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=700&auto=format&fit=crop","watch-panel.html"]
+];
+
+const trendingData = [
+  ["Hidden Paradise Travel Vlog","Nomadic Indian","11:32","https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=700&auto=format&fit=crop","video.html"],
+  ["Future of AI Explained","Tech Simplified","9:45","https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=700&auto=format&fit=crop","video.html"],
+  ["Midnight Vibes","Neha Sounds","3:45","https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=700&auto=format&fit=crop","video.html"],
+  ["Road to Glory","Gaming Beast","12.4K","https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=700&auto=format&fit=crop","video.html"],
+  ["Dance Like Nobody’s Watching","Move It Studio","4:10","https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=700&auto=format&fit=crop","video.html"],
+  ["Easy Pasta Recipes","Tasty Table","6:45","https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=700&auto=format&fit=crop","video.html"],
+  ["Photography Tips","Click Master","8:15","https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=700&auto=format&fit=crop","video.html"]
+];
+
+const cats = [
+  ["Gaming","category-gaming.html","https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=500&auto=format&fit=crop"],
+  ["Music","category-music.html","https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=500&auto=format&fit=crop"],
+  ["Comedy","category-comedy.html","https://images.unsplash.com/photo-1527224857830-43a7acc85260?q=80&w=500&auto=format&fit=crop"],
+  ["Tech","category-tech.html","https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=500&auto=format&fit=crop"],
+  ["Education","category-education.html","https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=500&auto=format&fit=crop"],
+  ["Lifestyle","category-lifestyle.html","https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=500&auto=format&fit=crop"],
+  ["Movies","category-movies.html","https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=500&auto=format&fit=crop"]
+];
+
+const reelsData = [
+  ["Sunset Dance Vibes","Neha Moves","1.4M","https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif","shorts.html"],
+  ["AI in 15 Seconds","Tech Daay","980K","https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif","shorts.html"],
+  ["Friends Comedy","Comedy Circle","2.2M","https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif","shorts.html"],
+  ["Street Food Bite","Foodie Yatra","760K","https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif","shorts.html"],
+  ["Blue Lagoon Mood","Travel Diary","1.1M","https://media.giphy.com/media/3ohhwfAa9rbXaZe86c/giphy.gif","shorts.html"],
+  ["Acoustic Vibe Check","Music Room","1.7M","https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif","shorts.html"],
+  ["Morning Fitness Flow","Fitness Flow","690K","https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif","shorts.html"],
+  ["Funny Group Moment","Laugh Hub","3.8M","https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif","shorts.html"]
+];
+
+function videoCard(item, live=false){
+  return `
+    <a href="${item[4]}" class="video-card">
+      <div class="thumb">
+        <img class="thumb-img" src="${item[3]}">
+        <video muted loop onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0">
+          <source src="${hoverVideo}" type="video/mp4">
+        </video>
+        ${live ? `<span class="live-tag">LIVE</span><span class="views">${item[2]}</span>` : `<span class="duration">${item[2]}</span>`}
+      </div>
+      <div class="video-info">
+        <h3>${item[0]}</h3>
+        <p>${item[1]} <span class="orange-dot">●</span></p>
+      </div>
+    </a>
+  `;
+}
+
+function renderVideos(id,data,live=false,start=0,end=5){
+  document.getElementById(id).innerHTML = data.slice(start,end).map(x=>videoCard(x,live)).join("");
+}
+
+renderVideos("liveNow",liveData,true,0,5);
+renderVideos("extraLive",liveData,true,5,liveData.length);
+renderVideos("launchEvent",launchData,false,0,5);
+renderVideos("extraLaunch",launchData,false,5,launchData.length);
+renderVideos("trendingVideos",trendingData,false,0,5);
+renderVideos("extraTrending",trendingData,false,5,trendingData.length);
+
+function renderCategories(){
+  const box=document.getElementById("categories");
+  box.innerHTML=cats.map((c,i)=>`
+    <div class="cat-card" onclick="openCategory('${c[0]}','${c[1]}')">
+      <img src="${c[2]}">
+      <h3>${c[0]}</h3>
+    </div>
+  `).join("");
+}
+renderCategories();
+
+function renderReels(){
+  document.getElementById("reels").innerHTML = reelsData.slice(0,6).map(r=>`
+    <a href="${r[4]}" class="reel-card">
+      <img src="${r[3]}">
+      <h3>${r[0]}</h3>
+      <p>${r[1]} • ${r[2]}</p>
+    </a>
+  `).join("");
+
+  document.getElementById("extraReels").innerHTML = reelsData.slice(6).map(r=>`
+    <a href="${r[4]}" class="reel-card">
+      <img src="${r[3]}">
+      <h3>${r[0]}</h3>
+      <p>${r[1]} • ${r[2]}</p>
+    </a>
+  `).join("");
+}
+renderReels();
+
+function toggleSection(id,btn){
+  const el=document.getElementById(id);
+  el.classList.toggle("show");
+  btn.innerHTML = el.classList.contains("show")
+    ? `Show less <i class="fa-solid fa-chevron-up"></i>`
+    : `See more <i class="fa-solid fa-chevron-right"></i>`;
+}
+
+function openCategory(name,link){
+  document.getElementById("catModalTitle").innerText = name + " Category";
+  const sample = [...trendingData.slice(0,3), ...liveData.slice(0,2)];
+  document.getElementById("catModalGrid").innerHTML = sample.map((x,i)=>videoCard(x,i>2)).join("");
+  document.getElementById("catModal").classList.add("show");
+  toast("Click category page to open full " + name + " page");
+  setTimeout(()=>{},500);
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove("show");
+}
+
+document.querySelectorAll(".modal-bg").forEach(m=>{
+  m.addEventListener("click",e=>{
+    if(e.target===m)m.classList.remove("show");
+  });
+});
+
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.innerText=msg;
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",1500);
+}
+</script>
+</body>
+</html>
