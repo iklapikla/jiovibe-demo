@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JioVibe Stories</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#fff;color:#222;overflow:hidden}
+a{text-decoration:none;color:inherit}
+.app{display:flex;height:100vh}
+
+/* SIDEBAR */
+.sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:32px 18px;background:#fff;z-index:10}
+.logo{display:flex;align-items:center;gap:4px;margin-bottom:45px;padding-left:8px}
+.logo-circle{width:54px;height:54px;background:#ff5a00;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
+.logo-text{font-size:32px;font-weight:800;color:#2b070b;letter-spacing:-1.2px}
+.menu{display:flex;flex-direction:column;gap:12px}
+.menu-item{display:flex;align-items:center;gap:18px;padding:17px 22px;border-radius:14px;font-weight:600;color:#383838;font-size:16px;transition:.25s}
+.menu-item i{width:22px;font-size:22px;text-align:center}
+.menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
+
+/* MAIN */
+.main{flex:1;height:100vh;display:flex;flex-direction:column}
+.topbar{height:82px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;z-index:8}
+.search{width:620px;height:48px;border:1px solid #edf0f4;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad;background:#fafafa}
+.search input{border:none;outline:none;flex:1;font-size:15px;background:transparent}
+.shortcut{background:#f1f2f5;border-radius:12px;padding:6px 10px;color:#777;font-weight:700}
+.top-actions{display:flex;align-items:center;gap:22px}
+.bell{font-size:23px;position:relative}
+.bell::after{content:"1";position:absolute;top:-8px;right:-7px;background:#ff5a00;color:#fff;font-size:10px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.profile{display:flex;align-items:center;gap:12px}
+.profile img{width:48px;height:48px;object-fit:cover;border-radius:50%}
+.profile span{font-weight:700;font-size:15px}
+
+/* FEED GRID */
+.story-home{
+  flex:1;
+  overflow-y:auto;
+  padding:28px 34px 50px;
+  background:#fbfbfc;
+}
+.story-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+.story-title h1{font-size:28px;font-weight:800}
+.story-title p{color:#777;font-weight:600}
+.story-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:18px;
+}
+.story-card{
+  height:340px;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  background:#000;
+  cursor:pointer;
+  box-shadow:0 10px 28px rgba(0,0,0,.10);
+  transition:.25s;
+}
+.story-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.16)}
+.story-card img{width:100%;height:100%;object-fit:cover}
+.story-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.72))}
+.story-card .story-info{position:absolute;left:14px;right:14px;bottom:14px;color:#fff;z-index:2}
+.story-info h3{font-size:15px;margin-bottom:6px}
+.story-info p{font-size:12px;color:#eee}
+.story-avatar{position:absolute;top:12px;left:12px;width:52px;height:52px;border-radius:15px;border:3px solid #ff5a00;object-fit:cover;z-index:2}
+
+/* STORY VIEWER */
+.viewer{
+  position:fixed;
+  inset:0;
+  background:rgba(248,249,252,.96);
+  z-index:70;
+  display:none;
+}
+.viewer.show{display:block}
+.close-viewer{
+  position:absolute;
+  top:22px;
+  right:28px;
+  width:48px;
+  height:48px;
+  border:none;
+  border-radius:50%;
+  background:#fff;
+  color:#ff5a00;
+  box-shadow:0 8px 28px rgba(0,0,0,.15);
+  z-index:100;
+  font-size:22px;
+  cursor:pointer;
+}
+.viewer-layout{
+  height:100vh;
+  display:grid;
+  grid-template-columns:250px 1fr 390px;
+  gap:34px;
+  align-items:center;
+  padding:40px 46px;
+}
+.blur-column{
+  opacity:.42;
+  filter:blur(5px);
+  pointer-events:none;
+}
+.blur-title{font-weight:800;color:#555;margin-bottom:18px}
+.blur-card{
+  height:170px;
+  border-radius:18px;
+  background-size:cover;
+  background-position:center;
+  margin-bottom:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.14);
+}
+.story-phone{
+  width:510px;
+  height:84vh;
+  max-height:820px;
+  border-radius:24px;
+  overflow:hidden;
+  position:relative;
+  background:#000;
+  box-shadow:0 24px 55px rgba(0,0,0,.22);
+  justify-self:center;
+}
+.story-phone img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.story-phone:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.05) 45%,rgba(0,0,0,.70));
+}
+.progress-bars{
+  position:absolute;
+  top:28px;
+  left:22px;
+  right:22px;
+  display:flex;
+  gap:6px;
+  z-index:4;
+}
+.bar{
+  height:4px;
+  flex:1;
+  background:rgba(255,255,255,.55);
+  border-radius:10px;
+  overflow:hidden;
+}
+.bar span{
+  display:block;
+  width:0%;
+  height:100%;
+  background:#ff5a00;
+  border-radius:10px;
+}
+.story-head{
+  position:absolute;
+  top:55px;
+  left:22px;
+  right:22px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#fff;
+  z-index:4;
+}
+.story-head img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #fff}
+.story-head h3{font-size:17px}
+.story-head p{font-size:13px;color:#eee;margin-top:3px}
+.verified{color:#ff5a00}
+.menu-dot{margin-left:auto;font-size:24px;cursor:pointer}
+.nav-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:58px;
+  height:58px;
+  border:none;
+  border-radius:50%;
+  background:#fff;
+  color:#ff5a00;
+  box-shadow:0 10px 28px rgba(0,0,0,.16);
+  font-size:27px;
+  cursor:pointer;
+  z-index:5;
+}
+.prev{left:-29px}
+.next{right:-29px}
+.reply-box{
+  position:absolute;
+  left:40px;
+  right:40px;
+  bottom:38px;
+  display:flex;
+  gap:12px;
+  z-index:4;
+}
+.reply-box input{
+  flex:1;
+  height:54px;
+  border:1px solid rgba(255,255,255,.45);
+  border-radius:28px;
+  background:rgba(0,0,0,.35);
+  color:#fff;
+  padding:0 22px;
+  outline:none;
+  font-size:15px;
+}
+.reply-box input::placeholder{color:#ddd}
+.reply-box button{
+  width:54px;
+  height:54px;
+  border:none;
+  border-radius:50%;
+  background:#ff5a00;
+  color:#fff;
+  font-size:23px;
+  cursor:pointer;
+}
+.sent-toast{
+  position:absolute;
+  left:50%;
+  bottom:110px;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.78);
+  color:#fff;
+  padding:10px 16px;
+  border-radius:18px;
+  font-size:13px;
+  font-weight:700;
+  display:none;
+  z-index:8;
+}
+
+/* RIGHT PANEL */
+.story-list-card{
+  background:#fff;
+  border:1px solid #edf0f4;
+  border-radius:22px;
+  padding:26px;
+  box-shadow:0 14px 40px rgba(0,0,0,.07);
+}
+.list-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+.list-head h2{font-size:22px}
+.list-head button{border:none;background:none;color:#ff5a00;font-weight:800;cursor:pointer}
+.story-person{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:22px;
+  cursor:pointer;
+  position:relative;
+}
+.story-person img{
+  width:74px;
+  height:74px;
+  border-radius:16px;
+  object-fit:cover;
+}
+.story-person.active img{
+  border:3px solid #ff5a00;
+  padding:2px;
+}
+.story-person h3{font-size:15px;margin-bottom:6px}
+.story-person p{font-size:13px;color:#777}
+.story-person:after{
+  content:"";
+  position:absolute;
+  right:0;
+  width:10px;
+  height:10px;
+  background:#ff5a00;
+  border-radius:50%;
+}
+.more-stories{
+  width:100%;
+  height:48px;
+  border:1px solid #edf0f4;
+  border-radius:24px;
+  background:#fff;
+  color:#444;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* SMALL MODAL */
+.story-options{
+  position:absolute;
+  top:92px;
+  right:26px;
+  background:#fff;
+  width:220px;
+  border-radius:16px;
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
+  overflow:hidden;
+  display:none;
+  z-index:20;
+}
+.story-options.show{display:block}
+.story-options div{padding:14px 16px;font-size:14px;font-weight:700;cursor:pointer}
+.story-options div:hover{background:#fff0e8;color:#ff5a00}
+
+@media(max-width:1200px){
+.story-grid{grid-template-columns:repeat(4,1fr)}
+.viewer-layout{grid-template-columns:1fr 340px}
+.blur-column{display:none}
+}
+@media(max-width:900px){
+.sidebar{width:220px}
+.search{width:420px}
+.story-grid{grid-template-columns:repeat(3,1fr)}
+.viewer-layout{grid-template-columns:1fr;padding:20px}
+.story-list-card{display:none}
+.story-phone{width:480px}
+}
+@media(max-width:780px){
+.sidebar{display:none}
+.topbar{padding:0 16px}
+.profile span{display:none}
+.search{width:100%}
+.story-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+.story-card{height:280px}
+.viewer-layout{padding:0}
+.story-phone{width:100%;height:100vh;max-height:none;border-radius:0}
+.close-viewer{top:18px;right:18px}
+.prev{left:14px}
+.next{right:14px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<aside class="sidebar">
+  <a href="index.html" class="logo">
+    <div class="logo-circle">Jio</div>
+    <div class="logo-text">Vibe</div>
+  </a>
+
+  <nav class="menu">
+    <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="explore.html" class="menu-item"><i class="fa-regular fa-compass"></i> Explore</a>
+    <a href="live.html" class="menu-item"><i class="fa-solid fa-tower-broadcast"></i> Live</a>
+    <a href="video.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Video</a>
+    <a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
+    <a href="stories.html" class="menu-item active"><i class="fa-regular fa-circle"></i> Stories</a>
+    <a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community Post</a>
+    <a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
+  </nav>
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+  <div class="search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input placeholder="Search creators, tags, topics..." />
+    <span class="shortcut">⌘ /</span>
+  </div>
+
+  <div class="top-actions">
+    <a href="notifications.html" class="bell"><i class="fa-regular fa-bell"></i></a>
+    <div class="profile">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop">
+      <span>Trupti Latur</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
+</header>
+
+<section class="story-home" id="storyHome">
+  <div class="story-title">
+    <div>
+      <h1>Stories</h1>
+      <p>Tap any story to open WhatsApp-style story viewer</p>
+    </div>
+  </div>
+
+  <div class="story-grid" id="storyGrid"></div>
+</section>
+
+</main>
+</div>
+
+<!-- STORY VIEWER -->
+<div class="viewer" id="viewer">
+  <button class="close-viewer" onclick="closeViewer()"><i class="fa-solid fa-xmark"></i></button>
+
+  <div class="viewer-layout">
+    <div class="blur-column">
+      <div class="blur-title">For You</div>
+      <div class="blur-card" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=500&auto=format&fit=crop')"></div>
+      <div class="blur-card" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=500&auto=format&fit=crop')"></div>
+      <div class="blur-card" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=500&auto=format&fit=crop')"></div>
+    </div>
+
+    <div class="story-phone">
+      <img id="storyImage" src="">
+      <div class="progress-bars" id="progressBars"></div>
+
+      <div class="story-head">
+        <img id="storyAvatar" src="">
+        <div>
+          <h3><span id="storyName"></span> <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3>
+          <p id="storyTime"></p>
+        </div>
+        <i class="fa-solid fa-ellipsis-vertical menu-dot" onclick="toggleOptions(event)"></i>
+      </div>
+
+      <button class="nav-btn prev" onclick="prevStory()"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="nav-btn next" onclick="nextStory()"><i class="fa-solid fa-chevron-right"></i></button>
+
+      <div class="reply-box">
+        <input id="replyInput" placeholder="Send a reply...">
+        <button onclick="sendReply()"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+
+      <div class="sent-toast" id="sentToast">Reply sent</div>
+
+      <div class="story-options" id="storyOptions">
+        <div><i class="fa-regular fa-bookmark"></i> Save story</div>
+        <div><i class="fa-solid fa-share"></i> Share</div>
+        <div><i class="fa-regular fa-eye-slash"></i> Mute creator</div>
+        <div><i class="fa-regular fa-flag"></i> Report</div>
+      </div>
+    </div>
+
+    <div class="story-list-card">
+      <div class="list-head">
+        <h2>Stories</h2>
+        <button onclick="loadMoreStories()">View all</button>
+      </div>
+
+      <div id="storyList"></div>
+
+      <button class="more-stories" onclick="loadMoreStories()">
+        <i class="fa-solid fa-clock-rotate-left"></i> Watch More Stories
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const baseStories = [
+  {
+    name:"Neha Moves",
+    time:"2h ago",
+    avatar:"https://i.pravatar.cc/100?img=32",
+    images:[
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=900&auto=format&fit=crop"
+    ]
+  },
+  {
+    name:"WanderWithRaj",
+    time:"3h ago",
+    avatar:"https://i.pravatar.cc/100?img=12",
+    images:[
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=900&auto=format&fit=crop"
+    ]
+  },
+  {
+    name:"MusicVibes",
+    time:"4h ago",
+    avatar:"https://i.pravatar.cc/100?img=22",
+    images:[
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=900&auto=format&fit=crop"
+    ]
+  },
+  {
+    name:"Travel With Simran",
+    time:"5h ago",
+    avatar:"https://i.pravatar.cc/100?img=45",
+    images:[
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=900&auto=format&fit=crop"
+    ]
+  },
+  {
+    name:"Foodie Naina",
+    time:"6h ago",
+    avatar:"https://i.pravatar.cc/100?img=28",
+    images:[
+      "https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=900&auto=format&fit=crop"
+    ]
+  }
+];
+
+let stories = [...baseStories];
+let currentUser = 0;
+let currentImage = 0;
+let timer = null;
+let progressTimer = null;
+let progress = 0;
+
+function renderGrid(){
+  const grid = document.getElementById("storyGrid");
+  grid.innerHTML = "";
+
+  stories.forEach((s, index)=>{
+    const card = document.createElement("div");
+    card.className = "story-card";
+    card.onclick = () => openViewer(index);
+    card.innerHTML = `
+      <img src="${s.images[0]}">
+      <img class="story-avatar" src="${s.avatar}">
+      <div class="story-info">
+        <h3>${s.name} <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3>
+        <p>${s.time}</p>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderSideList(){
+  const list = document.getElementById("storyList");
+  list.innerHTML = "";
+
+  stories.forEach((s,index)=>{
+    const row = document.createElement("div");
+    row.className = "story-person" + (index === currentUser ? " active" : "");
+    row.onclick = () => {
+      currentUser = index;
+      currentImage = 0;
+      showStory();
+    };
+    row.innerHTML = `
+      <img src="${s.images[0]}">
+      <div>
+        <h3>${s.name} <span class="verified"><i class="fa-solid fa-certificate"></i></span></h3>
+        <p>${s.time}</p>
+      </div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+function openViewer(index){
+  currentUser = index;
+  currentImage = 0;
+  document.getElementById("viewer").classList.add("show");
+  renderSideList();
+  showStory();
+}
+
+function closeViewer(){
+  document.getElementById("viewer").classList.remove("show");
+  clearInterval(timer);
+  clearInterval(progressTimer);
+  document.getElementById("storyImage").src = "";
+}
+
+function showStory(){
+  const s = stories[currentUser];
+  document.getElementById("storyImage").src = s.images[currentImage];
+  document.getElementById("storyAvatar").src = s.avatar;
+  document.getElementById("storyName").innerText = s.name;
+  document.getElementById("storyTime").innerText = s.time;
+
+  renderProgressBars();
+  renderSideList();
+  startAutoProgress();
+}
+
+function renderProgressBars(){
+  const box = document.getElementById("progressBars");
+  box.innerHTML = "";
+  stories[currentUser].images.forEach((img, i)=>{
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    bar.innerHTML = `<span style="width:${i < currentImage ? 100 : 0}%"></span>`;
+    box.appendChild(bar);
+  });
+}
+
+function startAutoProgress(){
+  clearInterval(timer);
+  clearInterval(progressTimer);
+  progress = 0;
+
+  progressTimer = setInterval(()=>{
+    progress += 2;
+    const bars = document.querySelectorAll(".bar span");
+    if(bars[currentImage]) bars[currentImage].style.width = progress + "%";
+    if(progress >= 100){
+      nextStory();
+    }
+  },100);
+
+  timer = setInterval(()=>{
+    nextStory();
+  },5000);
+}
+
+function nextStory(){
+  clearInterval(timer);
+  clearInterval(progressTimer);
+
+  const total = stories[currentUser].images.length;
+  if(currentImage < total - 1){
+    currentImage++;
+  }else{
+    currentImage = 0;
+    currentUser++;
+    if(currentUser >= stories.length){
+      loadMoreStories();
+      currentUser = stories.length - baseStories.length;
+    }
+  }
+  showStory();
+}
+
+function prevStory(){
+  clearInterval(timer);
+  clearInterval(progressTimer);
+
+  if(currentImage > 0){
+    currentImage--;
+  }else{
+    currentUser--;
+    if(currentUser < 0) currentUser = stories.length - 1;
+    currentImage = stories[currentUser].images.length - 1;
+  }
+  showStory();
+}
+
+function sendReply(){
+  const input = document.getElementById("replyInput");
+  if(input.value.trim() === "") return;
+
+  input.value = "";
+  const toast = document.getElementById("sentToast");
+  toast.style.display = "block";
+  setTimeout(()=>toast.style.display = "none", 1300);
+}
+
+document.getElementById("replyInput").addEventListener("keydown", e=>{
+  if(e.key === "Enter") sendReply();
+});
+
+function toggleOptions(e){
+  e.stopPropagation();
+  document.getElementById("storyOptions").classList.toggle("show");
+}
+
+document.addEventListener("click",()=>{
+  document.getElementById("storyOptions").classList.remove("show");
+});
+
+function loadMoreStories(){
+  const more = baseStories.map((s,i)=>({
+    ...s,
+    name: s.name + " " + (Math.floor(stories.length / baseStories.length) + 1),
+    time: (7 + i + stories.length) + "h ago"
+  }));
+  stories = stories.concat(more);
+  renderGrid();
+  renderSideList();
+}
+
+/* Unlimited scroll for story home */
+document.getElementById("storyHome").addEventListener("scroll", function(){
+  if(this.scrollTop + this.clientHeight >= this.scrollHeight - 300){
+    loadMoreStories();
+  }
+});
+
+document.addEventListener("keydown", e=>{
+  if(!document.getElementById("viewer").classList.contains("show")) return;
+  if(e.key === "ArrowRight") nextStory();
+  if(e.key === "ArrowLeft") prevStory();
+  if(e.key === "Escape") closeViewer();
+});
+
+renderGrid();
+</script>
+</body>
+</html>
