@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JioVibe Video</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#fff;color:#222;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.app{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{width:250px;height:100vh;border-right:1px solid #edf0f4;padding:32px 18px;position:fixed;left:0;top:0;background:#fff;z-index:10}
+.logo{display:flex;align-items:center;gap:4px;margin-bottom:45px;padding-left:8px}
+.logo-circle{width:54px;height:54px;background:#ff5a00;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:25px}
+.logo-text{font-size:32px;font-weight:800;color:#2b070b;letter-spacing:-1.2px}
+.menu{display:flex;flex-direction:column;gap:12px}
+.menu-item{display:flex;align-items:center;gap:18px;padding:17px 22px;border-radius:14px;font-weight:600;color:#383838;font-size:16px;transition:.25s}
+.menu-item i{width:22px;font-size:22px;text-align:center}
+.menu-item:hover,.menu-item.active{background:#fff0e8;color:#ff5a00}
+
+/* MAIN */
+.main{margin-left:250px;width:calc(100% - 250px)}
+.topbar{height:82px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;position:sticky;top:0;z-index:8}
+.search{width:720px;height:50px;border:1px solid #e8ebf0;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad}
+.search input{border:none;outline:none;flex:1;font-size:15px}
+.top-actions{display:flex;align-items:center;gap:22px}
+.bell-top{font-size:23px;position:relative}
+.bell-top::after{content:"1";position:absolute;top:-8px;right:-7px;background:#ff5a00;color:#fff;font-size:10px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.profile{display:flex;align-items:center;gap:12px}
+.profile img{width:48px;height:48px;object-fit:cover;border-radius:50%}
+.profile span{font-weight:700;font-size:15px}
+
+/* CONTENT */
+.content{padding:24px 28px 60px}
+.video-layout{display:grid;grid-template-columns:1fr 430px;gap:26px}
+
+/* PLAYER */
+.player{height:455px;border-radius:16px;overflow:hidden;background:#000;position:relative}
+.player img{width:100%;height:100%;object-fit:cover}
+.player:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.70))}
+.hd{position:absolute;top:22px;left:22px;background:rgba(0,0,0,.75);color:#fff;border-radius:7px;padding:7px 10px;font-weight:800;z-index:2}
+.controls{position:absolute;left:24px;right:24px;bottom:16px;color:#fff;z-index:3}
+.progress{height:4px;background:rgba(255,255,255,.45);border-radius:8px;margin-bottom:14px}
+.progress span{display:block;width:47%;height:100%;background:#ff5a00;border-radius:8px}
+.control-row{display:flex;align-items:center;justify-content:space-between}
+.control-left,.control-right{display:flex;align-items:center;gap:22px;font-size:22px}
+.time{font-size:15px;font-weight:700}
+
+/* VIDEO INFO */
+.video-title{font-size:23px;font-weight:800;margin:18px 0 12px}
+.meta{color:#6f7480;font-weight:600;font-size:14px;margin-bottom:14px}
+.action-row{display:flex;justify-content:flex-end;gap:12px;margin-bottom:12px}
+.action-btn{height:46px;padding:0 22px;border:1px solid #edf0f4;border-radius:14px;background:#fff;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:10px}
+.action-btn.active{background:#f0f0f0;color:#777}
+.action-btn.orange{color:#ff5a00}
+.channel-row{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #edf0f4;padding:18px 0}
+.channel{display:flex;align-items:center;gap:14px}
+.channel img{width:56px;height:56px;border-radius:50%;object-fit:cover}
+.channel h3{font-size:17px}.channel p{font-size:13px;color:#777;margin-top:4px}
+.verify{color:#ff5a00}
+.sub-actions{display:flex;align-items:center;gap:12px}
+.subscribe{background:#ff5a00;color:white;border:none;border-radius:12px;padding:15px 28px;font-size:16px;font-weight:800;cursor:pointer}
+.subscribe.subscribed{background:#e9e9e9;color:#555}
+.bell-btn{width:50px;height:50px;border:1px solid #edf0f4;background:#fff;border-radius:13px;font-size:20px;cursor:pointer}
+.bell-btn.on{background:#fff0e8;color:#ff5a00;border-color:#ffdac8}
+
+/* DESCRIPTION */
+.description{border:1px solid #edf0f4;border-radius:16px;padding:18px;margin-bottom:14px}
+.description h3{font-size:15px;margin-bottom:12px}
+.description p{font-size:14px;line-height:1.6;color:#666}
+.more-desc{display:none}
+.show-more{margin-top:14px;background:none;border:none;color:#ff5a00;font-weight:800;cursor:pointer}
+
+/* COMMENTS */
+.comments{border:1px solid #edf0f4;border-radius:16px;padding:18px}
+.comment-head{font-weight:800;margin-bottom:16px}
+.comment-input{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.comment-input img,.comment img{width:42px;height:42px;border-radius:50%;object-fit:cover}
+.comment-input input{flex:1;height:44px;border:1px solid #edf0f4;border-radius:25px;padding:0 18px;outline:none}
+.round-btn{width:46px;height:46px;border:none;border-radius:50%;background:#fff;border:1px solid #edf0f4;font-size:19px;cursor:pointer}
+.send{background:#ff5a00;color:white;border:none}
+.comment{display:flex;gap:12px;margin-top:15px}
+.comment h4{font-size:14px;margin-bottom:5px}.comment span{color:#777;font-size:12px;margin-left:8px}
+.comment p{font-size:14px;color:#555;margin-bottom:9px}
+.comment-actions{display:flex;gap:18px;color:#777;font-size:13px;font-weight:700}
+.comment-actions i{color:#ff5a00}
+
+/* RIGHT */
+.side-card{border:1px solid #edf0f4;border-radius:18px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.side-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.side-head h2{font-size:20px}
+.autoplay{display:flex;align-items:center;gap:10px;color:#777;font-size:14px}
+.switch{width:38px;height:20px;background:#ff5a00;border-radius:20px;position:relative;cursor:pointer}
+.switch:before{content:"";position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;right:2px;top:2px;transition:.2s}
+.switch.off{background:#ccc}
+.switch.off:before{right:20px}
+.upnext{display:flex;gap:14px;margin-bottom:22px;position:relative}
+.upnext img{width:165px;height:95px;border-radius:12px;object-fit:cover}
+.upnext h3{font-size:15px;line-height:1.35;margin-bottom:10px}
+.upnext p{font-size:13px;color:#777;margin-bottom:8px}
+.duration{position:absolute;left:125px;bottom:8px;background:rgba(0,0,0,.78);color:#fff;border-radius:5px;font-size:12px;font-weight:800;padding:4px 7px}
+.dots{margin-left:auto;font-size:20px;color:#777;cursor:pointer;padding:4px}
+.options{display:none;position:absolute;right:0;top:28px;background:white;border:1px solid #edf0f4;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.14);z-index:4;width:210px;overflow:hidden}
+.options.show{display:block}
+.options div{padding:13px 14px;font-size:14px;font-weight:700;cursor:pointer}
+.options div:hover{background:#fff0e8;color:#ff5a00}
+.side-more{height:46px;width:100%;border:none;border-radius:12px;background:#fff0e8;color:#ff5a00;font-weight:800;cursor:pointer}
+.extra-videos{display:none}
+.extra-videos.show{display:block}
+
+/* MODALS */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:50}
+.modal-bg.show{display:flex}
+.modal{background:white;width:390px;border-radius:20px;padding:24px;box-shadow:0 15px 40px rgba(0,0,0,.25)}
+.modal h2{margin-bottom:18px}
+.share-icons{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.share-icon{text-align:center;font-size:13px;font-weight:700;cursor:pointer}
+.share-icon i{width:54px;height:54px;border-radius:50%;background:#fff0e8;color:#ff5a00;display:flex;align-items:center;justify-content:center;font-size:25px;margin:0 auto 8px}
+.close{margin-top:18px;width:100%;height:46px;border:none;border-radius:12px;background:#f1f1f1;font-weight:800;cursor:pointer}
+.emoji-box{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;font-size:25px}
+.emoji-box span{cursor:pointer;text-align:center;padding:8px;border-radius:8px}
+.emoji-box span:hover{background:#fff0e8}
+.support-form label{font-size:13px;font-weight:700;margin-top:12px;display:block}
+.support-form input,.support-form select{width:100%;height:44px;border:1px solid #edf0f4;border-radius:10px;margin-top:7px;padding:0 12px}
+.pay-btn{margin-top:18px;width:100%;height:48px;background:#ff5a00;color:#fff;border:none;border-radius:12px;font-weight:800;cursor:pointer}
+
+@media(max-width:1100px){
+.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px)}
+.video-layout{grid-template-columns:1fr}.search{width:450px}
+}
+@media(max-width:780px){
+.sidebar{display:none}.main{margin-left:0;width:100%}.topbar{padding:0 16px}
+.search{width:100%}.profile span{display:none}.content{padding:16px}
+.player{height:280px}.action-row{justify-content:flex-start;flex-wrap:wrap}
+.channel-row{flex-direction:column;align-items:flex-start;gap:16px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<aside class="sidebar">
+  <a href="index.html" class="logo">
+    <div class="logo-circle">Jio</div>
+    <div class="logo-text">Vibe</div>
+  </a>
+
+  <nav class="menu">
+    <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="explore.html" class="menu-item"><i class="fa-regular fa-compass"></i> Explore</a>
+    <a href="live.html" class="menu-item"><i class="fa-solid fa-tower-broadcast"></i> Live</a>
+    <a href="video.html" class="menu-item active"><i class="fa-regular fa-circle-play"></i> Video</a>
+    <a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
+    <a href="stories.html" class="menu-item"><i class="fa-regular fa-circle"></i> Stories</a>
+    <a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community Post</a>
+    <a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
+  </nav>
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+  <div class="search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input placeholder="Search creators, videos, topics..." />
+  </div>
+
+  <div class="top-actions">
+    <a class="bell-top" href="notifications.html"><i class="fa-regular fa-bell"></i></a>
+    <div class="profile">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop">
+      <span>Trupti Latur</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
+</header>
+
+<section class="content">
+<div class="video-layout">
+
+<div>
+  <div class="player">
+    <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif">
+    <span class="hd">HD</span>
+
+    <div class="controls">
+      <div class="progress"><span></span></div>
+      <div class="control-row">
+        <div class="control-left">
+          <i class="fa-solid fa-pause"></i>
+          <i class="fa-solid fa-volume-high"></i>
+          <span class="time">04:12 / 18:45</span>
+        </div>
+        <div class="control-right">
+          <i class="fa-regular fa-closed-captioning"></i>
+          <i class="fa-solid fa-gear"></i>
+          <i class="fa-solid fa-expand"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="video-title">Chasing Horizons: A Journey Beyond Limits</h1>
+  <div class="meta">128K views • 12 May 2024 • Adventure</div>
+
+  <div class="action-row">
+    <button class="action-btn orange" id="likeBtn"><i class="fa-regular fa-thumbs-up"></i> <span id="likeText">12.5K</span></button>
+    <button class="action-btn" onclick="openModal('shareModal')"><i class="fa-solid fa-share"></i> Share</button>
+    <button class="action-btn" id="saveBtn"><i class="fa-regular fa-bookmark"></i> Save</button>
+    <button class="action-btn" onclick="openModal('supportModal')"><i class="fa-solid fa-indian-rupee-sign"></i> Super Support</button>
+  </div>
+
+  <div class="channel-row">
+    <div class="channel">
+      <img src="https://i.pravatar.cc/120?img=12">
+      <div>
+        <h3>WanderLens <span class="verify"><i class="fa-solid fa-certificate"></i></span></h3>
+        <p>245K subscribers</p>
+      </div>
+    </div>
+
+    <div class="sub-actions">
+      <button class="subscribe" id="subBtn">Subscribe</button>
+      <button class="bell-btn" id="bellBtn"><i class="fa-regular fa-bell"></i></button>
+    </div>
+  </div>
+
+  <div class="description">
+    <h3>About this video</h3>
+    <p>An extraordinary journey across mountains, valleys, and untouched beauty.</p>
+    <div class="more-desc" id="moreDesc">
+      <p>Sometimes, the best views come after the hardest climbs. In this episode, WanderLens travels through hidden valleys, snowy trails, quiet lakes, and sunrise points. This video is made for people who love travel, adventure, cinematic landscapes, and peaceful storytelling.</p>
+      <p>#Travel #Adventure #Mountains #JioVibe</p>
+    </div>
+    <button class="show-more" id="descBtn" onclick="toggleDesc()">Show more <i class="fa-solid fa-chevron-down"></i></button>
+  </div>
+
+  <div class="comments">
+    <div class="comment-head">Comments (<span id="commentCount">320</span>)</div>
+
+    <div class="comment-input">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=80&auto=format&fit=crop">
+      <input id="commentInput" placeholder="Add a comment...">
+      <button class="round-btn" onclick="openModal('emojiModal')"><i class="fa-regular fa-face-smile"></i></button>
+      <button class="round-btn send" onclick="sendComment()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+
+    <div id="commentList">
+      <div class="comment">
+        <img src="https://i.pravatar.cc/80?img=19">
+        <div>
+          <h4>Rohit Verma <span>2 days ago</span></h4>
+          <p>What a visual treat! 🔥🔥 The editing and storytelling is just perfect.</p>
+          <div class="comment-actions"><span><i class="fa-solid fa-thumbs-up"></i> 256</span><span><i class="fa-regular fa-thumbs-down"></i></span><span>Reply</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<aside>
+  <div class="side-card">
+    <div class="side-head">
+      <h2>Up Next</h2>
+      <div class="autoplay">Autoplay <div class="switch" id="autoSwitch"></div></div>
+    </div>
+
+    <div id="videoList">
+      <div class="upnext">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=600&auto=format&fit=crop">
+        <span class="duration">12:34</span>
+        <div><h3>Camping in the Hidden Valley</h3><p>The Outdoor Tales <span class="verify">●</span></p><p>98K views • 3 days ago</p></div>
+        <i class="fa-solid fa-ellipsis-vertical dots" onclick="toggleOption(this)"></i>
+        <div class="options">
+          <div><i class="fa-regular fa-clock"></i> Save to Watch Later</div>
+          <div><i class="fa-solid fa-list"></i> Add to Playlist</div>
+          <div><i class="fa-solid fa-share"></i> Share</div>
+          <div><i class="fa-regular fa-flag"></i> Report</div>
+          <div><i class="fa-regular fa-eye-slash"></i> Not Interested</div>
+        </div>
+      </div>
+
+      <div class="upnext">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop">
+        <span class="duration">10:20</span>
+        <div><h3>Exploring the Blue Lagoon</h3><p>Travel Diary</p><p>76K views • 1 week ago</p></div>
+        <i class="fa-solid fa-ellipsis-vertical dots" onclick="toggleOption(this)"></i>
+        <div class="options">
+          <div><i class="fa-regular fa-clock"></i> Save to Watch Later</div>
+          <div><i class="fa-solid fa-list"></i> Add to Playlist</div>
+          <div><i class="fa-solid fa-share"></i> Share</div>
+          <div><i class="fa-regular fa-flag"></i> Report</div>
+          <div><i class="fa-regular fa-eye-slash"></i> Not Interested</div>
+        </div>
+      </div>
+
+      <div class="upnext">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=600&auto=format&fit=crop">
+        <span class="duration">8:15</span>
+        <div><h3>Night Photography Tips & Tricks</h3><p>Click Master</p><p>54K views • 2 weeks ago</p></div>
+        <i class="fa-solid fa-ellipsis-vertical dots" onclick="toggleOption(this)"></i>
+        <div class="options">
+          <div><i class="fa-regular fa-clock"></i> Save to Watch Later</div>
+          <div><i class="fa-solid fa-list"></i> Add to Playlist</div>
+          <div><i class="fa-solid fa-share"></i> Share</div>
+          <div><i class="fa-regular fa-flag"></i> Report</div>
+          <div><i class="fa-regular fa-eye-slash"></i> Not Interested</div>
+        </div>
+      </div>
+
+      <div class="upnext">
+        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=600&auto=format&fit=crop">
+        <span class="duration">6:45</span>
+        <div><h3>5 Easy Pasta Recipes You’ll Love</h3><p>Tasty Table</p><p>38K views • 2 weeks ago</p></div>
+        <i class="fa-solid fa-ellipsis-vertical dots" onclick="toggleOption(this)"></i>
+        <div class="options">
+          <div><i class="fa-regular fa-clock"></i> Save to Watch Later</div>
+          <div><i class="fa-solid fa-list"></i> Add to Playlist</div>
+          <div><i class="fa-solid fa-share"></i> Share</div>
+          <div><i class="fa-regular fa-flag"></i> Report</div>
+          <div><i class="fa-regular fa-eye-slash"></i> Not Interested</div>
+        </div>
+      </div>
+
+      <div class="upnext">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=600&auto=format&fit=crop">
+        <span class="duration">15:10</span>
+        <div><h3>Morning Meditation for Positivity</h3><p>Mindful Living</p><p>61K views • 1 month ago</p></div>
+        <i class="fa-solid fa-ellipsis-vertical dots" onclick="toggleOption(this)"></i>
+        <div class="options">
+          <div><i class="fa-regular fa-clock"></i> Save to Watch Later</div>
+          <div><i class="fa-solid fa-list"></i> Add to Playlist</div>
+          <div><i class="fa-solid fa-share"></i> Share</div>
+          <div><i class="fa-regular fa-flag"></i> Report</div>
+          <div><i class="fa-regular fa-eye-slash"></i> Not Interested</div>
+        </div>
+      </div>
+
+      <div class="extra-videos" id="extraVideos">
+        <div class="upnext">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=600&auto=format&fit=crop">
+          <span class="duration">9:22</span>
+          <div><h3>Just Friends? Funny Moments</h3><p>Comedy Circle</p><p>120K views • 4 days ago</p></div>
+          <i class="fa-solid fa-ellipsis-vertical dots" onclick="toggleOption(this)"></i>
+          <div class="options">
+            <div><i class="fa-regular fa-clock"></i> Save to Watch Later</div>
+            <div><i class="fa-solid fa-list"></i> Add to Playlist</div>
+            <div><i class="fa-solid fa-share"></i> Share</div>
+            <div><i class="fa-regular fa-flag"></i> Report</div>
+            <div><i class="fa-regular fa-eye-slash"></i> Not Interested</div>
+          </div>
+        </div>
+
+        <div class="upnext">
+          <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=600&auto=format&fit=crop">
+          <span class="duration">7:08</span>
+          <div><h3>Future Tech Explained</h3><p>Tech Simplified</p><p>88K views • 5 days ago</p></div>
+          <i class="fa-solid fa-ellipsis-vertical dots" onclick="toggleOption(this)"></i>
+          <div class="options">
+            <div><i class="fa-regular fa-clock"></i> Save to Watch Later</div>
+            <div><i class="fa-solid fa-list"></i> Add to Playlist</div>
+            <div><i class="fa-solid fa-share"></i> Share</div>
+            <div><i class="fa-regular fa-flag"></i> Report</div>
+            <div><i class="fa-regular fa-eye-slash"></i> Not Interested</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="side-more" id="showMoreBtn" onclick="toggleMoreVideos()">Show more <i class="fa-solid fa-chevron-down"></i></button>
+  </div>
+</aside>
+
+</div>
+</section>
+</main>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="modal-bg" id="shareModal">
+  <div class="modal">
+    <h2>Share this video</h2>
+    <div class="share-icons">
+      <div class="share-icon"><i class="fa-brands fa-whatsapp"></i>WhatsApp</div>
+      <div class="share-icon"><i class="fa-brands fa-instagram"></i>Instagram</div>
+      <div class="share-icon"><i class="fa-brands fa-facebook"></i>Facebook</div>
+      <div class="share-icon"><i class="fa-brands fa-x-twitter"></i>Twitter</div>
+      <div class="share-icon"><i class="fa-brands fa-telegram"></i>Telegram</div>
+      <div class="share-icon"><i class="fa-solid fa-link"></i>Copy Link</div>
+      <div class="share-icon"><i class="fa-solid fa-envelope"></i>Email</div>
+      <div class="share-icon"><i class="fa-solid fa-message"></i>SMS</div>
+    </div>
+    <button class="close" onclick="closeModal('shareModal')">Close</button>
+  </div>
+</div>
+
+<!-- EMOJI MODAL -->
+<div class="modal-bg" id="emojiModal">
+  <div class="modal">
+    <h2>Select Emoji</h2>
+    <div class="emoji-box">
+      <span>😀</span><span>😍</span><span>🔥</span><span>❤️</span><span>👏</span><span>🎵</span><span>✨</span>
+      <span>😂</span><span>🥰</span><span>😎</span><span>🎸</span><span>💯</span><span>🙌</span><span>😭</span>
+    </div>
+    <button class="close" onclick="closeModal('emojiModal')">Close</button>
+  </div>
+</div>
+
+<!-- SUPER SUPPORT MODAL -->
+<div class="modal-bg" id="supportModal">
+  <div class="modal">
+    <h2>Super Support</h2>
+    <div class="support-form">
+      <label>Amount</label>
+      <input id="supportAmount" type="number" placeholder="Enter amount ₹" value="199">
+      <label>Payment Method</label>
+      <select id="supportMethod">
+        <option>UPI</option>
+        <option>Credit Card</option>
+        <option>Debit Card</option>
+        <option>Net Banking</option>
+        <option>Wallet</option>
+      </select>
+      <label>Message</label>
+      <input id="supportMsg" placeholder="Write support message">
+      <button class="pay-btn" onclick="sendSupport()">Pay & Support</button>
+    </div>
+    <button class="close" onclick="closeModal('supportModal')">Close</button>
+  </div>
+</div>
+
+<script>
+const likeBtn=document.getElementById("likeBtn");
+const likeText=document.getElementById("likeText");
+let liked=false;
+likeBtn.onclick=function(){
+  liked=!liked;
+  likeBtn.classList.toggle("active");
+  likeBtn.querySelector("i").className=liked?"fa-solid fa-thumbs-up":"fa-regular fa-thumbs-up";
+  likeText.innerText=liked?"12.6K":"12.5K";
+};
+
+const subBtn=document.getElementById("subBtn");
+subBtn.onclick=function(){
+  subBtn.classList.toggle("subscribed");
+  subBtn.innerText=subBtn.classList.contains("subscribed")?"Subscribed":"Subscribe";
+};
+
+const bellBtn=document.getElementById("bellBtn");
+bellBtn.onclick=function(){
+  bellBtn.classList.toggle("on");
+  bellBtn.innerHTML=bellBtn.classList.contains("on")?'<i class="fa-solid fa-bell"></i>':'<i class="fa-regular fa-bell"></i>';
+};
+
+const saveBtn=document.getElementById("saveBtn");
+saveBtn.onclick=function(){
+  saveBtn.classList.toggle("active");
+  saveBtn.innerHTML=saveBtn.classList.contains("active")?'<i class="fa-solid fa-bookmark"></i> Saved':'<i class="fa-regular fa-bookmark"></i> Save';
+};
+
+function toggleDesc(){
+  const more=document.getElementById("moreDesc");
+  const btn=document.getElementById("descBtn");
+  if(more.style.display==="block"){
+    more.style.display="none";
+    btn.innerHTML='Show more <i class="fa-solid fa-chevron-down"></i>';
+  }else{
+    more.style.display="block";
+    btn.innerHTML='Show less <i class="fa-solid fa-chevron-up"></i>';
+  }
+}
+
+function openModal(id){document.getElementById(id).classList.add("show")}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+document.querySelectorAll(".modal-bg").forEach(m=>{
+  m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")})
+});
+
+document.querySelectorAll(".emoji-box span").forEach(e=>{
+  e.onclick=function(){
+    document.getElementById("commentInput").value+=this.innerText;
+    closeModal("emojiModal");
+  }
+});
+
+function sendComment(){
+  const input=document.getElementById("commentInput");
+  if(input.value.trim()==="")return;
+  const list=document.getElementById("commentList");
+  const div=document.createElement("div");
+  div.className="comment";
+  div.innerHTML=`
+    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=80&auto=format&fit=crop">
+    <div>
+      <h4>You <span>Now</span></h4>
+      <p>${input.value}</p>
+      <div class="comment-actions"><span><i class="fa-regular fa-thumbs-up"></i> 0</span><span><i class="fa-regular fa-thumbs-down"></i></span><span>Reply</span></div>
+    </div>`;
+  list.prepend(div);
+  input.value="";
+  document.getElementById("commentCount").innerText=parseInt(document.getElementById("commentCount").innerText)+1;
+}
+
+document.getElementById("commentInput").addEventListener("keydown",function(e){
+  if(e.key==="Enter")sendComment();
+});
+
+function sendSupport(){
+  const amount=document.getElementById("supportAmount").value||199;
+  const msg=document.getElementById("supportMsg").value||"Loved this video!";
+  const list=document.getElementById("commentList");
+  const div=document.createElement("div");
+  div.className="comment";
+  div.innerHTML=`
+    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=80&auto=format&fit=crop">
+    <div>
+      <h4>You <span>Super Support ₹${amount}</span></h4>
+      <p>💛 ${msg}</p>
+      <div class="comment-actions"><span><i class="fa-solid fa-thumbs-up"></i> 1</span><span>Reply</span></div>
+    </div>`;
+  list.prepend(div);
+  closeModal("supportModal");
+}
+
+const autoSwitch=document.getElementById("autoSwitch");
+autoSwitch.onclick=function(){
+  autoSwitch.classList.toggle("off");
+};
+
+function toggleMoreVideos(){
+  const extra=document.getElementById("extraVideos");
+  const btn=document.getElementById("showMoreBtn");
+  extra.classList.toggle("show");
+  btn.innerHTML=extra.classList.contains("show")?'Show less <i class="fa-solid fa-chevron-up"></i>':'Show more <i class="fa-solid fa-chevron-down"></i>';
+}
+
+function toggleOption(dot){
+  document.querySelectorAll(".options").forEach(opt=>{
+    if(opt!==dot.nextElementSibling) opt.classList.remove("show");
+  });
+  dot.nextElementSibling.classList.toggle("show");
+}
+
+document.addEventListener("click",function(e){
+  if(!e.target.classList.contains("dots")){
+    document.querySelectorAll(".options").forEach(opt=>opt.classList.remove("show"));
+  }
+});
+</script>
+</body>
+</html>
