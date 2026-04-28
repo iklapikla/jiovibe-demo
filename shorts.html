@@ -26,10 +26,37 @@ a{text-decoration:none;color:inherit}
 
 /* MAIN */
 .main{flex:1;height:100vh;display:flex;flex-direction:column}
-.topbar{height:82px;border-bottom:1px solid #edf0f4;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;z-index:8}
-.search{width:620px;height:48px;border:1px solid #edf0f4;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 22px;color:#9ba1ad;background:#fafafa}
-.search input{border:none;outline:none;flex:1;font-size:15px;background:transparent}
-.shortcut{background:#f1f2f5;border-radius:12px;padding:6px 10px;color:#777;font-weight:700}
+.topbar{
+  height:94px;
+  border-bottom:1px solid #edf0f4;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 48px;
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:8;
+}
+
+.search{
+  width:720px;
+  height:50px;
+  border:1px solid #e8ebf0;
+  border-radius:28px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:0 22px;
+  color:#9ba1ad;
+  background:#fff;
+  box-shadow:0 1px 6px rgba(0,0,0,.03);
+}
+
+/* ye hata do ya hide kar do */
+.shortcut{
+  display:none;
+}.search input{border:none;outline:none;flex:1;font-size:15px;background:transparent}
 .top-actions{display:flex;align-items:center;gap:22px}
 .bell{font-size:23px;position:relative}
 .bell::after{content:"1";position:absolute;top:-8px;right:-7px;background:#ff5a00;color:#fff;font-size:10px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
