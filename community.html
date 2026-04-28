@@ -224,18 +224,18 @@ a{text-decoration:none;color:inherit}
 
   <div class="card side-card">
     <div class="side-head"><h2>Active Creators</h2><button onclick="toggleBlock('extraCreators',this)">View all</button></div>
-    <div class="creator"><img src="https://i.pravatar.cc/100?img=32"><div><h3>Neha Moves <span class="verified">●</span></h3><p>523K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
-    <div class="creator"><img src="https://i.pravatar.cc/100?img=12"><div><h3>WanderWithRaj <span class="verified">●</span></h3><p>312K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
-    <div class="creator"><img src="https://i.pravatar.cc/100?img=22"><div><h3>MusicVibes <span class="verified">●</span></h3><p>284K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
+    <div class="creator"><img src="https://i.pravatar.cc/100?img=32"><div><h3>Neha Moves <span class="verified">●</span></h3><p>523K followers</p></div><button class="follow-btn" onclick="follow(this)">Subscribe</button></div>
+    <div class="creator"><img src="https://i.pravatar.cc/100?img=12"><div><h3>WanderWithRaj <span class="verified">●</span></h3><p>312K followers</p></div><button class="follow-btn" onclick="follow(this)">Subscribe</button></div>
+    <div class="creator"><img src="https://i.pravatar.cc/100?img=22"><div><h3>MusicVibes <span class="verified">●</span></h3><p>284K followers</p></div><button class="follow-btn" onclick="follow(this)">Subscribe</button></div>
     <div id="extraCreators" style="display:none">
-      <div class="creator"><img src="https://i.pravatar.cc/100?img=28"><div><h3>Foodie Naina <span class="verified">●</span></h3><p>150K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
+      <div class="creator"><img src="https://i.pravatar.cc/100?img=28"><div><h3>Foodie Naina <span class="verified">●</span></h3><p>150K followers</p></div><button class="follow-btn" onclick="follow(this)">Subscribe</button></div>
     </div>
   </div>
 
   <div class="card side-card">
     <div class="side-head"><h2>Featured Creators</h2><button onclick="toast('Featured creators opened')">View all</button></div>
-    <div class="creator"><img src="https://i.pravatar.cc/100?img=45"><div><h3>Travel With Simran <span class="verified">●</span></h3><p>198K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
-    <div class="creator"><img src="https://i.pravatar.cc/100?img=52"><div><h3>Tech Simplified <span class="verified">●</span></h3><p>142K followers</p></div><button class="follow-btn" onclick="follow(this)">Follow</button></div>
+    <div class="creator"><img src="https://i.pravatar.cc/100?img=45"><div><h3>Travel With Simran <span class="verified">●</span></h3><p>198K followers</p></div><button class="follow-btn" onclick="follow(this)">Subscribe</button></div>
+    <div class="creator"><img src="https://i.pravatar.cc/100?img=52"><div><h3>Tech Simplified <span class="verified">●</span></h3><p>142K followers</p></div><button class="follow-btn" onclick="follow(this)">Subscribe</button></div>
   </div>
 
   <div class="card side-card">
@@ -452,7 +452,7 @@ function toggleMenu(menu){
   popup.classList.toggle("show");
 }
 document.addEventListener("click",e=>{if(!e.target.closest(".post-menu"))document.querySelectorAll(".menu-popup").forEach(p=>p.classList.remove("show"))})
-function follow(btn){btn.classList.toggle("following");btn.innerText=btn.classList.contains("following")?"Following":"Follow"}
+function follow(btn){btn.classList.toggle("following");btn.innerText=btn.classList.contains("following")?"Subscribed":"Subscribe"}
 function join(btn){btn.classList.toggle("joined");btn.innerText=btn.classList.contains("joined")?"Joined":"Join"}
 function toggleBlock(id,btn){const b=document.getElementById(id);b.style.display=b.style.display==="none"?"block":"none";btn.innerText=b.style.display==="none"?"View all":"Show less"}
 
