@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JioVibe Home</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #ffffff;
+      color: #1f1f1f;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      border-right: 1px solid #edf0f4;
+      padding: 32px 18px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background: #fff;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 45px;
+      padding-left: 8px;
+    }
+
+    .logo-circle {
+      width: 54px;
+      height: 54px;
+      background: #ff5a00;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 25px;
+    }
+
+    .logo-text {
+      font-size: 32px;
+      font-weight: 800;
+      color: #2b070b;
+      letter-spacing: -1.2px;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 17px 22px;
+      border-radius: 14px;
+      font-weight: 600;
+      color: #383838;
+      font-size: 16px;
+      transition: 0.25s ease;
+    }
+
+    .menu-item i {
+      width: 22px;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .menu-item:hover,
+    .menu-item.active {
+      background: #fff0e8;
+      color: #ff5a00;
+    }
+
+    .divider {
+      height: 1px;
+      background: #edf0f4;
+      margin: 22px 8px;
+    }
+
+    .main {
+      margin-left: 250px;
+      width: calc(100% - 250px);
+    }
+
+    .topbar {
+      height: 94px;
+      border-bottom: 1px solid #edf0f4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 8;
+    }
+
+    .search {
+      width: 720px;
+      height: 50px;
+      border: 1px solid #e8ebf0;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 22px;
+      color: #9ba1ad;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+    }
+
+    .search input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      position: relative;
+    }
+
+    .bell {
+      font-size: 23px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .bell::after {
+      content: "1";
+      position: absolute;
+      top: -8px;
+      right: -7px;
+      background: #ff5a00;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 18px;
+    }
+
+    .profile img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .profile span {
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 72px;
+      right: 0;
+      width: 410px;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.14);
+      padding: 28px;
+      display: none;
+      z-index: 20;
+    }
+
+    .dropdown.active {
+      display: block;
+    }
+
+    .dropdown::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      right: 150px;
+      width: 24px;
+      height: 24px;
+      background: white;
+      transform: rotate(45deg);
+    }
+
+    .drop-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .drop-head img {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .drop-head h3 {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .drop-head p {
+      color: #ff5a00;
+      font-weight: 700;
+    }
+
+    .drop-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 17px 20px;
+      border-radius: 13px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #2f2f2f;
+      transition: 0.2s;
+    }
+
+    .drop-item:hover,
+    .drop-item.highlight {
+      background: #fff0e8;
+      color: #ff5a00;
+    }
+
+    .drop-item i {
+      width: 24px;
+    }
+
+    .content {
+      padding: 26px 44px 60px;
+    }
+
+    .tabs-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .tab {
+      padding: 14px 24px;
+      border: 1px solid #e8ebf0;
+      border-radius: 24px;
+      background: #fff;
+      font-weight: 700;
+      color: #3d3d3d;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      white-space: nowrap;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+      transition: .25s;
+    }
+
+    .tab:hover,
+    .tab.active {
+      background: #ff5a00;
+      color: white;
+      border-color: #ff5a00;
+    }
+
+    .tab-next {
+      margin-left: auto;
+      font-size: 26px;
+    }
+
+    .hero-section {
+      position: relative;
+      margin-bottom: 34px;
+    }
+
+    .hero-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      border-radius: 16px;
+      scrollbar-width: none;
+    }
+
+    .hero-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hero {
+      min-width: 100%;
+      height: 320px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      scroll-snap-align: start;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.55) 34%, rgba(0,0,0,.04) 70%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      padding: 42px 46px;
+      width: 50%;
+      animation: fadeUp .8s ease;
+    }
+
+    .hero-content label {
+      color: #ff5a00;
+      font-weight: 800;
+      letter-spacing: .7px;
+      font-size: 15px;
+    }
+
+    .hero-content h1 {
+      font-size: 43px;
+      line-height: 1.05;
+      margin: 14px 0;
+      font-weight: 800;
+    }
+
+    .hero-content p {
+      color: #e7e7e7;
+      line-height: 1.6;
+      font-size: 16px;
+      margin-bottom: 26px;
+    }
+
+    .watch-btn {
+      background: #ff5a00;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 15px 24px;
+      font-size: 17px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .hero-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,.15);
+      cursor: pointer;
+      z-index: 3;
+      font-size: 18px;
+    }
+
+    .hero-btn.prev { left: 14px; }
+    .hero-btn.next { right: 14px; }
+
+    .dots {
+      position: absolute;
+      left: 48px;
+      bottom: 28px;
+      display: flex;
+      gap: 10px;
+      z-index: 4;
+    }
+
+    .dot {
+      width: 22px;
+      height: 4px;
+      background: rgba(255,255,255,.6);
+      border-radius: 10px;
+    }
+
+    .dot.active {
+      background: #ff5a00;
+      width: 28px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-head h2 {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .section-head h2 span {
+      color: #ff5a00;
+    }
+
+    .section-head button {
+      background: transparent;
+      border: none;
+      color: #ff5a00;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .video-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(0,0,0,.06);
+      transition: .25s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.11);
+    }
+
+    .thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+}
+
+.large .thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+    .thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .card:hover video {
+      display: block;
+    }
+
+    .duration {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      background: rgba(0,0,0,.76);
+      color: white;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 5px;
+    }
+
+    .live-tag {
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      background: red;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .card-body {
+      padding: 12px 12px 14px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .creator {
+      color: #6f7480;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .verified {
+      color: #ff5a00;
+      font-size: 12px;
+    }
+
+    .views {
+      color: #747985;
+      font-size: 13px;
+    }
+
+    .extra {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .extra.show {
+      display: grid;
+    }
+
+    @media(max-width: 1100px) {
+      .sidebar { width: 220px; }
+      .main { margin-left: 220px; width: calc(100% - 220px); }
+      .search { width: 450px; }
+      .video-row { grid-template-columns: repeat(3, 1fr); }
+      .video-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media(max-width: 780px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; width: 100%; }
+      .topbar { padding: 0 18px; }
+      .search { width: 100%; }
+      .profile span { display: none; }
+      .content { padding: 20px; }
+      .hero { height: 280px; }
+      .hero-content { width: 80%; padding: 32px; }
+      .hero-content h1 { font-size: 34px; }
+      .video-row, .video-grid { grid-template-columns: 1fr; }
+      .dropdown { right: -10px; width: 330px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <a href="index.html" class="logo">
+        <div class="logo-circle">Jio</div>
+        <div class="logo-text">Vibe</div>
+      </a>
+
+      <nav class="menu">
+        <a href="index.html" class="menu-item active"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="explore.html" class="menu-item"><i class="fa-regular fa-compass"></i> Explore</a>
+        <a href="live.html" class="menu-item"><i class="fa-solid fa-tower-broadcast"></i> Live</a>
+        <a href="video.html" class="menu-item"><i class="fa-regular fa-circle-play"></i> Video</a>
+        <a href="shorts.html" class="menu-item"><i class="fa-solid fa-bolt"></i> Shorts</a>
+        <a href="stories.html" class="menu-item"><i class="fa-regular fa-circle"></i> Stories</a>
+        <a href="community.html" class="menu-item"><i class="fa-regular fa-comments"></i> Community Post</a>
+        <a href="subscriptions.html" class="menu-item"><i class="fa-regular fa-rectangle-list"></i> Subscriptions</a>
+        <a href="wallet.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Wallet</a>
+
+      </nav>
+
+      <div class="divider"></div>
+    </aside>
+
+    <main class="main">
+
+      <header class="topbar">
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search creators, videos, topics..." />
+        </div>
+
+        <div class="top-actions">
+          <a href="notifications.html" class="bell"><i class="fa-regular fa-bell"></i></a>
+
+          <div class="profile" onclick="toggleDropdown()">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop" alt="Trupti Latur">
+            <span>Trupti Latur</span>
+            <i class="fa-solid fa-chevron-down" id="arrow"></i>
+          </div>
+
+          <div class="dropdown" id="profileDropdown">
+            <div class="drop-head">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop">
+              <div>
+                <h3>Trupti Latur</h3>
+                <p>Creator Account</p>
+              </div>
+            </div>
+
+            <a href="dashboard.html" class="drop-item highlight"><i class="fa-solid fa-table-cells-large"></i> Go to Dashboard</a>
+            <a href="my-channel.html" class="drop-item"><i class="fa-regular fa-user"></i> My Channel</a>
+            <a href="ai-studio.html" class="drop-item"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio</a>
+            <a href="wallet.html" class="drop-item"><i class="fa-regular fa-wallet"></i> Wallet</a>
+            <a href="settings.html" class="drop-item"><i class="fa-solid fa-gear"></i> Settings</a>
+
+            <div class="divider"></div>
+
+            <a href="logout.html" class="drop-item"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+          </div>
+        </div>
+      </header>
+
+   <section class="content">
+
+  <div class="tabs-wrap">
+    <a href="index.html" class="tab">All</a>
+    <a href="category-gaming.html" class="tab"><i class="fa-solid fa-gamepad"></i> Gaming</a>
+    <a href="category-music.html" class="tab"><i class="fa-solid fa-music"></i> Music</a>
+    <a href="category-comedy.html" class="tab"><i class="fa-regular fa-face-smile"></i> Comedy</a>
+    <a href="category-tech.html" class="tab"><i class="fa-solid fa-microchip"></i> Tech</a>
+    <a href="category-education.html" class="tab"><i class="fa-solid fa-graduation-cap"></i> Education</a>
+    <a href="category-lifestyle.html" class="tab active"><i class="fa-solid fa-mug-hot"></i> Lifestyle</a>
+    <a href="category-movies.html" class="tab"><i class="fa-solid fa-clapperboard"></i> Movies</a>
+    <a href="stories.html" class="tab"><i class="fa-regular fa-circle"></i> Stories</a>
+    <a href="community.html" class="tab"><i class="fa-solid fa-users"></i> Community Post</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero-section">
+    <div class="hero-track">
+
+      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=1800');">
+        <div class="hero-content">
+          <label>LIFESTYLE FEATURED</label>
+          <h1>Daily Life Upgrade</h1>
+          <p>Simple habits, routines and lifestyle improvements.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </div>
+
+      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1800');">
+        <div class="hero-content">
+          <label>FITNESS</label>
+          <h1>Stay Fit Everyday</h1>
+          <p>Home workouts, health tips and daily fitness motivation.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </div>
+
+      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1800');">
+        <div class="hero-content">
+          <label>TRAVEL</label>
+          <h1>Explore New Places</h1>
+          <p>Travel vlogs, destinations and experiences around the world.</p>
+          <span class="watch-btn"><i class="fa-solid fa-play"></i> Watch Now</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TRENDING -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Trending Lifestyle</h2>
+      <button onclick="toggleVideos('trendingExtra', this, 'View all')">View all <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <div class="video-row">
+
+      <a href="video.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=900');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-morning-routine-1580/1080p.mp4"></video>
+          <span class="duration">6:20</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Morning Routine for Success</div>
+          <div class="creator">Life Upgrade</div>
+        </div>
+      </a>
+
+      <a href="video.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=900');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-workout-at-home-1593/1080p.mp4"></video>
+          <span class="duration">5:12</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Home Workout Plan</div>
+          <div class="creator">Fit Daily</div>
+        </div>
+      </a>
+
+      <a href="video.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=900');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-traveling-1570/1080p.mp4"></video>
+          <span class="duration">8:40</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Travel Vlog Highlights</div>
+          <div class="creator">Travel World</div>
+        </div>
+      </a>
+
+      <a href="video.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=900');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-cooking-1568/1080p.mp4"></video>
+          <span class="duration">7:10</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Easy Cooking Recipes</div>
+          <div class="creator">Food & Life</div>
+        </div>
+      </a>
+
+      <a href="video.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=900');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-fashion-walk-5463/1080p.mp4"></video>
+          <span class="duration">4:50</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Fashion Tips for Daily Wear</div>
+          <div class="creator">Style Hub</div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="video-row extra" id="trendingExtra">
+
+      <a href="video.html" class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=900');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-meditation-1577/1080p.mp4"></video>
+          <span class="duration">5:30</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Meditation for Beginners</div>
+          <div class="creator">Peaceful Mind</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- RECOMMENDED -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Recommended Lifestyle Videos</h2>
+      <button onclick="toggleVideos('recommendedExtra', this, 'See more')">See more <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <div class="video-grid">
+
+      <a href="video.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=1000');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-morning-routine-1580/1080p.mp4"></video>
+          <span class="duration">10:20</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Daily Routine for Productivity</div>
+          <div class="creator">Life Planner</div>
+        </div>
+      </a>
+
+      <a href="video.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1000');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-workout-at-home-1593/1080p.mp4"></video>
+          <span class="duration">9:10</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Fitness Transformation Journey</div>
+          <div class="creator">Fit Daily</div>
+        </div>
+      </a>
+
+      <a href="video.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1000');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-traveling-1570/1080p.mp4"></video>
+          <span class="duration">8:45</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Best Travel Destinations</div>
+          <div class="creator">Travel World</div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="video-grid extra" id="recommendedExtra">
+
+      <a href="video.html" class="card large">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1000');">
+          <video muted loop src="https://cdn.coverr.co/videos/coverr-fashion-walk-5463/1080p.mp4"></video>
+          <span class="duration">7:30</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Style Guide for Beginners</div>
+          <div class="creator">Style Hub</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+</section>
+    </main>
+  </div>
+
+  <script>
+    const dropdown = document.getElementById("profileDropdown");
+    const arrow = document.getElementById("arrow");
+
+    function toggleDropdown() {
+      dropdown.classList.toggle("active");
+      arrow.classList.toggle("fa-chevron-up");
+      arrow.classList.toggle("fa-chevron-down");
+    }
+
+    document.addEventListener("click", function(e) {
+      const profile = document.querySelector(".profile");
+      if (!profile.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.remove("active");
+        arrow.classList.remove("fa-chevron-up");
+        arrow.classList.add("fa-chevron-down");
+      }
+    });
+
+    const heroTrack = document.getElementById("heroTrack");
+    const dots = document.querySelectorAll(".dot");
+    let heroIndex = 0;
+    const totalSlides = document.querySelectorAll(".hero").length;
+
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === heroIndex);
+      });
+    }
+
+    function goToHero(index) {
+      heroIndex = (index + totalSlides) % totalSlides;
+      heroTrack.scrollTo({
+        left: heroIndex * heroTrack.clientWidth,
+        behavior: "smooth"
+      });
+      updateDots();
+    }
+
+    function slideHero(direction) {
+      goToHero(heroIndex + direction);
+    }
+
+    setInterval(() => {
+      goToHero(heroIndex + 1);
+    }, 4000);
+
+    heroTrack.addEventListener("scroll", () => {
+      const index = Math.round(heroTrack.scrollLeft / heroTrack.clientWidth);
+      if (index !== heroIndex) {
+        heroIndex = index;
+        updateDots();
+      }
+    });
+
+    function toggleVideos(id, btn, originalText) {
+      const box = document.getElementById(id);
+      box.classList.toggle("show");
+
+      if (box.classList.contains("show")) {
+        btn.innerHTML = 'Show less <i class="fa-solid fa-chevron-up"></i>';
+      } else {
+        btn.innerHTML = originalText + ' <i class="fa-solid fa-chevron-right"></i>';
+      }
+    }
+
+    document.querySelectorAll(".card").forEach(card => {
+      const video = card.querySelector("video");
+
+      if (video) {
+        card.addEventListener("mouseenter", () => {
+          video.currentTime = 0;
+          video.play();
+        });
+
+        card.addEventListener("mouseleave", () => {
+          video.pause();
+          video.currentTime = 0;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
